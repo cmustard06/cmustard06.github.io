@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="cmustard的博客">
 <meta property="og:description" content="Note：  这里所用的VPS的系统是Cent os 基础环境准备1#  yum -y install gcc make gcc-c++ openssl-devel wget   Nginx安装VPS上安装Nginx首先是在/etc/yum.repos.d目录下创建一个源配置文件nginx.repo,写入如下代码 [nginx] name=nginx repo baseurl=http://ng">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2017-08-15T05:56:51.595Z">
+<meta property="og:updated_time" content="2017-08-15T06:03:21.948Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="hexo+github+nginx vps搭建博客">
 <meta name="twitter:description" content="Note：  这里所用的VPS的系统是Cent os 基础环境准备1#  yum -y install gcc make gcc-c++ openssl-devel wget   Nginx安装VPS上安装Nginx首先是在/etc/yum.repos.d目录下创建一个源配置文件nginx.repo,写入如下代码 [nginx] name=nginx repo baseurl=http://ng">
@@ -164,7 +164,7 @@
 
         
         <a href="/2017/08/15/hexo+github+nginx VPS搭建博客/" class="archive-article-date">
-  	<time datetime="2017-08-15T05:56:51.595Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-08-15</time>
+  	<time datetime="2017-08-15T06:03:21.948Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-08-15</time>
 </a>
         
       </header>
@@ -182,7 +182,8 @@ name=nginx repo
 baseurl=http://nginx.org/packages/centos/$releasever/$basearch/
 gpgcheck=0
 enabled=1
-</code></pre><p>执行命令：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">[root /]<span class="built_in">cd</span> /etc/yum.repos.d</div><div class="line">[root yum.repos.d]<span class="built_in">echo</span> -e <span class="string">"</span></div><div class="line"><span class="string">[nginx]\n</span></div><div class="line"><span class="string">name=nginx repo\n</span></div><div class="line"><span class="string">baseurl=http://nginx.org/packages/centos/\$releasever/\$basearch/\n</span></div><div class="line"><span class="string">gpgcheck=0\n</span></div><div class="line"><span class="string">enabled=1\n</span></div><div class="line"><span class="string">"</span> &gt; nginx.repo</div></pre></td></tr></table></figure></p>
+</code></pre><a id="more"></a>
+<p>执行命令：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">[root /]<span class="built_in">cd</span> /etc/yum.repos.d</div><div class="line">[root yum.repos.d]<span class="built_in">echo</span> -e <span class="string">"</span></div><div class="line"><span class="string">[nginx]\n</span></div><div class="line"><span class="string">name=nginx repo\n</span></div><div class="line"><span class="string">baseurl=http://nginx.org/packages/centos/\$releasever/\$basearch/\n</span></div><div class="line"><span class="string">gpgcheck=0\n</span></div><div class="line"><span class="string">enabled=1\n</span></div><div class="line"><span class="string">"</span> &gt; nginx.repo</div></pre></td></tr></table></figure></p>
 <p>查看是否配置正确(使用cat命令查看内容，以下配置文件大家自行使用查看命令验证配置信息)<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">[root /]cat /etc/yum.repos.d/nginx.repo</div><div class="line">[nginx]</div><div class="line">name=nginx repo</div><div class="line">baseurl=http://nginx.org/packages/centos/<span class="variable">$releasever</span>/<span class="variable">$basearch</span>/</div><div class="line">gpgcheck=0</div><div class="line">enabled=1</div></pre></td></tr></table></figure></p>
 <p>安装nginx<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum install nginx -y</div></pre></td></tr></table></figure></p>
 <p>查看Nginx版本号(安装完成验证)<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">nginx -v</div></pre></td></tr></table></figure></p>
