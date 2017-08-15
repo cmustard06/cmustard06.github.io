@@ -6,12 +6,12 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://www.cmustarc.com">
-  <title>cmustard的博客</title>
+  <title>Tag: 随笔 | cmustard的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="Web安全，Python">
 <meta property="og:type" content="website">
 <meta property="og:title" content="cmustard的博客">
-<meta property="og:url" content="http://www.cmustarc.com/index.html">
+<meta property="og:url" content="http://www.cmustarc.com/tags/随笔/index.html">
 <meta property="og:site_name" content="cmustard的博客">
 <meta property="og:description" content="Web安全，Python">
 <meta property="og:locale" content="zh-CN">
@@ -151,98 +151,34 @@
           <div id="js-content" class="content-ll">
             
   
-    <article id="post-hexo+github+nginx VPS搭建博客" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
+  
     
-      <header class="article-header">
-        
+    
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2017" class="archive-year">2017</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      	<div class="article-meta">
+	      	<a href="/2017/08/15/hexo+github+nginx VPS搭建博客/" class="archive-article-date">
+  	<time datetime="2017-08-15T05:56:51.595Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-08-15</time>
+</a>
+        </div>
+    	 
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/08/15/hexo+github+nginx VPS搭建博客/">hexo+github+nginx vps搭建博客</a>
+      <a class="archive-article-title" href="/2017/08/15/hexo+github+nginx VPS搭建博客/">hexo+github+nginx vps搭建博客</a>
     </h1>
   
 
-        
-        <a href="/2017/08/15/hexo+github+nginx VPS搭建博客/" class="archive-article-date">
-  	<time datetime="2017-08-15T05:56:51.595Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-08-15</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <ul>
-<li><strong>Note：  这里所用的VPS的系统是Cent os</strong></li>
-<li>基础环境准备<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#  yum -y install gcc make gcc-c++ openssl-devel wget</span></div></pre></td></tr></table></figure>
-</li>
-</ul>
-<h1 id="Nginx安装"><a href="#Nginx安装" class="headerlink" title="Nginx安装"></a>Nginx安装</h1><h2 id="VPS上安装Nginx"><a href="#VPS上安装Nginx" class="headerlink" title="VPS上安装Nginx"></a>VPS上安装Nginx</h2><p>首先是在/etc/yum.repos.d目录下创建一个源配置文件nginx.repo,写入如下代码</p>
-<pre><code>[nginx]
-name=nginx repo
-baseurl=http://nginx.org/packages/centos/$releasever/$basearch/
-gpgcheck=0
-enabled=1
-</code></pre><p>执行命令：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">[root /]<span class="built_in">cd</span> /etc/yum.repos.d</div><div class="line">[root yum.repos.d]<span class="built_in">echo</span> -e <span class="string">"</span></div><div class="line"><span class="string">[nginx]\n</span></div><div class="line"><span class="string">name=nginx repo\n</span></div><div class="line"><span class="string">baseurl=http://nginx.org/packages/centos/\$releasever/\$basearch/\n</span></div><div class="line"><span class="string">gpgcheck=0\n</span></div><div class="line"><span class="string">enabled=1\n</span></div><div class="line"><span class="string">"</span> &gt; nginx.repo</div></pre></td></tr></table></figure></p>
-<p>查看是否配置正确(使用cat命令查看内容，以下配置文件大家自行使用查看命令验证配置信息)<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">[root /]cat /etc/yum.repos.d/nginx.repo</div><div class="line">[nginx]</div><div class="line">name=nginx repo</div><div class="line">baseurl=http://nginx.org/packages/centos/<span class="variable">$releasever</span>/<span class="variable">$basearch</span>/</div><div class="line">gpgcheck=0</div><div class="line">enabled=1</div></pre></td></tr></table></figure></p>
-<p>安装nginx<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum install nginx -y</div></pre></td></tr></table></figure></p>
-<p>查看Nginx版本号(安装完成验证)<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">nginx -v</div></pre></td></tr></table></figure></p>
-<h2 id="VPS上部署Nginx"><a href="#VPS上部署Nginx" class="headerlink" title="VPS上部署Nginx"></a>VPS上部署Nginx</h2><p>在/etc/nginx/sites-available目录下创建一个配置文件XXX.conf(这里以hexo.conf为例),并在文件中输入一下内容</p>
-<pre><code>server {
-  root /var/www/blog/public; #站点目录
-  index index.html index.htm; #主页，不用改
-  server_name www.cmustard.com cmustard.com *.cmustard.com; #申请的域名
-  location / {
-    try_files $uri $uri/ /index.html;
-  }
-}
-</code></pre><p>执行以下命令，通过vim写入内容</p>
-<pre><code>mkdir -p /etc/nginx/sites-available
-vim /etc/nginx/sites-available/hexo.conf   #将上面的内容写入到文件中 
-</code></pre><p><strong>最后配置Nginx的配置文件</strong><br>在/etc/nginx/nginx.conf文件中添加如下代码(添加包含sites-available目录以及站点/var/www目录下的配置文件)<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#gzip  on;</span></div><div class="line"></div><div class="line"> include /etc/nginx/conf.d/*.conf;</div><div class="line"> include /etc/nginx/sites-available/*.conf;</div><div class="line"> include /var/www/*.conf;</div></pre></td></tr></table></figure></p>
-<p>测试一下配置文件是否有语法错误<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">nginx -t</div></pre></td></tr></table></figure></p>
-<p>如果显示如下内容表示可以：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">nginx: the configuration file /etc/nginx/nginx.conf syntax is ok</div><div class="line">nginx: configuration file /etc/nginx/nginx.conf <span class="built_in">test</span> is successful</div></pre></td></tr></table></figure></p>
-<p>启动Nginx服务器<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">service nginx reload</div><div class="line">/etc/init.d/nginx start</div><div class="line">chkconfig nginx start  <span class="comment"># 设置开机启动</span></div></pre></td></tr></table></figure></p>
-<h2 id="创建站点的专用管理者"><a href="#创建站点的专用管理者" class="headerlink" title="创建站点的专用管理者"></a>创建站点的专用管理者</h2><p>为了安全考虑我们需要在VPS上创建一个普通用户来专门管理网站，<br><strong>1.创建用户组以及用户</strong><br>创建用户和用户组</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"> <span class="variable">$groupadd</span> www  <span class="comment"># 创建用户组</span></div><div class="line"> <span class="variable">$useradd</span> www -m -g www  <span class="comment"># 创建用户</span></div><div class="line">```	</div><div class="line"></div><div class="line">查看用户信息，验证是否验证成功</div><div class="line">```bash</div><div class="line">$ finger www</div><div class="line">$ groups www</div></pre></td></tr></table></figure>
-<p><strong>2.设置用户密码</strong><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">passwd www</div></pre></td></tr></table></figure></p>
-<p><strong>3.设置家目录权限</strong><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">chmod 755 /home/www</div></pre></td></tr></table></figure></p>
-<p><strong>4.给www用户添加sudo权限</strong></p>
-<p>修改/etc/sudoers文件。找到如下指令添加一条<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="comment">## Allow root to run any commands anywhere</span></div><div class="line">root	ALL=(ALL)	ALL</div><div class="line">www	ALL=(ALL)	ALL  <span class="comment"># 新增的指令</span></div></pre></td></tr></table></figure></p>
-<h2 id="Nginx测试"><a href="#Nginx测试" class="headerlink" title="Nginx测试"></a>Nginx测试</h2><p><strong> 1.创建测试页面</strong></p>
-<p>进入/var/www/blog/public目录<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">[root@localhost /] <span class="built_in">cd</span> /var</div><div class="line">[root@localhost var] chmod 777 www</div><div class="line">[root@localhost var]  su www </div><div class="line">[www@localhost var] mkdir -p /var/www/blog/public</div><div class="line">[www@localhost var] <span class="built_in">cd</span> /var/www/blog/public</div><div class="line">[www@localhost public] <span class="built_in">echo</span> “This is <span class="built_in">test</span> HTML” &gt; index.html</div></pre></td></tr></table></figure></p>
-<p><strong>2.测试，打开浏览器输入域名，是否能访问到页面</strong></p>
-<p><strong>3.删除测试文件.html</strong><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[www@localhost public]<span class="comment"># rm index.html</span></div></pre></td></tr></table></figure></p>
-<h1 id="hexo"><a href="#hexo" class="headerlink" title="hexo"></a>hexo</h1><h2 id="安装hexo"><a href="#安装hexo" class="headerlink" title="安装hexo"></a>安装hexo</h2><p><strong>1.安装node.js</strong><br>安装hexo框架需要nodejs的环境，因此首先需要安装该环境<br>hexo官网提供了一中安装方法，我们就使用官网的安装方法<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.2/install.sh | bash</div></pre></td></tr></table></figure></p>
-<p>一旦nvm安装完成，我们需要重启终端然后运行下面的命令<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ nvm install stables</div></pre></td></tr></table></figure></p>
-<p><strong>2.安装hexo</strong><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ npm config <span class="built_in">set</span> unsafe-perm <span class="literal">true</span> <span class="comment"># 如果执行下面的那条命令出现了权限问题就先使用这条命令，在运行下面的命令</span></div><div class="line">$ npm install -g hexo-cli</div></pre></td></tr></table></figure></p>
-<p><strong>初始化</strong><br>自己创建blog文件夹。进行初始化命令<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ cd /var/www/</div><div class="line">$ hexo init blog</div></pre></td></tr></table></figure></p>
-<p>这样就完成了hexo的安装，接下来在执行<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo generate  或者  hexo g</div></pre></td></tr></table></figure></p>
-<p>执行了这条命令之后就会在blog目录下生产一个public文件夹，这里面是全部blog博客的静态文件。</p>
-<p><strong>访问域名，是否看到hexo页面</strong></p>
-<h1 id="github准备"><a href="#github准备" class="headerlink" title="github准备"></a>github准备</h1><p><strong>1.github注册账号</strong><br>在github官网注册自己的账号，然后创建一个repositorie，假如你github账号名称<br>为zzz.那就创建一个zzz.github.io的repository。</p>
-<p><strong>2.创建ssh key</strong><br>接下来我们需要在本地创建一个ssh key公钥，并将其添加到github中<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">cd</span> ~/.ssh</div><div class="line">rm *</div><div class="line">ssh-keygen -t rsa -b 4096 -C <span class="string">"你登录github的邮件地址"</span></div><div class="line">Generating public/private rsa key pair.</div><div class="line">Enter a file <span class="keyword">in</span> <span class="built_in">which</span> to save the key (/home/you/.ssh/id_rsa): [Press enter]</div><div class="line">       Enter passphrase (empty <span class="keyword">for</span> no passphrase): [Type a passphrase]  <span class="comment"># 输入一个安全密码</span></div><div class="line">Enter same passphrase again: [Type passphrase again]</div></pre></td></tr></table></figure></p>
-<p>此时在~/.ssh/下生成一个id_ras.pub的文件，复制这个文件中的信息，将其添加到github中。</p>
-<p><strong><em>在你github账号的setting中有一个SSH and GPG keys选项，进入这个选项后，在SSH keys栏中New SSH key 自己起一个名字，然后将id_ras.pub中的信息复制到key中，然后ADD。如果没有出现错误，就说明添加成功</em></strong></p>
-<p><strong>3.测试github</strong><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ssh -T git@github.com</div></pre></td></tr></table></figure></p>
-<p>如果显示<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#     Hi username! You've successfully authenticated, but GitHub does notprovide shell access.</span></div></pre></td></tr></table></figure></p>
-<p>就说明可以了，然后打开blog根目录下的_config.yml文件，添加如下(<strong><em>yml文件格式要求严格，注意空格</em></strong>)<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">deploy:</div><div class="line">  <span class="built_in">type</span>: git</div><div class="line">  repository: https://你的账号名@github.com/你的账号名/你的账号名.github.io.git <span class="comment">#比如 https://zzz@github.com/zzz/zzz.github.io.git</span></div><div class="line">  branch: master</div></pre></td></tr></table></figure></p>
-<p>然后在blog目录下输入<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#	hexo deploy (or  hexo d)</span></div></pre></td></tr></table></figure></p>
-<p>这个时候会提示你输入github的密码。回车，就完成了。<br>之后写玩blog就可以hexo g生成一下，然后hexo d在github上备份一下，</p>
-<h1 id="配置完成发布"><a href="#配置完成发布" class="headerlink" title="配置完成发布"></a>配置完成发布</h1><p>写markdown文件，然后保存在blog/source/_posts文件夹下，最后<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">hexo g</div><div class="line">hexo d</div></pre></td></tr></table></figure></p>
-<p><strong>其他</strong><br>hexo提供了很博客主题供使用，我们可以根据自己的喜好下载主题，讲主题文件保存到blog/theme文件下，然后修改blog根目录（主题文件下也有一个_config.yml文件）下的_config.yml中的theme选项就行。</p>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ul>
-<li><a href="http://renfuheng.com/2016/08/28/%E5%BF%AB%E9%80%9F%E5%9C%A8vps-centOs-6-%E4%B8%8A%E6%90%AD%E5%BB%BAhexo%E5%8D%9A%E5%AE%A2%E5%B9%B6push%E4%B8%80%E4%BB%BD%E5%88%B0github/" target="_blank" rel="external">快速在vps(centOs 6)上搭建hexo博客并push一份到github</a></li>
-<li><a href="https://www.hansoncoder.com/2016/03/02/VPS-building-Hexo/#VPS上安装Nginx" target="_blank" rel="external">VPS(CentOS)搭建Hexo博客与Git Hooks更新（小白篇</a></li>
-<li><a href="https://hexo.io/docs/index.html" target="_blank" rel="external">Hexo Documentation</a></li>
-</ul>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
+        <div class="article-info info-on-right">
+          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -254,112 +190,19 @@ vim /etc/nginx/sites-available/hexo.conf   #将上面的内容写入到文件中
 		</ul>
 	</div>
 
-      
+          
 
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/08/15/hexo+github+nginx VPS搭建博客/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
+        </div>
+        <div class="clearfix"></div>
+    </header>
   </div>
 </article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
   
-    <article id="post-hello-world" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
+  
+    </div></section>
+  
+
     
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/08/14/hello-world/">Hello World</a>
-    </h1>
-  
-
-        
-        <a href="/2017/08/14/hello-world/" class="archive-article-date">
-  	<time datetime="2017-08-14T13:06:44.466Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-08-14</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/08/14/hello-world/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-  
 
 
           </div>
@@ -381,10 +224,10 @@ vim /etc/nginx/sites-available/hexo.conf   #将上面的内容写入到文件中
     <script>
 	var yiliaConfig = {
 		mathjax: false,
-		isHome: true,
+		isHome: false,
 		isPost: false,
 		isArchive: false,
-		isTag: false,
+		isTag: true,
 		isCategory: false,
 		open_in_new: true,
 		toc_hide_index: true,
