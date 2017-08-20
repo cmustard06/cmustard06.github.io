@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="baidu-site-verification" content="L6Lm9d5Crl"/>
+  
+  
+  
+  
+  <title>python TCP代理 | cmustard的博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="流程">
+<meta name="keywords" content="tcp,代理">
+<meta property="og:type" content="article">
+<meta property="og:title" content="python TCP代理">
+<meta property="og:url" content="http://www.cmustarc.com/2017/08/20/python TCP代理/index.html">
+<meta property="og:site_name" content="cmustard的博客">
+<meta property="og:description" content="流程">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://ouz06keqs.bkt.clouddn.com/tcp_proxy2.png">
+<meta property="og:updated_time" content="2017-08-20T13:16:26.821Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="python TCP代理">
+<meta name="twitter:description" content="流程">
+<meta name="twitter:image" content="http://ouz06keqs.bkt.clouddn.com/tcp_proxy2.png">
+  
+    <link rel="alternative" href="/atom.xml" title="cmustard的博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/img/favicon.png">
+  
+  
+  <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  
+  
+      <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  
+  <!-- 加载特效 -->
+    <script src="/js/pace.js"></script>
+    <link href="/css/pace/pace-theme-flash.css" rel="stylesheet" />
+  <script>
+      var yiliaConfig = {
+          fancybox: true,
+          animate: true,
+          isHome: false,
+          isPost: true,
+          isArchive: false,
+          isTag: false,
+          isCategory: false,
+          open_in_new: false
+      }
+  </script>
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+        <a href="/" class="profilepic">
+            
+            <img lazy-src="/img/header.png" class="js-avatar">
+            
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">cmustard</a></h1>
+        </hgroup>
+        
+        <p class="header-subtitle">人生苦短，我用python</p>
+        
+        
+            <form>
+                <input type="text" class="st-default-search-input search" id="local-search-input" placeholder=" Search...">
+            </form>
+            <div id="local-search-result"></div>
+        
+        
+            <script type="text/javascript">
+                (function() {
+                    'use strict';
+                    function getMatchData(keyword, data) {
+                        var matchData = [];
+                        for(var i =0;i<data.length;i++){
+                            if(data[i].title.toLowerCase().indexOf(keyword)>=0) 
+                                matchData.push(data[i])
+                        }
+                        return matchData;
+                    }
+                    var $input = $('#local-search-input');
+                    var $resultContent = $('#local-search-result');
+                    $input.keyup(function(){
+                        $.ajax({
+                            url: '/search.json',
+                            dataType: "json",
+                            success: function( json ) {
+                                var str='<ul class=\"search-result-list\">';                
+                                var keyword = $input.val().trim().toLowerCase();
+                                $resultContent.innerHTML = "";
+                                if ($input.val().trim().length <= 0) {
+                                    $resultContent.empty();
+                                    $('#switch-area').show();
+                                    return;
+                                }
+                                var results = getMatchData(keyword, json);
+                                if(results.length === 0){
+                                    $resultContent.empty();
+                                    $('#switch-area').show();
+                                    return;
+                                } 
+                                for(var i =0; i<results.length; i++){
+                                    str += "<li><a href='"+ results[i].url +"' class='search-result-title'>"+ results[i].title +"</a></li>";
+                                }
+                                str += "</ul>";
+                                $resultContent.empty();
+                                $resultContent.append(str);
+                                $('#switch-area').hide();
+                            }
+                        });
+                    });
+                })();
+            </script>
+        
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a  href="/archives/">所有文章</a></li>
+                        
+                            <li><a  href="/categories/Web安全/">Web安全</a></li>
+                        
+                            <li><a  href="/categories/python">玩转Python</a></li>
+                        
+                            <li><a  href="/categories/notes">认知提升</a></li>
+                        
+                            <li><a  href="/about/">关于我</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fl github"  target="_blank" href="https://github.com/cmustard06" title="github">github</a>
+                            
+                                <a class="fl csdn"  target="_blank" href="http://blog.csdn.net/cmustard" title="csdn">csdn</a>
+                            
+                                <a class="fl rss"  target="_blank" href="/atom.xml" title="rss">rss</a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <a href="/tags/golang/" style="font-size: 10px;">golang</a> <a href="/tags/poc/" style="font-size: 10px;">poc</a> <a href="/tags/struct/" style="font-size: 10px;">struct</a> <a href="/tags/tcp/" style="font-size: 10px;">tcp</a> <a href="/tags/事件驱动/" style="font-size: 10px;">事件驱动</a> <a href="/tags/代理/" style="font-size: 10px;">代理</a> <a href="/tags/博客/" style="font-size: 10px;">博客</a> <a href="/tags/异步IO/" style="font-size: 10px;">异步IO</a> <a href="/tags/编程语言/" style="font-size: 10px;">编程语言</a>
+                    </div>
+                </section>
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a target="_blank"  class="main-nav-link switch-friends-link" href="http://dmmjy9.com">木木</a>
+                    
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">爱动漫,爱游戏,爱编程,爱运动,爱的太多了!</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">cmustard</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                
+                    <img lazy-src="/img/header.png" class="js-avatar">
+                
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">cmustard</a></h1>
+            </hgroup>
+            
+            <p class="header-subtitle">人生苦短，我用python</p>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/categories/Web安全/">Web安全</a></li>
+                
+                    <li><a href="/categories/python">玩转Python</a></li>
+                
+                    <li><a href="/categories/notes">认知提升</a></li>
+                
+                    <li><a href="/about/">关于我</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                <div class="social">
+                    
+                        <a class="github" target="_blank" href="https://github.com/cmustard06" title="github">github</a>
+                    
+                        <a class="csdn" target="_blank" href="http://blog.csdn.net/cmustard" title="csdn">csdn</a>
+                    
+                        <a class="rss" target="_blank" href="/atom.xml" title="rss">rss</a>
+                    
+                </div>
+            </nav>
+        </header>                
+    </div>
+</nav>
+      <div class="body-wrap"><article id="post-python TCP代理" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a  href="/2017/08/20/python TCP代理/" class="article-date">
+      <time datetime="2017-08-20T13:16:26.821Z" itemprop="datePublished">2017-08-20</time>
+</a>
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      python TCP代理
+    </h1>
+  
+
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/python/">python</a>
+    </div>
+
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/tcp/">tcp</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/代理/">代理</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h1 id="流程"><a href="#流程" class="headerlink" title="流程"></a>流程</h1><a id="more"></a>
+<p><img src="http://ouz06keqs.bkt.clouddn.com/tcp_proxy2.png" alt="流程图"></p>
+<h1 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div><div class="line">150</div><div class="line">151</div><div class="line">152</div><div class="line">153</div><div class="line">154</div><div class="line">155</div><div class="line">156</div><div class="line">157</div><div class="line">158</div><div class="line">159</div><div class="line">160</div><div class="line">161</div><div class="line">162</div><div class="line">163</div><div class="line">164</div><div class="line">165</div><div class="line">166</div><div class="line">167</div><div class="line">168</div><div class="line">169</div><div class="line">170</div><div class="line">171</div><div class="line">172</div><div class="line">173</div><div class="line">174</div><div class="line">175</div><div class="line">176</div><div class="line">177</div><div class="line">178</div><div class="line">179</div><div class="line">180</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#coding:utf-8</span></div><div class="line"></div><div class="line">import optparse</div><div class="line">import socket</div><div class="line">import threading</div><div class="line"></div><div class="line">def server_loop(local_host,local_port,remote_host,remote_port,receive_first):</div><div class="line"></div><div class="line">    server = socket.socket(socket.AF_INET,socket.SOCK_STREAM)</div><div class="line"></div><div class="line">    try:</div><div class="line">        server.bind((local_host,local_port))</div><div class="line">    except Exception as e:</div><div class="line">        <span class="built_in">print</span> e</div><div class="line">        <span class="built_in">print</span> <span class="string">"[!!] Failed to listen on %s:%d"</span> %(local_host,local_port)</div><div class="line">        <span class="built_in">print</span> <span class="string">"[!!] Check for other listening socket or correct permissions"</span></div><div class="line">        <span class="built_in">exit</span>(0)</div><div class="line"></div><div class="line">    <span class="built_in">print</span> <span class="string">"[*] Listening on %s:%d"</span> %(local_host,local_port)</div><div class="line"></div><div class="line">    server.listen(5)</div><div class="line">    <span class="keyword">while</span> True:</div><div class="line">        client_socket,addr=server.accept()</div><div class="line"></div><div class="line">        <span class="comment">#打印出本地连接信息</span></div><div class="line">        <span class="comment">#the addr  info is a pair (hostaddr, port).</span></div><div class="line">        <span class="built_in">print</span> <span class="string">"[==&gt;] Received incoming connection from %s:%d"</span> %(addr[0],addr[1])</div><div class="line"></div><div class="line">        <span class="comment">#开启一个线程与远程主机通信</span></div><div class="line">        th = threading.Thread(target=proxy_handler,args=(client_socket,remote_host,remote_port,receive_first))</div><div class="line"></div><div class="line">        th.start()</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line">def main():</div><div class="line">    usage=<span class="string">'./tcp_proxy.py -l [localhost] -lp [localport] -r [remotehost] -rp [remoteport] -f [receive_first]'</span></div><div class="line">    parser = optparse.OptionParser(usage)</div><div class="line">    parser.add_option(<span class="string">"-l"</span>,<span class="string">"--localhost"</span>,action=<span class="string">"store"</span>,<span class="built_in">type</span>=<span class="string">"string"</span>,dest=<span class="string">"local_host"</span>,<span class="built_in">help</span>=<span class="string">"local host"</span>)</div><div class="line">    parser.add_option(<span class="string">"-p"</span>,<span class="string">"--localport"</span>,action=<span class="string">"store"</span>,<span class="built_in">type</span>=<span class="string">"int"</span>,dest=<span class="string">"local_port"</span>,<span class="built_in">help</span>=<span class="string">"local port"</span>)</div><div class="line">    parser.add_option(<span class="string">"-r"</span>,<span class="string">"--remotehost"</span>,action=<span class="string">"store"</span>,<span class="built_in">type</span>=<span class="string">"string"</span>,dest=<span class="string">"remote_host"</span>,<span class="built_in">help</span>=<span class="string">"remote host"</span>)</div><div class="line">    parser.add_option(<span class="string">"-o"</span>,<span class="string">"--remoteport"</span>,action=<span class="string">"store"</span>,<span class="built_in">type</span>=<span class="string">"int"</span>,dest=<span class="string">"remote_port"</span>,<span class="built_in">help</span>=<span class="string">"remote port"</span>)</div><div class="line">    parser.add_option(<span class="string">"-f"</span>,<span class="string">"--receive_first"</span>,action=<span class="string">"store"</span>,<span class="built_in">type</span>=<span class="string">"string"</span>,dest=<span class="string">"receive_first"</span>,<span class="built_in">help</span>=<span class="string">"receive first:True or False"</span>)</div><div class="line">    (options,args)=parser.parse_args()</div><div class="line">    <span class="comment">#设置本地监听参数</span></div><div class="line">    local_host=options.local_host</div><div class="line">    local_port=options.local_port</div><div class="line">    <span class="comment">#设置远程目标</span></div><div class="line">    remote_host=options.remote_host</div><div class="line">    remote_port=options.remote_port</div><div class="line"></div><div class="line"></div><div class="line">    <span class="keyword">if</span> (local_host==None) | (local_port==None) | (remote_host==None) | (remote_port==None):</div><div class="line">        <span class="built_in">print</span> usage</div><div class="line">        <span class="built_in">exit</span>(0)</div><div class="line"></div><div class="line">    <span class="comment">#告诉代理在发送给远程主机之前连接和接受数据</span></div><div class="line">    receive_first=options.receive_first</div><div class="line"></div><div class="line">    <span class="keyword">if</span> <span class="string">"True"</span> <span class="keyword">in</span> receive_first:</div><div class="line">        receive_first=True</div><div class="line">    <span class="keyword">else</span>:</div><div class="line">        receive_first=False</div><div class="line"></div><div class="line">    <span class="comment">#现在设置好我们的监听socket</span></div><div class="line">    server_loop(local_host,local_port,remote_host,remote_port,receive_first)</div><div class="line"></div><div class="line">def proxy_handler(client_socket,remote_host,remote_port,receive_first):</div><div class="line"></div><div class="line">    <span class="comment">#链接远程主机</span></div><div class="line">    remote_socket=socket.socket(socket.AF_INET,socket.SOCK_STREAM)</div><div class="line">    remote_socket.connect((remote_host,remote_port))</div><div class="line"></div><div class="line">    <span class="comment">#如果必要从远程主机接受数据</span></div><div class="line"></div><div class="line">    <span class="keyword">if</span> receive_first:</div><div class="line"></div><div class="line">        remote_buffer=receive_from(remote_socket)</div><div class="line">        hexdump(remote_buffer)</div><div class="line"></div><div class="line">        <span class="comment">#发送给我们的响应处理</span></div><div class="line">        remote_buffer = response_handler(remote_buffer)</div><div class="line"></div><div class="line">        <span class="comment">#如果我们有数据传递给本地客户端，发送它</span></div><div class="line">        <span class="keyword">if</span> len(remote_buffer):</div><div class="line">            <span class="built_in">print</span> <span class="string">"[&lt;==] Sending %d bytes to localhost "</span>%(len(remote_buffer))</div><div class="line"></div><div class="line">            client_socket.send(remote_buffer)</div><div class="line"></div><div class="line">    <span class="comment">#现在我们从本地循环读取数据，发送给远程主机和本地主机</span></div><div class="line">    <span class="keyword">while</span> True:</div><div class="line"></div><div class="line">        <span class="comment">#从本地读取数据</span></div><div class="line">        local_buffer=receive_from(client_socket)</div><div class="line"></div><div class="line">        <span class="keyword">if</span> len(local_buffer):</div><div class="line"></div><div class="line">            <span class="built_in">print</span> <span class="string">"[==&gt;] Received %d bytes from localhost"</span> %(len(local_buffer))</div><div class="line">            hexdump(local_buffer)</div><div class="line">            <span class="comment">#发送给我们的本地请求</span></div><div class="line">            local_buffer=request_handler(local_buffer)</div><div class="line"></div><div class="line">            <span class="comment">#向远程主机发送数据</span></div><div class="line">            remote_socket.send(local_buffer)</div><div class="line">            <span class="built_in">print</span> <span class="string">"[==&gt;] Sent to remote"</span></div><div class="line"></div><div class="line">        <span class="comment">#接受相应的数据</span></div><div class="line">        remote_buffer = receive_from(remote_socket)</div><div class="line"></div><div class="line">        <span class="keyword">if</span> len(remote_buffer):</div><div class="line"></div><div class="line">            <span class="built_in">print</span> <span class="string">"[&lt;==] Received %d bytes from remote"</span> %(len(remote_buffer))</div><div class="line">            hexdump(remote_buffer)</div><div class="line"></div><div class="line">            <span class="comment">#发送到响应处理函数</span></div><div class="line">            remote_buffer=response_handler(remote_buffer)</div><div class="line"></div><div class="line">            <span class="comment">#将响应发送给本地socket</span></div><div class="line">            client_socket.send(remote_buffer)</div><div class="line"></div><div class="line">            <span class="built_in">print</span> <span class="string">"[&lt;==] Sent to localhost"</span></div><div class="line"></div><div class="line">        <span class="comment">#如果两边都没有数据，关闭连接</span></div><div class="line">        <span class="keyword">if</span> not len(local_buffer) or not len(remote_buffer):</div><div class="line">            client_socket.close()</div><div class="line">            remote_socket.close()</div><div class="line">            <span class="built_in">print</span> <span class="string">"[*] No more data. Closing connection"</span></div><div class="line"></div><div class="line">            <span class="built_in">break</span></div><div class="line"></div><div class="line"></div><div class="line">def hexdump(src,length=16):</div><div class="line">    result=[]</div><div class="line">    digits=4 <span class="keyword">if</span> isinstance(src,unicode) <span class="keyword">else</span> 2</div><div class="line"></div><div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> xrange(1,len(src),length):</div><div class="line">        s = src[i:i+length]</div><div class="line">        hexa=b<span class="string">' '</span>.join([<span class="string">"%0*X"</span> % (digits,ord(x)) <span class="keyword">for</span> x <span class="keyword">in</span> s])</div><div class="line">        text = b<span class="string">''</span>.join([x <span class="keyword">if</span> 0x20 &lt;= ord(x) &lt; 0x7F <span class="keyword">else</span> b<span class="string">'.'</span> <span class="keyword">for</span> x <span class="keyword">in</span> s])</div><div class="line">        result.append(b<span class="string">"%04X  %-*s  %s "</span> %(i,length*(digits+1),hexa,text))</div><div class="line"></div><div class="line">        <span class="built_in">print</span> b<span class="string">'\n'</span>.join(result)</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">#对目标是远程主机的请求进行修改</span></div><div class="line">def request_handler(buffer):</div><div class="line">    <span class="comment">#执行包修改</span></div><div class="line">    <span class="built_in">return</span> buffer</div><div class="line"></div><div class="line"><span class="comment">#对目标是本地主机的响应进行修改</span></div><div class="line">def response_handler(buffer):</div><div class="line">    <span class="comment">#执行包修改</span></div><div class="line">    <span class="built_in">return</span> buffer</div><div class="line"></div><div class="line"></div><div class="line">def receive_from(connection):</div><div class="line">    <span class="string">"连接成功后，接收数据"</span></div><div class="line">    buffer=<span class="string">""</span></div><div class="line"></div><div class="line">    <span class="comment">#我们设置了2秒的超时，这取决于目标的情况，可能需要调整</span></div><div class="line">    connection.settimeout(20)</div><div class="line"></div><div class="line">    try:</div><div class="line"></div><div class="line">        <span class="comment">#持续从缓存中读取数据直到没有数据或者超时</span></div><div class="line">        <span class="keyword">while</span> True:</div><div class="line">            data=connection.recv(4096)</div><div class="line">            <span class="keyword">if</span> not data:</div><div class="line">                <span class="built_in">break</span></div><div class="line"></div><div class="line">            buffer+=data</div><div class="line">    except Exception as e:</div><div class="line">        <span class="built_in">print</span> e</div><div class="line"></div><div class="line">    <span class="built_in">return</span> buffer</div><div class="line"></div><div class="line"></div><div class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</div><div class="line">    main()</div></pre></td></tr></table></figure>
+<h1 id="进阶"><a href="#进阶" class="headerlink" title="进阶"></a>进阶</h1><p>待续</p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a  href="/2017/08/20/python TCP代理/">python TCP代理</a></p>
+        <p><span>文章作者:</span><a  href="/" title="访问 cmustard 的个人博客">cmustard</a></p>
+        <p><span>发布时间:</span>2017年08月20日 - 21时16分</p>
+        <p><span>最后更新:</span>2017年08月20日 - 09时16分</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2017/08/20/python TCP代理/" title="python TCP代理">http://www.cmustarc.com/2017/08/20/python TCP代理/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://www.cmustarc.com/2017/08/20/python TCP代理/　　作者: cmustard" title=""></span>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" title="中国大陆 (CC BY-NC-SA 3.0 CN)" target = "_blank">"署名-非商用-相同方式共享 3.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+<nav id="article-nav">
+  
+    <a  href="/2017/08/20/论事件驱动与异步IO/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          论事件驱动与异步IO[转]
+        
+      </div>
+    </a>
+  
+  
+    <a  href="/2017/08/20/go语言初识/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">初识go语言</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#流程"><span class="toc-number">1.</span> <span class="toc-text">流程</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#代码实现"><span class="toc-number">2.</span> <span class="toc-text">代码实现</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#进阶"><span class="toc-number">3.</span> <span class="toc-text">进阶</span></a></li></ol>
+</div>
+<style>
+    .left-col .switch-btn {
+        display: none;
+    }
+    .left-col .switch-area {
+        display: none;
+    }
+</style>
+<input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script>
+    var valueHide = "隐藏目录";
+    var valueShow = "显示目录";
+    if ($(".left-col").is(":hidden")) {
+        $("#tocButton").attr("value", valueShow);
+    }
+    $("#tocButton").click(function() {
+        if ($("#toc").is(":hidden")) {
+            $("#tocButton").attr("value", valueHide);
+            $("#toc").slideDown(320);
+            $(".switch-btn, .switch-area").fadeOut(300);
+        }
+        else {
+            $("#tocButton").attr("value", valueShow);
+            $("#toc").slideUp(350);
+            $(".switch-btn, .switch-area").fadeIn(500);
+        }
+    })
+    if ($(".toc").length < 1) {
+        $("#toc, #tocButton").hide();
+        $(".switch-btn, .switch-area").show();
+    }
+</script>
+
+
+
+
+<div class="bdsharebuttonbox">
+	<a href="#" class="fx fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+	<a href="#" class="fx fa-weixin bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+	<a href="#" class="fx fa-qq bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+	<a href="#" class="fx fa-facebook-official bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+	<a href="#" class="fx fa-twitter bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+	<a href="#" class="fx fa-linkedin bds_linkedin" data-cmd="linkedin" title="分享到linkedin"></a>
+	<a href="#" class="fx fa-files-o bds_copy" data-cmd="copy" title="分享到复制网址"></a>
+</div>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+
+
+
+    
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a  href="/2017/08/20/论事件驱动与异步IO/" title="上一篇: 论事件驱动与异步IO[转]">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+        
+            <a  href="/2017/08/20/go语言初识/" title="下一篇: 初识go语言">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/08/20/论事件驱动与异步IO/">论事件驱动与异步IO[转]</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/20/python TCP代理/">python TCP代理</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/20/go语言初识/">初识go语言</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/16/Strut2 常见POC/">Struts2 常见POC收集和整理</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/15/hello-world/">Hello World</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/15/hexo+github+nginx VPS搭建博客/">hexo+github+nginx vps搭建博客</a></li></ul>
+    <script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+    <script>
+        $(".post-list").addClass("toc-article");
+        // $(".post-list-item a").attr("target","_blank");
+        $("#post-nav-button > a:nth-child(2)").click(function() {
+            $(".fa-bars, .fa-times").toggle();
+            $(".post-list").toggle(300);
+            if ($(".toc").length > 0) {
+                $("#toc, #tocButton").toggle(200, function() {
+                    if ($(".switch-area").is(":visible")) {
+                        $("#toc, .switch-btn, .switch-area").toggle();
+                        $("#tocButton").attr("value", valueHide);
+                        }
+                    })
+            }
+            else {
+                $(".switch-btn, .switch-area").fadeToggle(300);
+            }
+        })
+    </script>
+
+
+
+
+    <script>
+        
+    </script>
+
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                &copy; 2017 cmustard
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank">Hexo</a><a href="https://github.com/maochunguang" target="_blank">Blog</a> by tommy
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" >极客到访数: 
+                            <span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>, </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit">本页阅读量: 
+                            <span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+
+    </div>
+    <script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var backgroundnum = 4;
+            var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+            $("#mobile-nav").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+            $(".left-col").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+        })
+    </script>
+
+
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'xxxxx', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+
+	<script>
+	var _hmt = _hmt || [];
+	(function() {
+	  var hm = document.createElement("script");
+	  hm.src = "//hm.baidu.com/hm.js?xxxxxx";
+	  var s = document.getElementsByTagName("script")[0]; 
+	  s.parentNode.insertBefore(hm, s);
+	})();
+	</script>
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    $(document).ready(function() {
+        if ($("#comments").length < 1) {
+            $("#scroll > a:nth-child(2)").hide();
+        };
+    })
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+  <script language="javascript">
+    $(function() {
+        $("a[title]").each(function() {
+            var a = $(this);
+            var title = a.attr('title');
+            if (title == undefined || title == "") return;
+            a.data('title', title).removeAttr('title').hover(
+            function() {
+                var offset = a.offset();
+                $("<div id=\"anchortitlecontainer\"></div>").appendTo($("body")).html(title).css({
+                    top: offset.top - a.outerHeight() - 15,
+                    left: offset.left + a.outerWidth()/2 + 1
+                }).fadeIn(function() {
+                    var pop = $(this);
+                    setTimeout(function() {
+                        pop.remove();
+                    }, pop.text().length * 800);
+                });
+            }, function() {
+                $("#anchortitlecontainer").remove();
+            });
+        });
+    });
+</script>
+
+
+  </div>
+</body>
+</html>

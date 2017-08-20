@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="baidu-site-verification" content="L6Lm9d5Crl"/>
+  
+  
+  
+  
+  <title>初识go语言 | cmustard的博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="简介Go语言是一门全新的静态类型开发语言，与当前的开发语言相比具备众多令人兴奋不已的新特性。最主要的新特性如下：  自动垃圾回收 更丰富的内置类型 函数多返回值">
+<meta name="keywords" content="golang,编程语言">
+<meta property="og:type" content="article">
+<meta property="og:title" content="初识go语言">
+<meta property="og:url" content="http://www.cmustarc.com/2017/08/20/go语言初识/index.html">
+<meta property="og:site_name" content="cmustard的博客">
+<meta property="og:description" content="简介Go语言是一门全新的静态类型开发语言，与当前的开发语言相比具备众多令人兴奋不已的新特性。最主要的新特性如下：  自动垃圾回收 更丰富的内置类型 函数多返回值">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2017-08-20T06:02:20.243Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="初识go语言">
+<meta name="twitter:description" content="简介Go语言是一门全新的静态类型开发语言，与当前的开发语言相比具备众多令人兴奋不已的新特性。最主要的新特性如下：  自动垃圾回收 更丰富的内置类型 函数多返回值">
+  
+    <link rel="alternative" href="/atom.xml" title="cmustard的博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/img/favicon.png">
+  
+  
+  <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  
+  
+      <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  
+  <!-- 加载特效 -->
+    <script src="/js/pace.js"></script>
+    <link href="/css/pace/pace-theme-flash.css" rel="stylesheet" />
+  <script>
+      var yiliaConfig = {
+          fancybox: true,
+          animate: true,
+          isHome: false,
+          isPost: true,
+          isArchive: false,
+          isTag: false,
+          isCategory: false,
+          open_in_new: false
+      }
+  </script>
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+        <a href="/" class="profilepic">
+            
+            <img lazy-src="/img/header.png" class="js-avatar">
+            
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">cmustard</a></h1>
+        </hgroup>
+        
+        <p class="header-subtitle">人生苦短，我用python</p>
+        
+        
+            <form>
+                <input type="text" class="st-default-search-input search" id="local-search-input" placeholder=" Search...">
+            </form>
+            <div id="local-search-result"></div>
+        
+        
+            <script type="text/javascript">
+                (function() {
+                    'use strict';
+                    function getMatchData(keyword, data) {
+                        var matchData = [];
+                        for(var i =0;i<data.length;i++){
+                            if(data[i].title.toLowerCase().indexOf(keyword)>=0) 
+                                matchData.push(data[i])
+                        }
+                        return matchData;
+                    }
+                    var $input = $('#local-search-input');
+                    var $resultContent = $('#local-search-result');
+                    $input.keyup(function(){
+                        $.ajax({
+                            url: '/search.json',
+                            dataType: "json",
+                            success: function( json ) {
+                                var str='<ul class=\"search-result-list\">';                
+                                var keyword = $input.val().trim().toLowerCase();
+                                $resultContent.innerHTML = "";
+                                if ($input.val().trim().length <= 0) {
+                                    $resultContent.empty();
+                                    $('#switch-area').show();
+                                    return;
+                                }
+                                var results = getMatchData(keyword, json);
+                                if(results.length === 0){
+                                    $resultContent.empty();
+                                    $('#switch-area').show();
+                                    return;
+                                } 
+                                for(var i =0; i<results.length; i++){
+                                    str += "<li><a href='"+ results[i].url +"' class='search-result-title'>"+ results[i].title +"</a></li>";
+                                }
+                                str += "</ul>";
+                                $resultContent.empty();
+                                $resultContent.append(str);
+                                $('#switch-area').hide();
+                            }
+                        });
+                    });
+                })();
+            </script>
+        
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a  href="/archives/">所有文章</a></li>
+                        
+                            <li><a  href="/categories/Web安全/">Web安全</a></li>
+                        
+                            <li><a  href="/categories/python">玩转Python</a></li>
+                        
+                            <li><a  href="/categories/notes">认知提升</a></li>
+                        
+                            <li><a  href="/about/">关于我</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fl github"  target="_blank" href="https://github.com/cmustard06" title="github">github</a>
+                            
+                                <a class="fl csdn"  target="_blank" href="http://blog.csdn.net/cmustard" title="csdn">csdn</a>
+                            
+                                <a class="fl rss"  target="_blank" href="/atom.xml" title="rss">rss</a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <a href="/tags/golang/" style="font-size: 10px;">golang</a> <a href="/tags/poc/" style="font-size: 10px;">poc</a> <a href="/tags/struct/" style="font-size: 10px;">struct</a> <a href="/tags/tcp/" style="font-size: 10px;">tcp</a> <a href="/tags/事件驱动/" style="font-size: 10px;">事件驱动</a> <a href="/tags/代理/" style="font-size: 10px;">代理</a> <a href="/tags/博客/" style="font-size: 10px;">博客</a> <a href="/tags/异步IO/" style="font-size: 10px;">异步IO</a> <a href="/tags/编程语言/" style="font-size: 10px;">编程语言</a>
+                    </div>
+                </section>
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a target="_blank"  class="main-nav-link switch-friends-link" href="http://dmmjy9.com">木木</a>
+                    
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">爱动漫,爱游戏,爱编程,爱运动,爱的太多了!</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">cmustard</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                
+                    <img lazy-src="/img/header.png" class="js-avatar">
+                
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">cmustard</a></h1>
+            </hgroup>
+            
+            <p class="header-subtitle">人生苦短，我用python</p>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/categories/Web安全/">Web安全</a></li>
+                
+                    <li><a href="/categories/python">玩转Python</a></li>
+                
+                    <li><a href="/categories/notes">认知提升</a></li>
+                
+                    <li><a href="/about/">关于我</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                <div class="social">
+                    
+                        <a class="github" target="_blank" href="https://github.com/cmustard06" title="github">github</a>
+                    
+                        <a class="csdn" target="_blank" href="http://blog.csdn.net/cmustard" title="csdn">csdn</a>
+                    
+                        <a class="rss" target="_blank" href="/atom.xml" title="rss">rss</a>
+                    
+                </div>
+            </nav>
+        </header>                
+    </div>
+</nav>
+      <div class="body-wrap"><article id="post-go语言初识" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a  href="/2017/08/20/go语言初识/" class="article-date">
+      <time datetime="2017-08-20T06:02:20.243Z" itemprop="datePublished">2017-08-20</time>
+</a>
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      初识go语言
+    </h1>
+  
+
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/notes/">notes</a>
+    </div>
+
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/golang/">golang</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/编程语言/">编程语言</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>Go语言是一门全新的静态类型开发语言，与当前的开发语言相比具备众多令人兴奋不已的新特性。最主要的新特性如下：</p>
+<ul>
+<li>自动垃圾回收</li>
+<li>更丰富的内置类型</li>
+<li>函数多返回值<a id="more"></a></li>
+<li>错误处理</li>
+<li>匿名函数和闭包</li>
+<li>类型和接口</li>
+<li>并发编程</li>
+<li>反射</li>
+<li>语言交互性</li>
+</ul>
+<h1 id="自动垃圾回收"><a href="#自动垃圾回收" class="headerlink" title="自动垃圾回收"></a>自动垃圾回收</h1><p>手动管理内存的一个问题就是由于指针的到处传递而无法确定何时可以释放该指针的指向的内存块。假如在代码中的某个位置我们释放了内存，而另一些地方还在使用指向这块内存的指针，那么这些指针就变成了所谓的野指针或者悬空指针，对这些进行任何读写操作都会导致不可预料的后果。就比如以下的c++代码，进行内存释放。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">int *p = new int;</div><div class="line">p +=10 ; //这里对指针进行了偏移，因此那块内存不再被引用</div><div class="line">// ...... 这里可能发生针对这块int内存的垃圾回收。</div><div class="line">p -=10; //居然又偏移到原来的位置</div><div class="line">*p = 10; //如果有垃圾收集，这里就无法保证可以正常运行了</div></pre></td></tr></table></figure></p>
+<p> 所谓的垃圾回收，即所有的内存分配动作都会被在运行时记录，同时任何对该内存的使用也都会被记录，然后垃圾回收器一会对所有已经分配的内存进行跟踪监测，一旦发现有些内存已经不再使用，就会阶段性的回收这些没人用的内存。</p>
+<h1 id="更丰富的内置类型"><a href="#更丰富的内置类型" class="headerlink" title="更丰富的内置类型"></a>更丰富的内置类型</h1><p> 除了几乎所有语言都支持的简单内置类型外，Go语言也内置了一些比较新的语言学中的内置的高级类型，比如C#和Java中的数组和字符串，除此之外，Go语言中还内置了一个对于其他静态类型语言通常用库支持的字典类型。另外又一个新增的数据结构，数组切片，我们可以认为数组切片是一种可动态增长的数组。</p>
+<h1 id="函数多返回值"><a href="#函数多返回值" class="headerlink" title="函数多返回值"></a>函数多返回值</h1><p>目前主流语言中除了Python外基本都不支持函数的多返回值功能，比如我们如果要定义一个函数用于返回个人名字信息，而名字信息因为包含多个部分—-姓名，中间名和别名，在不支持多返回值的语言中我们又以下两种做法，要么专门定义一个结构体用于返回，要么以传出参数的方式返回多个结构使用指针。<br>     Go语言革命性的在静态语言阵营中率先提供了多返回值功能。Go语言中举例：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">func getName()(firstName,middleName,lastName,nickName string)&#123;</div><div class="line">     <span class="built_in">return</span> <span class="string">"May"</span>,<span class="string">"M"</span>,<span class="string">"Chen"</span>,<span class="string">"Babe"</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p> 因为返回值都已经有了名字，因此各个返回值也可以用如下方式来在不同的位置进行赋值，从而提供了极大的灵活性：<br> <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">func getName()(firstName,middleName,lastName,nickName string)&#123;</div><div class="line">     firstName = <span class="string">"May"</span></div><div class="line">     middleName = <span class="string">"M"</span></div><div class="line">     lastName = <span class="string">'Chen'</span></div><div class="line">     nickName = <span class="string">'Babe'</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>并不是每一个返回值都必须赋值，没有明赋值的返回值将保留默认的空值，函数的调用也比较简单<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">fn,mn,ln,nn := getName()</div></pre></td></tr></table></figure></p>
+<p> 如果我们只对函数其中的某几个返回值感兴趣的话。也可以直接用下划线作为占位符来忽略其他不关心的返回值。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">_,_,lastName,_:=getName()</div></pre></td></tr></table></figure></p>
+<h1 id="错误处理"><a href="#错误处理" class="headerlink" title="错误处理"></a>错误处理</h1><p>Go语言引入了关键字defer用于标准的错误处理流程，并提供了内置函数panic，recover完成异常的抛出与捕获。</p>
+<h1 id="匿名函数和闭包"><a href="#匿名函数和闭包" class="headerlink" title="匿名函数和闭包"></a>匿名函数和闭包</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">f := func(x,y int)int&#123;</div><div class="line">     <span class="built_in">return</span> x+y</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h1 id="接口类型"><a href="#接口类型" class="headerlink" title="接口类型"></a>接口类型</h1><p>Go语言的类型定义非常接近于C语言中的结构，甚至沿用了struct关键字。相比而言，Go语言并没有直接沿袭c++和JAVA的传统去设计一个超级复杂的类型系统，不支持继承和重载，而只是支持了最基本的类型组合功能。</p>
+<p>Go语言并不是简单的对面向对象开发语言做减法，他还引入了一个无比强大的非侵入式接口的概念，在C++中，我们通常会这样来确定接口和类型的关系。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">//抽象接口</div><div class="line">interface IFly&#123;</div><div class="line">     virtual void Fly()=0;</div><div class="line">&#125;;</div><div class="line"></div><div class="line">//实现类</div><div class="line">class Bird:public IFly&#123;</div><div class="line">     public:</div><div class="line">          <span class="function"><span class="title">Bird</span></span>()&#123;&#125;</div><div class="line">          virtual ~<span class="function"><span class="title">Bird</span></span>()&#123;&#125;</div><div class="line">     public:</div><div class="line">          void <span class="function"><span class="title">Fly</span></span>()&#123;</div><div class="line">               //以鸟的方式飞行</div><div class="line">&#125;</div><div class="line">&#125;;</div><div class="line"></div><div class="line">void <span class="function"><span class="title">main</span></span>()&#123;</div><div class="line">     IFly *pFly = new Bird();</div><div class="line">     pFly -&gt;Fly();</div><div class="line">     delete pFly;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>显然，在实现一个接口之前必须先定义该接口，并且将类型和接口紧密绑定，即接口的修改会影响到所有实现了该接口的类型。而Go语言的接口避免这类问题<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">type</span> Bird struct&#123;</div><div class="line">     ...</div><div class="line">&#125;</div><div class="line"></div><div class="line">func (b *Bird) <span class="function"><span class="title">Fly</span></span>()&#123;</div><div class="line">     //以鸟的方式飞行</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>我们在实现Bird类型时完全没有任何IFLY的信息，我们可以在另一个地方定义这个IFly接口:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">type</span> IFly interface &#123;</div><div class="line">     Fly()</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>这两者目前看起来完全没有关系，现在看看我们怎么使用他们<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">func <span class="function"><span class="title">main</span></span>()&#123;</div><div class="line">     var fly IFly = new(Bird)</div><div class="line">     fly.Fly()</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h1 id="并发编程"><a href="#并发编程" class="headerlink" title="并发编程"></a>并发编程</h1><p>Go语言引入了goroutine概念，他使得并发编程便得很简单，通过使用goroutine而不是裸用操作系统的并发机制，以及使用消息传递来共享内存而不是使用共享内存来进行通信。</p>
+<p>通过在函数调用前使用关键字go，我们即可让该函数以goroutine方式执行，goroutime是一种比线程更加轻盈，更省资源的协程。Go语言通过系统的线程来多路派遣这些函数的执行，使得每个用go关键字执行的函数可以运行成为一个单位协程，当一个协程阻塞的时候，调度器就会自动把其他协程安排到另外的线程中去执行，从而实现了程序无等待并行化运行。而且调度的开销非常小。</p>
+<p> Go语言实现了CSP（通信顺序进程）模型来作为goroutine间推荐通信方式。在CSP模型中，一个并发系统由若干并行运行的顺序进程组成，每个进程不能对其他进程的变量赋值。进程之间只能通过一对通信原语实现协作。Go语言用channel（通道）这个概念来轻巧地实现CSP模型，channel的使用方式比较接近Unix系统中的管道pipe概念，可以方便的进行跨goroutine的通信。</p>
+<p>另外。由于一个进程内创建的所有goroutine运行在同一个地址内存空间，因此如果不同的goroutine不得不去访问共享的内存变量，访问前应该先获取相应的读写锁，Go语言标准库中的sync包提供了完备的读写锁功能。</p>
+<p>一个简单的例子来演示goroutine和channel的使用方式，这是一个并行计算的例子，用两个goroutine进行并行的累加计算，待两个计算过程都完成后打印计算结果。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">package main</div><div class="line"></div><div class="line">import <span class="string">"fmt"</span></div><div class="line"></div><div class="line">/*</div><div class="line">这是一个并行计算的例子，由两个goroutine进行并行的累加计算</div><div class="line">*/</div><div class="line">func sum(values []int, resultChan chan int) &#123;</div><div class="line">    sum := 0</div><div class="line">    <span class="keyword">for</span> _, value := range values &#123;</div><div class="line">        sum += value</div><div class="line">    &#125;</div><div class="line">    resultChan &lt;- sum //将计算结果发送到channel中</div><div class="line">&#125;</div><div class="line"></div><div class="line">func <span class="function"><span class="title">main</span></span>() &#123;</div><div class="line">    values := []int&#123;1, 2, 3, 4, 5, 6, 7, 8, 9, 10&#125;</div><div class="line">    resultChan := make(chan int, 2)</div><div class="line">    go sum(values[:len(values)/2], resultChan)</div><div class="line">    go sum(values[len(values)/2:], resultChan)</div><div class="line">    sum1, sum2 := &lt;-resultChan, &lt;-resultChan //接收结果</div><div class="line"></div><div class="line">    fmt.Println(<span class="string">"Result:"</span>, sum1, sum2, sum2+sum1)</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h1 id="反射"><a href="#反射" class="headerlink" title="反射"></a>反射</h1><p>通过反射，你可以获取对象类型的详细信息，并可动态操作对象。反射最常见的使用场景是做对象的序列化。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line">package main</div><div class="line"></div><div class="line">/*</div><div class="line">利用反射功能列出某个类型中所有成员变量的值</div><div class="line">*/</div><div class="line"></div><div class="line">import (</div><div class="line">    <span class="string">"fmt"</span></div><div class="line">    <span class="string">"reflect"</span></div><div class="line">)</div><div class="line"></div><div class="line">// 创建一个新类型</div><div class="line"><span class="built_in">type</span> Bird struct &#123;</div><div class="line">    Name           string</div><div class="line">    LifeExpectance int</div><div class="line">&#125;</div><div class="line"></div><div class="line">func (b *Bird) <span class="function"><span class="title">Fly</span></span>() &#123;</div><div class="line">    fmt.Println(<span class="string">"I'm flying"</span>)</div><div class="line">&#125;</div><div class="line"></div><div class="line">func <span class="function"><span class="title">main</span></span>() &#123;</div><div class="line">    sparrow := &amp;Bird&#123;<span class="string">"Sparrow"</span>, 3&#125;</div><div class="line">    s := reflect.ValueOf(sparrow).Elem()</div><div class="line">    typeOfT := s.Type()</div><div class="line">    <span class="keyword">for</span> i := 0; i &lt; s.NumField(); i++ &#123;</div><div class="line">        f := s.Field(i)</div><div class="line">        fmt.Printf(<span class="string">"%d:%s %s = %v\n"</span>, i, typeOfT.Field(i).Name, f.Type(), f.Interface())</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h1 id="语言交互性"><a href="#语言交互性" class="headerlink" title="语言交互性"></a>语言交互性</h1><p> 由于Go语言和C语言有天生联系，Go语言的设计者们自然不会忽略如何重用现有C模块的这个问题，这个功能直接被命名为Cgo，Cgo即是语言特性，同时也是一个工具的名称。</p>
+<p> 在Go语言中，可以按Cgo的特定语法混合编写C语言代码，然后Cgo工具可以将这些混合的C代码提取并生成对于C功能的调用包装代码。这里需要安装gcc编译环境<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">package main</div><div class="line"></div><div class="line">/*</div><div class="line">在Go语言中调用C语言标准库的puts函数</div><div class="line"></div><div class="line"><span class="comment">#include&lt;stdio.h&gt;</span></div><div class="line"><span class="comment">#include&lt;stdlib.h&gt;</span></div><div class="line">*/</div><div class="line"></div><div class="line">import (</div><div class="line">    <span class="string">"C"</span></div><div class="line">    <span class="string">"unsafe"</span></div><div class="line">)</div><div class="line"></div><div class="line">func <span class="function"><span class="title">main</span></span>() &#123;</div><div class="line">    cstr := C.CString(<span class="string">"Hello, world"</span>)</div><div class="line">    C.puts(cstr)</div><div class="line">    C.free(unsafe.Pointer(cstr))</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a  href="/2017/08/20/go语言初识/">初识go语言</a></p>
+        <p><span>文章作者:</span><a  href="/" title="访问 cmustard 的个人博客">cmustard</a></p>
+        <p><span>发布时间:</span>2017年08月20日 - 14时02分</p>
+        <p><span>最后更新:</span>2017年08月20日 - 02时02分</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2017/08/20/go语言初识/" title="初识go语言">http://www.cmustarc.com/2017/08/20/go语言初识/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://www.cmustarc.com/2017/08/20/go语言初识/　　作者: cmustard" title=""></span>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" title="中国大陆 (CC BY-NC-SA 3.0 CN)" target = "_blank">"署名-非商用-相同方式共享 3.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+<nav id="article-nav">
+  
+    <a  href="/2017/08/20/python TCP代理/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          python TCP代理
+        
+      </div>
+    </a>
+  
+  
+    <a  href="/2017/08/16/Strut2 常见POC/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Struts2 常见POC收集和整理</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#简介"><span class="toc-number">1.</span> <span class="toc-text">简介</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#自动垃圾回收"><span class="toc-number">2.</span> <span class="toc-text">自动垃圾回收</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#更丰富的内置类型"><span class="toc-number">3.</span> <span class="toc-text">更丰富的内置类型</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#函数多返回值"><span class="toc-number">4.</span> <span class="toc-text">函数多返回值</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#错误处理"><span class="toc-number">5.</span> <span class="toc-text">错误处理</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#匿名函数和闭包"><span class="toc-number">6.</span> <span class="toc-text">匿名函数和闭包</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#接口类型"><span class="toc-number">7.</span> <span class="toc-text">接口类型</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#并发编程"><span class="toc-number">8.</span> <span class="toc-text">并发编程</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#反射"><span class="toc-number">9.</span> <span class="toc-text">反射</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#语言交互性"><span class="toc-number">10.</span> <span class="toc-text">语言交互性</span></a></li></ol>
+</div>
+<style>
+    .left-col .switch-btn {
+        display: none;
+    }
+    .left-col .switch-area {
+        display: none;
+    }
+</style>
+<input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script>
+    var valueHide = "隐藏目录";
+    var valueShow = "显示目录";
+    if ($(".left-col").is(":hidden")) {
+        $("#tocButton").attr("value", valueShow);
+    }
+    $("#tocButton").click(function() {
+        if ($("#toc").is(":hidden")) {
+            $("#tocButton").attr("value", valueHide);
+            $("#toc").slideDown(320);
+            $(".switch-btn, .switch-area").fadeOut(300);
+        }
+        else {
+            $("#tocButton").attr("value", valueShow);
+            $("#toc").slideUp(350);
+            $(".switch-btn, .switch-area").fadeIn(500);
+        }
+    })
+    if ($(".toc").length < 1) {
+        $("#toc, #tocButton").hide();
+        $(".switch-btn, .switch-area").show();
+    }
+</script>
+
+
+
+
+<div class="bdsharebuttonbox">
+	<a href="#" class="fx fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+	<a href="#" class="fx fa-weixin bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+	<a href="#" class="fx fa-qq bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+	<a href="#" class="fx fa-facebook-official bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+	<a href="#" class="fx fa-twitter bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+	<a href="#" class="fx fa-linkedin bds_linkedin" data-cmd="linkedin" title="分享到linkedin"></a>
+	<a href="#" class="fx fa-files-o bds_copy" data-cmd="copy" title="分享到复制网址"></a>
+</div>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+
+
+
+    
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a  href="/2017/08/20/python TCP代理/" title="上一篇: python TCP代理">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+        
+            <a  href="/2017/08/16/Strut2 常见POC/" title="下一篇: Struts2 常见POC收集和整理">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/08/20/论事件驱动与异步IO/">论事件驱动与异步IO[转]</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/20/python TCP代理/">python TCP代理</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/20/go语言初识/">初识go语言</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/16/Strut2 常见POC/">Struts2 常见POC收集和整理</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/15/hello-world/">Hello World</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/15/hexo+github+nginx VPS搭建博客/">hexo+github+nginx vps搭建博客</a></li></ul>
+    <script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+    <script>
+        $(".post-list").addClass("toc-article");
+        // $(".post-list-item a").attr("target","_blank");
+        $("#post-nav-button > a:nth-child(2)").click(function() {
+            $(".fa-bars, .fa-times").toggle();
+            $(".post-list").toggle(300);
+            if ($(".toc").length > 0) {
+                $("#toc, #tocButton").toggle(200, function() {
+                    if ($(".switch-area").is(":visible")) {
+                        $("#toc, .switch-btn, .switch-area").toggle();
+                        $("#tocButton").attr("value", valueHide);
+                        }
+                    })
+            }
+            else {
+                $(".switch-btn, .switch-area").fadeToggle(300);
+            }
+        })
+    </script>
+
+
+
+
+    <script>
+        
+    </script>
+
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                &copy; 2017 cmustard
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank">Hexo</a><a href="https://github.com/maochunguang" target="_blank">Blog</a> by tommy
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" >极客到访数: 
+                            <span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>, </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit">本页阅读量: 
+                            <span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+
+    </div>
+    <script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var backgroundnum = 4;
+            var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+            $("#mobile-nav").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+            $(".left-col").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+        })
+    </script>
+
+
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'xxxxx', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+
+	<script>
+	var _hmt = _hmt || [];
+	(function() {
+	  var hm = document.createElement("script");
+	  hm.src = "//hm.baidu.com/hm.js?xxxxxx";
+	  var s = document.getElementsByTagName("script")[0]; 
+	  s.parentNode.insertBefore(hm, s);
+	})();
+	</script>
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    $(document).ready(function() {
+        if ($("#comments").length < 1) {
+            $("#scroll > a:nth-child(2)").hide();
+        };
+    })
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+  <script language="javascript">
+    $(function() {
+        $("a[title]").each(function() {
+            var a = $(this);
+            var title = a.attr('title');
+            if (title == undefined || title == "") return;
+            a.data('title', title).removeAttr('title').hover(
+            function() {
+                var offset = a.offset();
+                $("<div id=\"anchortitlecontainer\"></div>").appendTo($("body")).html(title).css({
+                    top: offset.top - a.outerHeight() - 15,
+                    left: offset.left + a.outerWidth()/2 + 1
+                }).fadeIn(function() {
+                    var pop = $(this);
+                    setTimeout(function() {
+                        pop.remove();
+                    }, pop.text().length * 800);
+                });
+            }, function() {
+                $("#anchortitlecontainer").remove();
+            });
+        });
+    });
+</script>
+
+
+  </div>
+</body>
+</html>
