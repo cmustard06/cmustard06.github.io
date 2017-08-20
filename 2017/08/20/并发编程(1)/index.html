@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="baidu-site-verification" content="L6Lm9d5Crl"/>
+  
+  
+  
+  
+  <title>并发编程（1） | cmustard的博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="并发基础多进程多进程是操作系统层面进行并发的基本模式。同时也是开销最大的模式，在Linux上，很多工具链正是采用这种模式在工作，比如某个web服务器，他会有专门的进程赋值网络端口的监听和链接管理，还会有专门的进程负责事务和运算，这种方法的好处在于简单，进程间互不影响，坏处在于系统开销大，因为所有的进程都是由内核管理的">
+<meta name="keywords" content="golang,并发">
+<meta property="og:type" content="article">
+<meta property="og:title" content="并发编程（1）">
+<meta property="og:url" content="http://www.cmustarc.com/2017/08/20/并发编程(1)/index.html">
+<meta property="og:site_name" content="cmustard的博客">
+<meta property="og:description" content="并发基础多进程多进程是操作系统层面进行并发的基本模式。同时也是开销最大的模式，在Linux上，很多工具链正是采用这种模式在工作，比如某个web服务器，他会有专门的进程赋值网络端口的监听和链接管理，还会有专门的进程负责事务和运算，这种方法的好处在于简单，进程间互不影响，坏处在于系统开销大，因为所有的进程都是由内核管理的">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2017-08-20T13:25:13.026Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="并发编程（1）">
+<meta name="twitter:description" content="并发基础多进程多进程是操作系统层面进行并发的基本模式。同时也是开销最大的模式，在Linux上，很多工具链正是采用这种模式在工作，比如某个web服务器，他会有专门的进程赋值网络端口的监听和链接管理，还会有专门的进程负责事务和运算，这种方法的好处在于简单，进程间互不影响，坏处在于系统开销大，因为所有的进程都是由内核管理的">
+  
+    <link rel="alternative" href="/atom.xml" title="cmustard的博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/img/favicon.png">
+  
+  
+  <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  
+  
+      <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  
+  <!-- 加载特效 -->
+    <script src="/js/pace.js"></script>
+    <link href="/css/pace/pace-theme-flash.css" rel="stylesheet" />
+  <script>
+      var yiliaConfig = {
+          fancybox: true,
+          animate: true,
+          isHome: false,
+          isPost: true,
+          isArchive: false,
+          isTag: false,
+          isCategory: false,
+          open_in_new: false
+      }
+  </script>
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+        <a href="/" class="profilepic">
+            
+            <img lazy-src="/img/header.png" class="js-avatar">
+            
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">cmustard</a></h1>
+        </hgroup>
+        
+        <p class="header-subtitle">人生苦短，我用python</p>
+        
+        
+            <form>
+                <input type="text" class="st-default-search-input search" id="local-search-input" placeholder=" Search...">
+            </form>
+            <div id="local-search-result"></div>
+        
+        
+            <script type="text/javascript">
+                (function() {
+                    'use strict';
+                    function getMatchData(keyword, data) {
+                        var matchData = [];
+                        for(var i =0;i<data.length;i++){
+                            if(data[i].title.toLowerCase().indexOf(keyword)>=0) 
+                                matchData.push(data[i])
+                        }
+                        return matchData;
+                    }
+                    var $input = $('#local-search-input');
+                    var $resultContent = $('#local-search-result');
+                    $input.keyup(function(){
+                        $.ajax({
+                            url: '/search.json',
+                            dataType: "json",
+                            success: function( json ) {
+                                var str='<ul class=\"search-result-list\">';                
+                                var keyword = $input.val().trim().toLowerCase();
+                                $resultContent.innerHTML = "";
+                                if ($input.val().trim().length <= 0) {
+                                    $resultContent.empty();
+                                    $('#switch-area').show();
+                                    return;
+                                }
+                                var results = getMatchData(keyword, json);
+                                if(results.length === 0){
+                                    $resultContent.empty();
+                                    $('#switch-area').show();
+                                    return;
+                                } 
+                                for(var i =0; i<results.length; i++){
+                                    str += "<li><a href='"+ results[i].url +"' class='search-result-title'>"+ results[i].title +"</a></li>";
+                                }
+                                str += "</ul>";
+                                $resultContent.empty();
+                                $resultContent.append(str);
+                                $('#switch-area').hide();
+                            }
+                        });
+                    });
+                })();
+            </script>
+        
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a  href="/archives/">所有文章</a></li>
+                        
+                            <li><a  href="/categories/Web安全/">Web安全</a></li>
+                        
+                            <li><a  href="/categories/python">玩转Python</a></li>
+                        
+                            <li><a  href="/categories/notes">认知提升</a></li>
+                        
+                            <li><a  href="/about/">关于我</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fl github"  target="_blank" href="https://github.com/cmustard06" title="github">github</a>
+                            
+                                <a class="fl csdn"  target="_blank" href="http://blog.csdn.net/cmustard" title="csdn">csdn</a>
+                            
+                                <a class="fl rss"  target="_blank" href="/atom.xml" title="rss">rss</a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <a href="/tags/golang/" style="font-size: 20px;">golang</a> <a href="/tags/poc/" style="font-size: 10px;">poc</a> <a href="/tags/struct/" style="font-size: 10px;">struct</a> <a href="/tags/tcp/" style="font-size: 10px;">tcp</a> <a href="/tags/事件驱动/" style="font-size: 10px;">事件驱动</a> <a href="/tags/代理/" style="font-size: 10px;">代理</a> <a href="/tags/博客/" style="font-size: 10px;">博客</a> <a href="/tags/并发/" style="font-size: 10px;">并发</a> <a href="/tags/异步IO/" style="font-size: 10px;">异步IO</a> <a href="/tags/编程语言/" style="font-size: 10px;">编程语言</a>
+                    </div>
+                </section>
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a target="_blank"  class="main-nav-link switch-friends-link" href="http://dmmjy9.com">木木</a>
+                    
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">爱动漫,爱游戏,爱编程,爱运动,爱的太多了!</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">cmustard</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                
+                    <img lazy-src="/img/header.png" class="js-avatar">
+                
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">cmustard</a></h1>
+            </hgroup>
+            
+            <p class="header-subtitle">人生苦短，我用python</p>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/categories/Web安全/">Web安全</a></li>
+                
+                    <li><a href="/categories/python">玩转Python</a></li>
+                
+                    <li><a href="/categories/notes">认知提升</a></li>
+                
+                    <li><a href="/about/">关于我</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                <div class="social">
+                    
+                        <a class="github" target="_blank" href="https://github.com/cmustard06" title="github">github</a>
+                    
+                        <a class="csdn" target="_blank" href="http://blog.csdn.net/cmustard" title="csdn">csdn</a>
+                    
+                        <a class="rss" target="_blank" href="/atom.xml" title="rss">rss</a>
+                    
+                </div>
+            </nav>
+        </header>                
+    </div>
+</nav>
+      <div class="body-wrap"><article id="post-并发编程(1)" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a  href="/2017/08/20/并发编程(1)/" class="article-date">
+      <time datetime="2017-08-20T13:25:13.026Z" itemprop="datePublished">2017-08-20</time>
+</a>
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      并发编程（1）
+    </h1>
+  
+
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/notes/">notes</a>
+    </div>
+
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/golang/">golang</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/并发/">并发</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h1 id="并发基础"><a href="#并发基础" class="headerlink" title="并发基础"></a>并发基础</h1><h2 id="多进程"><a href="#多进程" class="headerlink" title="多进程"></a>多进程</h2><p>多进程是操作系统层面进行并发的基本模式。同时也是开销最大的模式，在Linux上，很多工具链正是采用这种模式在工作，比如某个web服务器，他会有专门的进程赋值网络端口的监听和链接管理，还会有专门的进程负责事务和运算，这种方法的好处在于简单，进程间互不影响，坏处在于系统开销大，因为所有的进程都是由内核管理的<br><a id="more"></a></p>
+<h2 id="多线程"><a href="#多线程" class="headerlink" title="多线程"></a>多线程</h2><p>多线程在大部分操作系统上都属于系统层面的并发模式，也是我们使用最多的最有效的一种模式，目前，我们所见的几乎所有的工具链都会使用这种模式，他比多进程的开销小很多，但是其开销依旧很大，且在高并发的模式下，效率会受影响</p>
+<h2 id="基于回调的非阻塞-异步IO"><a href="#基于回调的非阻塞-异步IO" class="headerlink" title="基于回调的非阻塞/异步IO"></a>基于回调的非阻塞/异步IO</h2><p>这种架构的诞生实际上来源于多线程模式的危机，在很多高并发服务器开发实践中，使用多线程模式会很快耗尽服务器的内存和CPU资源，而这种模式通过事件驱动的方式使用异步IO，使服务器持续运转，且尽可能的少用线程，降低开销，他目前在nodejs中得到了很好的实践，但是使用这种模式。编程比多线程要复杂，因为他把流程做了分割，对于问题本身的反应不够自然</p>
+<h2 id="协程"><a href="#协程" class="headerlink" title="协程"></a>协程</h2><p>协程本质上是一种用户态线程，不需要操作系统来进行抢占式调度，且在真正的实现中寄存于线程中，因此，系统开销极小，可以有效的提高线程的任务并发性，而避免多线程的缺点，使用协程的优点是编程简单，结构清晰，缺点是需要语言的支持，如果不支持，则需要用户在程序中自行实现调度器。</p>
+<p>对于线程间共享状态的各种操作都被封装在线程之间进行传递的消息中，这通常要求，发送消息时对状态进行复制，并且在消息传递过程的边界上交出这个状态的所有权，从逻辑上来看，这个操作与共享内存系统中执行的原子更新操作相同，但从物理上来看则是非常不同，由于需要执行复制操作，所以大多数消息传递的实现在性能上并不优越，但线程中的状态管理工作通常会变得更为简单</p>
+<h1 id="协程-1"><a href="#协程-1" class="headerlink" title="协程"></a>协程</h1><p>执行体是一个抽象的概念，在操作系统层面有多个概念与之对应，，比如操作系统自己掌管的进程，进程内的线程以及进程内的协程。与传统的系统级线程和进程相比，协程最大的优势就是在于其轻量级，可以轻松创建上百万个而不会导致系统资源衰竭，而线程和进程通常最多也不能超过1w个。</p>
+<p>Go语言在语言级别支持轻量级线程，叫goroutine，go语言标准库提供的所有系统调用操作都出让CPU给其他goroutine。让轻量级线程的切换管理不依赖于系统的线程和进程，也不依赖于CPU的核心数量</p>
+<h1 id="goroutine"><a href="#goroutine" class="headerlink" title="goroutine"></a>goroutine</h1><p>goroutine是go语言中轻量级线程的实现，由Go运行时管理。</p>
+<p>假设我们需要实现一个函数Add（）,他把两个参数相加，并将结果打印到屏幕上，具体代码如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">func Add(x,y int)&#123;</div><div class="line">     z := x+y</div><div class="line">     fmt.Println(z)</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>让这个函数执行并发操作<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">go Add(1,1)</div></pre></td></tr></table></figure></p>
+<p>在一个函数前面加上Go关键字，这次调用就会再一个新的goroutine中并发执行，当被调用的函数返回时，这个goroutine也就自动结束了。需要注意的是，如果这个函数有返回值，那么这个返回值会被丢弃</p>
+<h2 id="实例add-go"><a href="#实例add-go" class="headerlink" title="实例add.go"></a>实例add.go</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">package main</div><div class="line"></div><div class="line">import <span class="string">"fmt"</span></div><div class="line"></div><div class="line">func Add(x, y int) &#123;</div><div class="line">    z := x + y</div><div class="line">    fmt.Println(z)</div><div class="line">&#125;</div><div class="line"></div><div class="line">func <span class="function"><span class="title">main</span></span>() &#123;</div><div class="line">    <span class="keyword">for</span> i := 0; i &lt; 10; i++ &#123;</div><div class="line">        go Add(i, i)</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>运行结果就是屏幕上什么都没有。要解释这个现象就涉及到了go语言的程序执行机制了</p>
+<p>Go程序从初始化main package并执行main函数开始，当main函数返回时，程序退出，且程序并不会等待其他goroutine结束。对于上面的例子，主函数启动了10个goroutine，然后返回，这是程序就退出了，而被启动的执行Add的goroutine没有来得及执行，所有程序没有任何输出。</p>
+<p>在python中就是调用一个join()函数，让主程序等待所有的线程完成，但是在go语言中却不是这样，要让主函数等待所有的goroutine退出后在返回，这就是goroutine之间的通信问题。</p>
+<p>4.并发通信</p>
+<p>在工程上，有两种最常见的并发通信模型，共享数据和消息</p>
+<p>共享数据是指多个并发单元分别保持对同一个数据的引用，实现对该数据的共享，被共享的数据可能有多种形式，比如内存数据块，硬盘文件，网络数据等，在实际工程应用中最常见的就是内存了。也即是我们常说的内存了。</p>
+<p>先看看C语言中通常是怎么处理线程之间共享数据的，代码如下<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#include&lt;stdio.h&gt;</span></div><div class="line"><span class="comment">#include&lt;stdlib.h&gt;</span></div><div class="line"><span class="comment">#include&lt;pthread.h&gt;</span></div><div class="line"></div><div class="line">void *count();</div><div class="line">pthread_mutex_t mutex1 = PTHREAD_METUX_INITALIZER;</div><div class="line">int counter = 0;</div><div class="line"></div><div class="line">void <span class="function"><span class="title">main</span></span>()&#123;</div><div class="line">    int rc1,rc2;</div><div class="line">    ptherd_t thread1,thread2;</div><div class="line">    // 创建线程，每个线程独立执行函数functionC</div><div class="line"></div><div class="line">    <span class="keyword">if</span>((rc1=pthread_create(&amp;thread1,NULL,&amp;add,NULL)))&#123;</div><div class="line">        <span class="built_in">printf</span>(<span class="string">"Thread creation failed:%d\n"</span>,rc1);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">if</span>((rc2=pthread_create(&amp;thread2,NULL,&amp;add,NULL)))&#123;</div><div class="line">        <span class="built_in">printf</span>(<span class="string">"Thread creation failed: %d\n"</span>,rc2);</div><div class="line">    &#125;</div><div class="line">    //等待所有线程执行完毕</div><div class="line">    pthread_join(thread1,NULL);</div><div class="line">    pthread_join(thread2,NULL);</div><div class="line"></div><div class="line">    <span class="built_in">exit</span>(0);</div><div class="line">&#125;</div><div class="line"></div><div class="line">void *<span class="function"><span class="title">count</span></span>()&#123;</div><div class="line">    pthread_mutex_lock(&amp;mutex1);</div><div class="line">    counter++;</div><div class="line">    <span class="built_in">printf</span>(<span class="string">"COunter value:%d\n"</span>,counter);</div><div class="line">    pthread_mutex_unlock(&amp;mutex1);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>这段代码直接翻译成go语言代码<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line">package main</div><div class="line"></div><div class="line">import <span class="string">"fmt"</span></div><div class="line"></div><div class="line">import <span class="string">"sync"</span></div><div class="line">import <span class="string">"runtime"</span></div><div class="line"></div><div class="line">var counter int = 0</div><div class="line"></div><div class="line">func Count(lock *sync.Mutex) &#123;</div><div class="line">    //mutex 互斥锁是一种用于多线程编程中，防止两条线程同时对同一公共资源进行读写的机制</div><div class="line">    lock.Lock()</div><div class="line">    counter++</div><div class="line">    fmt.Println(<span class="string">"z"</span>)</div><div class="line">    lock.Unlock()</div><div class="line">&#125;</div><div class="line"></div><div class="line">func <span class="function"><span class="title">main</span></span>() &#123;</div><div class="line">    lock := sync.Mutex&#123;&#125;</div><div class="line">    <span class="keyword">for</span> i := 0; i &lt; 10; i++ &#123;</div><div class="line">        go Count(&amp;lock)</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">for</span> &#123;</div><div class="line">        lock.Lock()</div><div class="line">        c := counter</div><div class="line">        lock.Unlock()</div><div class="line">        runtime.Gosched()</div><div class="line">        <span class="keyword">if</span> c &gt;= 10 &#123;</div><div class="line">            <span class="built_in">break</span></div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>在上面这个例子中，我们在10个goroutine中共享了变量counter，每个goroutine执行完成后，将counter的值加1，因为10个goroutine是并发执行的，所有我们还引入了锁，也就是代码中的lock变量，每次对n的操作，都要先将锁锁住，操作完成后，再将锁打开，在主函数中，使用for循环来不断检查counter的值，同样需要加锁，当其值达到10的时候，说明goroutine执行完毕，这个时候主函数返回。</p>
+<p>go语言提供另一种通信模型，即以消息机制而非共享内存作为通信方式</p>
+<p>消息机制认为每个并发单元是自包含的，独立的个体，并且都有自己的变量，但在不同并发单元间这些变量不共享，每个并发单元的输入和输出只有一种，那就是消息。这有点类似于进程的概率，每个进程不会被其他进程打扰，他只做好自己的工作就可以了。不同的进程间靠消息来通信，他们不会共享内存。</p>
+<p> go语言提供的消息机制被称为channel，。</p>
+<p><em>不要通过共享内存来通信，而应该通过通信来共享内存</em></p>
+<h1 id="channel"><a href="#channel" class="headerlink" title="channel"></a>channel</h1><p>channel是go语言在语言级别提供的goroutine间的通信方式，我们可以使用channel在两个或者多个goroutine之间传递消息。channel是进程内的通讯方式。</p>
+<p>channel是类型相关的，也就是说，一个channel只能传递一种类型的值，这种类型需要在声明channel时指定。</p>
+<p>使用channel重写<br>channel.go<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">package main</div><div class="line"></div><div class="line">import <span class="string">"fmt"</span></div><div class="line"></div><div class="line">func Count(ch chan int) &#123;</div><div class="line">    //向对应的channel中写入一个数据，在这个channel被读取之前这个操作是阻塞的。</div><div class="line">    ch &lt;- 1</div><div class="line">    fmt.Println(<span class="string">"counting"</span>)</div><div class="line">&#125;</div><div class="line"></div><div class="line">func <span class="function"><span class="title">main</span></span>() &#123;</div><div class="line">    //先定义了一个包含10个channel的数组chs，并把数组中每个channel分配给10个不同的goroutine</div><div class="line">    chs := make([]chan int, 10)</div><div class="line">    <span class="keyword">for</span> i := 0; i &lt; 10; i++ &#123;</div><div class="line">        chs[i] = make(chan int)</div><div class="line">        go Count(chs[i])</div><div class="line">    &#125;</div><div class="line">    //在所有的goroutine启动完成后，通过下面这个语句从10个channel中依次读取数据。</div><div class="line">    //在对应的channel写入之前这个操作也是阻塞的。</div><div class="line">    <span class="keyword">for</span> _, ch := range chs &#123;</div><div class="line">        &lt;-ch</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h2 id="基本语法"><a href="#基本语法" class="headerlink" title="基本语法"></a>基本语法</h2><p>一般channel的声明形式为：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">var chanName chan ElementType</div></pre></td></tr></table></figure></p>
+<p>与一般变量声明不同的地方仅仅是在类型之前加了一个chan关键字，ElementType指定这个channel所能传递的元素类型。</p>
+<p>比如传递一个int的channel“<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">var ch chan int</div></pre></td></tr></table></figure></p>
+<p>或者我们可以声明一个map，元素是bool型的channel”<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">var m map[string] chan bool</div></pre></td></tr></table></figure></p>
+<p>上面的语法都是合法的，定义一个channel也很简单，直接使用内置函数make()即可<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ch := make(chan int)</div></pre></td></tr></table></figure></p>
+<p>这里就声明并初始化了一个int型的名为ch的channel<br>在channel的用法中，最常用的包括写入和读出，将一个数据写入（发送）至channel的语法很直观，如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ch &lt;=value</div></pre></td></tr></table></figure></p>
+<p>向channel写入数据通常会导致程序阻塞，直到有其他的goroutine从这个channel中读取数据，从channel中读取数据的语法是“：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">value := &lt;-ch</div></pre></td></tr></table></figure></p>
+<p>如果channel之前没有写入数据的话，那么从channel中读取数据也会导致程序的阻塞，直到channel中被写入数据为止。</p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a  href="/2017/08/20/并发编程(1)/">并发编程（1）</a></p>
+        <p><span>文章作者:</span><a  href="/" title="访问 cmustard 的个人博客">cmustard</a></p>
+        <p><span>发布时间:</span>2017年08月20日 - 21时25分</p>
+        <p><span>最后更新:</span>2017年08月20日 - 09时25分</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2017/08/20/并发编程(1)/" title="并发编程（1）">http://www.cmustarc.com/2017/08/20/并发编程(1)/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://www.cmustarc.com/2017/08/20/并发编程(1)/　　作者: cmustard" title=""></span>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" title="中国大陆 (CC BY-NC-SA 3.0 CN)" target = "_blank">"署名-非商用-相同方式共享 3.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+<nav id="article-nav">
+  
+  
+    <a  href="/2017/08/20/论事件驱动与异步IO/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">论事件驱动与异步IO[转]</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#并发基础"><span class="toc-number">1.</span> <span class="toc-text">并发基础</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#多进程"><span class="toc-number">1.1.</span> <span class="toc-text">多进程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#多线程"><span class="toc-number">1.2.</span> <span class="toc-text">多线程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#基于回调的非阻塞-异步IO"><span class="toc-number">1.3.</span> <span class="toc-text">基于回调的非阻塞/异步IO</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#协程"><span class="toc-number">1.4.</span> <span class="toc-text">协程</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#协程-1"><span class="toc-number">2.</span> <span class="toc-text">协程</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#goroutine"><span class="toc-number">3.</span> <span class="toc-text">goroutine</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#实例add-go"><span class="toc-number">3.1.</span> <span class="toc-text">实例add.go</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#channel"><span class="toc-number">4.</span> <span class="toc-text">channel</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#基本语法"><span class="toc-number">4.1.</span> <span class="toc-text">基本语法</span></a></li></ol></li></ol>
+</div>
+<style>
+    .left-col .switch-btn {
+        display: none;
+    }
+    .left-col .switch-area {
+        display: none;
+    }
+</style>
+<input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script>
+    var valueHide = "隐藏目录";
+    var valueShow = "显示目录";
+    if ($(".left-col").is(":hidden")) {
+        $("#tocButton").attr("value", valueShow);
+    }
+    $("#tocButton").click(function() {
+        if ($("#toc").is(":hidden")) {
+            $("#tocButton").attr("value", valueHide);
+            $("#toc").slideDown(320);
+            $(".switch-btn, .switch-area").fadeOut(300);
+        }
+        else {
+            $("#tocButton").attr("value", valueShow);
+            $("#toc").slideUp(350);
+            $(".switch-btn, .switch-area").fadeIn(500);
+        }
+    })
+    if ($(".toc").length < 1) {
+        $("#toc, #tocButton").hide();
+        $(".switch-btn, .switch-area").show();
+    }
+</script>
+
+
+
+
+<div class="bdsharebuttonbox">
+	<a href="#" class="fx fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+	<a href="#" class="fx fa-weixin bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+	<a href="#" class="fx fa-qq bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+	<a href="#" class="fx fa-facebook-official bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+	<a href="#" class="fx fa-twitter bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+	<a href="#" class="fx fa-linkedin bds_linkedin" data-cmd="linkedin" title="分享到linkedin"></a>
+	<a href="#" class="fx fa-files-o bds_copy" data-cmd="copy" title="分享到复制网址"></a>
+</div>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+
+
+
+    
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a  href="/" title="回到主页"><i class="fa fa-home"></i></a>
+        
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+        
+            <a  href="/2017/08/20/论事件驱动与异步IO/" title="下一篇: 论事件驱动与异步IO[转]">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/08/20/并发编程(1)/">并发编程（1）</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/20/论事件驱动与异步IO/">论事件驱动与异步IO[转]</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/20/python TCP代理/">python TCP代理</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/20/go语言初识/">初识go语言</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/16/Strut2 常见POC/">Struts2 常见POC收集和整理</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/15/hello-world/">Hello World</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/15/hexo+github+nginx VPS搭建博客/">hexo+github+nginx vps搭建博客</a></li></ul>
+    <script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+    <script>
+        $(".post-list").addClass("toc-article");
+        // $(".post-list-item a").attr("target","_blank");
+        $("#post-nav-button > a:nth-child(2)").click(function() {
+            $(".fa-bars, .fa-times").toggle();
+            $(".post-list").toggle(300);
+            if ($(".toc").length > 0) {
+                $("#toc, #tocButton").toggle(200, function() {
+                    if ($(".switch-area").is(":visible")) {
+                        $("#toc, .switch-btn, .switch-area").toggle();
+                        $("#tocButton").attr("value", valueHide);
+                        }
+                    })
+            }
+            else {
+                $(".switch-btn, .switch-area").fadeToggle(300);
+            }
+        })
+    </script>
+
+
+
+
+    <script>
+        
+    </script>
+
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                &copy; 2017 cmustard
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank">Hexo</a><a href="https://github.com/maochunguang" target="_blank">Blog</a> by tommy
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" >极客到访数: 
+                            <span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>, </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit">本页阅读量: 
+                            <span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+
+    </div>
+    <script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var backgroundnum = 4;
+            var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+            $("#mobile-nav").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+            $(".left-col").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+        })
+    </script>
+
+
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'xxxxx', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+
+	<script>
+	var _hmt = _hmt || [];
+	(function() {
+	  var hm = document.createElement("script");
+	  hm.src = "//hm.baidu.com/hm.js?xxxxxx";
+	  var s = document.getElementsByTagName("script")[0]; 
+	  s.parentNode.insertBefore(hm, s);
+	})();
+	</script>
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    $(document).ready(function() {
+        if ($("#comments").length < 1) {
+            $("#scroll > a:nth-child(2)").hide();
+        };
+    })
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+  <script language="javascript">
+    $(function() {
+        $("a[title]").each(function() {
+            var a = $(this);
+            var title = a.attr('title');
+            if (title == undefined || title == "") return;
+            a.data('title', title).removeAttr('title').hover(
+            function() {
+                var offset = a.offset();
+                $("<div id=\"anchortitlecontainer\"></div>").appendTo($("body")).html(title).css({
+                    top: offset.top - a.outerHeight() - 15,
+                    left: offset.left + a.outerWidth()/2 + 1
+                }).fadeIn(function() {
+                    var pop = $(this);
+                    setTimeout(function() {
+                        pop.remove();
+                    }, pop.text().length * 800);
+                });
+            }, function() {
+                $("#anchortitlecontainer").remove();
+            });
+        });
+    });
+</script>
+
+
+  </div>
+</body>
+</html>
