@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="baidu-site-verification" content="L6Lm9d5Crl"/>
+  
+  
+  
+  
+  <title>python常用模块(2) | cmustard的博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="configparser模块 XML模块 requests模块 subprocess模块 logging模块">
+<meta name="keywords" content="python">
+<meta property="og:type" content="article">
+<meta property="og:title" content="python常用模块(2)">
+<meta property="og:url" content="http://www.cmustarc.com/2017/08/26/Python常用模块2/index.html">
+<meta property="og:site_name" content="cmustard的博客">
+<meta property="og:description" content="configparser模块 XML模块 requests模块 subprocess模块 logging模块">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://img.blog.csdn.net/20161005142942317">
+<meta property="og:image" content="http://img.blog.csdn.net/20161005143147855">
+<meta property="og:image" content="http://img.blog.csdn.net/20161005144647341">
+<meta property="og:image" content="http://img.blog.csdn.net/20161005144807096">
+<meta property="og:image" content="http://img.blog.csdn.net/20161005145512630">
+<meta property="og:image" content="http://img.blog.csdn.net/20161005145630634">
+<meta property="og:image" content="http://img.blog.csdn.net/20161005145950561">
+<meta property="og:image" content="http://img.blog.csdn.net/20161006102749811">
+<meta property="og:image" content="http://img.blog.csdn.net/20161006103639906">
+<meta property="og:updated_time" content="2017-08-26T08:08:34.764Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="python常用模块(2)">
+<meta name="twitter:description" content="configparser模块 XML模块 requests模块 subprocess模块 logging模块">
+<meta name="twitter:image" content="http://img.blog.csdn.net/20161005142942317">
+  
+    <link rel="alternative" href="/atom.xml" title="cmustard的博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/img/favicon.png">
+  
+  
+  <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  
+  
+      <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  
+  <!-- 加载特效 -->
+    <script src="/js/pace.js"></script>
+    <link href="/css/pace/pace-theme-flash.css" rel="stylesheet" />
+  <script>
+      var yiliaConfig = {
+          fancybox: true,
+          animate: true,
+          isHome: false,
+          isPost: true,
+          isArchive: false,
+          isTag: false,
+          isCategory: false,
+          open_in_new: false
+      }
+  </script>
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+        <a href="/" class="profilepic">
+            
+            <img lazy-src="/img/header.png" class="js-avatar">
+            
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">cmustard</a></h1>
+        </hgroup>
+        
+        <p class="header-subtitle">人生苦短，我用python</p>
+        
+        
+            <form>
+                <input type="text" class="st-default-search-input search" id="local-search-input" placeholder=" Search...">
+            </form>
+            <div id="local-search-result"></div>
+        
+        
+            <script type="text/javascript">
+                (function() {
+                    'use strict';
+                    function getMatchData(keyword, data) {
+                        var matchData = [];
+                        for(var i =0;i<data.length;i++){
+                            if(data[i].title.toLowerCase().indexOf(keyword)>=0) 
+                                matchData.push(data[i])
+                        }
+                        return matchData;
+                    }
+                    var $input = $('#local-search-input');
+                    var $resultContent = $('#local-search-result');
+                    $input.keyup(function(){
+                        $.ajax({
+                            url: '/search.json',
+                            dataType: "json",
+                            success: function( json ) {
+                                var str='<ul class=\"search-result-list\">';                
+                                var keyword = $input.val().trim().toLowerCase();
+                                $resultContent.innerHTML = "";
+                                if ($input.val().trim().length <= 0) {
+                                    $resultContent.empty();
+                                    $('#switch-area').show();
+                                    return;
+                                }
+                                var results = getMatchData(keyword, json);
+                                if(results.length === 0){
+                                    $resultContent.empty();
+                                    $('#switch-area').show();
+                                    return;
+                                } 
+                                for(var i =0; i<results.length; i++){
+                                    str += "<li><a href='"+ results[i].url +"' class='search-result-title'>"+ results[i].title +"</a></li>";
+                                }
+                                str += "</ul>";
+                                $resultContent.empty();
+                                $resultContent.append(str);
+                                $('#switch-area').hide();
+                            }
+                        });
+                    });
+                })();
+            </script>
+        
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a  href="/archives/">所有文章</a></li>
+                        
+                            <li><a  href="/categories/Web安全/">Web安全</a></li>
+                        
+                            <li><a  href="/categories/python">玩转Python</a></li>
+                        
+                            <li><a  href="/categories/notes">认知提升</a></li>
+                        
+                            <li><a  href="/about/">关于我</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fl github"  target="_blank" href="https://github.com/cmustard06" title="github">github</a>
+                            
+                                <a class="fl csdn"  target="_blank" href="http://blog.csdn.net/cmustard" title="csdn">csdn</a>
+                            
+                                <a class="fl rss"  target="_blank" href="/atom.xml" title="rss">rss</a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <a href="/tags/golang/" style="font-size: 20px;">golang</a> <a href="/tags/poc/" style="font-size: 10px;">poc</a> <a href="/tags/python/" style="font-size: 20px;">python</a> <a href="/tags/struct/" style="font-size: 10px;">struct</a> <a href="/tags/tcp/" style="font-size: 10px;">tcp</a> <a href="/tags/事件驱动/" style="font-size: 10px;">事件驱动</a> <a href="/tags/代理/" style="font-size: 10px;">代理</a> <a href="/tags/博客/" style="font-size: 10px;">博客</a> <a href="/tags/并发/" style="font-size: 10px;">并发</a> <a href="/tags/异步IO/" style="font-size: 10px;">异步IO</a> <a href="/tags/编程语言/" style="font-size: 10px;">编程语言</a>
+                    </div>
+                </section>
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a target="_blank"  class="main-nav-link switch-friends-link" href="http://dmmjy9.com">木木</a>
+                    
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">爱动漫,爱游戏,爱编程,爱运动,爱的太多了!</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">cmustard</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                
+                    <img lazy-src="/img/header.png" class="js-avatar">
+                
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">cmustard</a></h1>
+            </hgroup>
+            
+            <p class="header-subtitle">人生苦短，我用python</p>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/categories/Web安全/">Web安全</a></li>
+                
+                    <li><a href="/categories/python">玩转Python</a></li>
+                
+                    <li><a href="/categories/notes">认知提升</a></li>
+                
+                    <li><a href="/about/">关于我</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                <div class="social">
+                    
+                        <a class="github" target="_blank" href="https://github.com/cmustard06" title="github">github</a>
+                    
+                        <a class="csdn" target="_blank" href="http://blog.csdn.net/cmustard" title="csdn">csdn</a>
+                    
+                        <a class="rss" target="_blank" href="/atom.xml" title="rss">rss</a>
+                    
+                </div>
+            </nav>
+        </header>                
+    </div>
+</nav>
+      <div class="body-wrap"><article id="post-Python常用模块2" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a  href="/2017/08/26/Python常用模块2/" class="article-date">
+      <time datetime="2017-08-26T08:08:34.764Z" itemprop="datePublished">2017-08-26</time>
+</a>
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      python常用模块(2)
+    </h1>
+  
+
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/python/">python</a>
+    </div>
+
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/">python</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <ul>
+<li>configparser模块</li>
+<li>XML模块</li>
+<li>requests模块</li>
+<li>subprocess模块</li>
+<li>logging模块</li>
+</ul>
+<a id="more"></a>
+<h1 id="configparser模块"><a href="#configparser模块" class="headerlink" title="configparser模块"></a>configparser模块</h1><p>configparser用于处理特定格式的文件，看模块名字就知道这应该是用于处理配置文件的，其本质上是利用open来操作文件<br>指定的格式</p>
+<p> 以mysql配置文件为例(my.ini)</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">[client]</div><div class="line">default-character-set=utf8</div><div class="line">password	= your_password</div><div class="line">port		= 3306</div><div class="line">socket		= /tmp/mysql.sock</div><div class="line"></div><div class="line"><span class="comment"># Here follows entries for some specific programs</span></div><div class="line"></div><div class="line"><span class="comment"># The MySQL server</span></div><div class="line">[wampmysqld]</div><div class="line">port		= 3306</div><div class="line">socket		= /tmp/mysql.sock</div><div class="line">key_buffer_size = 16M</div><div class="line">max_allowed_packet = 1M</div><div class="line">sort_buffer_size = 512K</div><div class="line">net_buffer_length = 8K</div><div class="line">read_buffer_size = 256K</div><div class="line">read_rnd_buffer_size = 512K</div><div class="line">myisam_sort_buffer_size = 8M</div><div class="line">basedir=e:/wamp/bin/mysql/mysql5.6.17</div><div class="line"><span class="built_in">log</span>-error=e:/wamp/logs/mysql.log</div><div class="line">datadir=e:/wamp/bin/mysql/mysql5.6.17/data</div></pre></td></tr></table></figure>
+<p>注意的就是如果对文件进行了修改，就需要使用write(fp)函数重新写入文件</p>
+<p>获取所有节点信息<br><strong>sections()</strong><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">import configparser</div><div class="line">config=configparser.ConfigParser()</div><div class="line">config.read(<span class="string">"my.ini"</span>)</div><div class="line">ret=config.sections()<span class="comment">#  获取配置文件中所有节点的信息。返回一个列表</span></div><div class="line"><span class="built_in">print</span> ret</div><div class="line"><span class="comment">################output###############</span></div><div class="line"><span class="string">"['client', 'wampmysqld']"</span></div></pre></td></tr></table></figure></p>
+<p>获取指定节点下所有的键值对<br><strong>items(section, raw=False, vars=None)</strong><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">config=configparser.ConfigParser()</div><div class="line">config.read(<span class="string">"my.ini"</span>)</div><div class="line">ret=config.items(<span class="string">'client'</span>)   <span class="comment">#读取[client]节点下的键值对,返回一个元素是元组的列表</span></div><div class="line"><span class="built_in">print</span> ret</div><div class="line"><span class="comment">################output###############</span></div><div class="line"><span class="string">"[('default-character-set', 'utf8'), ('password', 'your_password'), ('port', '3306'), ('socket', '/tmp/mysql.sock')]"</span></div></pre></td></tr></table></figure></p>
+<p>获取指定节点下的所有键（选项）<br><strong>options(section)</strong><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">config=configparser.ConfigParser()</div><div class="line">config.read(<span class="string">"my.ini"</span>)</div><div class="line">ret=config.options(<span class="string">'client'</span>)   <span class="comment">#返回一个列表</span></div><div class="line"><span class="built_in">print</span> ret</div><div class="line"><span class="comment">################output###############</span></div><div class="line"><span class="string">"['default-character-set', 'password', 'port', 'socket']"</span></div></pre></td></tr></table></figure></p>
+<p>获取指定节点下指定key的值（即选项的值）<br><strong>get(section, option, raw=False, vars=None)</strong><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">config=configparser.ConfigParser()</div><div class="line">config.read(<span class="string">"my.ini"</span>)</div><div class="line">ret=config.get(<span class="string">'client'</span>,<span class="string">'password'</span>)</div><div class="line"><span class="built_in">print</span> ret  <span class="comment">#your_password</span></div></pre></td></tr></table></figure></p>
+<p>检查，删除，添加节点<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">config=configparser.ConfigParser()</div><div class="line">config.read(<span class="string">"my.ini"</span>)</div><div class="line"></div><div class="line"><span class="comment">#检查配置文件中是否存在这个节点</span></div><div class="line"><span class="comment">#has_section(section)</span></div><div class="line">check=config.has_section(<span class="string">'client'</span>)</div><div class="line"><span class="built_in">print</span> check  <span class="comment">#True</span></div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">#添加节点</span></div><div class="line"><span class="comment">#add_section(section）添加一个节点，若存在就报错</span></div><div class="line">addSection=config.add_section(<span class="string">"mysql"</span>)</div><div class="line"><span class="comment">#将新添加的节点写入到源文件中</span></div><div class="line"><span class="comment">#write(fp) 参数为一个文件对象</span></div><div class="line">config.write(open(<span class="string">'my.ini'</span>,<span class="string">'w'</span>))</div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">#删除节点</span></div><div class="line"><span class="comment">#remove_section(section)</span></div><div class="line">config.remove_section(<span class="string">'mysql'</span>)</div><div class="line"><span class="comment">#写入文件</span></div><div class="line">config.write(open(<span class="string">"my.ini"</span>,<span class="string">'w'</span>))</div></pre></td></tr></table></figure></p>
+<p>检查、删除、设置指定节点内的键值对<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">config=configparser.ConfigParser()</div><div class="line">config.read(<span class="string">"my.ini"</span>)</div><div class="line"></div><div class="line"><span class="comment">#检查有没有这个键值对</span></div><div class="line">has_opt=config.has_option(<span class="string">'client'</span>,<span class="string">'password'</span>)</div><div class="line"><span class="built_in">print</span> has_opt  <span class="comment">#True</span></div><div class="line"></div><div class="line"><span class="comment">#设置一个新的键值对</span></div><div class="line">config.set(<span class="string">'client'</span>,<span class="string">'name'</span>,<span class="string">'cmustard'</span>)</div><div class="line">config.write(open(<span class="string">"my.ini"</span>,<span class="string">'w'</span>))</div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">#删除</span></div><div class="line">config.remove_option(<span class="string">'client'</span>,<span class="string">'name'</span>)</div><div class="line">config.write(open(<span class="string">"my.ini"</span>,<span class="string">'w'</span>))</div></pre></td></tr></table></figure></p>
+<h1 id="XML模块"><a href="#XML模块" class="headerlink" title="XML模块"></a>XML模块</h1><p>XML是实现不同语言或程序之间进行数据交换的协议，XML文件格式如下<br>a.xml<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">&lt;root&gt;</div><div class="line">    &lt;country name=<span class="string">"Liechtenstein"</span>&gt;</div><div class="line">        &lt;rank updated=<span class="string">"yes"</span>&gt;2&lt;/rank&gt;</div><div class="line">        &lt;year auth=<span class="string">"True"</span>&gt;2015&lt;/year&gt;</div><div class="line">        &lt;gdppc&gt;141100&lt;/gdppc&gt;</div><div class="line">        &lt;neighbor direction=<span class="string">"E"</span> name=<span class="string">"Austria"</span> /&gt;</div><div class="line">        &lt;neighbor direction=<span class="string">"W"</span> name=<span class="string">"Switzerland"</span> /&gt;</div><div class="line">    &lt;/country&gt;</div><div class="line">    &lt;country name=<span class="string">"Singapore"</span>&gt;</div><div class="line">        &lt;rank updated=<span class="string">"yes"</span>&gt;5&lt;/rank&gt;</div><div class="line">        &lt;year auth=<span class="string">"True"</span>&gt;2015&lt;/year&gt;</div><div class="line">        &lt;gdppc&gt;59900&lt;/gdppc&gt;</div><div class="line">        &lt;neighbor direction=<span class="string">"N"</span> name=<span class="string">"Malaysia"</span> /&gt;</div><div class="line">    &lt;/country&gt;</div><div class="line">    &lt;country name=<span class="string">"Panama"</span>&gt;</div><div class="line">        &lt;rank updated=<span class="string">"yes"</span>&gt;69&lt;/rank&gt;</div><div class="line">        &lt;year auth=<span class="string">"True"</span>&gt;2014&lt;/year&gt;</div><div class="line">        &lt;gdppc&gt;13600&lt;/gdppc&gt;</div><div class="line">        &lt;neighbor direction=<span class="string">"W"</span> name=<span class="string">"Costa Rica"</span> /&gt;</div><div class="line">        &lt;neighbor direction=<span class="string">"E"</span> name=<span class="string">"Colombia"</span> /&gt;</div><div class="line">    &lt;/country&gt;</div><div class="line">&lt;/root&gt;</div></pre></td></tr></table></figure></p>
+<h2 id="导入模块"><a href="#导入模块" class="headerlink" title="导入模块"></a>导入模块</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">import xml.etree.ElementTree as ET</div><div class="line">或者</div><div class="line">from xml.etree import ElementTree as ET</div></pre></td></tr></table></figure>
+<p>xml文件解析，有两种方式<br>1.利用ElementTree.XML将文件解析成xml对象，这是解析的字符串，需要读取文件<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">f=open(<span class="string">'a.xml'</span>,<span class="string">'r'</span>)</div><div class="line">xmlFile=f.read()</div><div class="line">f.close()</div><div class="line"><span class="comment">#将字符串解析成xml特殊对象，root代指xml文件的根节点</span></div><div class="line">root=ET.XML(xmlFile)</div><div class="line"><span class="built_in">print</span> root  <span class="comment">#&lt;Element 'Root' at 0x32ed7b8&gt;</span></div></pre></td></tr></table></figure></p>
+<p>2.利用ElementTree.parse将文件直接解析成xml对象，直接解析文件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">tree=ET.parse(<span class="string">'a.xml'</span>)</div><div class="line"><span class="comment">#获取xml文件的根节点</span></div><div class="line">root=tree.getroot()</div><div class="line"><span class="built_in">print</span> root  <span class="comment">#&lt;Element 'Root' at 0x3aedef0&gt;</span></div></pre></td></tr></table></figure>
+<p>###操作xml文件</p>
+<p>####遍历xml文档所有内容<br>方式一：解析字符串<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">f=open(<span class="string">'a.xml'</span>,<span class="string">'r'</span>)</div><div class="line">xmlFile=f.read()</div><div class="line">f.close()</div><div class="line">root=ET.XML(xmlFile)</div><div class="line"></div><div class="line"><span class="comment">#获取xml的根节点</span></div><div class="line">root=tree.getroot()</div><div class="line"></div><div class="line"><span class="comment">#顶层标签</span></div><div class="line"><span class="built_in">print</span> root.tag  <span class="comment">#Root</span></div><div class="line"></div><div class="line"><span class="comment">#遍历xml的第二层</span></div><div class="line"><span class="keyword">for</span> child <span class="keyword">in</span> root:</div><div class="line">    <span class="comment">#第二层节点标签名和标签属性</span></div><div class="line">    <span class="built_in">print</span> child.tag,child.attrib</div><div class="line">    <span class="built_in">print</span> <span class="string">"--------------------"</span></div><div class="line">    <span class="comment">#遍历第三层</span></div><div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> child:</div><div class="line">        <span class="comment">#第三层节点的标签名和内容</span></div><div class="line">        <span class="built_in">print</span> i.tag,i.text</div></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">方式二：直接解析xml文件</div><div class="line">```bash</div><div class="line">tree=ET.parse(&apos;a.xml&apos;)</div><div class="line"></div><div class="line">#获取xml的根节点</div><div class="line">root=tree.getroot()</div><div class="line"></div><div class="line">#顶层标签</div><div class="line">print root.tag  #Root</div><div class="line"></div><div class="line">#遍历xml的第二层</div><div class="line">for child in root:</div><div class="line">    #第二层节点标签名和标签属性</div><div class="line">    print child.tag,child.attrib</div><div class="line">    print &quot;--------------------&quot;</div><div class="line">    #遍历第三层</div><div class="line">    for i in child:</div><div class="line">        #第三层节点的标签名和内容</div><div class="line">        print i.tag,i.text</div></pre></td></tr></table></figure>
+<p>结果都是</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">root</div><div class="line">country &#123;<span class="string">'name'</span>: <span class="string">'Liechtenstein'</span>&#125;</div><div class="line">--------------------</div><div class="line">rank 2</div><div class="line">year 517888</div><div class="line">gdppc 141100</div><div class="line">neighbor None</div><div class="line">neighbor None</div><div class="line">country &#123;<span class="string">'name'</span>: <span class="string">'Singapore'</span>&#125;</div><div class="line">--------------------</div><div class="line">rank 5</div><div class="line">year 518656</div><div class="line">gdppc 59900</div><div class="line">neighbor None</div><div class="line">country &#123;<span class="string">'name'</span>: <span class="string">'Panama'</span>&#125;</div><div class="line">--------------------</div><div class="line">rank 69</div><div class="line">year 518656</div><div class="line">gdppc 13600</div><div class="line">neighbor None</div><div class="line">neighbor None</div></pre></td></tr></table></figure>
+<h2 id="遍历XML中指定的节点"><a href="#遍历XML中指定的节点" class="headerlink" title="遍历XML中指定的节点"></a>遍历XML中指定的节点</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">f=open(<span class="string">'a.xml'</span>,<span class="string">'r'</span>)</div><div class="line">xmlFile=f.read()</div><div class="line">f.close()</div><div class="line">root=ET.XML(xmlFile)</div><div class="line"><span class="comment">#或者</span></div><div class="line"></div><div class="line">tree=ET.parse(<span class="string">'a.xml'</span>)</div><div class="line"><span class="comment">#获取xml的根节点</span></div><div class="line">root=tree.getroot()</div><div class="line"></div><div class="line"></div><div class="line"><span class="built_in">print</span> root.tag</div><div class="line"><span class="comment">#遍历xml中的所有year节点</span></div><div class="line"><span class="keyword">for</span> node <span class="keyword">in</span> root.iter(<span class="string">'year'</span>):</div><div class="line">    <span class="comment">#获取节点标签名和内容</span></div><div class="line">    <span class="built_in">print</span> node.tag,node.text</div></pre></td></tr></table></figure>
+<p>结果</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">root</div><div class="line">year 2015</div><div class="line">year 2015</div><div class="line">year 2014</div></pre></td></tr></table></figure>
+<h2 id="修改节点内容"><a href="#修改节点内容" class="headerlink" title="修改节点内容"></a>修改节点内容</h2><p>（xml直接解析和字符串解析 代码是不一样的，保存文件的方式不一样）<br>xml直接解析：删除和设置节点属性<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="comment">###################直接解析##########################</span></div><div class="line"><span class="comment">#利用ElementTree.parse将文件直接解析成xml对象，解析文件</span></div><div class="line">tree=ET.parse(<span class="string">'a.xml'</span>)</div><div class="line"><span class="comment">#获取xml文件的根节点</span></div><div class="line">root=tree.getroot()</div><div class="line"></div><div class="line"><span class="built_in">print</span> root.tag</div><div class="line"><span class="built_in">print</span> [x <span class="keyword">for</span> x <span class="keyword">in</span> root.iter()]    <span class="comment">#遍历所有节点</span></div><div class="line"><span class="string">"[&lt;Element 'root' at 0x351a828&gt;, &lt;Element 'country' at 0x351a860&gt;, &lt;Element 'rank' at 0x351a898&gt;, &lt;Element 'year' at 0x351a8d0&gt;, &lt;Element 'gdppc' at 0x351a908&gt;, &lt;Element 'neighbor' at 0x351a940&gt;, &lt;Element 'neighbor' at 0x351a978&gt;, &lt;Element 'country' at 0x351a9b0&gt;, &lt;Element 'rank' at 0x351a9e8&gt;, &lt;Element 'year' at 0x351aa20&gt;, &lt;Element 'gdppc' at 0x351aa58&gt;, &lt;Element 'neighbor' at 0x351aa90&gt;, &lt;Element 'country' at 0x351aac8&gt;, &lt;Element 'rank' at 0x351ab00&gt;, &lt;Element 'year' at 0x351ab38&gt;, &lt;Element 'gdppc' at 0x351ab70&gt;, &lt;Element 'neighbor' at 0x351aba8&gt;, &lt;Element 'neighbor' at 0x351abe0&gt;]"</span></div><div class="line"></div><div class="line"><span class="comment">#循环所有year节点</span></div><div class="line"><span class="keyword">for</span> node <span class="keyword">in</span> root.iter(<span class="string">'year'</span>):</div><div class="line">    <span class="comment">#将year的值乘以2</span></div><div class="line">    new_name=int(node.text)*2</div><div class="line">    node.text=str(new_name)</div><div class="line"></div><div class="line">    <span class="comment">#设置属性&lt;year auth='True' test='123'&gt;</span></div><div class="line">    node.set(<span class="string">'auth'</span>,<span class="string">'True'</span>)</div><div class="line">    node.set(<span class="string">"test"</span>,<span class="string">'123'</span>)</div><div class="line"></div><div class="line">    <span class="comment">#删除属性</span></div><div class="line">    del node.attrib[<span class="string">'test'</span>]</div><div class="line"></div><div class="line"><span class="comment">############ 保存文件 ############</span></div><div class="line"><span class="comment">#由于对文件做了改动，因此需要重新保存文件</span></div><div class="line">tree.write(<span class="string">"a.xml"</span>)</div></pre></td></tr></table></figure></p>
+<p>没删除test之前结果：<br><img src="http://img.blog.csdn.net/20161005142942317" alt="这里写图片描述"><br>删除之后结果：<br><img src="http://img.blog.csdn.net/20161005143147855" alt="这里写图片描述"><br>字符串解析（删除节点）</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line"><span class="comment">############ 解析字符串方式打开 ############</span></div><div class="line"></div><div class="line"><span class="comment"># 打开文件，读取XML内容</span></div><div class="line">with open(<span class="string">'a.xml'</span>,<span class="string">'r'</span>) as f:</div><div class="line">    str_xml = f.read()</div><div class="line"></div><div class="line"><span class="comment"># 将字符串解析成xml特殊对象，root代指xml文件的根节点</span></div><div class="line">root = ET.XML(str_xml)</div><div class="line"></div><div class="line"></div><div class="line"><span class="comment"># 顶层标签</span></div><div class="line"><span class="built_in">print</span>(root.tag)</div><div class="line"></div><div class="line"><span class="comment"># 遍历root下的所有country节点</span></div><div class="line"><span class="keyword">for</span> country <span class="keyword">in</span> root.findall(<span class="string">'country'</span>):</div><div class="line">    <span class="comment"># 获取每一个country节点下rank节点的内容</span></div><div class="line">    <span class="built_in">print</span> country</div><div class="line">    <span class="string">""</span><span class="string">"</span></div><div class="line"><span class="string">    结果：</span></div><div class="line"><span class="string">    &lt;Element 'country' at 0x2efa828&gt;</span></div><div class="line"><span class="string">	&lt;Element 'country' at 0x2efa978&gt;</span></div><div class="line"><span class="string">	&lt;Element 'country' at 0x2efaa90&gt;</span></div><div class="line"><span class="string">    "</span><span class="string">""</span></div><div class="line">    rank = country.find(<span class="string">'rank'</span>).text</div><div class="line">	</div><div class="line">    <span class="keyword">if</span> int(rank)&gt;50:</div><div class="line">        <span class="comment"># 删除指定country节点</span></div><div class="line">        root.remove(country)</div><div class="line"></div><div class="line"><span class="comment">############ 保存文件 ############</span></div><div class="line">tree = ET.ElementTree(root)</div><div class="line">tree.write(<span class="string">"a.xml"</span>)</div></pre></td></tr></table></figure>
+<p>删除前<br><img src="http://img.blog.csdn.net/20161005144647341" alt="这里写图片描述"></p>
+<p>删除后<br><img src="http://img.blog.csdn.net/20161005144807096" alt="这里写图片描述"></p>
+<h2 id="创建xml文件"><a href="#创建xml文件" class="headerlink" title="创建xml文件"></a>创建xml文件</h2><p>方式一<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#创建名叫data的根节点</span></div><div class="line">root=ET.Element(<span class="string">"data"</span>)</div><div class="line"></div><div class="line"><span class="comment">#创建第二层（即大儿子）</span></div><div class="line">son1=root.makeelement(<span class="string">'son1'</span>,&#123;<span class="string">'name'</span>:<span class="string">'s1'</span>&#125;)</div><div class="line">son2=root.makeelement(<span class="string">"son2"</span>,&#123;<span class="string">'name'</span>:<span class="string">'s2'</span>&#125;)</div><div class="line"></div><div class="line"><span class="comment">#在son1 中创建第三层</span></div><div class="line">grandson1=son1.makeelement(<span class="string">'grandson1'</span>,&#123;<span class="string">'name'</span>:<span class="string">'gs1'</span>&#125;)</div><div class="line"></div><div class="line">grandson2=son2.makeelement(<span class="string">'grandson2'</span>,&#123;<span class="string">'name'</span>:<span class="string">'gs2'</span>&#125;)</div><div class="line"></div><div class="line"><span class="comment">#添加节点</span></div><div class="line">son1.append(grandson1)</div><div class="line">son2.append(grandson2)</div><div class="line"></div><div class="line">root.append(son1)</div><div class="line">root.append(son2)</div><div class="line"></div><div class="line"><span class="comment">#创建xml文件</span></div><div class="line">tree=ET.ElementTree(root)</div><div class="line">tree.write(<span class="string">'b.xml'</span>)</div></pre></td></tr></table></figure></p>
+<p>b.xml<br><img src="http://img.blog.csdn.net/20161005145512630" alt="这里写图片描述"></p>
+<p>方式二：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="comment">####################方式二#############</span></div><div class="line">root=ET.Element(<span class="string">'root'</span>)</div><div class="line">son1=ET.SubElement(root,<span class="string">'son1'</span>,attrib=&#123;<span class="string">'name'</span>:<span class="string">'s1'</span>&#125;)</div><div class="line">son2=ET.SubElement(root,<span class="string">'son2'</span>,attrib=&#123;<span class="string">'name'</span>:<span class="string">'s2'</span>&#125;)</div><div class="line"></div><div class="line">grandson1=ET.SubElement(son1,<span class="string">'grandson1'</span>,attrib=&#123;<span class="string">'name'</span>:<span class="string">'gs1'</span>&#125;)</div><div class="line">grandson1.text=<span class="string">'haha'</span></div><div class="line">grandson2=ET.SubElement(son2,<span class="string">'grandson2'</span>,attrib=&#123;<span class="string">'name'</span>:<span class="string">'gs2'</span>&#125;)</div><div class="line">grandson2.text=<span class="string">'hehe'</span></div><div class="line"></div><div class="line">et=ET.ElementTree(root)  <span class="comment">#生成文档对象</span></div><div class="line">et.write(<span class="string">'test.xml'</span>,xml_declaration=True)</div></pre></td></tr></table></figure>
+<p>test.xml<br><img src="http://img.blog.csdn.net/20161005145630634" alt="这里写图片描述"></p>
+<p>我们可以看出以上创建的xml是没有进行缩进的，都在一行<br>这个时候我们需要一个函数来解决这个问题，先将xml节点转换成字符串，然后通过open（）函数写入文件中<br>导入模块<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">from xml.dom import minidom</div></pre></td></tr></table></figure></p>
+<p>转换代码</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">def transfer(elem):</div><div class="line">    <span class="string">"将节点转换成字符串，并添加缩进"</span></div><div class="line">    rough_string=ET.tostring(elem,<span class="string">'utf-8'</span>)</div><div class="line">    reparsed=minidom.parseString(rough_string)</div><div class="line">    <span class="built_in">return</span> reparsed.toprettyxml(indent=<span class="string">'\t'</span>)</div></pre></td></tr></table></figure>
+<p>代码实现<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">root=ET.Element(<span class="string">'root'</span>)</div><div class="line">son1=ET.SubElement(root,<span class="string">'son1'</span>,attrib=&#123;<span class="string">'name'</span>:<span class="string">'s1'</span>&#125;)</div><div class="line">son2=ET.SubElement(root,<span class="string">'son2'</span>,attrib=&#123;<span class="string">'name'</span>:<span class="string">'s2'</span>&#125;)</div><div class="line"></div><div class="line">grandson1=ET.SubElement(son1,<span class="string">'grandson1'</span>,attrib=&#123;<span class="string">'name'</span>:<span class="string">'gs1'</span>&#125;)</div><div class="line">grandson1.text=<span class="string">'haha'</span></div><div class="line">grandson2=ET.SubElement(son2,<span class="string">'grandson2'</span>,attrib=&#123;<span class="string">'name'</span>:<span class="string">'gs2'</span>&#125;)</div><div class="line">grandson2.text=<span class="string">'hehe'</span></div><div class="line"></div><div class="line"><span class="comment">#转换</span></div><div class="line">str_xml=transfer(root)</div><div class="line"></div><div class="line">f=open(<span class="string">"tab.xml"</span>,<span class="string">'w'</span>)</div><div class="line">f.write(str_xml)</div><div class="line">f.close()</div></pre></td></tr></table></figure></p>
+<p>tab.xml<br><img src="http://img.blog.csdn.net/20161005145950561" alt="这里写图片描述"></p>
+<h1 id="requests模块"><a href="#requests模块" class="headerlink" title="requests模块"></a>requests模块</h1><h2 id="安装模块"><a href="#安装模块" class="headerlink" title="安装模块"></a>安装模块</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">pip install requests</div></pre></td></tr></table></figure>
+<h2 id="使用模块"><a href="#使用模块" class="headerlink" title="使用模块"></a>使用模块</h2><h3 id="GET请求"><a href="#GET请求" class="headerlink" title="GET请求"></a>GET请求</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line">import requests</div><div class="line"> </div><div class="line">ret = requests.get(<span class="string">'https://www.baidu.com'</span>)</div><div class="line"> </div><div class="line"><span class="built_in">print</span>(ret.url)  <span class="comment">#https://www.baidu.com/</span></div><div class="line"><span class="built_in">print</span>(ret.text)</div><div class="line">结果：</div><div class="line"><span class="string">""</span><span class="string">"</span></div><div class="line"><span class="string">&lt;!DOCTYPE html&gt;</span></div><div class="line"><span class="string">&lt;!--STATUS OK--&gt;&lt;html&gt; &lt;head&gt;&lt;meta http-equiv=content-type content=text/html;cha......</span></div><div class="line"><span class="string">"</span><span class="string">""</span></div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">#有get参数 </span></div><div class="line">payload = &#123;<span class="string">'wd'</span>: <span class="string">'csdn'</span>&#125;</div><div class="line">ret = requests.get(<span class="string">"https://www.baidu.com/s"</span>, params=payload)</div><div class="line"> </div><div class="line"><span class="built_in">print</span>(ret.url)  <span class="comment">#https://www.baidu.com/s?wd=csdn</span></div><div class="line"><span class="built_in">print</span>(ret.text)  </div><div class="line"><span class="string">""</span><span class="string">"</span></div><div class="line"><span class="string">&lt;html&gt;</span></div><div class="line"><span class="string">&lt;head&gt;</span></div><div class="line"><span class="string">	&lt;script&gt;.....</span></div><div class="line"><span class="string">"</span><span class="string">""</span></div></pre></td></tr></table></figure>
+<h3 id="POST请求"><a href="#POST请求" class="headerlink" title="POST请求"></a>POST请求</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">import requests</div><div class="line"> </div><div class="line">payload = &#123;<span class="string">'key1'</span>: <span class="string">'value1'</span>, <span class="string">'key2'</span>: <span class="string">'value2'</span>&#125;</div><div class="line">ret = requests.post(url, data=payload)</div><div class="line"> </div><div class="line"><span class="built_in">print</span>(ret.text)</div><div class="line"> </div><div class="line"> </div><div class="line"><span class="comment"># 2、发送请求头和数据实例</span></div><div class="line"> </div><div class="line">import requests</div><div class="line">import json</div><div class="line"> </div><div class="line"><span class="comment">#post参数</span></div><div class="line">payload = &#123;<span class="string">'some'</span>: <span class="string">'data'</span>&#125;  </div><div class="line"><span class="comment">#header头部</span></div><div class="line">headers = &#123;<span class="string">'content-type'</span>: <span class="string">'application/json'</span>&#125;</div><div class="line"></div><div class="line"><span class="comment">#携带cookie进行post提交</span></div><div class="line">ret = requests.post(url, data=json.dumps(payload),cookies=_cookies, headers=headers)</div><div class="line"> </div><div class="line"><span class="built_in">print</span>(ret.text)</div><div class="line"><span class="built_in">print</span>(ret.cookies)  <span class="comment">#得到返回的cookie</span></div></pre></td></tr></table></figure>
+<h2 id="其他请求"><a href="#其他请求" class="headerlink" title="其他请求"></a>其他请求</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">requests.get(url, params=None, **kwargs)</div><div class="line">requests.post(url, data=None, json=None, **kwargs)</div><div class="line">requests.put(url, data=None, **kwargs)</div><div class="line">requests.head(url, **kwargs)</div><div class="line">requests.delete(url, **kwargs)</div><div class="line">requests.patch(url, data=None, **kwargs)</div><div class="line">requests.options(url, **kwargs)</div></pre></td></tr></table></figure>
+<h1 id="subprocess模块"><a href="#subprocess模块" class="headerlink" title="subprocess模块"></a>subprocess模块</h1><p>用于在进程中执行相关命令<br><strong>call(args,  stdin=None, stdout=None, stderr=None, shell=False)</strong>，执行成功返回状态码0，否则返回1，并不会返回命令执行结果<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">import subprocess</div><div class="line">&gt;&gt;&gt; a=subprocess.call(<span class="string">"ls -l"</span>)</div><div class="line">Traceback (most recent call last):</div><div class="line">  File <span class="string">"&lt;stdin&gt;"</span>, line 1, <span class="keyword">in</span> &lt;module&gt;</div><div class="line">  File <span class="string">"/usr/lib/python2.7/subprocess.py"</span>, line 522, <span class="keyword">in</span> call</div><div class="line">    <span class="built_in">return</span> Popen(*popenargs, **kwargs).<span class="built_in">wait</span>()</div><div class="line">  File <span class="string">"/usr/lib/python2.7/subprocess.py"</span>, line 710, <span class="keyword">in</span> __init__</div><div class="line">    errread, errwrite)</div><div class="line">  File <span class="string">"/usr/lib/python2.7/subprocess.py"</span>, line 1335, <span class="keyword">in</span> _execute_child</div><div class="line">    raise child_exception</div><div class="line">OSError: [Errno 2] No such file or directory</div><div class="line"></div><div class="line"></div><div class="line">&gt;&gt;&gt; a=subprocess.call([<span class="string">'ls'</span>,<span class="string">'-l'</span>]) <span class="comment">#执行成功</span></div><div class="line"><span class="built_in">print</span> a</div><div class="line"></div><div class="line"><span class="string">""</span><span class="string">"</span></div><div class="line"><span class="string">shell=True参数会让subprocess.call接受字符串类型的变量作为命令，并调用shell去执行这个字符串</span></div><div class="line"><span class="string">"</span><span class="string">""</span></div><div class="line">a=subprocess.call(<span class="string">"ls -l"</span>,shell=True) </div><div class="line"><span class="built_in">print</span> a   <span class="comment">#0</span></div></pre></td></tr></table></figure></p>
+<p><strong>check_call(args,  stdin=None, stdout=None, stderr=None, shell=False)</strong>，执行成功返回状态码0，否则抛出异常<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">import subprocess</div><div class="line">a=subprocess.call(<span class="string">"ls -l"</span>,shell=True)</div><div class="line"><span class="built_in">print</span> a   <span class="comment">#0</span></div></pre></td></tr></table></figure></p>
+<p><strong>check_output(args,  stdin=None, stdout=None, stderr=None, shell=False)</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&gt;&gt;&gt; a=subprocess.check_output(<span class="string">"ls"</span>)   </div><div class="line">&gt;&gt;&gt; a  <span class="comment">#返回命令的执行结果</span></div><div class="line"><span class="string">'11.py\n1.pcap\nc.py\ndevelop\nhtml\nSQLiScanner\nsqlmap\nWebScarab.properties\nwww.tar\nx\n\xe5\x85\xac\xe5\x85\xb1\n\xe6\xa8\xa1\xe6\x9d\xbf\n\xe8\xa7\x86\xe9\xa2\x91\n\xe5\x9b\xbe\xe7\x89\x87\n\xe6\x96\x87\xe6\xa1\xa3\n\xe4\xb8\x8b\xe8\xbd\xbd\n\xe9\x9f\xb3\xe4\xb9\x90\n\xe6\xa1\x8c\xe9\x9d\xa2\n'</span></div><div class="line">&gt;&gt;&gt;</div></pre></td></tr></table></figure>
+<p><strong>Popen(args, bufsize=0, executable=None, stdin=None, stdout=None, stderr=None, preexec_fn=None, close_fds=False, shell=False,cwd=None, env=None, universal_newlines=False, startupinfo=None, creationflags=0)</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">executable 参数指定一个要执行的替换程序。它很少需要用到。当shell=False时，executable 将替换args 指定的要执行的程序。但是，原始的args 仍然会传给该程序。大部分程序将args 当做命令的名字，它可以不同于真实执行的程序。在Unix上， args 名字变成utilities中可执行程序的显示名字，例如ps。如果shell=True，在Unix上executable 参数表示指定一个替换默认的/bin/sh的shell。</div><div class="line">stdin、stdout 和stderr 分别指定要执行的程序的标准输入、标准输出和标准错误文件句柄。合法的值有PIPE、一个已经存在的文件描述符（一个正整数）、一个已经存在的文件对象和None。 PIPE表示应该为子进程创建一个新的管道。 如果为默认设置None，则不会发生重定向； 子进程的文件句柄将从父进程中继承。 另外，stderr 可以为STDOUT，它表示来自子进程中标准错误的数据应该被捕获到和标准输出相同的文件中。</div><div class="line">preexec_fn 如果设定为一个可调用对象，该对象将在子进程中在子进程执行之前调用。（只在Unix上）</div><div class="line">close_fds 如果为真，所有的描述符除了0、1 和2之外将在执行子进程之前关闭。（只在Unix上）。或者，在Windows上，close_fds 如果为真，那么子进程不会继承任何句柄。注意，在Windows上，你不可以设置close_fds 为真并同时通过设置stdin、stdout 或者stderr重定向标准句柄 。</div><div class="line">cwd 如果不为None，那么子进程在当前目录在其执行之前将改变为cwd。 注意在搜索可执行程序时，该目录不会考虑在内，所以你不可以指定相对cwd 的程序路径。</div><div class="line">env 如果不为None，它必须是一个定义了新进程环境变量的映射；这些环境变量将被使用而不是继承当前进程的环境这种默认的行为。</div><div class="line">universal_newlines 如果为True，那么文件对象stdout 和stderr 作为文本文件以universal newlines  模式打开。每一行的终止符可能是Unix风格的&apos;\n&apos;、旧式Macintosh风格的&apos;\r&apos;或者Windows风格的&apos;\r\n&apos;。所有这些外部的表示在Python程序看来都是&apos;\n&apos;</div></pre></td></tr></table></figure></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#由于进程之间默认是无法进行通讯的，如果进程间要进行通信，需要通过管道进行连接，即subprocess.PIPE</span></div><div class="line">&gt;&gt;&gt; a=subprocess.Popen(<span class="string">"ls"</span>,shell=True,stdin=subprocess.PIPE,stdout=subprocess.PIPE,stderr=subprocess.PIPE)</div><div class="line">&gt;&gt;&gt; a</div><div class="line">&lt;subprocess.Popen object at 0x7f4ad5a4ff90&gt;</div><div class="line">&gt;&gt;&gt; a.stdout.read()</div><div class="line"><span class="string">'11.py\n1.pcap\nc.py\ndevelop\nhtml\nSQLiScanner\nsqlmap\nWebScarab.properties\nwww.tar\nx\n\xe5\x85\xac\xe5\x85\xb1\n\xe6\xa8\xa1\xe6\x9d\xbf\n\xe8\xa7\x86\xe9\xa2\x91\n\xe5\x9b\xbe\xe7\x89\x87\n\xe6\x96\x87\xe6\xa1\xa3\n\xe4\xb8\x8b\xe8\xbd\xbd\n\xe9\x9f\xb3\xe4\xb9\x90\n\xe6\xa1\x8c\xe9\x9d\xa2\n'</span></div><div class="line">&gt;&gt;&gt;</div></pre></td></tr></table></figure>
+<p>通过这Popen()函数进行命令行交互</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">&gt;&gt;&gt; import subprocess</div><div class="line">&gt;&gt;&gt; s=subprocess.Popen([<span class="string">'python'</span>],shell=True,stdin=subprocess.PIPE,stdout=subprocess.PIPE,stderr=subprocess.PIPE)</div><div class="line">&gt;&gt;&gt; s.stdin.write(<span class="string">'print("hello1")\n'</span>)</div><div class="line">&gt;&gt;&gt; s.stdin.write(<span class="string">'print("hello2")\n'</span>)</div><div class="line">&gt;&gt;&gt; s.stdin.write(<span class="string">'print("hello3")\n'</span>)</div><div class="line">&gt;&gt;&gt; a=s.communicate()</div><div class="line">&gt;&gt;&gt; a</div><div class="line">(<span class="string">'hello1\nhello2\nhello3\n'</span>, <span class="string">''</span>)</div><div class="line">&gt;&gt;&gt; </div><div class="line"></div><div class="line">&gt;&gt;&gt; s=subprocess.Popen([<span class="string">'python'</span>],shell=True,stdin=subprocess.PIPE,stdout=subprocess.PIPE,stderr=subprocess.PIPE)</div><div class="line">&gt;&gt;&gt; s.stdin.write(<span class="string">'print("hello1")\n'</span>)&gt;&gt;&gt; s.stdin.write(<span class="string">'print("hello2")\n'</span>)</div><div class="line">&gt;&gt;&gt; s.stdin.close()</div><div class="line">&gt;&gt;&gt; cmd_out=s.stdout.read()</div><div class="line">&gt;&gt;&gt; s.stdout.close()</div><div class="line">&gt;&gt;&gt; <span class="built_in">print</span> cmd_out</div><div class="line">hello1</div><div class="line">hello2</div></pre></td></tr></table></figure>
+<h1 id="logging模块"><a href="#logging模块" class="headerlink" title="logging模块"></a>logging模块</h1><h2 id="日志级别"><a href="#日志级别" class="headerlink" title="日志级别"></a>日志级别</h2><p><img src="http://img.blog.csdn.net/20161006102749811" alt="这里写图片描述"><br>日志的级别默认为warning，所以如果不指定level，那么INFO与debug级别的信息就不会给予显示</p>
+<h2 id="最简单的用法"><a href="#最简单的用法" class="headerlink" title="最简单的用法"></a>最简单的用法</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">logging.warning(<span class="string">"warning!!!!"</span>)</div><div class="line">logging.debug(<span class="string">"debug!!!"</span>)</div><div class="line">logging.critical(<span class="string">"critiacl!!!"</span>)</div><div class="line"><span class="string">""</span><span class="string">"</span></div><div class="line"><span class="string">#################Output###############</span></div><div class="line"><span class="string">WARNING:root:warning!!!!</span></div><div class="line"><span class="string">CRITICAL:root:critiacl!!!</span></div><div class="line"><span class="string">"</span><span class="string">""</span></div><div class="line"></div><div class="line"><span class="comment">#由于默认显示级别为warning，因此无法显示debug的日志信息，要想解决这个问题我们需要改变默认的日志显示级别</span></div><div class="line"><span class="comment">#修改默认显示的级别</span></div><div class="line"></div><div class="line">logging.basicConfig(level=logging.DEBUG)</div><div class="line">logging.warning(<span class="string">"warning!!!!"</span>)</div><div class="line">logging.critical(<span class="string">"critiacl!!!"</span>)</div><div class="line">logging.debug(<span class="string">"debug!!!!"</span>)</div><div class="line"></div><div class="line"><span class="comment">#################Output###############</span></div><div class="line">WARNING:root:warning!!!!</div><div class="line">CRITICAL:root:critiacl!!!</div><div class="line">DEBUG:root:debug!!!</div></pre></td></tr></table></figure>
+<h2 id="日志输出到文件"><a href="#日志输出到文件" class="headerlink" title="日志输出到文件"></a>日志输出到文件</h2><p><strong>logging.basicConfig(filename,filemode=’a’,format=None,datefmt=None,level=logging.warning,stream=None)</strong><br>kwargs 支持如下几个关键字参数：<br>filename ：日志文件的保存路径。如果配置了些参数，将自动创建一个FileHandler作为Handler；<br>filemode ：日志文件的打开模式。 默认值为’a’，表示日志消息以追加的形式添加到日志文件中。如果设为’w’, 那么每次程序启动的时候都会创建一个新的日志文件；<br>format ：设置日志输出格式；<br>datefmt ：定义日期格式；<br>level ：设置日志的级别.对低于该级别的日志消息将被忽略；<br>stream ：设置特定的流用于初始化StreamHandler；</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#首先设置日志输入到文件的格式</span></div><div class="line">logging.basicConfig(filename=<span class="string">'log'</span>,level=logging.DEBUG)</div><div class="line">logging.warning(<span class="string">"warning!!!!"</span>)</div><div class="line">logging.critical(<span class="string">"critiacl!!!"</span>)</div><div class="line">logging.debug(<span class="string">"debug!!!!"</span>)</div></pre></td></tr></table></figure>
+<p>日志文件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">WARNING:root:warning!!!!</div><div class="line">CRITICAL:root:critiacl!!!</div><div class="line">DEBUG:root:debug!!!!</div></pre></td></tr></table></figure>
+<p>发现没有时间，需要改进</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">logging.basicConfig(filename=<span class="string">'log'</span>,level=logging.DEBUG,filemode=<span class="string">'a'</span>,format=<span class="string">"%(asctime)s %(message)s"</span>,datefmt=<span class="string">"%Y-%m-%d %H:%M:%S"</span>)</div><div class="line">logging.warning(<span class="string">"warning!!!!"</span>)</div><div class="line">logging.critical(<span class="string">"critiacl!!!"</span>)</div><div class="line">logging.debug(<span class="string">"debug!!!!"</span>)</div></pre></td></tr></table></figure>
+<p>日志文件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">2016-10-06 10:13:45 warning!!!!</div><div class="line">2016-10-06 10:13:45 critiacl!!!</div><div class="line">2016-10-06 10:13:45 debug!!!!</div></pre></td></tr></table></figure>
+<p>format的格式汇总<br><img src="http://img.blog.csdn.net/20161006103639906" alt="这里写图片描述"></p>
+<h2 id="高级用法"><a href="#高级用法" class="headerlink" title="高级用法"></a>高级用法</h2><p>如果我们想要将日志同时输出到屏幕和文件中或者将一个程序的日志输出到多个日志文件中，logging给我们提供了接口和处理器<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#首先申明一个logger对象</span></div><div class="line">logger=logging.getLogger(<span class="string">"TEST-LOG"</span>)  <span class="comment">#这个TEST-LOG 可以根据实际情况改变</span></div><div class="line">logger.setLevel(logging.DEBUG)      <span class="comment">#设置logger默认的的日志级别</span></div><div class="line"></div><div class="line"><span class="comment">#创建一个console 处理器，用来处理屏幕上的输出</span></div><div class="line">ch=logging.StreamHandler()</div><div class="line">ch.setLevel(logging.DEBUG)</div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">#创建一个文件日志处理器</span></div><div class="line">fh=logging.FileHandler(<span class="string">'log'</span>)</div><div class="line">fh.setLevel(logging.WARNING)   <span class="comment">#由于fh设置的日志级别为Warnning，所以会覆盖logger设置的级别，因此写入文件的级别为warning</span></div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">#创建一个格式</span></div><div class="line">formatter=logging.Formatter(<span class="string">"%(asctime)s %(name)s %(levelname)s %(message)s"</span>,datefmt=<span class="string">"%Y-%m-%d %H:%M:%S"</span>)</div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">#将创建的格式用到ch和fh上</span></div><div class="line">ch.setFormatter(formatter)</div><div class="line">fh.setFormatter(formatter)</div><div class="line"></div><div class="line"><span class="comment">#将ch和fh加入到logger中</span></div><div class="line">logger.addHandler(ch)</div><div class="line">logger.addHandler(fh)</div><div class="line"></div><div class="line"><span class="comment">#使用</span></div><div class="line">logger.debug(<span class="string">"debug message!!!"</span>)</div><div class="line">logger.info(<span class="string">"info message!!!"</span>)</div><div class="line">logger.warning(<span class="string">"warning message!!!"</span>)</div><div class="line">logger.error(<span class="string">"error message!!!"</span>)</div><div class="line">logger.critical(<span class="string">"critical message!!!"</span>)</div></pre></td></tr></table></figure></p>
+<p>屏幕</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">2016-10-06 10:23:06 TEST-LOG DEBUG debug message!!!</div><div class="line">2016-10-06 10:23:06 TEST-LOG INFO info message!!!</div><div class="line">2016-10-06 10:23:06 TEST-LOG WARNING warning message!!!</div><div class="line">2016-10-06 10:23:06 TEST-LOG ERROR error message!!!</div><div class="line">2016-10-06 10:23:06 TEST-LOG CRITICAL critical message!!!</div></pre></td></tr></table></figure>
+<p>日志文件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">2016-10-06 10:23:06 TEST-LOG WARNING warning message!!!</div><div class="line">2016-10-06 10:23:06 TEST-LOG ERROR error message!!!</div><div class="line">2016-10-06 10:23:06 TEST-LOG CRITICAL critical message!!!</div></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a  href="/2017/08/26/Python常用模块2/">python常用模块(2)</a></p>
+        <p><span>文章作者:</span><a  href="/" title="访问 cmustard 的个人博客">cmustard</a></p>
+        <p><span>发布时间:</span>2017年08月26日 - 16时08分</p>
+        <p><span>最后更新:</span>2017年08月26日 - 04时08分</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2017/08/26/Python常用模块2/" title="python常用模块(2)">http://www.cmustarc.com/2017/08/26/Python常用模块2/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://www.cmustarc.com/2017/08/26/Python常用模块2/　　作者: cmustard" title=""></span>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" title="中国大陆 (CC BY-NC-SA 3.0 CN)" target = "_blank">"署名-非商用-相同方式共享 3.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+<nav id="article-nav">
+  
+    <a  href="/2017/08/26/Python常用模块/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          python常用模块(1)
+        
+      </div>
+    </a>
+  
+  
+    <a  href="/2017/08/25/并发编程/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">并发编程</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#configparser模块"><span class="toc-number">1.</span> <span class="toc-text">configparser模块</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#XML模块"><span class="toc-number">2.</span> <span class="toc-text">XML模块</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#导入模块"><span class="toc-number">2.1.</span> <span class="toc-text">导入模块</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#遍历XML中指定的节点"><span class="toc-number">2.2.</span> <span class="toc-text">遍历XML中指定的节点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#修改节点内容"><span class="toc-number">2.3.</span> <span class="toc-text">修改节点内容</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#创建xml文件"><span class="toc-number">2.4.</span> <span class="toc-text">创建xml文件</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#requests模块"><span class="toc-number">3.</span> <span class="toc-text">requests模块</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#安装模块"><span class="toc-number">3.1.</span> <span class="toc-text">安装模块</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用模块"><span class="toc-number">3.2.</span> <span class="toc-text">使用模块</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#GET请求"><span class="toc-number">3.2.1.</span> <span class="toc-text">GET请求</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#POST请求"><span class="toc-number">3.2.2.</span> <span class="toc-text">POST请求</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#其他请求"><span class="toc-number">3.3.</span> <span class="toc-text">其他请求</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#subprocess模块"><span class="toc-number">4.</span> <span class="toc-text">subprocess模块</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#logging模块"><span class="toc-number">5.</span> <span class="toc-text">logging模块</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#日志级别"><span class="toc-number">5.1.</span> <span class="toc-text">日志级别</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#最简单的用法"><span class="toc-number">5.2.</span> <span class="toc-text">最简单的用法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#日志输出到文件"><span class="toc-number">5.3.</span> <span class="toc-text">日志输出到文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#高级用法"><span class="toc-number">5.4.</span> <span class="toc-text">高级用法</span></a></li></ol></li></ol>
+</div>
+<style>
+    .left-col .switch-btn {
+        display: none;
+    }
+    .left-col .switch-area {
+        display: none;
+    }
+</style>
+<input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script>
+    var valueHide = "隐藏目录";
+    var valueShow = "显示目录";
+    if ($(".left-col").is(":hidden")) {
+        $("#tocButton").attr("value", valueShow);
+    }
+    $("#tocButton").click(function() {
+        if ($("#toc").is(":hidden")) {
+            $("#tocButton").attr("value", valueHide);
+            $("#toc").slideDown(320);
+            $(".switch-btn, .switch-area").fadeOut(300);
+        }
+        else {
+            $("#tocButton").attr("value", valueShow);
+            $("#toc").slideUp(350);
+            $(".switch-btn, .switch-area").fadeIn(500);
+        }
+    })
+    if ($(".toc").length < 1) {
+        $("#toc, #tocButton").hide();
+        $(".switch-btn, .switch-area").show();
+    }
+</script>
+
+
+
+
+<div class="bdsharebuttonbox">
+	<a href="#" class="fx fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+	<a href="#" class="fx fa-weixin bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+	<a href="#" class="fx fa-qq bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+	<a href="#" class="fx fa-facebook-official bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+	<a href="#" class="fx fa-twitter bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+	<a href="#" class="fx fa-linkedin bds_linkedin" data-cmd="linkedin" title="分享到linkedin"></a>
+	<a href="#" class="fx fa-files-o bds_copy" data-cmd="copy" title="分享到复制网址"></a>
+</div>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+
+
+
+    
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a  href="/2017/08/26/Python常用模块/" title="上一篇: python常用模块(1)">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+        
+            <a  href="/2017/08/25/并发编程/" title="下一篇: 并发编程">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/08/26/Python常用模块/">python常用模块(1)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/26/Python常用模块2/">python常用模块(2)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/25/并发编程/">并发编程</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/20/论事件驱动与异步IO/">论事件驱动与异步IO[转]</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/20/python TCP代理/">python TCP代理</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/20/go语言初识/">初识go语言</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/16/Strut2 常见POC/">Struts2 常见POC收集和整理</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/15/hello-world/">Hello World</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/15/hexo+github+nginx VPS搭建博客/">hexo+github+nginx vps搭建博客</a></li></ul>
+    <script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+    <script>
+        $(".post-list").addClass("toc-article");
+        // $(".post-list-item a").attr("target","_blank");
+        $("#post-nav-button > a:nth-child(2)").click(function() {
+            $(".fa-bars, .fa-times").toggle();
+            $(".post-list").toggle(300);
+            if ($(".toc").length > 0) {
+                $("#toc, #tocButton").toggle(200, function() {
+                    if ($(".switch-area").is(":visible")) {
+                        $("#toc, .switch-btn, .switch-area").toggle();
+                        $("#tocButton").attr("value", valueHide);
+                        }
+                    })
+            }
+            else {
+                $(".switch-btn, .switch-area").fadeToggle(300);
+            }
+        })
+    </script>
+
+
+
+
+    <script>
+        
+    </script>
+
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                &copy; 2017 cmustard
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank">Hexo</a><a href="https://github.com/maochunguang" target="_blank">Blog</a> by tommy
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" >极客到访数: 
+                            <span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>, </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit">本页阅读量: 
+                            <span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+
+    </div>
+    <script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var backgroundnum = 4;
+            var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+            $("#mobile-nav").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+            $(".left-col").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+        })
+    </script>
+
+
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'xxxxx', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+
+	<script>
+	var _hmt = _hmt || [];
+	(function() {
+	  var hm = document.createElement("script");
+	  hm.src = "//hm.baidu.com/hm.js?xxxxxx";
+	  var s = document.getElementsByTagName("script")[0]; 
+	  s.parentNode.insertBefore(hm, s);
+	})();
+	</script>
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    $(document).ready(function() {
+        if ($("#comments").length < 1) {
+            $("#scroll > a:nth-child(2)").hide();
+        };
+    })
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+  <script language="javascript">
+    $(function() {
+        $("a[title]").each(function() {
+            var a = $(this);
+            var title = a.attr('title');
+            if (title == undefined || title == "") return;
+            a.data('title', title).removeAttr('title').hover(
+            function() {
+                var offset = a.offset();
+                $("<div id=\"anchortitlecontainer\"></div>").appendTo($("body")).html(title).css({
+                    top: offset.top - a.outerHeight() - 15,
+                    left: offset.left + a.outerWidth()/2 + 1
+                }).fadeIn(function() {
+                    var pop = $(this);
+                    setTimeout(function() {
+                        pop.remove();
+                    }, pop.text().length * 800);
+                });
+            }, function() {
+                $("#anchortitlecontainer").remove();
+            });
+        });
+    });
+</script>
+
+
+  </div>
+</body>
+</html>
