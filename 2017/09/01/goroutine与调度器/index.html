@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="baidu-site-verification" content="L6Lm9d5Crl"/>
+  
+  
+  
+  
+  <title>goroutine与调度器[转] | cmustard的博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="转载自goroutine与调度器by skoo我们都知道Go语言是原生支持语言级并发的，这个并发的最小逻辑单元就是goroutine。goroutine就是Go语言提供的一种用户态线程，当然这种用户态线程是跑在内核级线程之上的。当我们创建了很多的goroutine，并且它们都是跑在同一个内核线程之上的时候，就需要一个调度器来维护这些goroutine，确保所有的goroutine都使用cpu，并且">
+<meta name="keywords" content="golang,编程语言">
+<meta property="og:type" content="article">
+<meta property="og:title" content="goroutine与调度器[转]">
+<meta property="og:url" content="http://www.cmustarc.com/2017/09/01/goroutine与调度器/index.html">
+<meta property="og:site_name" content="cmustard的博客">
+<meta property="og:description" content="转载自goroutine与调度器by skoo我们都知道Go语言是原生支持语言级并发的，这个并发的最小逻辑单元就是goroutine。goroutine就是Go语言提供的一种用户态线程，当然这种用户态线程是跑在内核级线程之上的。当我们创建了很多的goroutine，并且它们都是跑在同一个内核线程之上的时候，就需要一个调度器来维护这些goroutine，确保所有的goroutine都使用cpu，并且">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://ouz06keqs.bkt.clouddn.com/golang-car.jpeg">
+<meta property="og:image" content="http://ouz06keqs.bkt.clouddn.com/golang-car.jpeg">
+<meta property="og:image" content="http://ouz06keqs.bkt.clouddn.com/gopher-bz.jpg">
+<meta property="og:updated_time" content="2017-09-01T07:29:19.432Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="goroutine与调度器[转]">
+<meta name="twitter:description" content="转载自goroutine与调度器by skoo我们都知道Go语言是原生支持语言级并发的，这个并发的最小逻辑单元就是goroutine。goroutine就是Go语言提供的一种用户态线程，当然这种用户态线程是跑在内核级线程之上的。当我们创建了很多的goroutine，并且它们都是跑在同一个内核线程之上的时候，就需要一个调度器来维护这些goroutine，确保所有的goroutine都使用cpu，并且">
+<meta name="twitter:image" content="http://ouz06keqs.bkt.clouddn.com/golang-car.jpeg">
+  
+    <link rel="alternative" href="/atom.xml" title="cmustard的博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/img/favicon.png">
+  
+  
+  <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  
+  
+      <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  
+  <!-- 加载特效 -->
+    <script src="/js/pace.js"></script>
+    <link href="/css/pace/pace-theme-flash.css" rel="stylesheet" />
+  <script>
+      var yiliaConfig = {
+          fancybox: true,
+          animate: true,
+          isHome: false,
+          isPost: true,
+          isArchive: false,
+          isTag: false,
+          isCategory: false,
+          open_in_new: false
+      }
+  </script>
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+        <a href="/" class="profilepic">
+            
+            <img lazy-src="/img/header.png" class="js-avatar">
+            
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">cmustard</a></h1>
+        </hgroup>
+        
+        <p class="header-subtitle">人生苦短，我用python</p>
+        
+        
+            <form>
+                <input type="text" class="st-default-search-input search" id="local-search-input" placeholder=" Search...">
+            </form>
+            <div id="local-search-result"></div>
+        
+        
+            <script type="text/javascript">
+                (function() {
+                    'use strict';
+                    function getMatchData(keyword, data) {
+                        var matchData = [];
+                        for(var i =0;i<data.length;i++){
+                            if(data[i].title.toLowerCase().indexOf(keyword)>=0) 
+                                matchData.push(data[i])
+                        }
+                        return matchData;
+                    }
+                    var $input = $('#local-search-input');
+                    var $resultContent = $('#local-search-result');
+                    $input.keyup(function(){
+                        $.ajax({
+                            url: '/search.json',
+                            dataType: "json",
+                            success: function( json ) {
+                                var str='<ul class=\"search-result-list\">';                
+                                var keyword = $input.val().trim().toLowerCase();
+                                $resultContent.innerHTML = "";
+                                if ($input.val().trim().length <= 0) {
+                                    $resultContent.empty();
+                                    $('#switch-area').show();
+                                    return;
+                                }
+                                var results = getMatchData(keyword, json);
+                                if(results.length === 0){
+                                    $resultContent.empty();
+                                    $('#switch-area').show();
+                                    return;
+                                } 
+                                for(var i =0; i<results.length; i++){
+                                    str += "<li><a href='"+ results[i].url +"' class='search-result-title'>"+ results[i].title +"</a></li>";
+                                }
+                                str += "</ul>";
+                                $resultContent.empty();
+                                $resultContent.append(str);
+                                $('#switch-area').hide();
+                            }
+                        });
+                    });
+                })();
+            </script>
+        
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a  href="/archives/">所有文章</a></li>
+                        
+                            <li><a  href="/categories/Web安全/">Web安全</a></li>
+                        
+                            <li><a  href="/categories/python">玩转Python</a></li>
+                        
+                            <li><a  href="/categories/notes">认知提升</a></li>
+                        
+                            <li><a  href="/about/">关于我</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fl github"  target="_blank" href="https://github.com/cmustard06" title="github">github</a>
+                            
+                                <a class="fl csdn"  target="_blank" href="http://blog.csdn.net/cmustard" title="csdn">csdn</a>
+                            
+                                <a class="fl rss"  target="_blank" href="/atom.xml" title="rss">rss</a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <a href="/tags/golang/" style="font-size: 20px;">golang</a> <a href="/tags/poc/" style="font-size: 10px;">poc</a> <a href="/tags/python/" style="font-size: 15px;">python</a> <a href="/tags/struct/" style="font-size: 10px;">struct</a> <a href="/tags/tcp/" style="font-size: 10px;">tcp</a> <a href="/tags/事件驱动/" style="font-size: 10px;">事件驱动</a> <a href="/tags/代理/" style="font-size: 10px;">代理</a> <a href="/tags/博客/" style="font-size: 10px;">博客</a> <a href="/tags/并发/" style="font-size: 10px;">并发</a> <a href="/tags/异步IO/" style="font-size: 10px;">异步IO</a> <a href="/tags/编程语言/" style="font-size: 15px;">编程语言</a>
+                    </div>
+                </section>
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a target="_blank"  class="main-nav-link switch-friends-link" href="http://dmmjy9.com">木木</a>
+                    
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">爱动漫,爱游戏,爱编程,爱运动,爱的太多了!</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">cmustard</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                
+                    <img lazy-src="/img/header.png" class="js-avatar">
+                
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">cmustard</a></h1>
+            </hgroup>
+            
+            <p class="header-subtitle">人生苦短，我用python</p>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/categories/Web安全/">Web安全</a></li>
+                
+                    <li><a href="/categories/python">玩转Python</a></li>
+                
+                    <li><a href="/categories/notes">认知提升</a></li>
+                
+                    <li><a href="/about/">关于我</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                <div class="social">
+                    
+                        <a class="github" target="_blank" href="https://github.com/cmustard06" title="github">github</a>
+                    
+                        <a class="csdn" target="_blank" href="http://blog.csdn.net/cmustard" title="csdn">csdn</a>
+                    
+                        <a class="rss" target="_blank" href="/atom.xml" title="rss">rss</a>
+                    
+                </div>
+            </nav>
+        </header>                
+    </div>
+</nav>
+      <div class="body-wrap"><article id="post-goroutine与调度器" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a  href="/2017/09/01/goroutine与调度器/" class="article-date">
+      <time datetime="2017-09-01T07:29:33.223Z" itemprop="datePublished">2017-09-01</time>
+</a>
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      goroutine与调度器[转]
+    </h1>
+  
+
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/notes/">notes</a>
+    </div>
+
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/golang/">golang</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/编程语言/">编程语言</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>转载自<a href="http://skoo.me/go/2013/11/29/golang-schedule?hmsr=studygolang.com&amp;utm_medium=studygolang.com&amp;utm_source=studygolang.com" target="_blank" rel="external">goroutine与调度器by skoo</a><br>我们都知道Go语言是原生支持语言级并发的，这个并发的最小逻辑单元就是goroutine。goroutine就是Go语言提供的一种用户态线程，当然这种用户态线程是跑在内核级线程之上的。当我们创建了很多的goroutine，并且它们都是跑在同一个内核线程之上的时候，就需要一个调度器来维护这些goroutine，确保所有的goroutine都使用cpu，并且是尽可能公平的使用cpu资源。<br><a id="more"></a><br>这个调度器的原理以及实现值得我们去深入研究一下。支撑整个调度器的主要有4个重要结构，分别是<code>M</code>、<code>G</code>、<code>P</code>、<code>Sched</code>，前三个定义在<code>runtime.h</code>中，Sched定义在<code>proc.c</code>中。</p>
+<ul>
+<li>Sched结构就是调度器，它维护有存储M和G的队列以及调度器的一些状态信息等。</li>
+<li>M代表内核级线程，一个M就是一个线程，goroutine就是跑在M之上的；M是一个很大的结构，里面维护小对象内存cache（mcache）、当前执行的goroutine、随机数发生器等等非常多的信息。</li>
+<li>P全称是Processor，处理器，它的主要用途就是用来执行goroutine的，所以它也维护了一个goroutine队列，里面存储了所有需要它来执行的goroutine，这个P的角色可能有一点让人迷惑，一开始容易和M冲突，后面重点聊一下它们的关系。</li>
+<li>G就是goroutine实现的核心结构了，G维护了goroutine需要的栈、程序计数器以及它所在的M等信息。<br>理解M、P、G三者的关系对理解整个调度器非常重要，我从网络上找了一个图来说明其三者关系：<br><img src="http://ouz06keqs.bkt.clouddn.com/golang-car.jpeg" alt=""><br>地鼠(gopher)用小车运着一堆待加工的砖。M就可以看作图中的地鼠，P就是小车，G就是小车里装的砖。一图胜千言啊，弄清楚了它们三者的关系，下面我们就开始重点聊地鼠是如何在搬运砖块的。<h1 id="启动过程"><a href="#启动过程" class="headerlink" title="启动过程"></a>启动过程</h1>在关心绝大多数程序的内部原理的时候，我们都试图去弄明白其启动初始化过程，弄明白这个过程对后续的深入分析至关重要。在asm_amd64.s文件中的汇编代码_rt0_amd64就是整个启动过程，核心过程如下：<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">CALL	runtime·args(SB)</div><div class="line">CALL	runtime·osinit(SB)</div><div class="line">CALL	runtime·hashinit(SB)</div><div class="line">CALL	runtime·schedinit(SB)</div><div class="line"></div><div class="line">// create a new goroutine to start program</div><div class="line">PUSHQ	<span class="variable">$runtime</span>·main·f(SB)		// entry</div><div class="line">PUSHQ	<span class="variable">$0</span>			// arg size</div><div class="line">CALL	runtime·newproc(SB)</div><div class="line">POPQ	AX</div><div class="line">POPQ	AX</div><div class="line"></div><div class="line">// start this M</div><div class="line">CALL	runtime·mstart(SB)</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>启动过程做了调度器初始化<code>runtime·schedinit</code>后，调用<code>runtime·newproc</code>创建出第一个goroutine，这个goroutine将执行的函数是<code>runtime·main</code>，这第一个goroutine也就是所谓的主goroutine。我们写的最简单的Go程序”hello，world”就是完全跑在这个goroutine里，当然任何一个Go程序的入口都是从这个goroutine开始的。最后调用的<code>runtime·mstart</code>就是真正的执行上一步创建的主goroutine。</p>
+<p>启动过程中的调度器初始化<code>runtime·schedinit</code>函数主要根据用户设置的GOMAXPROCS值来创建一批小车(P)，不管<code>GOMAXPROCS</code>设置为多大，最多也只能创建256个小车(P)。这些小车(p)初始创建好后都是闲置状态，也就是还没开始使用，所以它们都放置在调度器结构(Sched)的pidle字段维护的链表中存储起来了，以备后续之需。</p>
+<p>查看<code>runtime·main</code>函数可以了解到主goroutine开始执行后，做的第一件事情是创建了一个新的内核线程(地鼠M)，不过这个线程是一个特殊线程，它在整个运行期专门负责做特定的事情——系统监控(sysmon)。接下来就是进入Go程序的main函数开始Go程序的执行。</p>
+<p>至此，Go程序就被启动起来开始运行了。一个真正干活的Go程序，一定创建有不少的goroutine，所以在Go程序开始运行后，就会向调度器添加goroutine，调度器就要负责维护好这些goroutine的正常执行。</p>
+<h1 id="创建goroutine-G"><a href="#创建goroutine-G" class="headerlink" title="创建goroutine(G)"></a>创建goroutine(G)</h1><p>在Go程序中，时常会有类似代码：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">go do_something()</div></pre></td></tr></table></figure></p>
+<p>go关键字就是用来创建一个goroutine的，后面的函数就是这个goroutine需要执行的代码逻辑。go关键字对应到调度器的接口就是<code>runtime·newproc</code>。<code>runtime·newproc</code>干的事情很简单，就负责制造一块砖(G)，然后将这块砖(G)放入当前这个地鼠(M)的小车(P)中。</p>
+<p>每个新的goroutine都需要有一个自己的栈，G结构的sched字段维护了栈地址以及程序计数器等信息，这是最基本的调度信息，也就是说这个goroutine放弃cpu的时候需要保存这些信息，待下次重新获得cpu的时候，需要将这些信息装载到对应的cpu寄存器中。</p>
+<p>假设这个时候已经创建了大量的goroutne，就轮到调度器去维护这些goroutine了。</p>
+<h1 id="创建内核线程-M"><a href="#创建内核线程-M" class="headerlink" title="创建内核线程(M)"></a>创建内核线程(M)</h1><p><img src="http://ouz06keqs.bkt.clouddn.com/golang-car.jpeg" alt=""><br>Go程序中没有语言级的关键字让你去创建一个内核线程，你只能创建goroutine，内核线程只能由runtime根据实际情况去创建。runtime什么时候创建线程？以地鼠运砖图来讲，砖(G)太多了，地鼠(M)又太少了，实在忙不过来，刚好还有空闲的小车(P)没有使用，那就从别处再借些地鼠(M)过来直到把小车(p)用完为止。这里有一个地鼠(M)不够用，从别处借地鼠(M)的过程，这个过程就是创建一个内核线程(M)。创建M的接口函数是:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">void newm(void (*fn)(void), P *p)</div></pre></td></tr></table></figure></p>
+<p><code>newm</code>函数的核心行为就是调用<code>clone</code>系统调用创建一个内核线程，每个内核线程的开始执行位置都是<code>runtime·mstart</code>函数。参数p就是一辆空闲的小车(p)。</p>
+<p>每个创建好的内核线程都从<code>runtime·mstart</code>函数开始执行了，它们将用分配给自己小车去搬砖了。</p>
+<h1 id="调度核心"><a href="#调度核心" class="headerlink" title="调度核心"></a>调度核心</h1><p><code>newm</code>接口只是给新创建的M分配了一个空闲的P，也就是相当于告诉借来的地鼠(M)——“接下来的日子，你将使用1号小车搬砖，记住是1号小车；待会自己到停车场拿车。”，地鼠(M)去拿小车(P)这个过程就是acquirep。<code>runtime·mstart</code>在进入schedule之前会给当前M装配上P，<code>runtime·mstart</code>函数中的代码：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&#125; <span class="keyword">else</span> <span class="keyword">if</span>(m != &amp;runtime·m0) &#123;</div><div class="line">	acquirep(m-&gt;nextp);</div><div class="line">	m-&gt;nextp = nil;</div><div class="line">&#125;</div><div class="line">schedule();</div><div class="line">`</div></pre></td></tr></table></figure></p>
+<p>if分支的内容就是为当前M装配上P，<code>nextp</code>就是<code>newm</code>分配的空闲小车(P)，只是到这个时候才真正拿到手罢了。没有P，M是无法执行goroutine的，就像地鼠没有小车无法运砖一样的道理。对应<code>acquirep</code>的动作是<code>releasep</code>，把M装配的P给载掉；活干完了，地鼠需要休息了，就把小车还到停车场，然后睡觉去。</p>
+<p>地鼠(M)拿到属于自己的小车(P)后，就进入工场开始干活了，也就是上面的<code>schedule</code>调用。简化<code>schedule</code>的代码如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">static void</div><div class="line">schedule(void)</div><div class="line">&#123;</div><div class="line">	G *gp;</div><div class="line"></div><div class="line">	gp = runqget(m-&gt;p);</div><div class="line">	<span class="keyword">if</span>(gp == nil)</div><div class="line">		gp = findrunnable();</div><div class="line"></div><div class="line">	<span class="keyword">if</span> (m-&gt;p-&gt;runqhead != m-&gt;p-&gt;runqtail &amp;&amp;</div><div class="line">		runtime·atomicload(&amp;runtime·sched.nmspinning) == 0 &amp;&amp;</div><div class="line">		runtime·atomicload(&amp;runtime·sched.npidle) &gt; 0)  // TODO: fast atomic</div><div class="line">		wakep();</div><div class="line"></div><div class="line">	execute(gp);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>schedule函数被我简化了太多，主要是我不喜欢贴大段大段的代码，因此只保留主干代码了。这里涉及到4大步逻辑：<br><img src="http://ouz06keqs.bkt.clouddn.com/gopher-bz.jpg" alt=""></p>
+<ul>
+<li><code>runqget</code>, 地鼠(M)试图从自己的小车(P)取出一块砖(G)，当然结果可能失败，也就是这个地鼠的小车已经空了，没有砖了。</li>
+<li><code>findrunnable</code>, 如果地鼠自己的小车中没有砖，那也不能闲着不干活是吧，所以地鼠就会试图跑去工场仓库取一块砖来处理；工场仓库也可能没砖啊，出现这种情况的时候，这个地鼠也没有偷懒停下干活，而是悄悄跑出去，随机盯上一个小伙伴(地鼠)，然后从它的车里试图偷一半砖到自己车里。如果多次尝试偷砖都失败了，那说明实在没有砖可搬了，这个时候地鼠就会把小车还回停车场，然后睡觉休息了。如果地鼠睡觉了，下面的过程当然都停止了，地鼠睡觉也就是线程sleep了。</li>
+<li><code>wakep</code>, 到这个过程的时候，可怜的地鼠发现自己小车里有好多砖啊，自己根本处理不过来；再回头一看停车场居然有闲置的小车，立马跑到宿舍一看，你妹，居然还有小伙伴在睡觉，直接给屁股一脚，“你妹，居然还在睡觉，老子都快累死了，赶紧起来干活，分担点工作。”，小伙伴醒了，拿上自己的小车，乖乖干活去了。有时候，可怜的地鼠跑到宿舍却发现没有在睡觉的小伙伴，于是会很失望，最后只好向工场老板说——”停车场还有闲置的车啊，我快干不动了，赶紧从别的工场借个地鼠来帮忙吧。”，最后工场老板就搞来一个新的地鼠干活了</li>
+<li><code>execute</code>，地鼠拿着砖放入火种欢快的烧练起来。<br><strong>注： “地鼠偷砖”叫<a href="http://supertech.csail.mit.edu/papers/steal.pdf" target="_blank" rel="external">work stealing</a>，一种调度算法。</strong><br>到这里，貌似整个工场都正常的运转起来了，无懈可击的样子。不对，还有一个疑点没解决啊，假设地鼠的车里有很多砖，它把一块砖放入火炉中后，何时把它取出来，放入第二块砖呢？难道要一直把第一块砖烧练好，才取出来吗？那估计后面的砖真的是等得花儿都要谢了。这里就是要真正解决goroutine的调度，上下文切换问题。</li>
+</ul>
+<h1 id="调度点"><a href="#调度点" class="headerlink" title="调度点"></a>调度点</h1><p>当我们翻看channel的实现代码可以发现，对<code>channel</code>读写操作的时候会触发调用runtime·park函数。goroutine调用<code>park</code>后，这个goroutine就会被设置位<code>waiting</code>状态，放弃cpu。被<code>park</code>的goroutine处于<code>waiting</code>状态，并且这个goroutine不在小车(P)中，如果不对其调用<code>runtime·ready</code>，它是永远不会再被执行的。除了<code>channel</code>操作外，定时器中，网络poll等都有可能<code>park goroutine</code>。</p>
+<p>除了park可以放弃cpu外，调用<code>runtime·gosched</code>函数也可以让当前goroutine放弃cpu，但和<code>park</code>完全不同；<code>gosched</code>是将goroutine设置为<code>runnable</code>状态，然后放入到调度器全局等待队列（也就是上面提到的工场仓库，这下就明白为何工场仓库会有砖块(G)了吧）。</p>
+<p>除此之外，就轮到系统调用了，有些系统调用也会触发重新调度。Go语言完全是自己封装的系统调用，所以在封装系统调用的时候，可以做不少手脚，也就是进入系统调用的时候执行entersyscall，退出后又执行<code>exitsyscall</code>函数。 也只有封装了<code>entersyscall</code>的系统调用才有可能触发重新调度，它将改变小车(P)的状态为<code>syscall</code>。还记一开始提到的<code>sysmon</code>线程吗？这个系统监控线程会扫描所有的小车(P)，发现一个小车(P)处于了<code>syscall</code>的状态，就知道这个小车(P)遇到了<code>goroutine</code>在做系统调用，于是系统监控线程就会创建一个新的地鼠(M)去把这个处于syscall的小车给抢过来，开始干活，这样这个小车中的所有砖块(G)就可以绕过之前系统调用的等待了。被抢走小车的地鼠等系统调用返回后，发现自己的车没，不能继续干活了，于是只能把执行系统调用的<code>goroutine</code>放回到工场仓库，自己睡觉去了。</p>
+<p>从goroutine的调度点可以看出，调度器还是挺粗暴的，调度粒度有点过大，公平性也没有想想的那么好。总之，这个调度器还是比较简单的。</p>
+<h1 id="现场处理"><a href="#现场处理" class="headerlink" title="现场处理"></a>现场处理</h1><p>goroutine在cpu上换入换出，不断上下文切换的时候，必须要保证的事情就是保存现场和恢复现场，保存现场就是在goroutine放弃cpu的时候，将相关寄存器的值给保存到内存中；恢复现场就是在goroutine重新获得cpu的时候，需要从内存把之前的寄存器信息全部放回到相应寄存器中去。</p>
+<p>goroutine在主动放弃cpu的时候<code>(park/gosched)</code>，都会涉及到调用runtime·mcall函数，此函数也是汇编实现，主要将goroutine的栈地址和程序计数器保存到G结构的<code>sched</code>字段中，<code>mcall</code>就完成了现场保存。恢复现场的函数是<code>runtime·gogocall</code>，这个函数主要在<code>execute中</code>调用，就是在执行goroutine前，需要重新装载相应的寄存器。</p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a  href="/2017/09/01/goroutine与调度器/">goroutine与调度器[转]</a></p>
+        <p><span>文章作者:</span><a  href="/" title="访问 cmustard 的个人博客">cmustard</a></p>
+        <p><span>发布时间:</span>2017年09月01日 - 15时29分</p>
+        <p><span>最后更新:</span>2017年09月01日 - 03时29分</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2017/09/01/goroutine与调度器/" title="goroutine与调度器[转]">http://www.cmustarc.com/2017/09/01/goroutine与调度器/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://www.cmustarc.com/2017/09/01/goroutine与调度器/　　作者: cmustard" title=""></span>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" title="中国大陆 (CC BY-NC-SA 3.0 CN)" target = "_blank">"署名-非商用-相同方式共享 3.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+<nav id="article-nav">
+  
+  
+    <a  href="/2017/08/26/Python常用模块/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">python常用模块(1)</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#启动过程"><span class="toc-number">1.</span> <span class="toc-text">启动过程</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#创建goroutine-G"><span class="toc-number">2.</span> <span class="toc-text">创建goroutine(G)</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#创建内核线程-M"><span class="toc-number">3.</span> <span class="toc-text">创建内核线程(M)</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#调度核心"><span class="toc-number">4.</span> <span class="toc-text">调度核心</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#调度点"><span class="toc-number">5.</span> <span class="toc-text">调度点</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#现场处理"><span class="toc-number">6.</span> <span class="toc-text">现场处理</span></a></li></ol>
+</div>
+<style>
+    .left-col .switch-btn {
+        display: none;
+    }
+    .left-col .switch-area {
+        display: none;
+    }
+</style>
+<input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script>
+    var valueHide = "隐藏目录";
+    var valueShow = "显示目录";
+    if ($(".left-col").is(":hidden")) {
+        $("#tocButton").attr("value", valueShow);
+    }
+    $("#tocButton").click(function() {
+        if ($("#toc").is(":hidden")) {
+            $("#tocButton").attr("value", valueHide);
+            $("#toc").slideDown(320);
+            $(".switch-btn, .switch-area").fadeOut(300);
+        }
+        else {
+            $("#tocButton").attr("value", valueShow);
+            $("#toc").slideUp(350);
+            $(".switch-btn, .switch-area").fadeIn(500);
+        }
+    })
+    if ($(".toc").length < 1) {
+        $("#toc, #tocButton").hide();
+        $(".switch-btn, .switch-area").show();
+    }
+</script>
+
+
+
+
+<div class="bdsharebuttonbox">
+	<a href="#" class="fx fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+	<a href="#" class="fx fa-weixin bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+	<a href="#" class="fx fa-qq bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+	<a href="#" class="fx fa-facebook-official bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+	<a href="#" class="fx fa-twitter bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+	<a href="#" class="fx fa-linkedin bds_linkedin" data-cmd="linkedin" title="分享到linkedin"></a>
+	<a href="#" class="fx fa-files-o bds_copy" data-cmd="copy" title="分享到复制网址"></a>
+</div>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+
+
+
+    
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a  href="/" title="回到主页"><i class="fa fa-home"></i></a>
+        
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+        
+            <a  href="/2017/08/26/Python常用模块/" title="下一篇: python常用模块(1)">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/09/01/goroutine与调度器/">goroutine与调度器[转]</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/26/Python常用模块/">python常用模块(1)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/26/Python常用模块2/">python常用模块(2)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/25/并发编程/">并发编程</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/20/论事件驱动与异步IO/">论事件驱动与异步IO[转]</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/20/python TCP代理/">python TCP代理</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/20/go语言初识/">初识go语言</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/16/Strut2 常见POC/">Struts2 常见POC收集和整理</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/15/hello-world/">Hello World</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/15/hexo+github+nginx VPS搭建博客/">hexo+github+nginx vps搭建博客</a></li></ul>
+    <script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+    <script>
+        $(".post-list").addClass("toc-article");
+        // $(".post-list-item a").attr("target","_blank");
+        $("#post-nav-button > a:nth-child(2)").click(function() {
+            $(".fa-bars, .fa-times").toggle();
+            $(".post-list").toggle(300);
+            if ($(".toc").length > 0) {
+                $("#toc, #tocButton").toggle(200, function() {
+                    if ($(".switch-area").is(":visible")) {
+                        $("#toc, .switch-btn, .switch-area").toggle();
+                        $("#tocButton").attr("value", valueHide);
+                        }
+                    })
+            }
+            else {
+                $(".switch-btn, .switch-area").fadeToggle(300);
+            }
+        })
+    </script>
+
+
+
+
+    <script>
+        
+    </script>
+
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                &copy; 2017 cmustard
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank">Hexo</a><a href="https://github.com/maochunguang" target="_blank">Blog</a> by tommy
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" >极客到访数: 
+                            <span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>, </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit">本页阅读量: 
+                            <span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+
+    </div>
+    <script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var backgroundnum = 4;
+            var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+            $("#mobile-nav").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+            $(".left-col").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+        })
+    </script>
+
+
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'xxxxx', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+
+	<script>
+	var _hmt = _hmt || [];
+	(function() {
+	  var hm = document.createElement("script");
+	  hm.src = "//hm.baidu.com/hm.js?xxxxxx";
+	  var s = document.getElementsByTagName("script")[0]; 
+	  s.parentNode.insertBefore(hm, s);
+	})();
+	</script>
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    $(document).ready(function() {
+        if ($("#comments").length < 1) {
+            $("#scroll > a:nth-child(2)").hide();
+        };
+    })
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+  <script language="javascript">
+    $(function() {
+        $("a[title]").each(function() {
+            var a = $(this);
+            var title = a.attr('title');
+            if (title == undefined || title == "") return;
+            a.data('title', title).removeAttr('title').hover(
+            function() {
+                var offset = a.offset();
+                $("<div id=\"anchortitlecontainer\"></div>").appendTo($("body")).html(title).css({
+                    top: offset.top - a.outerHeight() - 15,
+                    left: offset.left + a.outerWidth()/2 + 1
+                }).fadeIn(function() {
+                    var pop = $(this);
+                    setTimeout(function() {
+                        pop.remove();
+                    }, pop.text().length * 800);
+                });
+            }, function() {
+                $("#anchortitlecontainer").remove();
+            });
+        });
+    });
+</script>
+
+
+  </div>
+</body>
+</html>
