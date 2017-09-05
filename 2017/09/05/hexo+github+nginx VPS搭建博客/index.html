@@ -6,20 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://www.cmustarc.com">
-  <title>初识go语言 | cmustard的博客</title>
+  <title>hexo+github+nginx vps搭建博客 | cmustard的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="简介Go语言是一门全新的静态类型开发语言，与当前的开发语言相比具备众多令人兴奋不已的新特性。最主要的新特性如下：  自动垃圾回收 更丰富的内置类型 函数多返回值">
-<meta name="keywords" content="golang,编程语言">
+  <meta name="description" content="Note：  这里所用的VPS的系统是Cent os 基础环境准备1#  yum -y install gcc make gcc-c++ openssl-devel wget">
+<meta name="keywords" content="博客">
 <meta property="og:type" content="article">
-<meta property="og:title" content="初识go语言">
-<meta property="og:url" content="http://www.cmustarc.com/2017/08/20/go语言初识/index.html">
+<meta property="og:title" content="hexo+github+nginx vps搭建博客">
+<meta property="og:url" content="http://www.cmustarc.com/2017/09/05/hexo+github+nginx VPS搭建博客/index.html">
 <meta property="og:site_name" content="cmustard的博客">
-<meta property="og:description" content="简介Go语言是一门全新的静态类型开发语言，与当前的开发语言相比具备众多令人兴奋不已的新特性。最主要的新特性如下：  自动垃圾回收 更丰富的内置类型 函数多返回值">
+<meta property="og:description" content="Note：  这里所用的VPS的系统是Cent os 基础环境准备1#  yum -y install gcc make gcc-c++ openssl-devel wget">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2017-08-20T06:02:20.243Z">
+<meta property="og:updated_time" content="2017-09-05T07:00:22.038Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="初识go语言">
-<meta name="twitter:description" content="简介Go语言是一门全新的静态类型开发语言，与当前的开发语言相比具备众多令人兴奋不已的新特性。最主要的新特性如下：  自动垃圾回收 更丰富的内置类型 函数多返回值">
+<meta name="twitter:title" content="hexo+github+nginx vps搭建博客">
+<meta name="twitter:description" content="Note：  这里所用的VPS的系统是Cent os 基础环境准备1#  yum -y install gcc make gcc-c++ openssl-devel wget">
   
     <link rel="alternative" href="/atom.xml" title="cmustard的博客" type="application/atom+xml">
   
@@ -171,62 +171,118 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-go语言初识" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-hexo+github+nginx VPS搭建博客" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      初识go语言
+      hexo+github+nginx vps搭建博客
     </h1>
   
 
         
-        <a href="/2017/08/20/go语言初识/" class="archive-article-date">
-  	<time datetime="2017-08-20T06:02:20.243Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-08-20</time>
+        <a href="/2017/09/05/hexo+github+nginx VPS搭建博客/" class="archive-article-date">
+  	<time datetime="2017-09-05T07:00:22.038Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-09-05</time>
 </a>
         
       </header>
     
+<!-- 目录内容 -->
+
+    <p class="show-toc-btn" id="show-toc-btn" onclick="showToc();" style="display:none">
+          <span class="btn-bg"></span>
+          <span class="btn-text">文章导航</span>
+          </p>
+	<div id="toc-article" class="toc-article">
+	    <span id="toc-close" class="toc-close" title="隐藏导航" onclick="showBtn();">×</span>
+		<strong class="toc-title">文章目录</strong>
+           <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Nginx安装"><span class="toc-number">1.</span> <span class="toc-text">Nginx安装</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#VPS上安装Nginx"><span class="toc-number">1.1.</span> <span class="toc-text">VPS上安装Nginx</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#VPS上部署Nginx"><span class="toc-number">1.2.</span> <span class="toc-text">VPS上部署Nginx</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#创建站点的专用管理者"><span class="toc-number">1.3.</span> <span class="toc-text">创建站点的专用管理者</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Nginx测试"><span class="toc-number">1.4.</span> <span class="toc-text">Nginx测试</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#hexo"><span class="toc-number">2.</span> <span class="toc-text">hexo</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#安装hexo"><span class="toc-number">2.1.</span> <span class="toc-text">安装hexo</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#github准备"><span class="toc-number">3.</span> <span class="toc-text">github准备</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#配置完成发布"><span class="toc-number">4.</span> <span class="toc-text">配置完成发布</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#参考"><span class="toc-number">5.</span> <span class="toc-text">参考</span></a></li></ol>
+         </div>
+   <script type="text/javascript">
+	function showToc(){
+		var toc_article = document.getElementById("toc-article");
+		var show_toc_btn = document.getElementById("show-toc-btn");
+		toc_article.setAttribute("style","display:block");
+		show_toc_btn.setAttribute("style","display:none");
+		};
+	function showBtn(){
+		var toc_article = document.getElementById("toc-article");
+		var show_toc_btn = document.getElementById("show-toc-btn");
+		toc_article.setAttribute("style","display:none");
+		show_toc_btn.setAttribute("style","display:block");
+		};
+   </script>
+      		
+<!-- 目录内容结束 -->
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>Go语言是一门全新的静态类型开发语言，与当前的开发语言相比具备众多令人兴奋不已的新特性。最主要的新特性如下：</p>
-<ul>
-<li>自动垃圾回收</li>
-<li>更丰富的内置类型</li>
-<li>函数多返回值<a id="more"></a></li>
-<li>错误处理</li>
-<li>匿名函数和闭包</li>
-<li>类型和接口</li>
-<li>并发编程</li>
-<li>反射</li>
-<li>语言交互性</li>
+        <ul>
+<li><strong>Note：  这里所用的VPS的系统是Cent os</strong></li>
+<li>基础环境准备<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#  yum -y install gcc make gcc-c++ openssl-devel wget</span></div></pre></td></tr></table></figure>
+</li>
 </ul>
-<h1 id="自动垃圾回收"><a href="#自动垃圾回收" class="headerlink" title="自动垃圾回收"></a>自动垃圾回收</h1><p>手动管理内存的一个问题就是由于指针的到处传递而无法确定何时可以释放该指针的指向的内存块。假如在代码中的某个位置我们释放了内存，而另一些地方还在使用指向这块内存的指针，那么这些指针就变成了所谓的野指针或者悬空指针，对这些进行任何读写操作都会导致不可预料的后果。就比如以下的c++代码，进行内存释放。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">int *p = new int;</div><div class="line">p +=10 ; //这里对指针进行了偏移，因此那块内存不再被引用</div><div class="line">// ...... 这里可能发生针对这块int内存的垃圾回收。</div><div class="line">p -=10; //居然又偏移到原来的位置</div><div class="line">*p = 10; //如果有垃圾收集，这里就无法保证可以正常运行了</div></pre></td></tr></table></figure></p>
-<p> 所谓的垃圾回收，即所有的内存分配动作都会被在运行时记录，同时任何对该内存的使用也都会被记录，然后垃圾回收器一会对所有已经分配的内存进行跟踪监测，一旦发现有些内存已经不再使用，就会阶段性的回收这些没人用的内存。</p>
-<h1 id="更丰富的内置类型"><a href="#更丰富的内置类型" class="headerlink" title="更丰富的内置类型"></a>更丰富的内置类型</h1><p> 除了几乎所有语言都支持的简单内置类型外，Go语言也内置了一些比较新的语言学中的内置的高级类型，比如C#和Java中的数组和字符串，除此之外，Go语言中还内置了一个对于其他静态类型语言通常用库支持的字典类型。另外又一个新增的数据结构，数组切片，我们可以认为数组切片是一种可动态增长的数组。</p>
-<h1 id="函数多返回值"><a href="#函数多返回值" class="headerlink" title="函数多返回值"></a>函数多返回值</h1><p>目前主流语言中除了Python外基本都不支持函数的多返回值功能，比如我们如果要定义一个函数用于返回个人名字信息，而名字信息因为包含多个部分—-姓名，中间名和别名，在不支持多返回值的语言中我们又以下两种做法，要么专门定义一个结构体用于返回，要么以传出参数的方式返回多个结构使用指针。<br>     Go语言革命性的在静态语言阵营中率先提供了多返回值功能。Go语言中举例：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">func getName()(firstName,middleName,lastName,nickName string)&#123;</div><div class="line">     <span class="built_in">return</span> <span class="string">"May"</span>,<span class="string">"M"</span>,<span class="string">"Chen"</span>,<span class="string">"Babe"</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p> 因为返回值都已经有了名字，因此各个返回值也可以用如下方式来在不同的位置进行赋值，从而提供了极大的灵活性：<br> <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">func getName()(firstName,middleName,lastName,nickName string)&#123;</div><div class="line">     firstName = <span class="string">"May"</span></div><div class="line">     middleName = <span class="string">"M"</span></div><div class="line">     lastName = <span class="string">'Chen'</span></div><div class="line">     nickName = <span class="string">'Babe'</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>并不是每一个返回值都必须赋值，没有明赋值的返回值将保留默认的空值，函数的调用也比较简单<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">fn,mn,ln,nn := getName()</div></pre></td></tr></table></figure></p>
-<p> 如果我们只对函数其中的某几个返回值感兴趣的话。也可以直接用下划线作为占位符来忽略其他不关心的返回值。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">_,_,lastName,_:=getName()</div></pre></td></tr></table></figure></p>
-<h1 id="错误处理"><a href="#错误处理" class="headerlink" title="错误处理"></a>错误处理</h1><p>Go语言引入了关键字defer用于标准的错误处理流程，并提供了内置函数panic，recover完成异常的抛出与捕获。</p>
-<h1 id="匿名函数和闭包"><a href="#匿名函数和闭包" class="headerlink" title="匿名函数和闭包"></a>匿名函数和闭包</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">f := func(x,y int)int&#123;</div><div class="line">     <span class="built_in">return</span> x+y</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h1 id="接口类型"><a href="#接口类型" class="headerlink" title="接口类型"></a>接口类型</h1><p>Go语言的类型定义非常接近于C语言中的结构，甚至沿用了struct关键字。相比而言，Go语言并没有直接沿袭c++和JAVA的传统去设计一个超级复杂的类型系统，不支持继承和重载，而只是支持了最基本的类型组合功能。</p>
-<p>Go语言并不是简单的对面向对象开发语言做减法，他还引入了一个无比强大的非侵入式接口的概念，在C++中，我们通常会这样来确定接口和类型的关系。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">//抽象接口</div><div class="line">interface IFly&#123;</div><div class="line">     virtual void Fly()=0;</div><div class="line">&#125;;</div><div class="line"></div><div class="line">//实现类</div><div class="line">class Bird:public IFly&#123;</div><div class="line">     public:</div><div class="line">          <span class="function"><span class="title">Bird</span></span>()&#123;&#125;</div><div class="line">          virtual ~<span class="function"><span class="title">Bird</span></span>()&#123;&#125;</div><div class="line">     public:</div><div class="line">          void <span class="function"><span class="title">Fly</span></span>()&#123;</div><div class="line">               //以鸟的方式飞行</div><div class="line">&#125;</div><div class="line">&#125;;</div><div class="line"></div><div class="line">void <span class="function"><span class="title">main</span></span>()&#123;</div><div class="line">     IFly *pFly = new Bird();</div><div class="line">     pFly -&gt;Fly();</div><div class="line">     delete pFly;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>显然，在实现一个接口之前必须先定义该接口，并且将类型和接口紧密绑定，即接口的修改会影响到所有实现了该接口的类型。而Go语言的接口避免这类问题<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">type</span> Bird struct&#123;</div><div class="line">     ...</div><div class="line">&#125;</div><div class="line"></div><div class="line">func (b *Bird) <span class="function"><span class="title">Fly</span></span>()&#123;</div><div class="line">     //以鸟的方式飞行</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>我们在实现Bird类型时完全没有任何IFLY的信息，我们可以在另一个地方定义这个IFly接口:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">type</span> IFly interface &#123;</div><div class="line">     Fly()</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>这两者目前看起来完全没有关系，现在看看我们怎么使用他们<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">func <span class="function"><span class="title">main</span></span>()&#123;</div><div class="line">     var fly IFly = new(Bird)</div><div class="line">     fly.Fly()</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<h1 id="并发编程"><a href="#并发编程" class="headerlink" title="并发编程"></a>并发编程</h1><p>Go语言引入了goroutine概念，他使得并发编程便得很简单，通过使用goroutine而不是裸用操作系统的并发机制，以及使用消息传递来共享内存而不是使用共享内存来进行通信。</p>
-<p>通过在函数调用前使用关键字go，我们即可让该函数以goroutine方式执行，goroutime是一种比线程更加轻盈，更省资源的协程。Go语言通过系统的线程来多路派遣这些函数的执行，使得每个用go关键字执行的函数可以运行成为一个单位协程，当一个协程阻塞的时候，调度器就会自动把其他协程安排到另外的线程中去执行，从而实现了程序无等待并行化运行。而且调度的开销非常小。</p>
-<p> Go语言实现了CSP（通信顺序进程）模型来作为goroutine间推荐通信方式。在CSP模型中，一个并发系统由若干并行运行的顺序进程组成，每个进程不能对其他进程的变量赋值。进程之间只能通过一对通信原语实现协作。Go语言用channel（通道）这个概念来轻巧地实现CSP模型，channel的使用方式比较接近Unix系统中的管道pipe概念，可以方便的进行跨goroutine的通信。</p>
-<p>另外。由于一个进程内创建的所有goroutine运行在同一个地址内存空间，因此如果不同的goroutine不得不去访问共享的内存变量，访问前应该先获取相应的读写锁，Go语言标准库中的sync包提供了完备的读写锁功能。</p>
-<p>一个简单的例子来演示goroutine和channel的使用方式，这是一个并行计算的例子，用两个goroutine进行并行的累加计算，待两个计算过程都完成后打印计算结果。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">package main</div><div class="line"></div><div class="line">import <span class="string">"fmt"</span></div><div class="line"></div><div class="line">/*</div><div class="line">这是一个并行计算的例子，由两个goroutine进行并行的累加计算</div><div class="line">*/</div><div class="line">func sum(values []int, resultChan chan int) &#123;</div><div class="line">    sum := 0</div><div class="line">    <span class="keyword">for</span> _, value := range values &#123;</div><div class="line">        sum += value</div><div class="line">    &#125;</div><div class="line">    resultChan &lt;- sum //将计算结果发送到channel中</div><div class="line">&#125;</div><div class="line"></div><div class="line">func <span class="function"><span class="title">main</span></span>() &#123;</div><div class="line">    values := []int&#123;1, 2, 3, 4, 5, 6, 7, 8, 9, 10&#125;</div><div class="line">    resultChan := make(chan int, 2)</div><div class="line">    go sum(values[:len(values)/2], resultChan)</div><div class="line">    go sum(values[len(values)/2:], resultChan)</div><div class="line">    sum1, sum2 := &lt;-resultChan, &lt;-resultChan //接收结果</div><div class="line"></div><div class="line">    fmt.Println(<span class="string">"Result:"</span>, sum1, sum2, sum2+sum1)</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<h1 id="反射"><a href="#反射" class="headerlink" title="反射"></a>反射</h1><p>通过反射，你可以获取对象类型的详细信息，并可动态操作对象。反射最常见的使用场景是做对象的序列化。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line">package main</div><div class="line"></div><div class="line">/*</div><div class="line">利用反射功能列出某个类型中所有成员变量的值</div><div class="line">*/</div><div class="line"></div><div class="line">import (</div><div class="line">    <span class="string">"fmt"</span></div><div class="line">    <span class="string">"reflect"</span></div><div class="line">)</div><div class="line"></div><div class="line">// 创建一个新类型</div><div class="line"><span class="built_in">type</span> Bird struct &#123;</div><div class="line">    Name           string</div><div class="line">    LifeExpectance int</div><div class="line">&#125;</div><div class="line"></div><div class="line">func (b *Bird) <span class="function"><span class="title">Fly</span></span>() &#123;</div><div class="line">    fmt.Println(<span class="string">"I'm flying"</span>)</div><div class="line">&#125;</div><div class="line"></div><div class="line">func <span class="function"><span class="title">main</span></span>() &#123;</div><div class="line">    sparrow := &amp;Bird&#123;<span class="string">"Sparrow"</span>, 3&#125;</div><div class="line">    s := reflect.ValueOf(sparrow).Elem()</div><div class="line">    typeOfT := s.Type()</div><div class="line">    <span class="keyword">for</span> i := 0; i &lt; s.NumField(); i++ &#123;</div><div class="line">        f := s.Field(i)</div><div class="line">        fmt.Printf(<span class="string">"%d:%s %s = %v\n"</span>, i, typeOfT.Field(i).Name, f.Type(), f.Interface())</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h1 id="语言交互性"><a href="#语言交互性" class="headerlink" title="语言交互性"></a>语言交互性</h1><p> 由于Go语言和C语言有天生联系，Go语言的设计者们自然不会忽略如何重用现有C模块的这个问题，这个功能直接被命名为Cgo，Cgo即是语言特性，同时也是一个工具的名称。</p>
-<p> 在Go语言中，可以按Cgo的特定语法混合编写C语言代码，然后Cgo工具可以将这些混合的C代码提取并生成对于C功能的调用包装代码。这里需要安装gcc编译环境<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">package main</div><div class="line"></div><div class="line">/*</div><div class="line">在Go语言中调用C语言标准库的puts函数</div><div class="line"></div><div class="line"><span class="comment">#include&lt;stdio.h&gt;</span></div><div class="line"><span class="comment">#include&lt;stdlib.h&gt;</span></div><div class="line">*/</div><div class="line"></div><div class="line">import (</div><div class="line">    <span class="string">"C"</span></div><div class="line">    <span class="string">"unsafe"</span></div><div class="line">)</div><div class="line"></div><div class="line">func <span class="function"><span class="title">main</span></span>() &#123;</div><div class="line">    cstr := C.CString(<span class="string">"Hello, world"</span>)</div><div class="line">    C.puts(cstr)</div><div class="line">    C.free(unsafe.Pointer(cstr))</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<a id="more"></a>
+<h1 id="Nginx安装"><a href="#Nginx安装" class="headerlink" title="Nginx安装"></a>Nginx安装</h1><h2 id="VPS上安装Nginx"><a href="#VPS上安装Nginx" class="headerlink" title="VPS上安装Nginx"></a>VPS上安装Nginx</h2><p>首先是在/etc/yum.repos.d目录下创建一个源配置文件nginx.repo,写入如下代码</p>
+<pre><code>[nginx]
+name=nginx repo
+baseurl=http://nginx.org/packages/centos/$releasever/$basearch/
+gpgcheck=0
+enabled=1
+</code></pre><p>执行命令：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">[root /]<span class="built_in">cd</span> /etc/yum.repos.d</div><div class="line">[root yum.repos.d]<span class="built_in">echo</span> -e <span class="string">"</span></div><div class="line"><span class="string">[nginx]\n</span></div><div class="line"><span class="string">name=nginx repo\n</span></div><div class="line"><span class="string">baseurl=http://nginx.org/packages/centos/\$releasever/\$basearch/\n</span></div><div class="line"><span class="string">gpgcheck=0\n</span></div><div class="line"><span class="string">enabled=1\n</span></div><div class="line"><span class="string">"</span> &gt; nginx.repo</div></pre></td></tr></table></figure></p>
+<p>查看是否配置正确(使用cat命令查看内容，以下配置文件大家自行使用查看命令验证配置信息)<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">[root /]cat /etc/yum.repos.d/nginx.repo</div><div class="line">[nginx]</div><div class="line">name=nginx repo</div><div class="line">baseurl=http://nginx.org/packages/centos/<span class="variable">$releasever</span>/<span class="variable">$basearch</span>/</div><div class="line">gpgcheck=0</div><div class="line">enabled=1</div></pre></td></tr></table></figure></p>
+<p>安装nginx<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum install nginx -y</div></pre></td></tr></table></figure></p>
+<p>查看Nginx版本号(安装完成验证)<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">nginx -v</div></pre></td></tr></table></figure></p>
+<h2 id="VPS上部署Nginx"><a href="#VPS上部署Nginx" class="headerlink" title="VPS上部署Nginx"></a>VPS上部署Nginx</h2><p>在/etc/nginx/sites-available目录下创建一个配置文件XXX.conf(这里以hexo.conf为例),并在文件中输入一下内容</p>
+<pre><code>server {
+  root /var/www/blog/public; #站点目录
+  index index.html index.htm; #主页，不用改
+  server_name www.cmustard.com cmustard.com *.cmustard.com; #申请的域名
+  location / {
+    try_files $uri $uri/ /index.html;
+  }
+}
+</code></pre><p>执行以下命令，通过vim写入内容</p>
+<pre><code>mkdir -p /etc/nginx/sites-available
+vim /etc/nginx/sites-available/hexo.conf   #将上面的内容写入到文件中 
+</code></pre><p><strong>最后配置Nginx的配置文件</strong><br>在/etc/nginx/nginx.conf文件中添加如下代码(添加包含sites-available目录以及站点/var/www目录下的配置文件)<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#gzip  on;</span></div><div class="line"></div><div class="line"> include /etc/nginx/conf.d/*.conf;</div><div class="line"> include /etc/nginx/sites-available/*.conf;</div><div class="line"> include /var/www/*.conf;</div></pre></td></tr></table></figure></p>
+<p>测试一下配置文件是否有语法错误<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">nginx -t</div></pre></td></tr></table></figure></p>
+<p>如果显示如下内容表示可以：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">nginx: the configuration file /etc/nginx/nginx.conf syntax is ok</div><div class="line">nginx: configuration file /etc/nginx/nginx.conf <span class="built_in">test</span> is successful</div></pre></td></tr></table></figure></p>
+<p>启动Nginx服务器<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">service nginx reload</div><div class="line">/etc/init.d/nginx start</div><div class="line">chkconfig nginx start  <span class="comment"># 设置开机启动</span></div></pre></td></tr></table></figure></p>
+<h2 id="创建站点的专用管理者"><a href="#创建站点的专用管理者" class="headerlink" title="创建站点的专用管理者"></a>创建站点的专用管理者</h2><p>为了安全考虑我们需要在VPS上创建一个普通用户来专门管理网站，<br><strong>1.创建用户组以及用户</strong><br>创建用户和用户组</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"> <span class="variable">$groupadd</span> www  <span class="comment"># 创建用户组</span></div><div class="line"> <span class="variable">$useradd</span> www -m -g www  <span class="comment"># 创建用户</span></div><div class="line">```	</div><div class="line"></div><div class="line">查看用户信息，验证是否验证成功</div><div class="line">```bash</div><div class="line">$ finger www</div><div class="line">$ groups www</div></pre></td></tr></table></figure>
+<p><strong>2.设置用户密码</strong><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">passwd www</div></pre></td></tr></table></figure></p>
+<p><strong>3.设置家目录权限</strong><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">chmod 755 /home/www</div></pre></td></tr></table></figure></p>
+<p><strong>4.给www用户添加sudo权限</strong></p>
+<p>修改/etc/sudoers文件。找到如下指令添加一条<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="comment">## Allow root to run any commands anywhere</span></div><div class="line">root	ALL=(ALL)	ALL</div><div class="line">www	ALL=(ALL)	ALL  <span class="comment"># 新增的指令</span></div></pre></td></tr></table></figure></p>
+<h2 id="Nginx测试"><a href="#Nginx测试" class="headerlink" title="Nginx测试"></a>Nginx测试</h2><p><strong> 1.创建测试页面</strong></p>
+<p>进入/var/www/blog/public目录<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">[root@localhost /] <span class="built_in">cd</span> /var</div><div class="line">[root@localhost var] chmod 777 www</div><div class="line">[root@localhost var]  su www </div><div class="line">[www@localhost var] mkdir -p /var/www/blog/public</div><div class="line">[www@localhost var] <span class="built_in">cd</span> /var/www/blog/public</div><div class="line">[www@localhost public] <span class="built_in">echo</span> “This is <span class="built_in">test</span> HTML” &gt; index.html</div></pre></td></tr></table></figure></p>
+<p><strong>2.测试，打开浏览器输入域名，是否能访问到页面</strong></p>
+<p><strong>3.删除测试文件.html</strong><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[www@localhost public]<span class="comment"># rm index.html</span></div></pre></td></tr></table></figure></p>
+<h1 id="hexo"><a href="#hexo" class="headerlink" title="hexo"></a>hexo</h1><h2 id="安装hexo"><a href="#安装hexo" class="headerlink" title="安装hexo"></a>安装hexo</h2><p><strong>1.安装node.js</strong><br>安装hexo框架需要nodejs的环境，因此首先需要安装该环境<br>hexo官网提供了一中安装方法，我们就使用官网的安装方法<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.2/install.sh | bash</div></pre></td></tr></table></figure></p>
+<p>一旦nvm安装完成，我们需要重启终端然后运行下面的命令<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ nvm install stables</div></pre></td></tr></table></figure></p>
+<p><strong>2.安装hexo</strong><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ npm config <span class="built_in">set</span> unsafe-perm <span class="literal">true</span> <span class="comment"># 如果执行下面的那条命令出现了权限问题就先使用这条命令，在运行下面的命令</span></div><div class="line">$ npm install -g hexo-cli</div></pre></td></tr></table></figure></p>
+<p><strong>初始化</strong><br>自己创建blog文件夹。进行初始化命令<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ cd /var/www/</div><div class="line">$ hexo init blog</div></pre></td></tr></table></figure></p>
+<p>这样就完成了hexo的安装，接下来在执行<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo generate  或者  hexo g</div></pre></td></tr></table></figure></p>
+<p>执行了这条命令之后就会在blog目录下生产一个public文件夹，这里面是全部blog博客的静态文件。</p>
+<p><strong>访问域名，是否看到hexo页面</strong></p>
+<h1 id="github准备"><a href="#github准备" class="headerlink" title="github准备"></a>github准备</h1><p><strong>1.github注册账号</strong><br>在github官网注册自己的账号，然后创建一个repositorie，假如你github账号名称<br>为zzz.那就创建一个zzz.github.io的repository。</p>
+<p><strong>2.创建ssh key</strong><br>接下来我们需要在本地创建一个ssh key公钥，并将其添加到github中<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">cd</span> ~/.ssh</div><div class="line">rm *</div><div class="line">ssh-keygen -t rsa -b 4096 -C <span class="string">"你登录github的邮件地址"</span></div><div class="line">Generating public/private rsa key pair.</div><div class="line">Enter a file <span class="keyword">in</span> <span class="built_in">which</span> to save the key (/home/you/.ssh/id_rsa): [Press enter]</div><div class="line">       Enter passphrase (empty <span class="keyword">for</span> no passphrase): [Type a passphrase]  <span class="comment"># 输入一个安全密码</span></div><div class="line">Enter same passphrase again: [Type passphrase again]</div></pre></td></tr></table></figure></p>
+<p>此时在~/.ssh/下生成一个id_ras.pub的文件，复制这个文件中的信息，将其添加到github中。</p>
+<p><strong><em>在你github账号的setting中有一个SSH and GPG keys选项，进入这个选项后，在SSH keys栏中New SSH key 自己起一个名字，然后将id_ras.pub中的信息复制到key中，然后ADD。如果没有出现错误，就说明添加成功</em></strong></p>
+<p><strong>3.测试github</strong><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ssh -T git@github.com</div></pre></td></tr></table></figure></p>
+<p>如果显示<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#     Hi username! You've successfully authenticated, but GitHub does notprovide shell access.</span></div></pre></td></tr></table></figure></p>
+<p>就说明可以了，然后打开blog根目录下的_config.yml文件，添加如下(<strong><em>yml文件格式要求严格，注意空格</em></strong>)<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">deploy:</div><div class="line">  <span class="built_in">type</span>: git</div><div class="line">  repository: https://你的账号名@github.com/你的账号名/你的账号名.github.io.git <span class="comment">#比如 https://zzz@github.com/zzz/zzz.github.io.git</span></div><div class="line">  branch: master</div></pre></td></tr></table></figure></p>
+<p>然后在blog目录下输入<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#	hexo deploy (or  hexo d)</span></div></pre></td></tr></table></figure></p>
+<p>这个时候会提示你输入github的密码。回车，就完成了。<br>之后写玩blog就可以hexo g生成一下，然后hexo d在github上备份一下，</p>
+<h1 id="配置完成发布"><a href="#配置完成发布" class="headerlink" title="配置完成发布"></a>配置完成发布</h1><p>写markdown文件，然后保存在blog/source/_posts文件夹下，最后<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">hexo g</div><div class="line">hexo d</div></pre></td></tr></table></figure></p>
+<p><strong>其他</strong><br>hexo提供了很博客主题供使用，我们可以根据自己的喜好下载主题，讲主题文件保存到blog/theme文件下，然后修改blog根目录（主题文件下也有一个_config.yml文件）下的_config.yml中的theme选项就行。</p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ul>
+<li><a href="http://renfuheng.com/2016/08/28/%E5%BF%AB%E9%80%9F%E5%9C%A8vps-centOs-6-%E4%B8%8A%E6%90%AD%E5%BB%BAhexo%E5%8D%9A%E5%AE%A2%E5%B9%B6push%E4%B8%80%E4%BB%BD%E5%88%B0github/" target="_blank" rel="external">快速在vps(centOs 6)上搭建hexo博客并push一份到github</a></li>
+<li><a href="https://www.hansoncoder.com/2016/03/02/VPS-building-Hexo/#VPS上安装Nginx" target="_blank" rel="external">VPS(CentOS)搭建Hexo博客与Git Hooks更新（小白篇</a></li>
+<li><a href="https://hexo.io/docs/index.html" target="_blank" rel="external">Hexo Documentation</a></li>
+</ul>
 
       
 
@@ -261,11 +317,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">golang</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">编程语言</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">博客</a>
         		</li>
       		
 		</ul>
@@ -332,7 +384,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="http://s.jiathis.com/qrcode.php?url=http://www.cmustarc.com/2017/08/20/go语言初识/" alt="微信分享二维码">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://www.cmustarc.com/2017/09/05/hexo+github+nginx VPS搭建博客/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -346,7 +398,7 @@
   
 <nav id="article-nav">
   
-    <a href="/2017/08/20/python TCP代理/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2017/09/05/python TCP代理/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
@@ -356,8 +408,8 @@
     </a>
   
   
-    <a href="/2017/08/16/Strut2 常见POC/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Struts2 常见POC收集和整理</div>
+    <a href="/2017/09/05/go语言初识/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">初识go语言</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -377,6 +429,19 @@
         </div>
         
         
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Nginx安装"><span class="toc-number">1.</span> <span class="toc-text">Nginx安装</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#VPS上安装Nginx"><span class="toc-number">1.1.</span> <span class="toc-text">VPS上安装Nginx</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#VPS上部署Nginx"><span class="toc-number">1.2.</span> <span class="toc-text">VPS上部署Nginx</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#创建站点的专用管理者"><span class="toc-number">1.3.</span> <span class="toc-text">创建站点的专用管理者</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Nginx测试"><span class="toc-number">1.4.</span> <span class="toc-text">Nginx测试</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#hexo"><span class="toc-number">2.</span> <span class="toc-text">hexo</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#安装hexo"><span class="toc-number">2.1.</span> <span class="toc-text">安装hexo</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#github准备"><span class="toc-number">3.</span> <span class="toc-text">github准备</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#配置完成发布"><span class="toc-number">4.</span> <span class="toc-text">配置完成发布</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#参考"><span class="toc-number">5.</span> <span class="toc-text">参考</span></a></li></ol>
+                    </div>
+                </span>
+            </div>
+        </div>
+        
     </div>
 </aside>
 
@@ -385,7 +450,7 @@
   
   <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="go语言初识" data-title="初识go语言" data-url="http://www.cmustarc.com/2017/08/20/go语言初识/"></div>
+	<div class="ds-thread" data-thread-key="hexo+github+nginx VPS搭建博客" data-title="hexo+github+nginx vps搭建博客" data-url="http://www.cmustarc.com/2017/09/05/hexo+github+nginx VPS搭建博客/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">
@@ -413,6 +478,7 @@
   
 
 
+
           </div>
         </div>
       </div>
@@ -438,7 +504,7 @@
 		isTag: false,
 		isCategory: false,
 		open_in_new: true,
-		toc_hide_index: true,
+		toc_hide_index: false,
 		root: "/",
 		innerArchive: true,
 		showTags: false
@@ -523,10 +589,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">并发</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">博客</a>
               </li>
              
@@ -536,6 +598,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">代理</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">并发</a>
               </li>
              
               <li class="article-tag-list-item">

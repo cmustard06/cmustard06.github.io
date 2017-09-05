@@ -6,18 +6,23 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://www.cmustarc.com">
-  <title>Archives: 2017/8 | cmustard的博客</title>
+  <title>python常用模块(1) | cmustard的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Web安全，Python">
-<meta property="og:type" content="website">
-<meta property="og:title" content="cmustard的博客">
-<meta property="og:url" content="http://www.cmustarc.com/archives/2017/08/index.html">
+  <meta name="description" content="sys模块OS模块shutil模块hashlib模块random模块序列化">
+<meta name="keywords" content="python">
+<meta property="og:type" content="article">
+<meta property="og:title" content="python常用模块(1)">
+<meta property="og:url" content="http://www.cmustarc.com/2017/09/05/Python常用模块/index.html">
 <meta property="og:site_name" content="cmustard的博客">
-<meta property="og:description" content="Web安全，Python">
+<meta property="og:description" content="sys模块OS模块shutil模块hashlib模块random模块序列化">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://img.blog.csdn.net/20161003205317105">
+<meta property="og:image" content="http://img.blog.csdn.net/20161003204502034">
+<meta property="og:updated_time" content="2017-09-05T07:01:09.800Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="cmustard的博客">
-<meta name="twitter:description" content="Web安全，Python">
+<meta name="twitter:title" content="python常用模块(1)">
+<meta name="twitter:description" content="sys模块OS模块shutil模块hashlib模块random模块序列化">
+<meta name="twitter:image" content="http://img.blog.csdn.net/20161003205317105">
   
     <link rel="alternative" href="/atom.xml" title="cmustard的博客" type="application/atom+xml">
   
@@ -169,36 +174,123 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-Python常用模块" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2017" class="archive-year">2017</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/08/26/Python常用模块/" class="archive-article-date">
-  	<time datetime="2017-08-26T08:08:51.734Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-08-26</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/08/26/Python常用模块/">python常用模块(1)</a>
+    <h1 class="article-title" itemprop="name">
+      python常用模块(1)
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2017/09/05/Python常用模块/" class="archive-article-date">
+  	<time datetime="2017-09-05T07:01:09.800Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-09-05</time>
+</a>
+        
+      </header>
+    
+<!-- 目录内容 -->
+
+    <p class="show-toc-btn" id="show-toc-btn" onclick="showToc();" style="display:none">
+          <span class="btn-bg"></span>
+          <span class="btn-text">文章导航</span>
+          </p>
+	<div id="toc-article" class="toc-article">
+	    <span id="toc-close" class="toc-close" title="隐藏导航" onclick="showBtn();">×</span>
+		<strong class="toc-title">文章目录</strong>
+           <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#sys模块"><span class="toc-number">1.</span> <span class="toc-text">sys模块</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#os模块"><span class="toc-number">2.</span> <span class="toc-text">os模块</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#shutil模块"><span class="toc-number">3.</span> <span class="toc-text">shutil模块</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#hashlib模块"><span class="toc-number">4.</span> <span class="toc-text">hashlib模块</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#random模块"><span class="toc-number">5.</span> <span class="toc-text">random模块</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#序列化"><span class="toc-number">6.</span> <span class="toc-text">序列化</span></a></li></ol>
+         </div>
+   <script type="text/javascript">
+	function showToc(){
+		var toc_article = document.getElementById("toc-article");
+		var show_toc_btn = document.getElementById("show-toc-btn");
+		toc_article.setAttribute("style","display:block");
+		show_toc_btn.setAttribute("style","display:none");
+		};
+	function showBtn(){
+		var toc_article = document.getElementById("toc-article");
+		var show_toc_btn = document.getElementById("show-toc-btn");
+		toc_article.setAttribute("style","display:none");
+		show_toc_btn.setAttribute("style","display:block");
+		};
+   </script>
+      		
+<!-- 目录内容结束 -->
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><em>sys模块</em><br><em>OS模块</em><br><em>shutil模块</em><br><em>hashlib模块</em><br><em>random模块</em><br><em>序列化</em><br><a id="more"></a></p>
+<h1 id="sys模块"><a href="#sys模块" class="headerlink" title="sys模块"></a>sys模块</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">&gt;&gt;&gt; sys.platform   <span class="comment">#返回操作系统平台名称</span></div><div class="line"><span class="string">'win32'</span></div><div class="line">&gt;&gt;&gt; sys.stdin      <span class="comment">#输入相关</span></div><div class="line">&lt;open file <span class="string">'&lt;stdin&gt;'</span>, mode <span class="string">'r'</span> at 0x000000000337B030&gt;</div><div class="line">&gt;&gt;&gt; sys.stdout     <span class="comment">#输出相关</span></div><div class="line">&lt;open file <span class="string">'&lt;stdout&gt;'</span>, mode <span class="string">'w'</span> at 0x000000000337B0C0&gt;</div><div class="line">&gt;&gt;&gt; sys.maxint     <span class="comment">#最大的int值</span></div><div class="line">2147483647</div><div class="line">&gt;&gt;&gt;</div><div class="line">&gt;&gt;&gt; sys.version    <span class="comment">#获取python解释器的版本信息</span></div><div class="line"><span class="string">'2.7.11 (v2.7.11:6d1b6a68f775, Dec  5 2015, 20:40:30) [MSC v.1500 64 bit (AMD64)]'</span></div><div class="line">&gt;&gt;&gt;</div><div class="line"></div><div class="line">sys.argv  <span class="comment">#命令参数列表</span></div></pre></td></tr></table></figure>
+<p>进度条</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">import sys</div><div class="line">import time</div><div class="line"></div><div class="line"></div><div class="line">def view_bar(num, total):</div><div class="line">    rate = <span class="built_in">float</span>(num) / <span class="built_in">float</span>(total)</div><div class="line">    rate_num = int(rate * 100)</div><div class="line">    r = <span class="string">'\r%d%%'</span> % (rate_num, )</div><div class="line">    sys.stdout.write(r)   <span class="comment">#做进度条用的</span></div><div class="line">    sys.stdout.flush()    <span class="comment">#flush这个缓冲区，意味着它将缓冲区中一切写入数据都flush</span></div><div class="line"></div><div class="line"></div><div class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</div><div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(0, 100):</div><div class="line">        time.sleep(2)</div><div class="line">        view_bar(i, 100)</div><div class="line"></div><div class="line">进度百分比</div></pre></td></tr></table></figure>
+<h1 id="os模块"><a href="#os模块" class="headerlink" title="os模块"></a>os模块</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div></pre></td><td class="code"><pre><div class="line">&gt;&gt;&gt; os.getcwd()  <span class="comment">#获取当前python的工作目录</span></div><div class="line"><span class="string">'C:\\Users\\cmustard'</span></div><div class="line">&gt;&gt;&gt; <span class="built_in">print</span> os.getcwd()</div><div class="line">C:\Users\cmustard</div><div class="line">&gt;&gt;&gt;</div><div class="line"></div><div class="line">&gt;&gt;&gt; os.chdir(<span class="string">"d:"</span>)  <span class="comment">#改变当前的工作目录</span></div><div class="line">&gt;&gt;&gt; os.getcwd()</div><div class="line"><span class="string">'D:\\'</span></div><div class="line">&gt;&gt;&gt;</div><div class="line"></div><div class="line"></div><div class="line">&gt;&gt;&gt; os.curdir  <span class="comment">#返回当前目录</span></div><div class="line"><span class="string">'.'</span></div><div class="line">&gt;&gt;&gt;</div><div class="line"></div><div class="line">&gt;&gt;&gt; <span class="built_in">print</span> os.pardir  <span class="comment">#获取当前目录的父目录字符串</span></div><div class="line">..</div><div class="line">&gt;&gt;&gt;</div><div class="line"></div><div class="line">os.makedirs(<span class="string">"dir1/dir2"</span>)<span class="comment">#可生成多层递归目录</span></div><div class="line"></div><div class="line">os.removedirs(<span class="string">'dirname1'</span>) <span class="comment">#若目录为空则删除，并递归到上一级目录，如若也为空，则删除，以此类推</span></div><div class="line"></div><div class="line"></div><div class="line">os.mkdir(<span class="string">"dirname"</span>)  <span class="comment">#创建文件夹</span></div><div class="line"></div><div class="line">os.rmdir(<span class="string">"dirname"</span>)   <span class="comment">#删除单级空目录，若目录不为空就无法删除</span></div><div class="line"></div><div class="line">os.listdir(<span class="string">'dirname'</span>)  <span class="comment">#列出指定目录下的所有文件和子目录，包括隐藏文件，返回一个列表</span></div><div class="line">&gt;&gt;&gt;</div><div class="line">&gt;&gt;&gt; os.listdir(<span class="string">'.'</span>)</div><div class="line">[<span class="string">'All Users'</span>, <span class="string">'Default'</span>, <span class="string">'Default User'</span>, <span class="string">'Default.migrated'</span>,<span class="string">'DefaultAppPool'</span>, <span class="string">'desktop.ini'</span>, <span class="string">'Public'</span>]</div><div class="line">&gt;&gt;&gt;</div><div class="line"></div><div class="line"></div><div class="line">os.remove(<span class="string">"filename"</span>)  <span class="comment">#删除一个文件名</span></div><div class="line"></div><div class="line">os.rename(<span class="string">"oldname"</span>,<span class="string">"newname"</span>) <span class="comment">#重命名文件/目录</span></div><div class="line"></div><div class="line">os.stat(<span class="string">"dir/filename"</span>)  <span class="comment">#获取文件或者目录信息</span></div><div class="line">&gt;&gt;&gt; os.stat(<span class="string">'Default'</span>)  </div><div class="line">nt.stat_result(st_mode=16749, st_ino=0L, st_dev=0L, st_nlink=0, st_uid=0, st_gid</div><div class="line">=0, st_size=8192L, st_atime=1464553172L, st_mtime=1464553172L, st_ctime=14461865</div><div class="line">10L)</div><div class="line">&gt;&gt;&gt;</div><div class="line"></div><div class="line"></div><div class="line">os.sep  <span class="comment">#操作系统特定的路径分隔符</span></div><div class="line">&gt;&gt;&gt; os.sep</div><div class="line"><span class="string">'\\'</span></div><div class="line">&gt;&gt;&gt;</div><div class="line"></div><div class="line">os.linesep  <span class="comment">#当前平台使用的行终止符</span></div><div class="line">&gt;&gt;&gt; os.linesep  <span class="comment">#win下的</span></div><div class="line"><span class="string">'\r\n'</span></div><div class="line">&gt;&gt;&gt;</div><div class="line"></div><div class="line"></div><div class="line">os.pathsep  <span class="comment">#用于分割文件路径的字符串</span></div><div class="line">&gt;&gt;&gt; os.pathsep</div><div class="line"><span class="string">';'</span></div><div class="line">&gt;&gt;&gt;</div><div class="line"></div><div class="line">os.name  <span class="comment">#字符串指示当前使用平台</span></div><div class="line">&gt;&gt;&gt; os.name  <span class="comment">#win--&gt;nt   unix--&gt;posix</span></div><div class="line"><span class="string">'nt'</span></div><div class="line">&gt;&gt;&gt;</div><div class="line"></div><div class="line">os.system(<span class="string">'cmd'</span>)  <span class="comment">#运行shell命令，直接显示</span></div><div class="line">&gt;&gt;&gt; res-os.system(<span class="string">'net user'</span>)</div><div class="line"></div><div class="line">\\CMUSTARD 的用户帐户</div><div class="line"></div><div class="line">-----------------------------------------------------------</div><div class="line">&gt;&gt;&gt; <span class="built_in">print</span> res  <span class="comment">#0表示成功执行</span></div><div class="line">0</div><div class="line">&gt;&gt;&gt;</div><div class="line">os.popen(<span class="string">'cmd'</span>)</div><div class="line">&gt;&gt;&gt; os.popen(<span class="string">"dir"</span>)  <span class="comment">#将返回的命令执行结果存放为文件类型</span></div><div class="line">&lt;open file <span class="string">'dir'</span>, mode <span class="string">'r'</span> at 0x0000000002F19150&gt;</div><div class="line">&gt;&gt;&gt;f=os.popen(<span class="string">"dir"</span>)</div><div class="line">&gt;&gt;&gt; <span class="built_in">print</span> [i <span class="keyword">for</span> i <span class="keyword">in</span> f]</div><div class="line"></div><div class="line">os.walk(top, topdown=True, onerror=None, followlinks=False)</div><div class="line">这个方法返回的是一个三元tupple(dirpath, dirnames, filenames)</div><div class="line"></div><div class="line">	* 其中第一个为起始路径，</div><div class="line">	* 第二个为起始路径下的子文件夹,</div><div class="line">	* 第三个是起始路径下的文件.</div><div class="line">	* dirpath是一个string，代表目录的路径,</div><div class="line">	* dirnames是一个list，包含了dirpath下所有子目录的名字,</div><div class="line">	* filenames是一个list，包含了非目录文件的名字.这些名字不包含路径信息,如果需要得到全路径,需要使用 os.path.join(dirpath, name).</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line">os.environ  <span class="comment">#获取系统环境变量</span></div><div class="line"></div><div class="line"></div><div class="line">os.path.abspath(path)       返回path规范化的绝对路径</div><div class="line">&gt;&gt;&gt; os.path.abspath(os.getcwd())</div><div class="line"><span class="string">'C:\\Users'</span></div><div class="line">&gt;&gt;&gt;</div><div class="line"></div><div class="line">os.path.split(path)         将path分割成目录和文件名二元组返回</div><div class="line">&gt;&gt;&gt; os.path.split(<span class="string">"/tmp/dd/f.txt"</span>)</div><div class="line">(<span class="string">'/tmp/dd'</span>, <span class="string">'f.txt'</span>)</div><div class="line">&gt;&gt;&gt;</div><div class="line"></div><div class="line">os.path.dirname(path)       返回path的目录。其实就是os.path.split(path)的第一个元素</div><div class="line">&gt;&gt;&gt; os.path.dirname(os.getcwd())</div><div class="line"><span class="string">'C:\\'</span></div><div class="line">&gt;&gt;&gt;</div><div class="line"></div><div class="line">os.path.basename(path)      返回path最后的文件名。如何path以／或\结尾，那么就会返回空值。即os.path.split(path)的第二个元素</div><div class="line"></div><div class="line">os.path.exists(path)        如果path存在，返回True；如果path不存在，返回False</div><div class="line">&gt;&gt;&gt; os.path.exists(<span class="string">"e://"</span>)</div><div class="line">True</div><div class="line">&gt;&gt;&gt;</div><div class="line"></div><div class="line">os.path.isabs(path)         如果path是绝对路径，返回True</div><div class="line"></div><div class="line">os.path.isfile(path)        如果path是一个存在的文件，返回True。否则返回False</div><div class="line"></div><div class="line">os.path.isdir(path)         如果path是一个存在的目录，则返回True。否则返回False</div><div class="line"></div><div class="line">os.path.join(path1[, path2[, ...]])  将多个路径组合后返回，第一个绝对路径之前的参数将被忽略</div><div class="line"></div><div class="line">os.path.getatime(path)      返回path所指向的文件或者目录的最后存取时间</div><div class="line">&gt;&gt;&gt; res=os.path.getatime(<span class="string">'Public'</span>)</div><div class="line">&gt;&gt;&gt; res=os.path.getatime(<span class="string">'Public'</span>)</div><div class="line">&gt;&gt;&gt; import time</div><div class="line">&gt;&gt;&gt; time.ctime(res)</div><div class="line"><span class="string">'Mon May 30 04:02:15 2016'</span></div><div class="line">&gt;&gt;&gt;</div><div class="line"></div><div class="line">os.path.getmtime(path)      返回path所指向的文件或者目录的最后修改时间</div></pre></td></tr></table></figure>
+<h1 id="shutil模块"><a href="#shutil模块" class="headerlink" title="shutil模块"></a>shutil模块</h1><p><em>高级的 文件、文件夹、压缩包 处理模块</em><br><strong>shutil.copyfileobj(fsrc, fdst[, length])</strong><br>将一个文件对象的内容拷贝到另一个文件对象中去</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">import shutil</div><div class="line">shutil.copyfileobj(open(<span class="string">"a.txt"</span>,<span class="string">'r'</span>),open(<span class="string">'b.txt'</span>,<span class="string">'w'</span>))</div></pre></td></tr></table></figure>
+<p><strong>shutil.copyfile(src,dst)</strong><br>拷贝文件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">shutil.copyfile(<span class="string">"old.txt"</span>,<span class="string">'new.txt'</span>)</div></pre></td></tr></table></figure>
+<p><strong>shutil.copymode(src,dst)</strong><br>仅仅只是拷贝权限，文件的内容和组都不发生改变</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">shutil.copymode(<span class="string">"1.log"</span>,<span class="string">"2.log"</span>)</div></pre></td></tr></table></figure>
+<p><strong>shutil.copystat(src,dst)</strong><br>仅仅只是拷贝状态信息，包括：mode bits，atime，mtime，flags</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">shutil.copymode(<span class="string">"1.log"</span>,<span class="string">"2.log"</span>)</div></pre></td></tr></table></figure>
+<p><strong>shutil.copy2(str,dst)</strong><br>机拷贝文件，也拷贝文件的状态信息</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">shutil.copymode(<span class="string">"1.log"</span>,<span class="string">"2.log"</span>)</div></pre></td></tr></table></figure>
+<p><strong>shutil.ignore_patterns(*patterns)</strong><br><strong>shutil.copytree(src, dst, symlinks=False, ignore=None)</strong><br>递归的去拷贝文件夹</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">shutil.copytree(<span class="string">'folder1'</span>, <span class="string">'folder2'</span>,ignore=shutil.ignore_patterns(<span class="string">'*.pyc'</span>, <span class="string">'tmp*'</span>)) <span class="comment">#不拷贝pyc结尾和tem开头的文件</span></div></pre></td></tr></table></figure>
+<p><strong>shutil.rmtree(path[, ignore_errors[, onerror]])</strong><br>递归删除文件夹中的所有文件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">shutil.rmtree(<span class="string">'folder'</span>)</div></pre></td></tr></table></figure>
+<p><strong>shutil.move(src, dst)</strong><br>类似于linux的mv命令，就相当于文件夹重命名</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">shutil.move(<span class="string">'folder1'</span>,<span class="string">'folder3'</span>)</div></pre></td></tr></table></figure>
+<p><strong>make_archive(base_name, format, root_dir=None, base_dir=None, verbose=0,dry_run=0, owner=None, group=None, logger=None)</strong><br>创建压缩包并返回文路径<br>base_name： 压缩包的文件名，也可以是压缩包的路径。只是文件名时，则保存至·当前目录，否则保存至指定路径，<br>如：www                        =&gt;保存至当前路径<br>如：/Users/wupeiqi/www =&gt;保存至/Users/wupeiqi/<br>format：    压缩包种类，“zip”, “tar”, “bztar”，“gztar”<br>root_dir：    要压缩的文件夹路径（默认当前目录）<br>owner：    用户，默认当前用户<br>group：    组，默认当前组<br>logger：    用于记录日志，通常是logging.Logger对象</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#将 /root/develop 下的文件打包放置当前程序目录</span></div><div class="line"></div><div class="line">import shutil</div><div class="line">&gt;&gt;&gt;shutil.make_archive(<span class="string">'www'</span>,<span class="string">'tar'</span>,<span class="string">'/root/develop'</span>)</div><div class="line"><span class="string">'/root/develop/www.tar'</span></div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">#将 /root/develop 下的文件打包放置 /root/目录下</span></div><div class="line">import shutil</div><div class="line">&gt;&gt;&gt; shutil.make_archive(<span class="string">"/root/www"</span>, <span class="string">'tar'</span>, root_dir=<span class="string">'/root/develop'</span>)</div><div class="line"><span class="string">'/root/www.tar'</span></div></pre></td></tr></table></figure>
+<h1 id="hashlib模块"><a href="#hashlib模块" class="headerlink" title="hashlib模块"></a>hashlib模块</h1><p>用于加密相关的操作的模块，代替了md5模块和sha模块，主要提供 SHA1, SHA224, SHA256, SHA384, SHA512 ，MD5 算法</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div></pre></td><td class="code"><pre><div class="line">import hashlib</div><div class="line"><span class="comment">## MD5</span></div><div class="line"><span class="built_in">hash</span>=hashlib.md5()</div><div class="line">hash.update(<span class="string">'admin'</span>)</div><div class="line"><span class="comment">#help(hash.update)  #更新所提供的字符串对象的散列状态.</span></div><div class="line"><span class="built_in">print</span> hash.hexdigest()  <span class="comment">#21232f297a57a5a743894a0e4a801fc3</span></div><div class="line"><span class="built_in">print</span> hash.digest()   <span class="comment">#!#/)zW��C�JJ��，正因为输出乱码，所以要转换成16进制</span></div><div class="line"></div><div class="line"><span class="comment">#sha1</span></div><div class="line"><span class="built_in">hash</span>=hashlib.sha1()</div><div class="line">hash.update(<span class="string">'admin'</span>)</div><div class="line"><span class="built_in">print</span> hash.hexdigest()  <span class="comment">#d033e22ae348aeb5660fc2140aec35850c4da997</span></div><div class="line"></div><div class="line"><span class="comment">## sha256</span></div><div class="line"><span class="built_in">hash</span>=hashlib.sha256()</div><div class="line">hash.update(<span class="string">'admin'</span>)</div><div class="line"><span class="built_in">print</span> hash.hexdigest() <span class="comment">#8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918</span></div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">## sha384</span></div><div class="line"><span class="built_in">hash</span>=hashlib.sha384()</div><div class="line">hash.update(<span class="string">'admin'</span>)</div><div class="line"><span class="built_in">print</span> hash.hexdigest()<span class="comment">#9ca694a90285c034432c9550421b7b9dbd5c0f4b6673f05f6dbce58052ba20e4248041956ee8c9a2ec9f10290cdc0782</span></div><div class="line"></div><div class="line"></div><div class="line"><span class="comment"># sha512</span></div><div class="line"><span class="built_in">hash</span>=hashlib.sha512()</div><div class="line">hash.update(<span class="string">'admin'</span>)</div><div class="line"><span class="built_in">print</span> hash.hexdigest()<span class="comment">#c7ad44cbad762a5da0a452f9e854fdc1e0e7a52a38015f23f3eab1d80b931dd472634dfac71cd34ebc35d16ab7fb8a90c81f975113d6c7538dc69dd8de9077ec</span></div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">#为了防止撞库，对加密算法中添加自定义key再来做加密*</span></div><div class="line"><span class="comment"># MD5</span></div><div class="line"><span class="built_in">hash</span>=hashlib.md5(<span class="string">'key'</span>)</div><div class="line">hash.update(<span class="string">'admin'</span>)     <span class="comment">#===&gt;就是hash.update('keyadmin')</span></div><div class="line"><span class="built_in">print</span> hash.hexdigest()  <span class="comment">#f6c45a71296c1d65db3825a7dc781bc8</span></div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">#python内置库中还有一个hmac模块，它内部对我们创建的key和内容进行进一步的处理后在加密</span></div><div class="line">import hmac</div><div class="line">h=hmac.new(key=<span class="string">'key'</span>)</div><div class="line">h.update(<span class="string">"admin"</span>)</div><div class="line"><span class="built_in">print</span> h.hexdigest()  <span class="comment">#b9092bfe47f21e2930a864b457f7c26d</span></div></pre></td></tr></table></figure>
+<h1 id="random模块"><a href="#random模块" class="headerlink" title="random模块"></a>random模块</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">import random</div><div class="line"><span class="built_in">print</span> random.random()  <span class="comment">#生成一个随机浮点数：0.0---1.0 不包括1.0</span></div></pre></td></tr></table></figure>
+<p><strong>random.uniform(a,b)</strong>    用于生成一个指定范围内的随机浮点数，a,b为上下限，只要a!=b,就会生成介于两者之间的一个浮点数，若a=b，则生成的浮点数就是a<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">print</span> random.uniform(3,4)  <span class="comment">#3.51035646075</span></div><div class="line"><span class="built_in">print</span> random.uniform(3,3)  <span class="comment">#3.0</span></div><div class="line"><span class="built_in">print</span> random.uniform(4,3)  <span class="comment">#3.48687917972</span></div></pre></td></tr></table></figure></p>
+<p><strong>random.randint(a,b)</strong>  用于生成一个指定范围内的整数，a为下限，b为上限，生成的随机整数a&lt;=n&lt;=b;若a=b，则n=a；若a&gt;b，报错<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">print</span> random.randint(4,5) <span class="comment">#5</span></div></pre></td></tr></table></figure></p>
+<p><strong>random.randrange([start], stop [,step])</strong>    从指定范围内，按指定基数递增的集合中获取一个随机数，基数缺省值为1<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">print</span> random.randrange(10,20,3) <span class="comment">#从10,13,16,19 中19</span></div></pre></td></tr></table></figure></p>
+<p><strong>random.choice(sequence)</strong>    从序列中获取一个随机元素，参数sequence表示一个有序类型，并不是一种特定类型，泛指list，tuple，字符串等<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">seq=[<span class="string">'abc'</span>,<span class="string">'cc'</span>,<span class="string">'dd'</span>]</div><div class="line"><span class="built_in">print</span> random.choice(seq)  <span class="comment">#dd</span></div></pre></td></tr></table></figure></p>
+<p><strong>random.shuffle(x[,random])</strong>    用于将一个列表中的元素打乱<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">seq=[<span class="string">'hello'</span>,<span class="string">'world'</span>,<span class="string">'and'</span>,<span class="string">'python'</span>]</div><div class="line">random.shuffle(seq)</div><div class="line"><span class="built_in">print</span> seq  <span class="comment">#['and', 'python', 'world', 'hello']</span></div></pre></td></tr></table></figure></p>
+<p><strong>random.sample(sequence,k)</strong>    从指定序列中随机获取k个元素作为一个片段返回，sample函数不会修改原有序列<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">seq=[1,2,3,4,5,6,7,8,9,10]</div><div class="line"><span class="built_in">print</span> random.sample(seq,3) <span class="comment">#随机取出的最后一个片段返回[10, 4, 6]</span></div></pre></td></tr></table></figure></p>
+<h1 id="序列化"><a href="#序列化" class="headerlink" title="序列化"></a>序列化</h1><p>python用于序列化的两个模块一个是json模块，一个是pickle模块<br>json:用于字符串和字典之间进行转换<br>pickle：用于python特有类型和python基础类型进行转换，只适合python用</p>
+<p>Json模块提供了四个基本功能：dumps、dump、loads、load<br>pickle模块提供了四个基本功能：dumps、dump、loads、load</p>
+<p>1.py<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">import json</div><div class="line"><span class="string">"json模块主要用于跨程序交流，json是一种通用的数据结构"</span></div><div class="line"><span class="comment">#将python字典存入文件，给其他程序读取</span></div><div class="line">f=open(<span class="string">"a.txt"</span>,<span class="string">'w'</span>)</div><div class="line">src=&#123;<span class="string">"k1"</span>:<span class="string">"v1"</span>,<span class="string">"k2"</span>:<span class="string">"v2"</span>,<span class="string">"k3"</span>:<span class="string">"v3"</span>,<span class="string">"k4"</span>:<span class="string">"v4"</span>&#125;</div><div class="line">json.dump(src,f)</div><div class="line">f.close()</div></pre></td></tr></table></figure></p>
+<p>json存储在文件中格式<br><img src="http://img.blog.csdn.net/20161003205317105" alt="这里写图片描述"><br>2.py<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">#读取</div><div class="line">f=open(&quot;a.txt&quot;,&apos;r&apos;)</div><div class="line">d=json.loads(f.read())</div><div class="line">f.close()</div><div class="line">print d  #&#123;u&apos;k3&apos;: u&apos;v3&apos;, u&apos;k2&apos;: u&apos;v2&apos;, u&apos;k1&apos;: u&apos;v1&apos;, u&apos;k4&apos;: u&apos;v4&apos;&#125;</div><div class="line"></div><div class="line">print type(d)   #载入后既是一个字典类型的数据，这样就减少了很多麻烦&lt;type &apos;dict&apos;&gt;</div><div class="line"></div><div class="line">print d[&apos;k1&apos;]   #v1</div></pre></td></tr></table></figure></p>
+<p>3.py<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">import pickle</div><div class="line"><span class="string">"python独有的模块，为了方便用python程序之间的交流"</span></div><div class="line"></div><div class="line"><span class="comment">#向文件中存取python类型的数据，这里存储列表形式</span></div><div class="line">src=[1,2,3,4,5,6,7]</div><div class="line">with open(<span class="string">"a.txt"</span>,<span class="string">'w'</span>) as f:</div><div class="line">    content=pickle.dump(src,f)</div></pre></td></tr></table></figure></p>
+<p>文件中用pickle模块序列化的列表的存储格式<br><img src="http://img.blog.csdn.net/20161003204502034" alt="这里写图片描述"></p>
+<p>4.py<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#取出文件</span></div><div class="line">with open(<span class="string">"a.txt"</span>,<span class="string">'r'</span>)  as f:</div><div class="line">    con=f.read()</div><div class="line"></div><div class="line"><span class="built_in">print</span> pickle.loads(con)   <span class="comment">#[1, 2, 3, 4, 5, 6, 7]</span></div><div class="line"><span class="built_in">print</span> <span class="built_in">type</span>(pickle.loads(con))&lt;<span class="built_in">type</span> <span class="string">'list'</span>&gt;</div></pre></td></tr></table></figure></p>
+<p>在python中原来是什么类型的数据存储在文件中，现在取出来就是什么类型的数据</p>
+<p>load与loads的区别就是<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">load（）</div><div class="line">with open(<span class="string">"a.txt"</span>,<span class="string">'r'</span>)  as f:</div><div class="line">    <span class="built_in">print</span> *.load(f)  <span class="comment">#&#123;u'k3': u'v3', u'k2': u'v2', u'k1': u'v1', u'k4': u'v4'&#125;</span></div><div class="line">    </div><div class="line">loads（）</div><div class="line">with open(<span class="string">"a.txt"</span>,<span class="string">'r'</span>)  as f:</div><div class="line">    con=f.read()</div><div class="line"></div><div class="line"><span class="built_in">print</span> *.loads(con)   <span class="comment">#&#123;u'k3': u'v3', u'k2': u'v2', u'k1': u'v1', u'k4': u'v4'&#125;</span></div></pre></td></tr></table></figure></p>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -210,7 +302,7 @@
 		</ul>
 	</div>
 
-          
+      
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
@@ -223,305 +315,147 @@
 	</div>
 
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://www.cmustarc.com/2017/09/05/Python常用模块/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/08/20/论事件驱动与异步IO/" class="archive-article-date">
-  	<time datetime="2017-08-20T13:20:35.441Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-08-20</time>
-</a>
+<nav id="article-nav">
+  
+    <a href="/2017/09/05/Python常用模块2/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          python常用模块(2)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/09/05/python TCP代理/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">python TCP代理</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/08/20/论事件驱动与异步IO/">论事件驱动与异步IO[转]</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">事件驱动</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">异步IO</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/notes//" class="article-tag-list-link color1">notes</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#sys模块"><span class="toc-number">1.</span> <span class="toc-text">sys模块</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#os模块"><span class="toc-number">2.</span> <span class="toc-text">os模块</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#shutil模块"><span class="toc-number">3.</span> <span class="toc-text">shutil模块</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#hashlib模块"><span class="toc-number">4.</span> <span class="toc-text">hashlib模块</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#random模块"><span class="toc-number">5.</span> <span class="toc-text">random模块</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#序列化"><span class="toc-number">6.</span> <span class="toc-text">序列化</span></a></li></ol>
+                    </div>
+                </span>
+            </div>
         </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
+        
+    </div>
+</aside>
+
+
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/08/20/python TCP代理/" class="archive-article-date">
-  	<time datetime="2017-08-20T13:16:26.821Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-08-20</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/08/20/python TCP代理/">python TCP代理</a>
-    </h1>
-  
+  <div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="Python常用模块" data-title="python常用模块(1)" data-url="http://www.cmustarc.com/2017/09/05/Python常用模块/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"true"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">tcp</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">代理</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/python//" class="article-tag-list-link color2">python</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/08/20/go语言初识/" class="archive-article-date">
-  	<time datetime="2017-08-20T06:02:20.243Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-08-20</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/08/20/go语言初识/">初识go语言</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">golang</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">编程语言</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/notes//" class="article-tag-list-link color1">notes</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/08/16/Strut2 常见POC/" class="archive-article-date">
-  	<time datetime="2017-08-16T06:37:02.120Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-08-16</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/08/16/Strut2 常见POC/">Struts2 常见POC收集和整理</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">poc</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">struct</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Web安全//" class="article-tag-list-link color1">Web安全</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/08/15/hello-world/" class="archive-article-date">
-  	<time datetime="2017-08-15T12:18:32.682Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-08-15</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/08/15/hello-world/">Hello World</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/08/15/hexo+github+nginx VPS搭建博客/" class="archive-article-date">
-  	<time datetime="2017-08-15T12:14:23.956Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-08-15</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/08/15/hexo+github+nginx VPS搭建博客/">hexo+github+nginx vps搭建博客</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">博客</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/notes//" class="article-tag-list-link color1">notes</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
   
   
-    </div></section>
   
 
-    
+  
+
+  
+
+  
+
 
 
           </div>
@@ -544,12 +478,12 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: true,
-		toc_hide_index: true,
+		toc_hide_index: false,
 		root: "/",
 		innerArchive: true,
 		showTags: false
@@ -634,10 +568,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">并发</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">博客</a>
               </li>
              
@@ -647,6 +577,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">代理</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">并发</a>
               </li>
              
               <li class="article-tag-list-item">

@@ -6,22 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://www.cmustarc.com">
-  <title>python TCP代理 | cmustard的博客</title>
+  <title>Hello World | cmustard的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="流程">
-<meta name="keywords" content="tcp,代理">
+  <meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.">
 <meta property="og:type" content="article">
-<meta property="og:title" content="python TCP代理">
-<meta property="og:url" content="http://www.cmustarc.com/2017/08/20/python TCP代理/index.html">
+<meta property="og:title" content="Hello World">
+<meta property="og:url" content="http://www.cmustarc.com/2017/09/05/hello-world/index.html">
 <meta property="og:site_name" content="cmustard的博客">
-<meta property="og:description" content="流程">
+<meta property="og:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://ouz06keqs.bkt.clouddn.com/tcp_proxy2.png">
-<meta property="og:updated_time" content="2017-08-20T13:16:26.821Z">
+<meta property="og:updated_time" content="2017-09-05T06:43:14.028Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="python TCP代理">
-<meta name="twitter:description" content="流程">
-<meta name="twitter:image" content="http://ouz06keqs.bkt.clouddn.com/tcp_proxy2.png">
+<meta name="twitter:title" content="Hello World">
+<meta name="twitter:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.">
   
     <link rel="alternative" href="/atom.xml" title="cmustard的博客" type="application/atom+xml">
   
@@ -173,30 +170,38 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-python TCP代理" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-hello-world" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      python TCP代理
+      Hello World
     </h1>
   
 
         
-        <a href="/2017/08/20/python TCP代理/" class="archive-article-date">
-  	<time datetime="2017-08-20T13:16:26.821Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-08-20</time>
+        <a href="/2017/09/05/hello-world/" class="archive-article-date">
+  	<time datetime="2017-09-05T06:43:14.028Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-09-05</time>
 </a>
         
       </header>
     
+<!-- 目录内容 -->
+		
+<!-- 目录内容结束 -->
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="流程"><a href="#流程" class="headerlink" title="流程"></a>流程</h1><a id="more"></a>
-<p><img src="http://ouz06keqs.bkt.clouddn.com/tcp_proxy2.png" alt="流程图"></p>
-<h1 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div><div class="line">150</div><div class="line">151</div><div class="line">152</div><div class="line">153</div><div class="line">154</div><div class="line">155</div><div class="line">156</div><div class="line">157</div><div class="line">158</div><div class="line">159</div><div class="line">160</div><div class="line">161</div><div class="line">162</div><div class="line">163</div><div class="line">164</div><div class="line">165</div><div class="line">166</div><div class="line">167</div><div class="line">168</div><div class="line">169</div><div class="line">170</div><div class="line">171</div><div class="line">172</div><div class="line">173</div><div class="line">174</div><div class="line">175</div><div class="line">176</div><div class="line">177</div><div class="line">178</div><div class="line">179</div><div class="line">180</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#coding:utf-8</span></div><div class="line"></div><div class="line">import optparse</div><div class="line">import socket</div><div class="line">import threading</div><div class="line"></div><div class="line">def server_loop(local_host,local_port,remote_host,remote_port,receive_first):</div><div class="line"></div><div class="line">    server = socket.socket(socket.AF_INET,socket.SOCK_STREAM)</div><div class="line"></div><div class="line">    try:</div><div class="line">        server.bind((local_host,local_port))</div><div class="line">    except Exception as e:</div><div class="line">        <span class="built_in">print</span> e</div><div class="line">        <span class="built_in">print</span> <span class="string">"[!!] Failed to listen on %s:%d"</span> %(local_host,local_port)</div><div class="line">        <span class="built_in">print</span> <span class="string">"[!!] Check for other listening socket or correct permissions"</span></div><div class="line">        <span class="built_in">exit</span>(0)</div><div class="line"></div><div class="line">    <span class="built_in">print</span> <span class="string">"[*] Listening on %s:%d"</span> %(local_host,local_port)</div><div class="line"></div><div class="line">    server.listen(5)</div><div class="line">    <span class="keyword">while</span> True:</div><div class="line">        client_socket,addr=server.accept()</div><div class="line"></div><div class="line">        <span class="comment">#打印出本地连接信息</span></div><div class="line">        <span class="comment">#the addr  info is a pair (hostaddr, port).</span></div><div class="line">        <span class="built_in">print</span> <span class="string">"[==&gt;] Received incoming connection from %s:%d"</span> %(addr[0],addr[1])</div><div class="line"></div><div class="line">        <span class="comment">#开启一个线程与远程主机通信</span></div><div class="line">        th = threading.Thread(target=proxy_handler,args=(client_socket,remote_host,remote_port,receive_first))</div><div class="line"></div><div class="line">        th.start()</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line">def main():</div><div class="line">    usage=<span class="string">'./tcp_proxy.py -l [localhost] -lp [localport] -r [remotehost] -rp [remoteport] -f [receive_first]'</span></div><div class="line">    parser = optparse.OptionParser(usage)</div><div class="line">    parser.add_option(<span class="string">"-l"</span>,<span class="string">"--localhost"</span>,action=<span class="string">"store"</span>,<span class="built_in">type</span>=<span class="string">"string"</span>,dest=<span class="string">"local_host"</span>,<span class="built_in">help</span>=<span class="string">"local host"</span>)</div><div class="line">    parser.add_option(<span class="string">"-p"</span>,<span class="string">"--localport"</span>,action=<span class="string">"store"</span>,<span class="built_in">type</span>=<span class="string">"int"</span>,dest=<span class="string">"local_port"</span>,<span class="built_in">help</span>=<span class="string">"local port"</span>)</div><div class="line">    parser.add_option(<span class="string">"-r"</span>,<span class="string">"--remotehost"</span>,action=<span class="string">"store"</span>,<span class="built_in">type</span>=<span class="string">"string"</span>,dest=<span class="string">"remote_host"</span>,<span class="built_in">help</span>=<span class="string">"remote host"</span>)</div><div class="line">    parser.add_option(<span class="string">"-o"</span>,<span class="string">"--remoteport"</span>,action=<span class="string">"store"</span>,<span class="built_in">type</span>=<span class="string">"int"</span>,dest=<span class="string">"remote_port"</span>,<span class="built_in">help</span>=<span class="string">"remote port"</span>)</div><div class="line">    parser.add_option(<span class="string">"-f"</span>,<span class="string">"--receive_first"</span>,action=<span class="string">"store"</span>,<span class="built_in">type</span>=<span class="string">"string"</span>,dest=<span class="string">"receive_first"</span>,<span class="built_in">help</span>=<span class="string">"receive first:True or False"</span>)</div><div class="line">    (options,args)=parser.parse_args()</div><div class="line">    <span class="comment">#设置本地监听参数</span></div><div class="line">    local_host=options.local_host</div><div class="line">    local_port=options.local_port</div><div class="line">    <span class="comment">#设置远程目标</span></div><div class="line">    remote_host=options.remote_host</div><div class="line">    remote_port=options.remote_port</div><div class="line"></div><div class="line"></div><div class="line">    <span class="keyword">if</span> (local_host==None) | (local_port==None) | (remote_host==None) | (remote_port==None):</div><div class="line">        <span class="built_in">print</span> usage</div><div class="line">        <span class="built_in">exit</span>(0)</div><div class="line"></div><div class="line">    <span class="comment">#告诉代理在发送给远程主机之前连接和接受数据</span></div><div class="line">    receive_first=options.receive_first</div><div class="line"></div><div class="line">    <span class="keyword">if</span> <span class="string">"True"</span> <span class="keyword">in</span> receive_first:</div><div class="line">        receive_first=True</div><div class="line">    <span class="keyword">else</span>:</div><div class="line">        receive_first=False</div><div class="line"></div><div class="line">    <span class="comment">#现在设置好我们的监听socket</span></div><div class="line">    server_loop(local_host,local_port,remote_host,remote_port,receive_first)</div><div class="line"></div><div class="line">def proxy_handler(client_socket,remote_host,remote_port,receive_first):</div><div class="line"></div><div class="line">    <span class="comment">#链接远程主机</span></div><div class="line">    remote_socket=socket.socket(socket.AF_INET,socket.SOCK_STREAM)</div><div class="line">    remote_socket.connect((remote_host,remote_port))</div><div class="line"></div><div class="line">    <span class="comment">#如果必要从远程主机接受数据</span></div><div class="line"></div><div class="line">    <span class="keyword">if</span> receive_first:</div><div class="line"></div><div class="line">        remote_buffer=receive_from(remote_socket)</div><div class="line">        hexdump(remote_buffer)</div><div class="line"></div><div class="line">        <span class="comment">#发送给我们的响应处理</span></div><div class="line">        remote_buffer = response_handler(remote_buffer)</div><div class="line"></div><div class="line">        <span class="comment">#如果我们有数据传递给本地客户端，发送它</span></div><div class="line">        <span class="keyword">if</span> len(remote_buffer):</div><div class="line">            <span class="built_in">print</span> <span class="string">"[&lt;==] Sending %d bytes to localhost "</span>%(len(remote_buffer))</div><div class="line"></div><div class="line">            client_socket.send(remote_buffer)</div><div class="line"></div><div class="line">    <span class="comment">#现在我们从本地循环读取数据，发送给远程主机和本地主机</span></div><div class="line">    <span class="keyword">while</span> True:</div><div class="line"></div><div class="line">        <span class="comment">#从本地读取数据</span></div><div class="line">        local_buffer=receive_from(client_socket)</div><div class="line"></div><div class="line">        <span class="keyword">if</span> len(local_buffer):</div><div class="line"></div><div class="line">            <span class="built_in">print</span> <span class="string">"[==&gt;] Received %d bytes from localhost"</span> %(len(local_buffer))</div><div class="line">            hexdump(local_buffer)</div><div class="line">            <span class="comment">#发送给我们的本地请求</span></div><div class="line">            local_buffer=request_handler(local_buffer)</div><div class="line"></div><div class="line">            <span class="comment">#向远程主机发送数据</span></div><div class="line">            remote_socket.send(local_buffer)</div><div class="line">            <span class="built_in">print</span> <span class="string">"[==&gt;] Sent to remote"</span></div><div class="line"></div><div class="line">        <span class="comment">#接受相应的数据</span></div><div class="line">        remote_buffer = receive_from(remote_socket)</div><div class="line"></div><div class="line">        <span class="keyword">if</span> len(remote_buffer):</div><div class="line"></div><div class="line">            <span class="built_in">print</span> <span class="string">"[&lt;==] Received %d bytes from remote"</span> %(len(remote_buffer))</div><div class="line">            hexdump(remote_buffer)</div><div class="line"></div><div class="line">            <span class="comment">#发送到响应处理函数</span></div><div class="line">            remote_buffer=response_handler(remote_buffer)</div><div class="line"></div><div class="line">            <span class="comment">#将响应发送给本地socket</span></div><div class="line">            client_socket.send(remote_buffer)</div><div class="line"></div><div class="line">            <span class="built_in">print</span> <span class="string">"[&lt;==] Sent to localhost"</span></div><div class="line"></div><div class="line">        <span class="comment">#如果两边都没有数据，关闭连接</span></div><div class="line">        <span class="keyword">if</span> not len(local_buffer) or not len(remote_buffer):</div><div class="line">            client_socket.close()</div><div class="line">            remote_socket.close()</div><div class="line">            <span class="built_in">print</span> <span class="string">"[*] No more data. Closing connection"</span></div><div class="line"></div><div class="line">            <span class="built_in">break</span></div><div class="line"></div><div class="line"></div><div class="line">def hexdump(src,length=16):</div><div class="line">    result=[]</div><div class="line">    digits=4 <span class="keyword">if</span> isinstance(src,unicode) <span class="keyword">else</span> 2</div><div class="line"></div><div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> xrange(1,len(src),length):</div><div class="line">        s = src[i:i+length]</div><div class="line">        hexa=b<span class="string">' '</span>.join([<span class="string">"%0*X"</span> % (digits,ord(x)) <span class="keyword">for</span> x <span class="keyword">in</span> s])</div><div class="line">        text = b<span class="string">''</span>.join([x <span class="keyword">if</span> 0x20 &lt;= ord(x) &lt; 0x7F <span class="keyword">else</span> b<span class="string">'.'</span> <span class="keyword">for</span> x <span class="keyword">in</span> s])</div><div class="line">        result.append(b<span class="string">"%04X  %-*s  %s "</span> %(i,length*(digits+1),hexa,text))</div><div class="line"></div><div class="line">        <span class="built_in">print</span> b<span class="string">'\n'</span>.join(result)</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">#对目标是远程主机的请求进行修改</span></div><div class="line">def request_handler(buffer):</div><div class="line">    <span class="comment">#执行包修改</span></div><div class="line">    <span class="built_in">return</span> buffer</div><div class="line"></div><div class="line"><span class="comment">#对目标是本地主机的响应进行修改</span></div><div class="line">def response_handler(buffer):</div><div class="line">    <span class="comment">#执行包修改</span></div><div class="line">    <span class="built_in">return</span> buffer</div><div class="line"></div><div class="line"></div><div class="line">def receive_from(connection):</div><div class="line">    <span class="string">"连接成功后，接收数据"</span></div><div class="line">    buffer=<span class="string">""</span></div><div class="line"></div><div class="line">    <span class="comment">#我们设置了2秒的超时，这取决于目标的情况，可能需要调整</span></div><div class="line">    connection.settimeout(20)</div><div class="line"></div><div class="line">    try:</div><div class="line"></div><div class="line">        <span class="comment">#持续从缓存中读取数据直到没有数据或者超时</span></div><div class="line">        <span class="keyword">while</span> True:</div><div class="line">            data=connection.recv(4096)</div><div class="line">            <span class="keyword">if</span> not data:</div><div class="line">                <span class="built_in">break</span></div><div class="line"></div><div class="line">            buffer+=data</div><div class="line">    except Exception as e:</div><div class="line">        <span class="built_in">print</span> e</div><div class="line"></div><div class="line">    <span class="built_in">return</span> buffer</div><div class="line"></div><div class="line"></div><div class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</div><div class="line">    main()</div></pre></td></tr></table></figure>
-<h1 id="进阶"><a href="#进阶" class="headerlink" title="进阶"></a>进阶</h1><p>待续</p>
+        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.<br><a id="more"></a></p>
+<h2 id="1-Quick-Start"><a href="#1-Quick-Start" class="headerlink" title="1.Quick Start"></a>1.Quick Start</h2><h3 id="1-1Create-a-new-post"><a href="#1-1Create-a-new-post" class="headerlink" title="1.1Create a new post"></a>1.1Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
+<h3 id="1-2-Run-server"><a href="#1-2-Run-server" class="headerlink" title="1.2 Run server"></a>1.2 Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
+<h3 id="1-3Generate-static-files"><a href="#1-3Generate-static-files" class="headerlink" title="1.3Generate static files"></a>1.3Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
+<h3 id="1-4Deploy-to-remote-sites"><a href="#1-4Deploy-to-remote-sites" class="headerlink" title="1.4Deploy to remote sites"></a>1.4Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
 
       
 
@@ -226,33 +231,7 @@
     <div class="article-info article-info-index">
       
       
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">tcp</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">代理</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
       
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/python//" class="article-tag-list-link color2">python</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
 
       
 
@@ -302,7 +281,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="http://s.jiathis.com/qrcode.php?url=http://www.cmustarc.com/2017/08/20/python TCP代理/" alt="微信分享二维码">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://www.cmustarc.com/2017/09/05/hello-world/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -316,18 +295,18 @@
   
 <nav id="article-nav">
   
-    <a href="/2017/08/20/论事件驱动与异步IO/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2017/09/05/go语言初识/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          论事件驱动与异步IO[转]
+          初识go语言
         
       </div>
     </a>
   
   
-    <a href="/2017/08/20/go语言初识/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">初识go语言</div>
+    <a href="/2017/09/05/goroutine与调度器/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">goroutine与调度器[转]</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -355,7 +334,7 @@
   
   <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="python TCP代理" data-title="python TCP代理" data-url="http://www.cmustarc.com/2017/08/20/python TCP代理/"></div>
+	<div class="ds-thread" data-thread-key="hello-world" data-title="Hello World" data-url="http://www.cmustarc.com/2017/09/05/hello-world/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">
@@ -383,6 +362,7 @@
   
 
 
+
           </div>
         </div>
       </div>
@@ -408,7 +388,7 @@
 		isTag: false,
 		isCategory: false,
 		open_in_new: true,
-		toc_hide_index: true,
+		toc_hide_index: false,
 		root: "/",
 		innerArchive: true,
 		showTags: false
@@ -493,10 +473,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">并发</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">博客</a>
               </li>
              
@@ -506,6 +482,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">代理</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">并发</a>
               </li>
              
               <li class="article-tag-list-item">
