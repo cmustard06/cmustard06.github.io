@@ -6,18 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://www.cmustarc.com">
-  <title>Category: notes | glamor的博客</title>
+  <title>正则表达式 | glamor的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Web安全，Python">
-<meta property="og:type" content="website">
-<meta property="og:title" content="glamor的博客">
-<meta property="og:url" content="http://www.cmustarc.com/categories/notes/index.html">
+  <meta name="description" content="常见正则表达式符号和特殊字符literal 匹配文本字符串的字面值literalrel|re2 匹配正则表达式re1或者re2. 匹配任意字符，除\n外^匹配字符串起始部分$匹配字符串终止部分*匹配0次或者多次前面出现的正则表达式+匹配1次或者多次前面出现的正则表达式?匹配0次或者1次前面出现的正则表达式{M} 匹配M次前面出现的正则表达式{N,M}匹配N-M次前面出现的正则表达式">
+<meta name="keywords" content="python,正则表达式">
+<meta property="og:type" content="article">
+<meta property="og:title" content="正则表达式">
+<meta property="og:url" content="http://www.cmustarc.com/2017/09/28/正则表达式/index.html">
 <meta property="og:site_name" content="glamor的博客">
-<meta property="og:description" content="Web安全，Python">
+<meta property="og:description" content="常见正则表达式符号和特殊字符literal 匹配文本字符串的字面值literalrel|re2 匹配正则表达式re1或者re2. 匹配任意字符，除\n外^匹配字符串起始部分$匹配字符串终止部分*匹配0次或者多次前面出现的正则表达式+匹配1次或者多次前面出现的正则表达式?匹配0次或者1次前面出现的正则表达式{M} 匹配M次前面出现的正则表达式{N,M}匹配N-M次前面出现的正则表达式">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2017-09-28T08:16:04.032Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="glamor的博客">
-<meta name="twitter:description" content="Web安全，Python">
+<meta name="twitter:title" content="正则表达式">
+<meta name="twitter:description" content="常见正则表达式符号和特殊字符literal 匹配文本字符串的字面值literalrel|re2 匹配正则表达式re1或者re2. 匹配任意字符，除\n外^匹配字符串起始部分$匹配字符串终止部分*匹配0次或者多次前面出现的正则表达式+匹配1次或者多次前面出现的正则表达式?匹配0次或者1次前面出现的正则表达式{M} 匹配M次前面出现的正则表达式{N,M}匹配N-M次前面出现的正则表达式">
   
     <link rel="alternative" href="/atom.xml" title="glamor的博客" type="application/atom+xml">
   
@@ -179,336 +181,262 @@ var _hmt = _hmt || [];
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-正则表达式" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      正则表达式
+    </h1>
+  
+
+        
+        <a href="/2017/09/28/正则表达式/" class="archive-article-date">
+  	<time datetime="2017-09-28T08:16:04.032Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-09-28</time>
+</a>
+        
+      </header>
     
+<!-- 目录内容 -->
+
+    <p class="show-toc-btn" id="show-toc-btn" onclick="showToc();" style="display:none">
+          <span class="btn-bg"></span>
+          <span class="btn-text">文章导航</span>
+          </p>
+	<div id="toc-article" class="toc-article">
+	    <span id="toc-close" class="toc-close" title="隐藏导航" onclick="showBtn();">×</span>
+		<strong class="toc-title">文章目录</strong>
+           <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#常见正则表达式符号和特殊字符"><span class="toc-number">1.</span> <span class="toc-text">常见正则表达式符号和特殊字符</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#重复、特殊字符以及分组"><span class="toc-number">2.</span> <span class="toc-text">重复、特殊字符以及分组</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#电子邮件的匹配"><span class="toc-number">2.1.</span> <span class="toc-text">电子邮件的匹配</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#匹配字符串的起始和结尾以及单词边界"><span class="toc-number">3.</span> <span class="toc-text">匹配字符串的起始和结尾以及单词边界</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#findall-和-finditer"><span class="toc-number">4.</span> <span class="toc-text">findall()和 finditer()</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#sub-和subn-搜索与替换"><span class="toc-number">5.</span> <span class="toc-text">sub()和subn()搜索与替换</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#使用split-分隔字符串"><span class="toc-number">6.</span> <span class="toc-text">使用split()分隔字符串</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#数据生成器"><span class="toc-number">7.</span> <span class="toc-text">数据生成器</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#匹配字符串"><span class="toc-number">8.</span> <span class="toc-text">匹配字符串</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#贪婪模式"><span class="toc-number">9.</span> <span class="toc-text">贪婪模式</span></a></li></ol>
+         </div>
+   <script type="text/javascript">
+	function showToc(){
+		var toc_article = document.getElementById("toc-article");
+		var show_toc_btn = document.getElementById("show-toc-btn");
+		toc_article.setAttribute("style","display:block");
+		show_toc_btn.setAttribute("style","display:none");
+		};
+	function showBtn(){
+		var toc_article = document.getElementById("toc-article");
+		var show_toc_btn = document.getElementById("show-toc-btn");
+		toc_article.setAttribute("style","display:none");
+		show_toc_btn.setAttribute("style","display:block");
+		};
+   </script>
+      		
+<!-- 目录内容结束 -->
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="常见正则表达式符号和特殊字符"><a href="#常见正则表达式符号和特殊字符" class="headerlink" title="常见正则表达式符号和特殊字符"></a>常见正则表达式符号和特殊字符</h1><p><code>literal</code> 匹配文本字符串的字面值literal<br><code>rel|re2</code> 匹配正则表达式re1或者re2<br><code>.</code> 匹配任意字符，除\n外<br><code>^</code>匹配字符串起始部分<br><code>$</code>匹配字符串终止部分<br><code>*</code>匹配0次或者多次前面出现的正则表达式<br><code>+</code>匹配1次或者多次前面出现的正则表达式<br><code>?</code>匹配0次或者1次前面出现的正则表达式<br><code>{M}</code> 匹配M次前面出现的正则表达式<br><code>{N,M}</code>匹配N-M次前面出现的正则表达式<br><a id="more"></a><br><code>[...]</code>匹配来自字符集的任意单一字符<br><code>[..x-y...]</code>匹配x～y范围中任意单一字符<br><code>[^...]</code>不匹配此字符集中出现的任何一个字符，包括某一范围的字符<br><code>(*|+|?|{})?</code>用于匹配上面频繁出现/重复出现符号的非贪婪版本(*,+,?,{})<br><code>(...)</code>匹配封闭的正则表达式，然后另存为子组<br><code>\d</code>匹配任何十进制数字 \D与\d相反<br><code>\w</code>匹配任何字母数字字符，\W与之相反<br><code>\s</code>匹配任何空格字符，与<code>[\n|\t|\r|\v|\f]</code>相同，<code>\S</code>与之相反<br><code>\b</code> 匹配任何单词边界，<code>\B</code>与之相反<br><code>\N</code>匹配已保存的子组N <code>price:\16</code><br><code>\c</code>逐字匹配任何特殊字符c<br><code>\A(\Z)</code> 匹配字符串的起始<br><code>(?iLmsux)</code> 在正则表达式中嵌入一个或者多个特殊标记参数<br><code>(?......)</code> 表示一个匹配不用保存的分组<br><code>(?P&lt;name&gt;...)</code> 像一个仅由name标示而不是数字ID标示的正则分组匹配<br><code>(?P=name)</code> 在同一个字符串中匹配由<code>(?P&lt;name&gt;)</code>分组的之前文本<br><code>(?#...)</code>表示注释，所有内容都被忽略<br><code>(?=...)</code> 匹配条件是如果…出现在之后的位置，而不使用输入字符串，称作正向前视断言<br><code>(?!...)</code>匹配条件是如果…不出现之后的位置，而不使用输入字符串，称作负向前视断言<br><code>(?&lt;=...)</code>匹配条件是如果…出现在之前的位置,而不使用输入字符串;称作正向后视断言<br><code>(?&lt;!...)</code>匹配条件是如果…不出现在之前的位置,而不使用输入字符串;称作负向后视断言</p>
+<h1 id="重复、特殊字符以及分组"><a href="#重复、特殊字符以及分组" class="headerlink" title="重复、特殊字符以及分组"></a>重复、特殊字符以及分组</h1><h2 id="电子邮件的匹配"><a href="#电子邮件的匹配" class="headerlink" title="电子邮件的匹配"></a>电子邮件的匹配</h2><p>为了表示主机名是可选的，因此我们需要创建一个模式来匹配主机名，使用‘？’表示该模式出现零次或者一次<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&gt;&gt;&gt; patt =r<span class="string">"\w+@(\w+\.)?\w+\.com"</span></div><div class="line">&gt;&gt;&gt; re.match(patt,<span class="string">"nobpdy@xxx.com"</span>).group()</div><div class="line"><span class="string">'nobpdy@xxx.com'</span></div><div class="line">&gt;&gt;&gt; re.match(patt,<span class="string">"nobpdy@www.xxx.com"</span>).group()</div><div class="line"><span class="string">'nobpdy@www.xxx.com'</span></div></pre></td></tr></table></figure></p>
+<p>进一步扩展，允许多个中间子域名的存在，这里只需要将上面pattern中的<code>？</code>改成<code>*</code>就完成了<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&gt;&gt;&gt; patt = <span class="string">'\w+@(\w+\.)*\w+\.com'</span></div><div class="line">&gt;&gt;&gt; re.match(patt, <span class="string">'nobody@www.xxx.yyy.zzz.com'</span>).group()</div><div class="line"><span class="string">'nobody@www.xxx.yyy.zzz.com'</span></div></pre></td></tr></table></figure></p>
+<p>上面的正则表达式不能针对形如xxx-aaa这样邮件,下面先使用子组来对目标字符进行匹配，先匹配xxx-123这样的形式的支付<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">&gt;&gt;&gt; m = re.match(<span class="string">'(\w\w\w)-(\d\d\d)'</span>,<span class="string">'abc-123'</span>)  <span class="comment"># 两个子组</span></div><div class="line">&gt;&gt;&gt; m.group()</div><div class="line"><span class="string">'abc-123'</span></div><div class="line">&gt;&gt;&gt; m.group(0)</div><div class="line"><span class="string">'abc-123'</span></div><div class="line">&gt;&gt;&gt; m.group(1)</div><div class="line"><span class="string">'abc'</span></div><div class="line">&gt;&gt;&gt; m.group(2)</div><div class="line"><span class="string">'123'</span></div><div class="line">&gt;&gt;&gt; m.groups()</div><div class="line">(<span class="string">'abc'</span>, <span class="string">'123'</span>)</div></pre></td></tr></table></figure></p>
+<p><code>group()</code>通常用于以普通方式显示所有的匹配部分,但也能用于获取各个匹配的子组。可以使用 <code>groups()</code>方法来获取一个包含所有匹配子字符串的元组。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div></pre></td><td class="code"><pre><div class="line">&gt;&gt;&gt; m = re.match(<span class="string">'ab'</span>,<span class="string">'ab'</span>)</div><div class="line">&gt;&gt;&gt; m.group()  <span class="comment"># 完整子组</span></div><div class="line"><span class="string">'ab'</span></div><div class="line">&gt;&gt;&gt; m.groups()</div><div class="line">()</div><div class="line">&gt;&gt;&gt; </div><div class="line">&gt;&gt;&gt; m = re.match(<span class="string">"(ab)"</span>,<span class="string">'ab'</span>)  <span class="comment"># 一个子组</span></div><div class="line">&gt;&gt;&gt; m.group()</div><div class="line"><span class="string">'ab'</span></div><div class="line">&gt;&gt;&gt; m.groups()</div><div class="line">(<span class="string">'ab'</span>,)</div><div class="line">&gt;&gt;&gt; m.group(0)</div><div class="line"><span class="string">'ab'</span></div><div class="line">&gt;&gt;&gt; m.group(1)</div><div class="line"><span class="string">'ab'</span></div><div class="line">&gt;&gt;&gt; </div><div class="line">&gt;&gt;&gt; </div><div class="line">&gt;&gt;&gt; m = re.match(<span class="string">'(a)(b)'</span>,<span class="string">'ab'</span>)  <span class="comment"># 两个子组</span></div><div class="line">&gt;&gt;&gt; m.group()</div><div class="line"><span class="string">'ab'</span></div><div class="line">&gt;&gt;&gt; m.group(1)</div><div class="line"><span class="string">'a'</span></div><div class="line">&gt;&gt;&gt; m.group(2)</div><div class="line"><span class="string">'b'</span></div><div class="line">&gt;&gt;&gt; m.groups()</div><div class="line">(<span class="string">'a'</span>, <span class="string">'b'</span>)</div><div class="line">&gt;&gt;&gt; </div><div class="line">&gt;&gt;&gt; </div><div class="line">&gt;&gt;&gt; m = re.match(<span class="string">'(a(b))'</span>,<span class="string">'ab'</span>) <span class="comment"># 两个子组</span></div><div class="line">&gt;&gt;&gt; m.group()</div><div class="line"><span class="string">'ab'</span></div><div class="line">&gt;&gt;&gt; m.group(0)</div><div class="line"><span class="string">'ab'</span></div><div class="line">&gt;&gt;&gt; m.group(1)</div><div class="line"><span class="string">'ab'</span></div><div class="line">&gt;&gt;&gt; m.group(2)</div><div class="line"><span class="string">'b'</span></div><div class="line">&gt;&gt;&gt; m.groups()</div><div class="line">(<span class="string">'ab'</span>, <span class="string">'b'</span>)</div><div class="line">&gt;&gt;&gt;</div></pre></td></tr></table></figure></p>
+<h1 id="匹配字符串的起始和结尾以及单词边界"><a href="#匹配字符串的起始和结尾以及单词边界" class="headerlink" title="匹配字符串的起始和结尾以及单词边界"></a>匹配字符串的起始和结尾以及单词边界</h1><p><code>\b</code>匹配任何单词边界(\B与之相反)，该作符更多用于表示搜索而不是匹配,因为 <code>match()</code>总是从字符串开始位置进行匹配<br><code>^</code>匹配字符串起始部分<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">&gt;&gt;&gt; m = re.search(<span class="string">'^The'</span>,<span class="string">'The end.'</span>)   <span class="comment"># 匹配</span></div><div class="line">&gt;&gt;&gt; <span class="keyword">if</span> m is not None: m.group()</div><div class="line">... </div><div class="line"><span class="string">'The'</span></div><div class="line">&gt;&gt;&gt; m = re.search(<span class="string">'^The'</span>,<span class="string">'end. The'</span>)  <span class="comment"># 不作为起始</span></div><div class="line">&gt;&gt;&gt; </div><div class="line">&gt;&gt;&gt; <span class="keyword">if</span> m is not None: m.group()</div><div class="line">... </div><div class="line">&gt;&gt;&gt; m = re.search(r<span class="string">'\bthe'</span>,<span class="string">'bite the dog'</span>)  <span class="comment"># 在边界</span></div><div class="line">&gt;&gt;&gt; <span class="keyword">if</span> m is not None:m.group()</div><div class="line">... </div><div class="line"><span class="string">'the'</span></div><div class="line">&gt;&gt;&gt; m = re.search(r<span class="string">'\bthe'</span>,<span class="string">'bitethe dog'</span>)  <span class="comment"># 有边界</span></div><div class="line">&gt;&gt;&gt; <span class="keyword">if</span> m is not None:m.group()</div><div class="line">... </div><div class="line">&gt;&gt;&gt; m = re.search(r<span class="string">'\Bthe'</span>,<span class="string">'bitethe dog'</span>)   <span class="comment"># 没有边界</span></div><div class="line">&gt;&gt;&gt; <span class="keyword">if</span> m is not None:m.group()</div><div class="line">... </div><div class="line"><span class="string">'the'</span></div></pre></td></tr></table></figure></p>
+<h1 id="findall-和-finditer"><a href="#findall-和-finditer" class="headerlink" title="findall()和 finditer()"></a>findall()和 finditer()</h1><p><code>findall()</code>查询字符串中某个正则表达式模式全部的非重要出现情况，这与<code>search</code>在执行字符串搜索的时候类似，不一样的是<code>findall</code>返回的总是一个列表。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&gt;&gt;&gt; re.findall(<span class="string">'car'</span>,<span class="string">'car'</span>)</div><div class="line">[<span class="string">'car'</span>]</div><div class="line">&gt;&gt;&gt; re.findall(<span class="string">'car'</span>,<span class="string">'scary'</span>)</div><div class="line">[<span class="string">'car'</span>]</div><div class="line">&gt;&gt;&gt; re.findall(<span class="string">'car'</span>,<span class="string">'carry the barcardi to the car'</span>)</div><div class="line">[<span class="string">'car'</span>, <span class="string">'car'</span>, <span class="string">'car'</span>]</div></pre></td></tr></table></figure></p>
+<p>对于子组，它是在一个更加复杂的返回列表中搜索结果，子组是允许从单个正则表达式中抽取特定模式的一种机制，对于一个成功的匹配，每个子组匹配是返回的一个元组中的一个单一的元素，而且每个元组是结果列表中的元素。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">&gt;&gt;&gt; s = <span class="string">'This and that.'</span></div><div class="line">&gt;&gt;&gt; re.findall(r<span class="string">'(th\w+) and (th\w+)'</span>,s,re.I)</div><div class="line">[(<span class="string">'This'</span>, <span class="string">'that'</span>)]</div><div class="line">&gt;&gt;&gt; re.finditer(r<span class="string">'(th\w+) and (th\w+)'</span>,s,re.I).next().groups()</div><div class="line">(<span class="string">'This'</span>, <span class="string">'that'</span>)</div><div class="line">&gt;&gt;&gt; re.finditer(r<span class="string">'(th\w+) and (th\w+)'</span>,s,re.I).next().group(1)</div><div class="line"><span class="string">'This'</span></div><div class="line">&gt;&gt;&gt; re.finditer(r<span class="string">'(th\w+) and (th\w+)'</span>,s,re.I).next().group(2)</div><div class="line"><span class="string">'that'</span></div><div class="line">&gt;&gt;&gt; [g.groups() <span class="keyword">for</span> g <span class="keyword">in</span> re.finditer(r<span class="string">'(th\w+) and (th\w+)'</span>,s,re.I)]</div><div class="line">[(<span class="string">'This'</span>, <span class="string">'that'</span>)]</div></pre></td></tr></table></figure></p>
+<p>在单个字符串中执行单个分组的多重匹配<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">&gt;&gt;&gt; re.findall(r<span class="string">'(th\w+)'</span>,s,re.I)</div><div class="line">[<span class="string">'This'</span>, <span class="string">'that'</span>]</div><div class="line">&gt;&gt;&gt; </div><div class="line">&gt;&gt;&gt; it = re.finditer(r<span class="string">'(th\w+)'</span>,s,re.I)</div><div class="line">&gt;&gt;&gt; g = it.next()</div><div class="line">&gt;&gt;&gt; g.groups()</div><div class="line">(<span class="string">'This'</span>,)</div><div class="line">&gt;&gt;&gt; g.group(1)</div><div class="line"><span class="string">'This'</span></div><div class="line">&gt;&gt;&gt; g = it.next()</div><div class="line">&gt;&gt;&gt; g.groups()</div><div class="line">(<span class="string">'that'</span>,)</div><div class="line">&gt;&gt;&gt; g.group(1)</div><div class="line"><span class="string">'that'</span></div><div class="line">&gt;&gt;&gt; [g.group(1) <span class="keyword">for</span> g <span class="keyword">in</span> re.finditer(r<span class="string">'(th\w+)'</span>,s,re.I)]</div><div class="line">[<span class="string">'This'</span>, <span class="string">'that'</span>]</div><div class="line">&gt;&gt;&gt;</div></pre></td></tr></table></figure></p>
+<p><strong>注意：使用<code>finditer</code>函数完成的所有额外工作都旨在获取它的输出来匹配<code>findall</code>的输出</strong></p>
+<h1 id="sub-和subn-搜索与替换"><a href="#sub-和subn-搜索与替换" class="headerlink" title="sub()和subn()搜索与替换"></a>sub()和subn()搜索与替换</h1><p>将某字符串中所有匹配正则表达式的部分进行某种形式的替换。用来替换的部分通常是一个字符串，但也有可能是一个函数，该函数返回一个用来替换的字符串。<code>subn()</code>多返回一个表示替换的总数，替换后的字符串替换总数一起作为一个拥有两个元素的元组返回<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">&gt;&gt;&gt; re.sub(<span class="string">'X'</span>,<span class="string">'Mr. Smith'</span>,<span class="string">'attn:X\n\nDear X,\n'</span>) <span class="comment"># 将X替换成Mr. Smith</span></div><div class="line"><span class="string">'attn:Mr. Smith\n\nDear Mr. Smith,\n'</span></div><div class="line">&gt;&gt;&gt; re.subn(<span class="string">'X'</span>,<span class="string">'Mr. Smith'</span>,<span class="string">'attn:X\n\nDear X,\n'</span>)</div><div class="line">(<span class="string">'attn:Mr. Smith\n\nDear Mr. Smith,\n'</span>, 2)   <span class="comment"># 返回的元组，包含了替换字符的总数</span></div><div class="line">&gt;&gt;&gt; <span class="built_in">print</span> re.sub(<span class="string">'X'</span>,<span class="string">'Mr. Smith'</span>,<span class="string">'attn:X\n\nDear X,\n'</span>)</div><div class="line">attn:Mr. Smith</div><div class="line"></div><div class="line">Dear Mr. Smith,</div><div class="line"></div><div class="line">&gt;&gt;&gt; re.sub(<span class="string">'[ae]'</span>,<span class="string">'X'</span>,<span class="string">'abcdefg'</span>)</div><div class="line"><span class="string">'XbcdXfg'</span></div><div class="line">&gt;&gt;&gt; re.subn(<span class="string">'[ae]'</span>,<span class="string">'X'</span>,<span class="string">'abcdefg'</span>)</div><div class="line">(<span class="string">'XbcdXfg'</span>, 2)</div></pre></td></tr></table></figure></p>
+<p>使用匹配对象的<code>group</code>方法除了能够取出匹配分组编号外，还可以使用<code>\N</code>，其中N是在替换字符串中使用的分组编号，下面的代码就是将美式的日期表示法转换成其他国家常用的格式<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&gt;&gt;&gt; re.sub(r<span class="string">'(\d&#123;1,2&#125;)/(\d&#123;1,2&#125;)/(\d&#123;2&#125;|\d&#123;4&#125;)'</span>,r<span class="string">'\2/\1/\3'</span>,<span class="string">'2/20/91'</span>)</div><div class="line"><span class="string">'20/2/91'</span></div><div class="line">&gt;&gt;&gt; re.sub(r<span class="string">'(\d&#123;1,2&#125;)/(\d&#123;1,2&#125;)/(\d&#123;2&#125;|\d&#123;4&#125;)'</span>,r<span class="string">'\2/\1/\3'</span>,<span class="string">'2/20/1991'</span>)</div><div class="line"><span class="string">'20/2/1991'</span></div></pre></td></tr></table></figure></p>
+<h1 id="使用split-分隔字符串"><a href="#使用split-分隔字符串" class="headerlink" title="使用split()分隔字符串"></a>使用split()分隔字符串</h1><p>与分割一个固定字符串相比，他们基于正则表达式的模式分隔字符串，为字符串分隔功能添加一些额外的威力，如果我们不想为每次模式的出现都分割字符串，就可以通过为max参数设定一个值来指定最大分割数。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&gt;&gt;&gt; re.split(<span class="string">":"</span>,<span class="string">"str1:str2:str3"</span>)</div><div class="line">[<span class="string">'str1'</span>, <span class="string">'str2'</span>, <span class="string">'str3'</span>]</div></pre></td></tr></table></figure></p>
+<h1 id="数据生成器"><a href="#数据生成器" class="headerlink" title="数据生成器"></a>数据生成器</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/env python</span></div><div class="line"></div><div class="line"></div><div class="line">from random import randrange,choice</div><div class="line">from string import ascii_lowercase</div><div class="line">from time import ctime</div><div class="line"></div><div class="line"></div><div class="line">tlds = (<span class="string">'com'</span>,<span class="string">'edu'</span>,<span class="string">'net'</span>,<span class="string">'org'</span>,<span class="string">'gov'</span>)</div><div class="line"></div><div class="line"><span class="keyword">for</span> i <span class="keyword">in</span> xrange(randrange(5,11)):</div><div class="line">    dtint = randrange(2**32) <span class="comment"># 由于ctime格式的时间范围是0~2^32，maxint如果是64位系统的话就超过了范围</span></div><div class="line">    <span class="built_in">print</span> dtint</div><div class="line">    dtstr = ctime(dtint)</div><div class="line">    llen = randrange(4,8)</div><div class="line">    login = <span class="string">''</span>.join(choice(ascii_lowercase) <span class="keyword">for</span> j <span class="keyword">in</span> range(llen))</div><div class="line">    dlen = randrange(llen,13)</div><div class="line">    dom = <span class="string">''</span>.join(choice(ascii_lowercase) <span class="keyword">for</span> j <span class="keyword">in</span> xrange(dlen))</div><div class="line">    <span class="built_in">print</span> <span class="string">"%s::%s@%s.%s::%d-%d-%d"</span>%(dtstr,login,dom,choice(tlds),dtint,llen,dlen)</div></pre></td></tr></table></figure>
+<h1 id="匹配字符串"><a href="#匹配字符串" class="headerlink" title="匹配字符串"></a>匹配字符串</h1><p>下面这些字符串是由上面的数据生成器随机生成的<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">data = <span class="string">""</span><span class="string">"Tue Sep 12 02:37:37 1989::bqsya@kkbaove.gov::621538657-5-7</span></div><div class="line"><span class="string">Thu Apr  2 12:56:06 1987::gtuwfa@csmmbnmtj.gov::544337766-6-9</span></div><div class="line"><span class="string">Fri Nov 17 23:46:04 2045::hcqgq@whxyl.org::2394546364-5-5</span></div><div class="line"><span class="string">Wed Jan 12 22:43:33 2056::autzktz@dyswpdkhgfr.org::2714913813-7-11</span></div><div class="line"><span class="string">Wed Oct 29 20:17:34 2053::gwigww@mynkcmk.gov::2645353054-6-7</span></div><div class="line"><span class="string">Mon Oct 29 17:12:06 1973::lugjv@eajrdpym.org::120733926-5-8</span></div><div class="line"><span class="string">Tue Mar  6 09:01:02 2057::tymkk@yfaxnhiczzmo.net::2751066062-5-12</span></div><div class="line"><span class="string">Fri Sep 25 10:01:20 2076::pzzhju@ouexrnrjfsqg.edu::3368224880-6-12</span></div><div class="line"><span class="string">Sat Dec 21 02:14:18 1974::ifkklhw@fthgyaqzhwlg.org::156795258-7-12</span></div><div class="line"><span class="string">Mon Aug 10 00:49:36 2076::rlcnxn@jhxikley.gov::3364217376-6-8"</span><span class="string">""</span></div></pre></td></tr></table></figure></p>
+<p><code>^(Mon|Tue|Wed|Thu|Fri|Sat|Sun</code>,圆括号的意思是，这些字符串中的一个将会有一次成功匹配。如下所示，可以以子组的方式来访问匹配字符串<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">&gt;&gt;&gt; import re</div><div class="line">&gt;&gt;&gt; patt = r<span class="string">'^(Mon|Tue|Wed|Thu|Fri|Sat|Sun)'</span></div><div class="line">&gt;&gt;&gt; m = re.match(patt,data)</div><div class="line">&gt;&gt;&gt; m.group()</div><div class="line"><span class="string">'Tue'</span></div><div class="line">&gt;&gt;&gt; m.group(1)</div><div class="line"><span class="string">'Tue'</span></div><div class="line">&gt;&gt;&gt; m.groups()</div><div class="line">(<span class="string">'Tue'</span>,)</div><div class="line">&gt;&gt;&gt;</div></pre></td></tr></table></figure></p>
+<p>上面的正则表达式是很严格的，范围比较狭窄，在不同的国家使用的日期缩写可能不一样，因此我们需要使用一个宽松的表达式<br><code>^\w{3}</code><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">&gt;&gt;&gt; patt = r<span class="string">'^(\w&#123;3&#125;)'</span></div><div class="line">&gt;&gt;&gt; m = re.match(patt,data)</div><div class="line">&gt;&gt;&gt; <span class="keyword">if</span> m is not None:m.group()</div><div class="line">... </div><div class="line"><span class="string">'Tue'</span></div><div class="line">&gt;&gt;&gt; m.group(1)</div><div class="line"><span class="string">'Tue'</span></div></pre></td></tr></table></figure></p>
+<h1 id="贪婪模式"><a href="#贪婪模式" class="headerlink" title="贪婪模式"></a>贪婪模式</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&gt;&gt;&gt; patt = r<span class="string">'.+(\d+-\d+-\d+)'</span></div><div class="line">&gt;&gt;&gt; re.search(patt,data).group(1)</div><div class="line"><span class="string">'7-5-7'</span></div></pre></td></tr></table></figure>
+<p>这里我们想要匹配<code>621538657-5-7</code>，但是匹配的结果确实<code>7-5-7</code><br>正则表达式本质上实现贪婪匹配，这就意味着对于通配符模式，将对正则表达式从做左至右按顺序求值，而且试图匹配获取匹配该模式的尽可能多的的字符。<br>解决的其中的一个方案是使用”非贪婪“操作符”?”。我们可以在”*”,”+”或者”?”之后使用该操作符，该操作符将要求正则表达式引擎匹配尽可能少的字符，因此在”.+”之后放置一个”?”<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&gt;&gt;&gt; patt = r<span class="string">'.+?(\d+-\d+-\d+)'</span></div><div class="line">&gt;&gt;&gt; re.search(patt,data).group(1)</div><div class="line"><span class="string">'621538657-5-7'</span></div></pre></td></tr></table></figure></p>
+<p>另一个解决的方案就是将”::”作为字段分隔符，读者可以仅仅使用正则字符串split(“::”)方法获取所有的部分，然后使用split(‘-‘)作为另一个横线分隔符，就能够获取最初想要查询的三个整数。</p>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
       
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2017" class="archive-year">2017</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/09/10/golang流程控制/" class="archive-article-date">
-  	<time datetime="2017-09-10T13:06:36.043Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-09-10</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/09/10/golang流程控制/">流程控制</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">go</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">python</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">编程</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">正则表达式</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/notes//" class="article-tag-list-link color1">notes</a>
+        			<a href="/categories/python//" class="article-tag-list-link color2">python</a>
         		</li>
       		
 		</ul>
 	</div>
 
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://www.cmustarc.com/2017/09/28/正则表达式/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/09/05/论事件驱动与异步IO/" class="archive-article-date">
-  	<time datetime="2017-09-05T07:02:28.067Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-09-05</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2017/09/15/s2-053/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">S2-053</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/09/05/论事件驱动与异步IO/">论事件驱动与异步IO[转]</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">事件驱动</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">异步IO</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/notes//" class="article-tag-list-link color1">notes</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#常见正则表达式符号和特殊字符"><span class="toc-number">1.</span> <span class="toc-text">常见正则表达式符号和特殊字符</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#重复、特殊字符以及分组"><span class="toc-number">2.</span> <span class="toc-text">重复、特殊字符以及分组</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#电子邮件的匹配"><span class="toc-number">2.1.</span> <span class="toc-text">电子邮件的匹配</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#匹配字符串的起始和结尾以及单词边界"><span class="toc-number">3.</span> <span class="toc-text">匹配字符串的起始和结尾以及单词边界</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#findall-和-finditer"><span class="toc-number">4.</span> <span class="toc-text">findall()和 finditer()</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#sub-和subn-搜索与替换"><span class="toc-number">5.</span> <span class="toc-text">sub()和subn()搜索与替换</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#使用split-分隔字符串"><span class="toc-number">6.</span> <span class="toc-text">使用split()分隔字符串</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#数据生成器"><span class="toc-number">7.</span> <span class="toc-text">数据生成器</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#匹配字符串"><span class="toc-number">8.</span> <span class="toc-text">匹配字符串</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#贪婪模式"><span class="toc-number">9.</span> <span class="toc-text">贪婪模式</span></a></li></ol>
+                    </div>
+                </span>
+            </div>
         </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
+        
+    </div>
+</aside>
+
+
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/09/05/并发编程/" class="archive-article-date">
-  	<time datetime="2017-09-05T07:02:07.165Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-09-05</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/09/05/并发编程/">并发编程</a>
-    </h1>
-  
+  <div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="正则表达式" data-title="正则表达式" data-url="http://www.cmustarc.com/2017/09/28/正则表达式/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"true"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">golang</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">并发</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/notes//" class="article-tag-list-link color1">notes</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/09/05/hexo+github+nginx VPS搭建博客/" class="archive-article-date">
-  	<time datetime="2017-09-05T07:00:22.038Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-09-05</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/09/05/hexo+github+nginx VPS搭建博客/">hexo+github+nginx vps搭建博客</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">博客</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/notes//" class="article-tag-list-link color1">notes</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/09/05/go语言初识/" class="archive-article-date">
-  	<time datetime="2017-09-05T07:00:05.936Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-09-05</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/09/05/go语言初识/">初识go语言</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">golang</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">编程语言</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/notes//" class="article-tag-list-link color1">notes</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/09/05/goroutine与调度器/" class="archive-article-date">
-  	<time datetime="2017-09-05T06:21:31.521Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-09-05</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/09/05/goroutine与调度器/">goroutine与调度器[转]</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">golang</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">编程语言</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/notes//" class="article-tag-list-link color1">notes</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
   
   
-    </div></section>
   
 
-    
+  
+
+  
+
+  
+
 
 
           </div>
@@ -531,10 +459,10 @@ var _hmt = _hmt || [];
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
-		isCategory: true,
+		isCategory: false,
 		open_in_new: true,
 		toc_hide_index: false,
 		root: "/",
