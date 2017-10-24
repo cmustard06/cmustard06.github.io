@@ -6,18 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://www.cmustarc.com">
-  <title>Archives: 2017/10 | glamor的博客</title>
+  <title>HTMLParser模块 | glamor的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Web安全，Python">
-<meta property="og:type" content="website">
-<meta property="og:title" content="glamor的博客">
-<meta property="og:url" content="http://www.cmustarc.com/archives/2017/10/index.html">
+  <meta name="description" content="简介HTMLParser实例可以分析和处理在html数据中的遇到开始标签，结束标签，文本，注释和其他标签。我们可以通过重写HTMLParser的子类的方法来实现我们期望的行为这个HTMLParser实例化是不需要其他参数的">
+<meta name="keywords" content="python,爬虫">
+<meta property="og:type" content="article">
+<meta property="og:title" content="HTMLParser模块">
+<meta property="og:url" content="http://www.cmustarc.com/2017/10/24/HTMLParser模块/index.html">
 <meta property="og:site_name" content="glamor的博客">
-<meta property="og:description" content="Web安全，Python">
+<meta property="og:description" content="简介HTMLParser实例可以分析和处理在html数据中的遇到开始标签，结束标签，文本，注释和其他标签。我们可以通过重写HTMLParser的子类的方法来实现我们期望的行为这个HTMLParser实例化是不需要其他参数的">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2017-10-24T07:58:29.408Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="glamor的博客">
-<meta name="twitter:description" content="Web安全，Python">
+<meta name="twitter:title" content="HTMLParser模块">
+<meta name="twitter:description" content="简介HTMLParser实例可以分析和处理在html数据中的遇到开始标签，结束标签，文本，注释和其他标签。我们可以通过重写HTMLParser的子类的方法来实现我们期望的行为这个HTMLParser实例化是不需要其他参数的">
   
     <link rel="alternative" href="/atom.xml" title="glamor的博客" type="application/atom+xml">
   
@@ -179,36 +181,94 @@ var _hmt = _hmt || [];
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-HTMLParser模块" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2017" class="archive-year">2017</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/10/24/HTMLParser模块/" class="archive-article-date">
-  	<time datetime="2017-10-24T07:58:29.408Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-24</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/10/24/HTMLParser模块/">HTMLParser模块</a>
+    <h1 class="article-title" itemprop="name">
+      HTMLParser模块
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2017/10/24/HTMLParser模块/" class="archive-article-date">
+  	<time datetime="2017-10-24T07:58:29.408Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-24</time>
+</a>
+        
+      </header>
+    
+<!-- 目录内容 -->
+
+    <p class="show-toc-btn" id="show-toc-btn" onclick="showToc();" style="display:none">
+          <span class="btn-bg"></span>
+          <span class="btn-text">文章导航</span>
+          </p>
+	<div id="toc-article" class="toc-article">
+	    <span id="toc-close" class="toc-close" title="隐藏导航" onclick="showBtn();">×</span>
+		<strong class="toc-title">文章目录</strong>
+           <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#简介"><span class="toc-number">1.</span> <span class="toc-text">简介</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#类的定义和常用方法"><span class="toc-number">2.</span> <span class="toc-text">类的定义和常用方法</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#类的定义"><span class="toc-number">2.1.</span> <span class="toc-text">类的定义</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#常用方法"><span class="toc-number">2.2.</span> <span class="toc-text">常用方法</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#htmlentitydefs"><span class="toc-number">3.</span> <span class="toc-text">htmlentitydefs</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#htmlentitydefs-entitydefs"><span class="toc-number">3.1.</span> <span class="toc-text">htmlentitydefs.entitydefs</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#htmlentitydefs-name2codepoint"><span class="toc-number">3.2.</span> <span class="toc-text">htmlentitydefs.name2codepoint</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#htmlentitydefs-codepoint2name"><span class="toc-number">3.3.</span> <span class="toc-text">htmlentitydefs.codepoint2name</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#模拟登录"><span class="toc-number">4.</span> <span class="toc-text">模拟登录</span></a></li></ol>
+         </div>
+   <script type="text/javascript">
+	function showToc(){
+		var toc_article = document.getElementById("toc-article");
+		var show_toc_btn = document.getElementById("show-toc-btn");
+		toc_article.setAttribute("style","display:block");
+		show_toc_btn.setAttribute("style","display:none");
+		};
+	function showBtn(){
+		var toc_article = document.getElementById("toc-article");
+		var show_toc_btn = document.getElementById("show-toc-btn");
+		toc_article.setAttribute("style","display:none");
+		show_toc_btn.setAttribute("style","display:block");
+		};
+   </script>
+      		
+<!-- 目录内容结束 -->
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p><code>HTMLParser</code>实例可以分析和处理在html数据中的遇到开始标签，结束标签，文本，注释和其他标签。我们可以通过重写<code>HTMLParser</code>的子类的方法来实现我们期望的行为<br><strong>这个<code>HTMLParser</code>实例化是不需要其他参数的</strong><br><a id="more"></a></p>
+<h1 id="类的定义和常用方法"><a href="#类的定义和常用方法" class="headerlink" title="类的定义和常用方法"></a>类的定义和常用方法</h1><h2 id="类的定义"><a href="#类的定义" class="headerlink" title="类的定义"></a>类的定义</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">class HTMLParser(markupbase.ParserBase):</div><div class="line">    def __init__(self):</div><div class="line">        <span class="string">""</span><span class="string">"初始或者重置这个实例"</span><span class="string">""</span></div><div class="line">        self.reset()</div></pre></td></tr></table></figure>
+<ol>
+<li>HTMLParser主要用来解析HTML文件</li>
+<li>HTMLParser可以接收相应的HTML内容，并进行解析，遇到HTML的标签会自动调用相应的handler（处理方法）来处理，用户需要自己创建相应的子类来继承HTMLParser，并且复写相应的handler方法</li>
+<li>HTMLParser不会检查开始标签和结束标签是否是一对</li>
+</ol>
+<h2 id="常用方法"><a href="#常用方法" class="headerlink" title="常用方法"></a>常用方法</h2><p><code>HTMLParser.feed(data)</code>:接受一个字符串类型的HTML内容，并进行解析<br><code>HTMLParser.close()</code>:当遇到文件结束标签后进行的处理方法，如果子类要复写该方法，需要首先调用<code>HTMLParser</code>类的close()方法<br><code>HTMLParser.reset()</code>:重置HTMLParser实例，该方法会丢掉未处理的html内容<br><code>HTMLParser.getpos()</code>：返回当前行和相应的偏移量<br><code>HTMLParser.handle_starttag(tag,attrs)</code>:对开始标签的处理方法，例如<code>&lt;div id=&quot;main&quot;&gt;</code>，参数tag指的是div，attrs指的是一个(name,value)列表，<br><code>HTMLParser.handle_endtag(tag)</code>:对结束标签的处理方法。例如<code>&lt;/div&gt;</code>,参数tag指的是div<br><code>HTMLParser.handle_data(data)</code>:对标签之间的数据的处理方法。<code>&lt;tag&gt;test&lt;/tag&gt;</code>,data指的是”test”<br><code>HTMLParser.handle_comment(data)</code>:对HTML中注释的处理方法<br><code>HTMLParser.handle_charref(name)</code>:处理特殊字符，就是以&amp;#开头的，然后获取&amp;#后面的字符进行进一步，操作一般是内码表示的字符,如&amp;#62,$#x3E<br><code>HTMLParser.handle_entityref(name)</code>:处理一些特殊字符，以&amp;开头的，然后获取&amp;后面的字符进行进一步操作，如&amp;gt<br><code>HTMLParser.handle_decl (decl)</code>: 处理&lt;!开头的，比如&lt;!DOCTYPE html PUBLIC “-//W3C//DTD HTML 4.01 Transitional//EN”<br><code>HTMLParser.handle_pi(data)</code>:处理形如&lt;?instruction&gt;的东西<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/env python</span></div><div class="line"><span class="comment"># coding:utf-8</span></div><div class="line"><span class="comment"># @author:cmustard</span></div><div class="line"></div><div class="line"><span class="string">""</span><span class="string">"</span></div><div class="line"><span class="string">HTMLParser模块使用举例</span></div><div class="line"><span class="string">"</span><span class="string">""</span></div><div class="line"></div><div class="line">from HTMLParser import HTMLParser</div><div class="line">from htmlentitydefs import name2codepoint</div><div class="line"></div><div class="line"></div><div class="line">class MyHTMLParser(HTMLParser):</div><div class="line">    def handle_starttag(self, tag, attrs):</div><div class="line">        <span class="built_in">print</span> <span class="string">"Start tag    :"</span>, tag</div><div class="line">        <span class="keyword">for</span> name, value <span class="keyword">in</span> attrs:</div><div class="line">            <span class="built_in">print</span> <span class="string">"    attrs    :&#123;&#125;=&#123;&#125;"</span>.format(name, value)</div><div class="line"></div><div class="line">    def handle_endtag(self, tag):</div><div class="line">        <span class="built_in">print</span> <span class="string">"End tag  : "</span>, tag</div><div class="line"></div><div class="line">    def handle_data(self, data):</div><div class="line">        <span class="built_in">print</span> <span class="string">"Data : "</span>, data</div><div class="line"></div><div class="line">    def handle_comment(self, data):</div><div class="line">        <span class="built_in">print</span>(<span class="string">"comment  : &#123;&#125;"</span>.format(data))</div><div class="line"></div><div class="line">    <span class="comment"># &amp;gt;&amp;#62;&amp;#x3E;</span></div><div class="line">    def handle_entityref(self, name):</div><div class="line">        <span class="comment"># print name  # gt</span></div><div class="line">        <span class="comment"># print name2codepoint[name] # 62</span></div><div class="line">        c = unichr(name2codepoint[name])</div><div class="line">        <span class="built_in">print</span>(<span class="string">"Named ent    :&#123;&#125;"</span>.format(c))</div><div class="line"></div><div class="line">    def handle_charref(self, name):</div><div class="line">        <span class="comment"># print name  # 62  x3E</span></div><div class="line">        <span class="keyword">if</span> name.startswith(<span class="string">"x"</span>):  <span class="comment"># 如果字符是以x开头的，就获取x后面的字符，然后将其先转换成16进制，再转换成Unicode字符</span></div><div class="line">            <span class="comment"># c = unichr(int(name[1:], 16))</span></div><div class="line">            c = int(name[1:], 16)  <span class="comment"># 62</span></div><div class="line">            c = unichr(c)  <span class="comment"># &gt;</span></div><div class="line">        <span class="keyword">else</span>:</div><div class="line">            c = unichr(int(name))</div><div class="line">        <span class="built_in">print</span> <span class="string">"Num ent  :"</span>, c</div><div class="line"></div><div class="line">    def handle_decl(self, decl):</div><div class="line">        <span class="built_in">print</span> <span class="string">"Decl:    "</span>, decl</div><div class="line"></div><div class="line"></div><div class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</div><div class="line">    parser = MyHTMLParser()</div><div class="line">    <span class="comment"># 解析doctype</span></div><div class="line">    <span class="built_in">print</span>(u<span class="string">"解析doctype"</span>)</div><div class="line">    html = <span class="string">""</span><span class="string">"&lt;!DOCTYPE HTML PUBLIC "</span>-//W3C//DTD HTML 4.01//EN<span class="string">" "</span>http://www.w3.org/TR/html4/strict.dtd<span class="string">"&gt;"</span><span class="string">""</span></div><div class="line">    parser.feed(html)</div><div class="line">    <span class="string">""</span><span class="string">"</span></div><div class="line"><span class="string">    Decl:     DOCTYPE HTML PUBLIC "</span>-//W3C//DTD HTML 4.01//EN<span class="string">" "</span>http://www.w3.org/TR/html4/strict.dtd<span class="string">"</span></div><div class="line"><span class="string">    "</span><span class="string">""</span></div><div class="line">    <span class="built_in">print</span></div><div class="line">    <span class="comment"># 解析一个标签，包括标签中的属性和其对应的值</span></div><div class="line">    <span class="built_in">print</span> u<span class="string">"解析一个标签，包括标签中的属性和其对应的值"</span></div><div class="line">    parser.feed(<span class="string">'&lt;img src="python-logo.png" alt="The Python logo"&gt;'</span>)</div><div class="line">    <span class="string">""</span><span class="string">"</span></div><div class="line"><span class="string">    Start tag: img</span></div><div class="line"><span class="string">        attrs:src=python-logo.png</span></div><div class="line"><span class="string">        attrs:alt=The Python logo</span></div><div class="line"><span class="string">    "</span><span class="string">""</span></div><div class="line">    <span class="comment"># 解析一个title标签</span></div><div class="line">    <span class="built_in">print</span> u<span class="string">"解析一个title标签"</span></div><div class="line">    parser.feed(<span class="string">'&lt;h1&gt;Python&lt;/h1&gt;'</span>)</div><div class="line">    <span class="string">""</span><span class="string">"</span></div><div class="line"><span class="string">    Start tag: h1</span></div><div class="line"><span class="string">    Data:  Python</span></div><div class="line"><span class="string">    End tag : h1</span></div><div class="line"><span class="string">    "</span><span class="string">""</span></div><div class="line">    <span class="built_in">print</span></div><div class="line">    <span class="comment"># 对于script和style内容的返回如下，没有对其进行进一步的解析</span></div><div class="line">    <span class="built_in">print</span> u<span class="string">"对于script和style内容的返回如下，没有对其进行进一步的解析"</span></div><div class="line">    parser.feed(<span class="string">'&lt;style type="text/css"&gt;#python &#123; color: green &#125;&lt;/style&gt;'</span>)</div><div class="line">    <span class="string">""</span><span class="string">"</span></div><div class="line"><span class="string">    Start tag    : style</span></div><div class="line"><span class="string">        attrs    :type=text/css</span></div><div class="line"><span class="string">    Data :  #python &#123; color: green &#125;</span></div><div class="line"><span class="string">    End tag  : style</span></div><div class="line"><span class="string">    "</span><span class="string">""</span></div><div class="line">    <span class="built_in">print</span></div><div class="line"></div><div class="line">    parser.feed(<span class="string">''</span><span class="string">'&lt;script type="text/javascript"&gt; \</span></div><div class="line"><span class="string">    alert("&lt;strong&gt;hello!&lt;/strong&gt;");&lt;/script&gt;'</span><span class="string">''</span>)</div><div class="line">    <span class="string">""</span><span class="string">"</span></div><div class="line"><span class="string">    Start tag    : script</span></div><div class="line"><span class="string">        attrs    :type=text/javascript</span></div><div class="line"><span class="string">    Data :       alert("</span>&lt;strong&gt;hello!&lt;/strong&gt;<span class="string">");</span></div><div class="line"><span class="string">    End tag  :  script</span></div><div class="line"><span class="string">    "</span><span class="string">""</span></div><div class="line">    <span class="built_in">print</span></div><div class="line"></div><div class="line">    <span class="comment"># 对注释进行解析</span></div><div class="line">    <span class="built_in">print</span> u<span class="string">"对注释进行解析"</span></div><div class="line">    parser.feed(<span class="string">''</span><span class="string">'&lt;!-- a comment --&gt;\</span></div><div class="line"><span class="string">    &lt;!--[if IE 9]&gt;IE-specific content&lt;![endif]--&gt;'</span><span class="string">''</span>)</div><div class="line">    <span class="string">""</span><span class="string">"</span></div><div class="line"><span class="string">    comment  :  a comment</span></div><div class="line"><span class="string">    Data :</span></div><div class="line"><span class="string">    comment  : [if IE 9]&gt;IE-specific content&lt;![endif]</span></div><div class="line"><span class="string">    "</span><span class="string">""</span></div><div class="line">    <span class="built_in">print</span></div><div class="line"></div><div class="line">    <span class="comment"># 解析编码后的字符，并将其转换成可识别的字符</span></div><div class="line">    <span class="built_in">print</span> u<span class="string">"解析编码后的字符，并将其转换成可识别的字符"</span></div><div class="line">    parser.feed(<span class="string">'&amp;gt;&amp;#62;&amp;#x3E;'</span>)</div><div class="line">    <span class="string">""</span><span class="string">"</span></div><div class="line"><span class="string">    Named ent    :&gt;</span></div><div class="line"><span class="string">    Num ent  : &gt;</span></div><div class="line"><span class="string">    Num ent  : &gt;</span></div><div class="line"><span class="string">    "</span><span class="string">""</span></div><div class="line"></div><div class="line">    <span class="built_in">print</span></div><div class="line"></div><div class="line">    <span class="comment"># 解析无效的HTML也可以使用,比如没有加引号的属性</span></div><div class="line">    <span class="built_in">print</span> u<span class="string">"解析无效的HTML也可以使用,比如没有加引号的属性"</span></div><div class="line">    parser.feed(<span class="string">'&lt;p&gt;&lt;a class=link href=#main&gt;tag soup&lt;/p &gt;&lt;/a&gt;'</span>)</div><div class="line">    <span class="string">""</span><span class="string">"</span></div><div class="line"><span class="string">    Start tag    : p</span></div><div class="line"><span class="string">    Start tag    : a</span></div><div class="line"><span class="string">        attrs    :class=link</span></div><div class="line"><span class="string">        attrs    :href=#main</span></div><div class="line"><span class="string">    Data :  tag soup</span></div><div class="line"><span class="string">    End tag  :  p</span></div><div class="line"><span class="string">    End tag  :  a</span></div><div class="line"><span class="string">    "</span><span class="string">""</span></div></pre></td></tr></table></figure></p>
+<h1 id="htmlentitydefs"><a href="#htmlentitydefs" class="headerlink" title="htmlentitydefs"></a>htmlentitydefs</h1><h2 id="htmlentitydefs-entitydefs"><a href="#htmlentitydefs-entitydefs" class="headerlink" title="htmlentitydefs.entitydefs"></a><code>htmlentitydefs.entitydefs</code></h2><p>A dictionary mapping XHTML 1.0 entity definitions to their replacement text in ISO Latin-1.<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"> &gt;&gt;&gt;h.entitydefs</div><div class="line">&#123;<span class="string">'zwnj'</span>: <span class="string">'&amp;#8204;'</span>, <span class="string">'aring'</span>: <span class="string">'\xe5'</span>, <span class="string">'gt'</span>: <span class="string">'&gt;'</span>, <span class="string">'yen'</span>: <span class="string">'\xa5'</span>, <span class="string">'ograve'</span>: <span class="string">'\xf2'</span>, <span class="string">'Chi'</span>: <span class="string">'&amp;#935;'</span>, <span class="string">'delta'</span>: <span class="string">'&amp;#948;'</span>, <span class="string">'rang'</span>: <span class="string">'&amp;#9002;'</span>, <span class="string">'trade'</span>: <span class="string">'&amp;#8482;'</span>, <span class="string">'Ntilde'</span>: <span class="string">'\xd1'</span>, <span class="string">'upsih'</span>: <span class="string">'&amp;#978;'</span>, <span class="string">'Yacute'</span>: <span class="string">'\xdd'</span>, <span class="string">'Atilde'</span>: <span class="string">'\xc3'</span>, <span class="string">'radic'</span>: <span class="string">'&amp;#8730;'</span>, <span class="string">'otimes'</span>: <span class="string">'&amp;#8855;'</span>, <span class="string">'aelig'</span>: <span class="string">'\xe6'</span>, <span class="string">'oelig'</span>: <span class="string">'&amp;#339;'</span>, <span class="string">'equiv'</span>: <span class="string">'&amp;#8801;'</span>, <span class="string">'ni'</span>: <span class="string">'&amp;#8715;'</span>, <span class="string">'Psi'</span>: <span class="string">'&amp;#936;'</span>, <span class="string">'auml'</span>: <span class="string">'\xe4'</span>, <span class="string">'cup'</span>: <span class="string">'&amp;#8746;'</span>, <span class="string">'Acirc'</span>: <span class="string">'\xc2'</span>, <span class="string">'Epsilon'</span>: <span class="string">'&amp;#917;'</span>, <span class="string">'minus'</span>: <span class="string">'&amp;#8722;'</span>, <span class="string">'otilde'</span>: <span class="string">'\xf5'</span>, <span class="string">'lt'</span>: <span class="string">'&lt;'</span>, <span class="string">'Icirc'</span>: <span class="string">'\xce'</span>, <span class="string">'Eacute'</span>: <span class="string">'\xc9'</span>, <span class="string">'Oacute'</span>: <span class="string">'\xd3'</span>, <span class="string">'sbquo'</span>: <span class="string">'&amp;#8218;'</span>, <span class="string">'Prime'</span>: <span class="string">'&amp;#8243;'</span>, <span class="string">'oslash'</span>: <span class="string">'\xf8'</span>, <span class="string">'psi'</span>: <span class="string">'&amp;#968;'</span>, <span class="string">'Kappa'</span>: <span class="string">'&amp;#922;'</span>, <span class="string">'rsaquo'</span>: <span class="string">'&amp;#8250;'</span>, <span class="string">'acute'</span>: <span class="string">'\xb4'</span>, <span class="string">'uacute'</span>: <span class="string">'\xfa'</span>, <span class="string">'sigmaf'</span>: <span class="string">'&amp;#962;'</span>, <span class="string">'lrm'</span>: <span class="string">'&amp;#8206;'</span>, <span class="string">'zwj'</span>: <span class="string">'&amp;#8205;'</span>, <span class="string">'cedil'</span>: <span class="string">'\xb8'</span>, <span class="string">'Xi'</span>: <span class="string">'&amp;#926;'</span>, <span class="string">'uml'</span>: <span class="string">'\xa8'</span>, <span class="string">'not'</span>: <span class="string">'\xac'</span>, <span class="string">'ensp'</span>: <span class="string">'&amp;#8194;'</span>, <span class="string">'AElig'</span>: <span class="string">'\xc6'</span>, <span class="string">'prime'</span>: <span class="string">'&amp;#8242;'</span>, <span class="string">'Tau'</span>: <span class="string">'&amp;#932;'</span>, <span class="string">'lceil'</span>: <span class="string">'&amp;#8968;'</span>, <span class="string">'iquest'</span>: <span class="string">'\xbf'</span>, <span class="string">'alefsym'</span>: <span class="string">'&amp;#8501;'</span>, <span class="string">'laquo'</span>: <span class="string">'\xab'</span>, <span class="string">'dArr'</span>: <span class="string">'&amp;#8659;'</span>, <span class="string">'rdquo'</span>: <span class="string">'&amp;#8221;'</span>, <span class="string">'ge'</span>: <span class="string">'&amp;#8805;'</span>, <span class="string">'Igrave'</span>: <span class="string">'\xcc'</span>, <span class="string">'reg'</span>: <span class="string">'\xae'</span>, <span class="string">'micro'</span>: <span class="string">'\xb5'</span>, <span class="string">'shy'</span>: <span class="string">'\xad'</span>, <span class="string">'sdot'</span>: <span class="string">'&amp;#8901;'</span>, <span class="string">'nbsp'</span>: <span class="string">'\xa0'</span>, <span class="string">'lfloor'</span>: <span class="string">'&amp;#8970;'</span>, <span class="string">'lArr'</span>: <span class="string">'&amp;#8656;'</span>, <span class="string">'Auml'</span>: <span class="string">'\xc4'</span>, <span class="string">'brvbar'</span>: <span class="string">'\xa6'</span>, <span class="string">'Otilde'</span>: <span class="string">'\xd5'</span>, <span class="string">'szlig'</span>: <span class="string">'\xdf'</span>, <span class="string">'clubs'</span>: <span class="string">'&amp;#9827;'</span>, <span class="string">'agrave'</span>: <span class="string">'\xe0'</span>, <span class="string">'Ocirc'</span>: <span class="string">'\xd4'</span>, <span class="string">'Theta'</span>: <span class="string">'&amp;#920;'</span>, <span class="string">'Pi'</span>: <span class="string">'&amp;#928;'</span>, <span class="string">'OElig'</span>: <span class="string">'&amp;#338;'</span>, <span class="string">'Scaron'</span>: <span class="string">'&amp;#352;'</span>, <span class="string">'thetasym'</span>: <span class="string">'&amp;#977;'</span>, <span class="string">'egrave'</span>: <span class="string">'\xe8'</span>, <span class="string">'sub'</span>: <span class="string">'&amp;#8834;'</span>, <span class="string">'iexcl'</span>: <span class="string">'\xa1'</span>, <span class="string">'frac12'</span>: <span class="string">'\xbd'</span>, <span class="string">'ordf'</span>: <span class="string">'\xaa'</span>, <span class="string">'sum'</span>: <span class="string">'&amp;#8721;'</span>, <span class="string">'frac14'</span>: <span class="string">'\xbc'</span>, <span class="string">'prop'</span>: <span class="string">'&amp;#8733;'</span>, <span class="string">'Uuml'</span>: <span class="string">'\xdc'</span>, <span class="string">'ntilde'</span>: <span class="string">'\xf1'</span>, <span class="string">'sup'</span>: <span class="string">'&amp;#8835;'</span>, <span class="string">'asymp'</span>: <span class="string">'&amp;#8776;'</span>, <span class="string">'theta'</span>: <span class="string">'&amp;#952;'</span>, <span class="string">'prod'</span>: <span class="string">'&amp;#8719;'</span>, <span class="string">'nsub'</span>: <span class="string">'&amp;#8836;'</span>, <span class="string">'hArr'</span>: <span class="string">'&amp;#8660;'</span>, <span class="string">'rArr'</span>: <span class="string">'&amp;#8658;'</span>, <span class="string">'Oslash'</span>: <span class="string">'\xd8'</span>, <span class="string">'nu'</span>: <span class="string">'&amp;#957;'</span>, <span class="string">'THORN'</span>: <span class="string">'\xde'</span>, <span class="string">'yuml'</span>: <span class="string">'\xff'</span>, <span class="string">'infin'</span>: <span class="string">'&amp;#8734;'</span>, <span class="string">'Mu'</span>: <span class="string">'&amp;#924;'</span>, <span class="string">'le'</span>: <span class="string">'&amp;#8804;'</span>, <span class="string">'thinsp'</span>: <span class="string">'&amp;#8201;'</span>, <span class="string">'ecirc'</span>: <span class="string">'\xea'</span>, <span class="string">'bdquo'</span>: <span class="string">'&amp;#8222;'</span>, <span class="string">'Sigma'</span>: <span class="string">'&amp;#931;'</span>, <span class="string">'fnof'</span>: <span class="string">'&amp;#402;'</span>, <span class="string">'Aring'</span>: <span class="string">'\xc5'</span>, <span class="string">'tilde'</span>: <span class="string">'&amp;#732;'</span>, <span class="string">'frac34'</span>: <span class="string">'\xbe'</span>, <span class="string">'nabla'</span>: <span class="string">'&amp;#8711;'</span>, <span class="string">'mdash'</span>: <span class="string">'&amp;#8212;'</span>, <span class="string">'uarr'</span>: <span class="string">'&amp;#8593;'</span>, <span class="string">'permil'</span>: <span class="string">'&amp;#8240;'</span>, <span class="string">'Ugrave'</span>: <span class="string">'\xd9'</span>, <span class="string">'eta'</span>: <span class="string">'&amp;#951;'</span>, <span class="string">'Agrave'</span>: <span class="string">'\xc0'</span>, <span class="string">'sup1'</span>: <span class="string">'\xb9'</span>, <span class="string">'forall'</span>: <span class="string">'&amp;#8704;'</span>, <span class="string">'circ'</span>: <span class="string">'&amp;#710;'</span>, <span class="string">'eth'</span>: <span class="string">'\xf0'</span>, <span class="string">'rceil'</span>: <span class="string">'&amp;#8969;'</span>, <span class="string">'iuml'</span>: <span class="string">'\xef'</span>, <span class="string">'gamma'</span>: <span class="string">'&amp;#947;'</span>, <span class="string">'lambda'</span>: <span class="string">'&amp;#955;'</span>, <span class="string">'harr'</span>: <span class="string">'&amp;#8596;'</span>, <span class="string">'Egrave'</span>: <span class="string">'\xc8'</span>, <span class="string">'xi'</span>: <span class="string">'&amp;#958;'</span>, <span class="string">'real'</span>: <span class="string">'&amp;#8476;'</span>, <span class="string">'divide'</span>: <span class="string">'\xf7'</span>, <span class="string">'Ouml'</span>: <span class="string">'\xd6'</span>, <span class="string">'image'</span>: <span class="string">'&amp;#8465;'</span>, <span class="string">'hellip'</span>: <span class="string">'&amp;#8230;'</span>, <span class="string">'igrave'</span>: <span class="string">'\xec'</span>, <span class="string">'Yuml'</span>: <span class="string">'&amp;#376;'</span>, <span class="string">'ang'</span>: <span class="string">'&amp;#8736;'</span>, <span class="string">'sube'</span>: <span class="string">'&amp;#8838;'</span>, <span class="string">'loz'</span>: <span class="string">'&amp;#9674;'</span>, <span class="string">'frasl'</span>: <span class="string">'&amp;#8260;'</span>, <span class="string">'ETH'</span>: <span class="string">'\xd0'</span>, <span class="string">'lowast'</span>: <span class="string">'&amp;#8727;'</span>, <span class="string">'Nu'</span>: <span class="string">'&amp;#925;'</span>, <span class="string">'plusmn'</span>: <span class="string">'\xb1'</span>, <span class="string">'omega'</span>: <span class="string">'&amp;#969;'</span>, <span class="string">'chi'</span>: <span class="string">'&amp;#967;'</span>, <span class="string">'sup2'</span>: <span class="string">'\xb2'</span>, <span class="string">'sup3'</span>: <span class="string">'\xb3'</span>, <span class="string">'Aacute'</span>: <span class="string">'\xc1'</span>, <span class="string">'cent'</span>: <span class="string">'\xa2'</span>, <span class="string">'Iacute'</span>: <span class="string">'\xcd'</span>, <span class="string">'oline'</span>: <span class="string">'&amp;#8254;'</span>, <span class="string">'Ecirc'</span>: <span class="string">'\xca'</span>, <span class="string">'Beta'</span>: <span class="string">'&amp;#914;'</span>, <span class="string">'perp'</span>: <span class="string">'&amp;#8869;'</span>, <span class="string">'emsp'</span>: <span class="string">'&amp;#8195;'</span>, <span class="string">'there4'</span>: <span class="string">'&amp;#8756;'</span>, <span class="string">'pi'</span>: <span class="string">'&amp;#960;'</span>, <span class="string">'iota'</span>: <span class="string">'&amp;#953;'</span>, <span class="string">'empty'</span>: <span class="string">'&amp;#8709;'</span>, <span class="string">'euml'</span>: <span class="string">'\xeb'</span>, <span class="string">'notin'</span>: <span class="string">'&amp;#8713;'</span>, <span class="string">'Upsilon'</span>: <span class="string">'&amp;#933;'</span>, <span class="string">'para'</span>: <span class="string">'\xb6'</span>, <span class="string">'epsilon'</span>: <span class="string">'&amp;#949;'</span>, <span class="string">'Delta'</span>: <span class="string">'&amp;#916;'</span>, <span class="string">'weierp'</span>: <span class="string">'&amp;#8472;'</span>, <span class="string">'uuml'</span>: <span class="string">'\xfc'</span>, <span class="string">'part'</span>: <span class="string">'&amp;#8706;'</span>, <span class="string">'icirc'</span>: <span class="string">'\xee'</span>, <span class="string">'bull'</span>: <span class="string">'&amp;#8226;'</span>, <span class="string">'omicron'</span>: <span class="string">'&amp;#959;'</span>, <span class="string">'upsilon'</span>: <span class="string">'&amp;#965;'</span>, <span class="string">'copy'</span>: <span class="string">'\xa9'</span>, <span class="string">'Iuml'</span>: <span class="string">'\xcf'</span>, <span class="string">'Lambda'</span>: <span class="string">'&amp;#923;'</span>, <span class="string">'spades'</span>: <span class="string">'&amp;#9824;'</span>, <span class="string">'ndash'</span>: <span class="string">'&amp;#8211;'</span>, <span class="string">'kappa'</span>: <span class="string">'&amp;#954;'</span>, <span class="string">'ccedil'</span>: <span class="string">'\xe7'</span>, <span class="string">'Ucirc'</span>: <span class="string">'\xdb'</span>, <span class="string">'cap'</span>: <span class="string">'&amp;#8745;'</span>, <span class="string">'ocirc'</span>: <span class="string">'\xf4'</span>, <span class="string">'mu'</span>: <span class="string">'&amp;#956;'</span>, <span class="string">'scaron'</span>: <span class="string">'&amp;#353;'</span>, <span class="string">'lsquo'</span>: <span class="string">'&amp;#8216;'</span>, <span class="string">'isin'</span>: <span class="string">'&amp;#8712;'</span>, <span class="string">'Zeta'</span>: <span class="string">'&amp;#918;'</span>, <span class="string">'supe'</span>: <span class="string">'&amp;#8839;'</span>, <span class="string">'deg'</span>: <span class="string">'\xb0'</span>, <span class="string">'and'</span>: <span class="string">'&amp;#8743;'</span>, <span class="string">'tau'</span>: <span class="string">'&amp;#964;'</span>, <span class="string">'pound'</span>: <span class="string">'\xa3'</span>, <span class="string">'curren'</span>: <span class="string">'\xa4'</span>, <span class="string">'int'</span>: <span class="string">'&amp;#8747;'</span>, <span class="string">'ucirc'</span>: <span class="string">'\xfb'</span>, <span class="string">'rfloor'</span>: <span class="string">'&amp;#8971;'</span>, <span class="string">'crarr'</span>: <span class="string">'&amp;#8629;'</span>, <span class="string">'ugrave'</span>: <span class="string">'\xf9'</span>, <span class="string">'exist'</span>: <span class="string">'&amp;#8707;'</span>, <span class="string">'cong'</span>: <span class="string">'&amp;#8773;'</span>, <span class="string">'Dagger'</span>: <span class="string">'&amp;#8225;'</span>, <span class="string">'oplus'</span>: <span class="string">'&amp;#8853;'</span>, <span class="string">'times'</span>: <span class="string">'\xd7'</span>, <span class="string">'atilde'</span>: <span class="string">'\xe3'</span>, <span class="string">'piv'</span>: <span class="string">'&amp;#982;'</span>, <span class="string">'iacute'</span>: <span class="string">'\xed'</span>, <span class="string">'Euml'</span>: <span class="string">'\xcb'</span>, <span class="string">'Phi'</span>: <span class="string">'&amp;#934;'</span>, <span class="string">'raquo'</span>: <span class="string">'\xbb'</span>, <span class="string">'lsaquo'</span>: <span class="string">'&amp;#8249;'</span>, <span class="string">'quot'</span>: <span class="string">'"'</span>, <span class="string">'Uacute'</span>: <span class="string">'\xda'</span>, <span class="string">'Omicron'</span>: <span class="string">'&amp;#927;'</span>, <span class="string">'ne'</span>: <span class="string">'&amp;#8800;'</span>, <span class="string">'Iota'</span>: <span class="string">'&amp;#921;'</span>, <span class="string">'eacute'</span>: <span class="string">'\xe9'</span>, <span class="string">'rarr'</span>: <span class="string">'&amp;#8594;'</span>, <span class="string">'yacute'</span>: <span class="string">'\xfd'</span>, <span class="string">'Rho'</span>: <span class="string">'&amp;#929;'</span>, <span class="string">'darr'</span>: <span class="string">'&amp;#8595;'</span>, <span class="string">'Alpha'</span>: <span class="string">'&amp;#913;'</span>, <span class="string">'zeta'</span>: <span class="string">'&amp;#950;'</span>, <span class="string">'Omega'</span>: <span class="string">'&amp;#937;'</span>, <span class="string">'acirc'</span>: <span class="string">'\xe2'</span>, <span class="string">'sim'</span>: <span class="string">'&amp;#8764;'</span>, <span class="string">'phi'</span>: <span class="string">'&amp;#966;'</span>, <span class="string">'diams'</span>: <span class="string">'&amp;#9830;'</span>, <span class="string">'macr'</span>: <span class="string">'\xaf'</span>, <span class="string">'larr'</span>: <span class="string">'&amp;#8592;'</span>, <span class="string">'Ccedil'</span>: <span class="string">'\xc7'</span>, <span class="string">'ordm'</span>: <span class="string">'\xba'</span>, <span class="string">'uArr'</span>: <span class="string">'&amp;#8657;'</span>, <span class="string">'beta'</span>: <span class="string">'&amp;#946;'</span>, <span class="string">'Eta'</span>: <span class="string">'&amp;#919;'</span>, <span class="string">'rho'</span>: <span class="string">'&amp;#961;'</span>, <span class="string">'aacute'</span>: <span class="string">'\xe1'</span>, <span class="string">'alpha'</span>: <span class="string">'&amp;#945;'</span>, <span class="string">'rlm'</span>: <span class="string">'&amp;#8207;'</span>, <span class="string">'middot'</span>: <span class="string">'\xb7'</span>, <span class="string">'Gamma'</span>: <span class="string">'&amp;#915;'</span>, <span class="string">'euro'</span>: <span class="string">'&amp;#8364;'</span>, <span class="string">'lang'</span>: <span class="string">'&amp;#9001;'</span>, <span class="string">'dagger'</span>: <span class="string">'&amp;#8224;'</span>, <span class="string">'amp'</span>: <span class="string">'&amp;'</span>, <span class="string">'rsquo'</span>: <span class="string">'&amp;#8217;'</span>, <span class="string">'thorn'</span>: <span class="string">'\xfe'</span>, <span class="string">'ouml'</span>: <span class="string">'\xf6'</span>, <span class="string">'or'</span>: <span class="string">'&amp;#8744;'</span>, <span class="string">'Ograve'</span>: <span class="string">'\xd2'</span>, <span class="string">'sect'</span>: <span class="string">'\xa7'</span>, <span class="string">'ldquo'</span>: <span class="string">'&amp;#8220;'</span>, <span class="string">'hearts'</span>: <span class="string">'&amp;#9829;'</span>, <span class="string">'sigma'</span>: <span class="string">'&amp;#963;'</span>, <span class="string">'oacute'</span>: <span class="string">'\xf3'</span>&#125;</div></pre></td></tr></table></figure></p>
+<h2 id="htmlentitydefs-name2codepoint"><a href="#htmlentitydefs-name2codepoint" class="headerlink" title="htmlentitydefs.name2codepoint"></a><code>htmlentitydefs.name2codepoint</code></h2><p>A dictionary that maps HTML entity names to the Unicode code points.<br>将HTML实体映射到Unicode编码的字典<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">＃ &amp;gt</div><div class="line">&gt;&gt;&gt; h.name2codepoint[<span class="string">"gt"</span>]</div><div class="line">62</div><div class="line">&gt;&gt;&gt; unichr(62)</div><div class="line">u<span class="string">'&gt;'</span></div><div class="line"></div><div class="line">&gt;&gt;&gt;h.name2codepoint</div><div class="line">&#123;<span class="string">'aring'</span>: 229, <span class="string">'gt'</span>: 62, <span class="string">'sup'</span>: 8835, <span class="string">'Ntilde'</span>: 209, <span class="string">'upsih'</span>: 978, <span class="string">'Yacute'</span>: 221, <span class="string">'Atilde'</span>: 195, <span class="string">'radic'</span>: 8730, <span class="string">'otimes'</span>: 8855, <span class="string">'aelig'</span>: 230, <span class="string">'Psi'</span>: 936, <span class="string">'Uuml'</span>: 220, <span class="string">'Epsilon'</span>: 917, <span class="string">'Icirc'</span>: 206, <span class="string">'Eacute'</span>: 201, <span class="string">'Lambda'</span>: 923, <span class="string">'Prime'</span>: 8243, <span class="string">'Kappa'</span>: 922, <span class="string">'sigmaf'</span>: 962, <span class="string">'lrm'</span>: 8206, <span class="string">'cedil'</span>: 184, <span class="string">'kappa'</span>: 954, <span class="string">'AElig'</span>: 198, <span class="string">'prime'</span>: 8242, <span class="string">'Tau'</span>: 932, <span class="string">'lceil'</span>: 8968, <span class="string">'dArr'</span>: 8659, <span class="string">'ge'</span>: 8805, <span class="string">'sdot'</span>: 8901, <span class="string">'lfloor'</span>: 8970, <span class="string">'lArr'</span>: 8656, <span class="string">'Auml'</span>: 196, <span class="string">'brvbar'</span>: 166, <span class="string">'Otilde'</span>: 213, <span class="string">'Theta'</span>: 920, <span class="string">'Pi'</span>: 928, <span class="string">'OElig'</span>: 338, <span class="string">'Scaron'</span>: 352, <span class="string">'egrave'</span>: 232, <span class="string">'sub'</span>: 8834, <span class="string">'iexcl'</span>: 161, <span class="string">'ordf'</span>: 170, <span class="string">'sum'</span>: 8721, <span class="string">'ntilde'</span>: 241, <span class="string">'atilde'</span>: 227, <span class="string">'theta'</span>: 952, <span class="string">'nsub'</span>: 8836, <span class="string">'hArr'</span>: 8660, <span class="string">'Oslash'</span>: 216, <span class="string">'THORN'</span>: 222, <span class="string">'yuml'</span>: 255, <span class="string">'Mu'</span>: 924, <span class="string">'thinsp'</span>: 8201, <span class="string">'ecirc'</span>: 234, <span class="string">'bdquo'</span>: 8222, <span class="string">'Aring'</span>: 197, <span class="string">'nabla'</span>: 8711, <span class="string">'permil'</span>: 8240, <span class="string">'Ugrave'</span>: 217, <span class="string">'eta'</span>: 951, <span class="string">'Agrave'</span>: 192, <span class="string">'forall'</span>: 8704, <span class="string">'eth'</span>: 240, <span class="string">'rceil'</span>: 8969, <span class="string">'iuml'</span>: 239, <span class="string">'Egrave'</span>: 200, <span class="string">'divide'</span>: 247, <span class="string">'igrave'</span>: 236, <span class="string">'otilde'</span>: 245, <span class="string">'pound'</span>: 163, <span class="string">'frasl'</span>: 8260, <span class="string">'ETH'</span>: 208, <span class="string">'lowast'</span>: 8727, <span class="string">'chi'</span>: 967, <span class="string">'Aacute'</span>: 193, <span class="string">'cent'</span>: 162, <span class="string">'Beta'</span>: 914, <span class="string">'perp'</span>: 8869, <span class="string">'there4'</span>: 8756, <span class="string">'pi'</span>: 960, <span class="string">'empty'</span>: 8709, <span class="string">'euml'</span>: 235, <span class="string">'notin'</span>: 8713, <span class="string">'uuml'</span>: 252, <span class="string">'icirc'</span>: 238, <span class="string">'bull'</span>: 8226, <span class="string">'upsilon'</span>: 965, <span class="string">'Oacute'</span>: 211, <span class="string">'ensp'</span>: 8194, <span class="string">'ccedil'</span>: 231, <span class="string">'cap'</span>: 8745, <span class="string">'mu'</span>: 956, <span class="string">'deg'</span>: 176, <span class="string">'tau'</span>: 964, <span class="string">'emsp'</span>: 8195, <span class="string">'hellip'</span>: 8230, <span class="string">'ucirc'</span>: 251, <span class="string">'ugrave'</span>: 249, <span class="string">'cong'</span>: 8773, <span class="string">'Iota'</span>: 921, <span class="string">'quot'</span>: 34, <span class="string">'rarr'</span>: 8594, <span class="string">'Rho'</span>: 929, <span class="string">'uacute'</span>: 250, <span class="string">'acirc'</span>: 226, <span class="string">'sim'</span>: 8764, <span class="string">'phi'</span>: 966, <span class="string">'diams'</span>: 9830, <span class="string">'Euml'</span>: 203, <span class="string">'Ccedil'</span>: 199, <span class="string">'Eta'</span>: 919, <span class="string">'Gamma'</span>: 915, <span class="string">'euro'</span>: 8364, <span class="string">'thetasym'</span>: 977, <span class="string">'sect'</span>: 167, <span class="string">'ldquo'</span>: 8220, <span class="string">'hearts'</span>: 9829, <span class="string">'oacute'</span>: 243, <span class="string">'zwnj'</span>: 8204, <span class="string">'yen'</span>: 165, <span class="string">'ograve'</span>: 242, <span class="string">'Chi'</span>: 935, <span class="string">'trade'</span>: 8482, <span class="string">'xi'</span>: 958, <span class="string">'nbsp'</span>: 160, <span class="string">'tilde'</span>: 732, <span class="string">'lsaquo'</span>: 8249, <span class="string">'oelig'</span>: 339, <span class="string">'equiv'</span>: 8801, <span class="string">'le'</span>: 8804, <span class="string">'auml'</span>: 228, <span class="string">'cup'</span>: 8746, <span class="string">'Yuml'</span>: 376, <span class="string">'lt'</span>: 60, <span class="string">'Upsilon'</span>: 933, <span class="string">'ndash'</span>: 8211, <span class="string">'yacute'</span>: 253, <span class="string">'real'</span>: 8476, <span class="string">'psi'</span>: 968, <span class="string">'rsaquo'</span>: 8250, <span class="string">'darr'</span>: 8595, <span class="string">'Alpha'</span>: 913, <span class="string">'not'</span>: 172, <span class="string">'amp'</span>: 38, <span class="string">'oslash'</span>: 248, <span class="string">'acute'</span>: 180, <span class="string">'zwj'</span>: 8205, <span class="string">'laquo'</span>: 171, <span class="string">'rdquo'</span>: 8221, <span class="string">'Igrave'</span>: 204, <span class="string">'micro'</span>: 181, <span class="string">'shy'</span>: 173, <span class="string">'supe'</span>: 8839, <span class="string">'szlig'</span>: 223, <span class="string">'clubs'</span>: 9827, <span class="string">'agrave'</span>: 224, <span class="string">'Ocirc'</span>: 212, <span class="string">'harr'</span>: 8596, <span class="string">'larr'</span>: 8592, <span class="string">'frac12'</span>: 189, <span class="string">'prop'</span>: 8733, <span class="string">'circ'</span>: 710, <span class="string">'ocirc'</span>: 244, <span class="string">'asymp'</span>: 8776, <span class="string">'uml'</span>: 168, <span class="string">'prod'</span>: 8719, <span class="string">'reg'</span>: 174, <span class="string">'rlm'</span>: 8207, <span class="string">'infin'</span>: 8734, <span class="string">'Sigma'</span>: 931, <span class="string">'mdash'</span>: 8212, <span class="string">'uarr'</span>: 8593, <span class="string">'times'</span>: 215, <span class="string">'rArr'</span>: 8658, <span class="string">'or'</span>: 8744, <span class="string">'gamma'</span>: 947, <span class="string">'lambda'</span>: 955, <span class="string">'rang'</span>: 9002, <span class="string">'sup3'</span>: 179, <span class="string">'dagger'</span>: 8224, <span class="string">'Ouml'</span>: 214, <span class="string">'image'</span>: 8465, <span class="string">'alefsym'</span>: 8501, <span class="string">'sube'</span>: 8838, <span class="string">'alpha'</span>: 945, <span class="string">'Nu'</span>: 925, <span class="string">'plusmn'</span>: 177, <span class="string">'sup1'</span>: 185, <span class="string">'sup2'</span>: 178, <span class="string">'frac34'</span>: 190, <span class="string">'oline'</span>: 8254, <span class="string">'Delta'</span>: 916, <span class="string">'loz'</span>: 9674, <span class="string">'iota'</span>: 953, <span class="string">'iacute'</span>: 237, <span class="string">'para'</span>: 182, <span class="string">'ordm'</span>: 186, <span class="string">'epsilon'</span>: 949, <span class="string">'weierp'</span>: 8472, <span class="string">'part'</span>: 8706, <span class="string">'delta'</span>: 948, <span class="string">'omicron'</span>: 959, <span class="string">'copy'</span>: 169, <span class="string">'Iuml'</span>: 207, <span class="string">'Xi'</span>: 926, <span class="string">'Dagger'</span>: 8225, <span class="string">'Ograve'</span>: 210, <span class="string">'Ucirc'</span>: 219, <span class="string">'scaron'</span>: 353, <span class="string">'lsquo'</span>: 8216, <span class="string">'isin'</span>: 8712, <span class="string">'Zeta'</span>: 918, <span class="string">'minus'</span>: 8722, <span class="string">'and'</span>: 8743, <span class="string">'ang'</span>: 8736, <span class="string">'curren'</span>: 164, <span class="string">'int'</span>: 8747, <span class="string">'rfloor'</span>: 8971, <span class="string">'crarr'</span>: 8629, <span class="string">'exist'</span>: 8707, <span class="string">'oplus'</span>: 8853, <span class="string">'Acirc'</span>: 194, <span class="string">'piv'</span>: 982, <span class="string">'ni'</span>: 8715, <span class="string">'Phi'</span>: 934, <span class="string">'Iacute'</span>: 205, <span class="string">'Uacute'</span>: 218, <span class="string">'Omicron'</span>: 927, <span class="string">'ne'</span>: 8800, <span class="string">'iquest'</span>: 191, <span class="string">'sbquo'</span>: 8218, <span class="string">'Ecirc'</span>: 202, <span class="string">'zeta'</span>: 950, <span class="string">'Omega'</span>: 937, <span class="string">'nu'</span>: 957, <span class="string">'macr'</span>: 175, <span class="string">'frac14'</span>: 188, <span class="string">'aacute'</span>: 225, <span class="string">'uArr'</span>: 8657, <span class="string">'beta'</span>: 946, <span class="string">'fnof'</span>: 402, <span class="string">'rho'</span>: 961, <span class="string">'eacute'</span>: 233, <span class="string">'omega'</span>: 969, <span class="string">'middot'</span>: 183, <span class="string">'lang'</span>: 9001, <span class="string">'spades'</span>: 9824, <span class="string">'rsquo'</span>: 8217, <span class="string">'thorn'</span>: 254, <span class="string">'ouml'</span>: 246, <span class="string">'raquo'</span>: 187, <span class="string">'sigma'</span>: 963&#125;</div></pre></td></tr></table></figure></p>
+<h2 id="htmlentitydefs-codepoint2name"><a href="#htmlentitydefs-codepoint2name" class="headerlink" title="htmlentitydefs.codepoint2name"></a><code>htmlentitydefs.codepoint2name</code></h2><p>A dictionary that maps Unicode code points to HTML entity names.<br>将Unicode实体映射到HTML实体的字典<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"> &gt;&gt;&gt;h.codepoint2name</div><div class="line">&#123;8704: &apos;forall&apos;, 8194: &apos;ensp&apos;, 8195: &apos;emsp&apos;, 8709: &apos;empty&apos;, 8711: &apos;nabla&apos;, 8712: &apos;isin&apos;, 8201: &apos;thinsp&apos;, 8715: &apos;ni&apos;, 8204: &apos;zwnj&apos;, 8205: &apos;zwj&apos;, 8206: &apos;lrm&apos;, 8719: &apos;prod&apos;, 8721: &apos;sum&apos;, 8722: &apos;minus&apos;, 8211: &apos;ndash&apos;, 8212: &apos;mdash&apos;, 8727: &apos;lowast&apos;, 8216: &apos;lsquo&apos;, 8217: &apos;rsquo&apos;, 8730: &apos;radic&apos;, 175: &apos;macr&apos;, 8220: &apos;ldquo&apos;, 8221: &apos;rdquo&apos;, 8222: &apos;bdquo&apos;, 8224: &apos;dagger&apos;, 8225: &apos;Dagger&apos;, 8226: &apos;bull&apos;, 8230: &apos;hellip&apos;, 8743: &apos;and&apos;, 8744: &apos;or&apos;, 8745: &apos;cap&apos;, 8746: &apos;cup&apos;, 8747: &apos;int&apos;, 8240: &apos;permil&apos;, 8242: &apos;prime&apos;, 8243: &apos;Prime&apos;, 8756: &apos;there4&apos;, 8713: &apos;notin&apos;, 8249: &apos;lsaquo&apos;, 8250: &apos;rsaquo&apos;, 8764: &apos;sim&apos;, 62: &apos;gt&apos;, 8629: &apos;crarr&apos;, 9824: &apos;spades&apos;, 8260: &apos;frasl&apos;, 8773: &apos;cong&apos;, 8776: &apos;asymp&apos;, 8207: &apos;rlm&apos;, 9829: &apos;hearts&apos;, 8800: &apos;ne&apos;, 8801: &apos;equiv&apos;, 9827: &apos;clubs&apos;, 8804: &apos;le&apos;, 8805: &apos;ge&apos;, 9830: &apos;diams&apos;, 38: &apos;amp&apos;, 8834: &apos;sub&apos;, 8835: &apos;sup&apos;, 8836: &apos;nsub&apos;, 8838: &apos;sube&apos;, 8839: &apos;supe&apos;, 8853: &apos;oplus&apos;, 8855: &apos;otimes&apos;, 8734: &apos;infin&apos;, 8218: &apos;sbquo&apos;, 8901: &apos;sdot&apos;, 160: &apos;nbsp&apos;, 161: &apos;iexcl&apos;, 162: &apos;cent&apos;, 163: &apos;pound&apos;, 164: &apos;curren&apos;, 8869: &apos;perp&apos;, 166: &apos;brvbar&apos;, 167: &apos;sect&apos;, 168: &apos;uml&apos;, 169: &apos;copy&apos;, 170: &apos;ordf&apos;, 171: &apos;laquo&apos;, 8364: &apos;euro&apos;, 173: &apos;shy&apos;, 174: &apos;reg&apos;, 8733: &apos;prop&apos;, 176: &apos;deg&apos;, 177: &apos;plusmn&apos;, 178: &apos;sup2&apos;, 179: &apos;sup3&apos;, 180: &apos;acute&apos;, 181: &apos;micro&apos;, 182: &apos;para&apos;, 183: &apos;middot&apos;, 184: &apos;cedil&apos;, 185: &apos;sup1&apos;, 186: &apos;ordm&apos;, 187: &apos;raquo&apos;, 188: &apos;frac14&apos;, 189: &apos;frac12&apos;, 190: &apos;frac34&apos;, 191: &apos;iquest&apos;, 192: &apos;Agrave&apos;, 193: &apos;Aacute&apos;, 194: &apos;Acirc&apos;, 195: &apos;Atilde&apos;, 196: &apos;Auml&apos;, 197: &apos;Aring&apos;, 198: &apos;AElig&apos;, 199: &apos;Ccedil&apos;, 200: &apos;Egrave&apos;, 201: &apos;Eacute&apos;, 202: &apos;Ecirc&apos;, 203: &apos;Euml&apos;, 204: &apos;Igrave&apos;, 34: &apos;quot&apos;, 206: &apos;Icirc&apos;, 207: &apos;Iuml&apos;, 208: &apos;ETH&apos;, 209: &apos;Ntilde&apos;, 210: &apos;Ograve&apos;, 211: &apos;Oacute&apos;, 212: &apos;Ocirc&apos;, 213: &apos;Otilde&apos;, 214: &apos;Ouml&apos;, 215: &apos;times&apos;, 216: &apos;Oslash&apos;, 217: &apos;Ugrave&apos;, 218: &apos;Uacute&apos;, 219: &apos;Ucirc&apos;, 220: &apos;Uuml&apos;, 221: &apos;Yacute&apos;, 222: &apos;THORN&apos;, 223: &apos;szlig&apos;, 224: &apos;agrave&apos;, 225: &apos;aacute&apos;, 226: &apos;acirc&apos;, 227: &apos;atilde&apos;, 228: &apos;auml&apos;, 229: &apos;aring&apos;, 230: &apos;aelig&apos;, 231: &apos;ccedil&apos;, 232: &apos;egrave&apos;, 205: &apos;Iacute&apos;, 234: &apos;ecirc&apos;, 235: &apos;euml&apos;, 236: &apos;igrave&apos;, 8658: &apos;rArr&apos;, 238: &apos;icirc&apos;, 239: &apos;iuml&apos;, 240: &apos;eth&apos;, 241: &apos;ntilde&apos;, 242: &apos;ograve&apos;, 243: &apos;oacute&apos;, 244: &apos;ocirc&apos;, 245: &apos;otilde&apos;, 246: &apos;ouml&apos;, 247: &apos;divide&apos;, 248: &apos;oslash&apos;, 249: &apos;ugrave&apos;, 250: &apos;uacute&apos;, 251: &apos;ucirc&apos;, 252: &apos;uuml&apos;, 253: &apos;yacute&apos;, 254: &apos;thorn&apos;, 255: &apos;yuml&apos;, 172: &apos;not&apos;, 8968: &apos;lceil&apos;, 8969: &apos;rceil&apos;, 8970: &apos;lfloor&apos;, 8971: &apos;rfloor&apos;, 8465: &apos;image&apos;, 8472: &apos;weierp&apos;, 8476: &apos;real&apos;, 8482: &apos;trade&apos;, 732: &apos;tilde&apos;, 9002: &apos;rang&apos;, 8736: &apos;ang&apos;, 402: &apos;fnof&apos;, 8706: &apos;part&apos;, 8501: &apos;alefsym&apos;, 710: &apos;circ&apos;, 338: &apos;OElig&apos;, 339: &apos;oelig&apos;, 352: &apos;Scaron&apos;, 353: &apos;scaron&apos;, 8593: &apos;uarr&apos;, 60: &apos;lt&apos;, 8594: &apos;rarr&apos;, 8707: &apos;exist&apos;, 8595: &apos;darr&apos;, 8254: &apos;oline&apos;, 233: &apos;eacute&apos;, 376: &apos;Yuml&apos;, 916: &apos;Delta&apos;, 237: &apos;iacute&apos;, 8592: &apos;larr&apos;, 913: &apos;Alpha&apos;, 914: &apos;Beta&apos;, 915: &apos;Gamma&apos;, 8596: &apos;harr&apos;, 917: &apos;Epsilon&apos;, 918: &apos;Zeta&apos;, 919: &apos;Eta&apos;, 920: &apos;Theta&apos;, 921: &apos;Iota&apos;, 922: &apos;Kappa&apos;, 923: &apos;Lambda&apos;, 924: &apos;Mu&apos;, 925: &apos;Nu&apos;, 926: &apos;Xi&apos;, 927: &apos;Omicron&apos;, 928: &apos;Pi&apos;, 929: &apos;Rho&apos;, 931: &apos;Sigma&apos;, 932: &apos;Tau&apos;, 933: &apos;Upsilon&apos;, 934: &apos;Phi&apos;, 935: &apos;Chi&apos;, 936: &apos;Psi&apos;, 937: &apos;Omega&apos;, 945: &apos;alpha&apos;, 946: &apos;beta&apos;, 947: &apos;gamma&apos;, 948: &apos;delta&apos;, 949: &apos;epsilon&apos;, 950: &apos;zeta&apos;, 951: &apos;eta&apos;, 952: &apos;theta&apos;, 953: &apos;iota&apos;, 954: &apos;kappa&apos;, 955: &apos;lambda&apos;, 956: &apos;mu&apos;, 957: &apos;nu&apos;, 958: &apos;xi&apos;, 959: &apos;omicron&apos;, 960: &apos;pi&apos;, 961: &apos;rho&apos;, 962: &apos;sigmaf&apos;, 963: &apos;sigma&apos;, 964: &apos;tau&apos;, 965: &apos;upsilon&apos;, 966: &apos;phi&apos;, 967: &apos;chi&apos;, 968: &apos;psi&apos;, 969: &apos;omega&apos;, 9674: &apos;loz&apos;, 8656: &apos;lArr&apos;, 977: &apos;thetasym&apos;, 978: &apos;upsih&apos;, 8659: &apos;dArr&apos;, 8660: &apos;hArr&apos;, 982: &apos;piv&apos;, 165: &apos;yen&apos;, 8657: &apos;uArr&apos;, 9001: &apos;lang&apos;&#125;</div></pre></td></tr></table></figure></p>
+<h1 id="模拟登录"><a href="#模拟登录" class="headerlink" title="模拟登录"></a>模拟登录</h1><p>模拟登录，获取form表单中所有input标签中的属性的名称和默认值，然后根据需要修改这些值，组合后提交到服务器。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/env python</span></div><div class="line"><span class="comment">#coding:utf-8</span></div><div class="line"><span class="comment">#@author:cmustard</span></div><div class="line"></div><div class="line">from HTMLParser import HTMLParser</div><div class="line">import urllib2</div><div class="line"><span class="string">""</span><span class="string">"</span></div><div class="line"><span class="string">模拟wp后台登录</span></div><div class="line"><span class="string">"</span><span class="string">""</span></div><div class="line"></div><div class="line">class MyHTMLParser(HTMLParser):</div><div class="line">    def __init__(self):</div><div class="line">        HTMLParser.__init__(self)</div><div class="line">        self.result = &#123;&#125;</div><div class="line"></div><div class="line">    def handle_starttag(self, tag, attrs):</div><div class="line">        <span class="keyword">if</span> tag == <span class="string">'input'</span>:</div><div class="line">            tag_name = None</div><div class="line">            tag_value = None</div><div class="line">            <span class="keyword">for</span> name, value <span class="keyword">in</span> attrs:</div><div class="line"></div><div class="line">                <span class="keyword">if</span> name == <span class="string">'name'</span>:  <span class="comment"># 获取参数的名称</span></div><div class="line">                    tag_name = value</div><div class="line">                <span class="keyword">if</span> name == <span class="string">'value'</span>: <span class="comment"># 获取参数的值</span></div><div class="line">                    tag_value = value</div><div class="line">                <span class="keyword">if</span> tag_name is not None:  <span class="comment"># 组合参数的名称和参数的值</span></div><div class="line">                    self.result[tag_name] = tag_value</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line">def main():</div><div class="line">    url = <span class="string">"http://www.jinglingshu.org/wp-login.php"</span></div><div class="line">    req = urllib2.Request(url)</div><div class="line">    html = urllib2.urlopen(req)</div><div class="line">    cookie = html.headers[<span class="string">'set-cookie'</span>]</div><div class="line">    content = html.read()</div><div class="line">    parser = MyHTMLParser()</div><div class="line">    parser.feed(content)</div><div class="line">    params = parser.result</div><div class="line">    <span class="keyword">for</span> key, value <span class="keyword">in</span> params.items():</div><div class="line">        <span class="keyword">if</span> key == <span class="string">'log'</span>:</div><div class="line">            params[key] = <span class="string">'admin'</span></div><div class="line">        <span class="keyword">if</span> key == <span class="string">"pwd"</span>:</div><div class="line">            params[key] = <span class="string">'123456'</span></div><div class="line">    data = <span class="string">""</span></div><div class="line">    <span class="keyword">for</span> key,value <span class="keyword">in</span> params.items():</div><div class="line">        data += key+<span class="string">"="</span>+value+<span class="string">"&amp;"</span></div><div class="line">    data = data[:-1]</div><div class="line">    req.add_header(<span class="string">"cookie"</span>,cookie)</div><div class="line">    html = urllib2.urlopen(req,data=data)</div><div class="line">    <span class="keyword">if</span> html.read().find(<span class="string">"The password you entered for the username"</span>)&gt;=0:</div><div class="line">        <span class="built_in">print</span> u<span class="string">"登录失败"</span></div><div class="line">    <span class="keyword">else</span>:</div><div class="line">        <span class="built_in">print</span> u<span class="string">"登录成功"</span></div><div class="line"></div><div class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</div><div class="line">    main()</div></pre></td></tr></table></figure></p>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -224,7 +284,7 @@ var _hmt = _hmt || [];
 		</ul>
 	</div>
 
-          
+      
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
@@ -237,262 +297,138 @@ var _hmt = _hmt || [];
 	</div>
 
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://www.cmustarc.com/2017/10/24/HTMLParser模块/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/10/23/SQL注入/" class="archive-article-date">
-  	<time datetime="2017-10-23T08:44:11.481Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-23</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2017/10/23/SQL注入/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">SQL注入整理(一)</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/10/23/SQL注入/">SQL注入整理(一)</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">sql注入</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Web安全//" class="article-tag-list-link color1">Web安全</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#简介"><span class="toc-number">1.</span> <span class="toc-text">简介</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#类的定义和常用方法"><span class="toc-number">2.</span> <span class="toc-text">类的定义和常用方法</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#类的定义"><span class="toc-number">2.1.</span> <span class="toc-text">类的定义</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#常用方法"><span class="toc-number">2.2.</span> <span class="toc-text">常用方法</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#htmlentitydefs"><span class="toc-number">3.</span> <span class="toc-text">htmlentitydefs</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#htmlentitydefs-entitydefs"><span class="toc-number">3.1.</span> <span class="toc-text">htmlentitydefs.entitydefs</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#htmlentitydefs-name2codepoint"><span class="toc-number">3.2.</span> <span class="toc-text">htmlentitydefs.name2codepoint</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#htmlentitydefs-codepoint2name"><span class="toc-number">3.3.</span> <span class="toc-text">htmlentitydefs.codepoint2name</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#模拟登录"><span class="toc-number">4.</span> <span class="toc-text">模拟登录</span></a></li></ol>
+                    </div>
+                </span>
+            </div>
         </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
+        
+    </div>
+</aside>
+
+
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/10/20/列表/" class="archive-article-date">
-  	<time datetime="2017-10-20T06:44:02.397Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-20</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/10/20/列表/">列表</a>
-    </h1>
-  
+  <div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="HTMLParser模块" data-title="HTMLParser模块" data-url="http://www.cmustarc.com/2017/10/24/HTMLParser模块/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"true"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">python</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/python//" class="article-tag-list-link color2">python</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/10/19/偏函数/" class="archive-article-date">
-  	<time datetime="2017-10-20T02:55:23.606Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-20</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/10/19/偏函数/">偏函数</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">python</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/python//" class="article-tag-list-link color2">python</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/10/18/with上下文管理器/" class="archive-article-date">
-  	<time datetime="2017-10-19T03:26:14.613Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-19</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/10/18/with上下文管理器/">上下文管理器与with语句</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">python</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/python//" class="article-tag-list-link color2">python</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/10/13/v2ray/" class="archive-article-date">
-  	<time datetime="2017-10-13T10:18:48.745Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-13</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/10/13/v2ray/">v2ray 配置文件</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">科学上网</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/notes//" class="article-tag-list-link color1">notes</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
   
   
-    </div></section>
   
 
-    
+  
+
+  
+
+  
+
 
 
           </div>
@@ -515,8 +451,8 @@ var _hmt = _hmt || [];
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: true,
