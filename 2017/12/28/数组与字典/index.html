@@ -5,18 +5,18 @@
   
   <title>数组与数组切片 | glamor的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="数组是go语言中最常见的数据结构之一，数组时有同一类型数据组成的集合 0x01 数组声明12345[32] byte      //长度为32的数组，每一个元素为一个字节[2*N] struct &amp;#123;x,y int32&amp;#125;      //复杂类型数组[1000] *float64      //指针数组[3][5] int      //二维数组[2][2][2]float64">
-<meta name="keywords" content="golang,基础">
+  <meta name="description" content="数组是go语言中最常见的数据结构之一，数组时有同一类型数据组成的集合">
+<meta name="keywords" content="基础,golang">
 <meta property="og:type" content="article">
 <meta property="og:title" content="数组与数组切片">
 <meta property="og:url" content="http://www.cmustarc.com/2017/12/28/数组与字典/index.html">
 <meta property="og:site_name" content="glamor的博客">
-<meta property="og:description" content="数组是go语言中最常见的数据结构之一，数组时有同一类型数据组成的集合 0x01 数组声明12345[32] byte      //长度为32的数组，每一个元素为一个字节[2*N] struct &amp;#123;x,y int32&amp;#125;      //复杂类型数组[1000] *float64      //指针数组[3][5] int      //二维数组[2][2][2]float64">
+<meta property="og:description" content="数组是go语言中最常见的数据结构之一，数组时有同一类型数据组成的集合">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2017-12-28T13:13:48.092Z">
+<meta property="og:updated_time" content="2017-12-28T13:18:41.123Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="数组与数组切片">
-<meta name="twitter:description" content="数组是go语言中最常见的数据结构之一，数组时有同一类型数据组成的集合 0x01 数组声明12345[32] byte      //长度为32的数组，每一个元素为一个字节[2*N] struct &amp;#123;x,y int32&amp;#125;      //复杂类型数组[1000] *float64      //指针数组[3][5] int      //二维数组[2][2][2]float64">
+<meta name="twitter:description" content="数组是go语言中最常见的数据结构之一，数组时有同一类型数据组成的集合">
   
     <link rel="alternative" href="/atom.xml" title="glamor的博客" type="application/atom+xml">
   
@@ -205,7 +205,7 @@
   
     <div class="article-meta">
       <a href="/2017/12/28/数组与字典/" class="article-date">
-      <time datetime="2017-12-28T13:13:48.092Z" itemprop="datePublished">2017-12-28</time>
+      <time datetime="2017-12-28T13:18:41.123Z" itemprop="datePublished">2017-12-28</time>
 </a>
     </div>
   
@@ -243,7 +243,7 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>数组是go语言中最常见的数据结构之一，数组时有<strong>同一类型数据组成的集合</strong></p>
+        <p>数组是go语言中最常见的数据结构之一，数组时有<strong>同一类型数据组成的集合</strong><br><a id="more"></a></p>
 <h1 id="0x01-数组声明"><a href="#0x01-数组声明" class="headerlink" title="0x01 数组声明"></a>0x01 数组声明</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">[32] byte      //长度为32的数组，每一个元素为一个字节</div><div class="line">[2*N] struct &#123;x,y int32&#125;      //复杂类型数组</div><div class="line">[1000] *float64      //指针数组</div><div class="line">[3][5] int      //二维数组</div><div class="line">[2][2][2]float64    //等同于[2]([2][2]float64)</div></pre></td></tr></table></figure>
 <p>在go语言中，数组的长度在定义后就<strong>不能够进行更改</strong>，在声明长度是可以是一个常量或者一个常量表达式，可以使用go语言内置的<code>len()</code>函数来获取数组的长度<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">arrlength := len(arr)</div></pre></td></tr></table></figure></p>
 <h2 id="元素访问"><a href="#元素访问" class="headerlink" title="元素访问"></a>元素访问</h2><ul>
@@ -337,8 +337,8 @@
     <div class="copyright">
         <p><span>本文标题:</span><a href="/2017/12/28/数组与字典/">数组与数组切片</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 glamor 的个人博客">glamor</a></p>
-        <p><span>发布时间:</span>2017年12月28日 - 21时13分</p>
-        <p><span>最后更新:</span>2017年12月28日 - 08时13分</p>
+        <p><span>发布时间:</span>2017年12月28日 - 21时18分</p>
+        <p><span>最后更新:</span>2017年12月28日 - 08时18分</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2017/12/28/数组与字典/" title="数组与数组切片">http://www.cmustarc.com/2017/12/28/数组与字典/</a>
             <span class="copy-path" data-clipboard-text="原文: http://www.cmustarc.com/2017/12/28/数组与字典/　　作者: glamor" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
