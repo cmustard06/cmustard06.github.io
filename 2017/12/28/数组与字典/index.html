@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>数组与数组切片 | glamor的博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="数组是go语言中最常见的数据结构之一，数组时有同一类型数据组成的集合 0x01 数组声明12345[32] byte      //长度为32的数组，每一个元素为一个字节[2*N] struct &amp;#123;x,y int32&amp;#125;      //复杂类型数组[1000] *float64      //指针数组[3][5] int      //二维数组[2][2][2]float64">
+<meta name="keywords" content="golang,基础">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数组与数组切片">
+<meta property="og:url" content="http://www.cmustarc.com/2017/12/28/数组与字典/index.html">
+<meta property="og:site_name" content="glamor的博客">
+<meta property="og:description" content="数组是go语言中最常见的数据结构之一，数组时有同一类型数据组成的集合 0x01 数组声明12345[32] byte      //长度为32的数组，每一个元素为一个字节[2*N] struct &amp;#123;x,y int32&amp;#125;      //复杂类型数组[1000] *float64      //指针数组[3][5] int      //二维数组[2][2][2]float64">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2017-12-28T13:13:48.092Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="数组与数组切片">
+<meta name="twitter:description" content="数组是go语言中最常见的数据结构之一，数组时有同一类型数据组成的集合 0x01 数组声明12345[32] byte      //长度为32的数组，每一个元素为一个字节[2*N] struct &amp;#123;x,y int32&amp;#125;      //复杂类型数组[1000] *float64      //指针数组[3][5] int      //二维数组[2][2][2]float64">
+  
+    <link rel="alternative" href="/atom.xml" title="glamor的博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/img/favicon.png">
+  
+  
+      <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  
+  
+      <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  
+  <!-- 加载特效 -->
+    <script src="/js/pace.js"></script>
+    <link href="/css/pace/pace-theme-flash.css" rel="stylesheet" />
+  <script>
+      var yiliaConfig = {
+          rootUrl: '/',
+          fancybox: true,
+          animate: true,
+          isHome: false,
+          isPost: true,
+          isArchive: false,
+          isTag: false,
+          isCategory: false,
+          open_in_new: false
+      }
+  </script>
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            
+            <img lazy-src="/img/head.jpg" class="js-avatar">
+            
+        </a>
+
+        <hgroup>
+          <h1 class="header-author"><a href="/" title="Hi Mate">glamor</a></h1>
+        </hgroup>
+
+        
+        <p class="header-subtitle">莫等闲，白了少年头空悲切...</p>
+        
+        
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">博客首页</a></li>
+                        
+                            <li><a href="/categories/python">人生苦短</a></li>
+                        
+                            <li><a href="/categories/Web安全">安全海洋</a></li>
+                        
+                            <li><a href="/categories/notes">随笔</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fl mail" target="_blank" href="mailto:root@cmustard.com" title="mail">mail</a>
+                            
+                                <a class="fl github" target="_blank" href="https://github.com/cmustard06" title="github">github</a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <a href="/tags/TCP-IP/" style="font-size: 10px;">TCP/IP</a> <a href="/tags/go/" style="font-size: 10px;">go</a> <a href="/tags/golang/" style="font-size: 17.5px;">golang</a> <a href="/tags/poc/" style="font-size: 12.5px;">poc</a> <a href="/tags/python/" style="font-size: 20px;">python</a> <a href="/tags/python3/" style="font-size: 12.5px;">python3</a> <a href="/tags/sql注入/" style="font-size: 10px;">sql注入</a> <a href="/tags/struct/" style="font-size: 10px;">struct</a> <a href="/tags/struts/" style="font-size: 10px;">struts</a> <a href="/tags/tcp/" style="font-size: 10px;">tcp</a> <a href="/tags/tcp-ip/" style="font-size: 10px;">tcp/ip</a> <a href="/tags/事件驱动/" style="font-size: 10px;">事件驱动</a> <a href="/tags/代理/" style="font-size: 10px;">代理</a> <a href="/tags/博客/" style="font-size: 10px;">博客</a> <a href="/tags/基础/" style="font-size: 15px;">基础</a> <a href="/tags/并发/" style="font-size: 10px;">并发</a> <a href="/tags/异步IO/" style="font-size: 10px;">异步IO</a> <a href="/tags/正则表达式/" style="font-size: 10px;">正则表达式</a> <a href="/tags/爬虫/" style="font-size: 10px;">爬虫</a> <a href="/tags/科学上网/" style="font-size: 10px;">科学上网</a> <a href="/tags/编程/" style="font-size: 10px;">编程</a> <a href="/tags/编程语言/" style="font-size: 12.5px;">编程语言</a> <a href="/tags/网络/" style="font-size: 12.5px;">网络</a> <a href="/tags/网络基础知识/" style="font-size: 10px;">网络基础知识</a> <a href="/tags/网络编程/" style="font-size: 10px;">网络编程</a> <a href="/tags/集合/" style="font-size: 10px;">集合</a>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.dmmjy9.com">dmmjy9</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="Me">glamor</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                
+                    <img lazy-src="/img/head.jpg" class="js-avatar">
+                
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="Me">glamor</a></h1>
+            </hgroup>
+            
+            <p class="header-subtitle">莫等闲，白了少年头空悲切...</p>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">博客首页</a></li>
+                
+                    <li><a href="/categories/python">人生苦短</a></li>
+                
+                    <li><a href="/categories/Web安全">安全海洋</a></li>
+                
+                    <li><a href="/categories/notes">随笔</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                <div class="social">
+                    
+                        <a class="mail" target="_blank" href="mailto:root@cmustard.com" title="mail">mail</a>
+                    
+                        <a class="github" target="_blank" href="https://github.com/cmustard06" title="github">github</a>
+                    
+                </div>
+            </nav>
+        </header>                
+    </div>
+</nav>
+      <div class="body-wrap"><article id="post-数组与字典" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2017/12/28/数组与字典/" class="article-date">
+      <time datetime="2017-12-28T13:13:48.092Z" itemprop="datePublished">2017-12-28</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      数组与数组切片
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/notes/">notes</a>
+    </div>
+
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/golang/">golang</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/基础/">基础</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>数组是go语言中最常见的数据结构之一，数组时有<strong>同一类型数据组成的集合</strong></p>
+<h1 id="0x01-数组声明"><a href="#0x01-数组声明" class="headerlink" title="0x01 数组声明"></a>0x01 数组声明</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">[32] byte      //长度为32的数组，每一个元素为一个字节</div><div class="line">[2*N] struct &#123;x,y int32&#125;      //复杂类型数组</div><div class="line">[1000] *float64      //指针数组</div><div class="line">[3][5] int      //二维数组</div><div class="line">[2][2][2]float64    //等同于[2]([2][2]float64)</div></pre></td></tr></table></figure>
+<p>在go语言中，数组的长度在定义后就<strong>不能够进行更改</strong>，在声明长度是可以是一个常量或者一个常量表达式，可以使用go语言内置的<code>len()</code>函数来获取数组的长度<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">arrlength := len(arr)</div></pre></td></tr></table></figure></p>
+<h2 id="元素访问"><a href="#元素访问" class="headerlink" title="元素访问"></a>元素访问</h2><ul>
+<li>可以使用数组下标来进行访问，下标都是从0开始的<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">package main</div><div class="line"></div><div class="line">import <span class="string">"fmt"</span></div><div class="line"></div><div class="line">func <span class="function"><span class="title">main</span></span>() &#123;</div><div class="line">	var array [10]int   //声明数组长度为10的整型数组</div><div class="line">	array = [10]int&#123;1, 2, 3, 4, 5, 6, 7, 8, 9, 0&#125;  // 初始化这个数组</div><div class="line">	<span class="keyword">for</span> i := 0; i &lt; len(array); i++ &#123;</div><div class="line">		fmt.Println(<span class="string">"Elements:"</span>, i, <span class="string">" of array is "</span>, array[i])</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>遍历结果<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">Elements: 0  of array is  1</div><div class="line">Elements: 1  of array is  2</div><div class="line">Elements: 2  of array is  3</div><div class="line">Elements: 3  of array is  4</div><div class="line">Elements: 4  of array is  5</div><div class="line">Elements: 5  of array is  6</div><div class="line">Elements: 6  of array is  7</div><div class="line">Elements: 7  of array is  8</div><div class="line">Elements: 8  of array is  9</div><div class="line">Elements: 9  of array is  0</div></pre></td></tr></table></figure></p>
+<ul>
+<li><code>range</code><strong>关键字</strong>用于便捷的遍历容器中的元素<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">for</span> i, v := range array &#123;   //是关键字而不是函数</div><div class="line">	fmt.Println(<span class="string">"Array Elements:["</span>, i, <span class="string">"]="</span>, v)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p><em>range有两个返回值，一个是元素的数组下标，第二个是元素的值</em><br>结果<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">Array Elements:[ 0 ]= 1</div><div class="line">Array Elements:[ 1 ]= 2</div><div class="line">Array Elements:[ 2 ]= 3</div><div class="line">Array Elements:[ 3 ]= 4</div><div class="line">Array Elements:[ 4 ]= 5</div><div class="line">Array Elements:[ 5 ]= 6</div><div class="line">Array Elements:[ 6 ]= 7</div><div class="line">Array Elements:[ 7 ]= 8</div><div class="line">Array Elements:[ 8 ]= 9</div><div class="line">Array Elements:[ 9 ]= 0</div></pre></td></tr></table></figure></p>
+<h2 id="值类型"><a href="#值类型" class="headerlink" title="值类型"></a>值类型</h2><p>在go语言中，数组是一个<strong>值类型</strong>，所有的值类型变量在复制和作为参数传递时都将产生一次复制动作。简单来说就是如果将数组作为函数的参数类型，那么将数组传入到函数内部进行修改，并不会影响原数组的值。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">package main</div><div class="line"></div><div class="line">import <span class="string">"fmt"</span></div><div class="line"></div><div class="line">func modify(array [10]int) &#123;</div><div class="line">	array[0] = 1000</div><div class="line">	fmt.Println(<span class="string">"In modify(), array values:"</span>, array) //In modify(), array values: [1000 2 3 4 5 6 7 8 9 0]</div><div class="line">&#125;</div><div class="line"></div><div class="line">func <span class="function"><span class="title">main</span></span>() &#123;</div><div class="line">	var array [10]int</div><div class="line">	array = [10]int&#123;1, 2, 3, 4, 5, 6, 7, 8, 9, 0&#125;</div><div class="line">	modify(array)</div><div class="line">	fmt.Println(<span class="string">"In main(), array value:"</span>, array)  // In main(), array value: [1 2 3 4 5 6 7 8 9 0]</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h1 id="数组切片"><a href="#数组切片" class="headerlink" title="数组切片"></a>数组切片</h1><p>由于数组在定义之后，数组的长度无法修改，数组是值类型，每传递一次都会产生一份副本，因此Go语言提供了数组切片来弥补数组的不足</p>
+<p>数组切片拥有自己的数据结构，而不单单是一个指针。数组切片的数据结构可以抽象为以下3个变量</p>
+<ul>
+<li>一个指向原生数组的指针</li>
+<li>数组切片中的元素个数</li>
+<li>数组切片已经分配的存储空间<br>基于数组，数组切片添加了一系列的管理功能，可以随时动态扩充存放空间。<h2 id="创建数组切片"><a href="#创建数组切片" class="headerlink" title="创建数组切片"></a>创建数组切片</h2>两种方法，一种是基于数组创建，另一种是直接创建。<h3 id="基于数组创建"><a href="#基于数组创建" class="headerlink" title="基于数组创建"></a>基于数组创建</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line">package main</div><div class="line"></div><div class="line">import <span class="string">"fmt"</span></div><div class="line"></div><div class="line">func modify(array [10]int) &#123;</div><div class="line">	array[0] = 1000</div><div class="line">	fmt.Println(<span class="string">"In modify(), array values:"</span>, array)</div><div class="line">&#125;</div><div class="line"></div><div class="line">func <span class="function"><span class="title">main</span></span>() &#123;</div><div class="line">	//定义一个数组</div><div class="line">	var myarray [10]int</div><div class="line">	myarray = [10]int&#123;11, 2, 3, 4, 5, 6, 7, 8, 9, 10&#125;</div><div class="line"></div><div class="line">	//基于数组创建一个数组切片</div><div class="line">	var mySlice []int = myarray[:5]</div><div class="line">	fmt.Println(<span class="string">"Elements of myArray:"</span>)</div><div class="line"></div><div class="line">	<span class="keyword">for</span> _, v := range myarray &#123;</div><div class="line">		fmt.Print(v, <span class="string">" "</span>)</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	fmt.Println(<span class="string">"\nElements of mySlice: "</span>)</div><div class="line">	<span class="keyword">for</span> _, v := range mySlice &#123;</div><div class="line">		fmt.Print(v, <span class="string">" "</span>)</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line">------------------------------</div><div class="line">Elements of myArray:</div><div class="line">11 2 3 4 5 6 7 8 9 10</div><div class="line">Elements of mySlice:</div><div class="line">11 2 3 4 5</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>go语言支持使用myarray[first:last]来基于数组生成一个数组切片。<br>基于所有元素的数组切片<br><code>mySlice = myarray[:]</code><br>基于前五个元素的数组切片<br><code>mySlice = myarray[:5]</code><br>从第五个元素开始的所有元素创建数组切片<br><code>mySlice = myarray[5:]</code></p>
+<h3 id="直接创建"><a href="#直接创建" class="headerlink" title="直接创建"></a>直接创建</h3><p>go语言提供的内置函数<code>make()</code>可以用于灵活的创建数组切片<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">//创建一个初始元素为5的数组切片，元素的初始值为0</div><div class="line">mySlice := make([]int,5)</div><div class="line"></div><div class="line">//创建一个初始元素为5的数组切片，元素的初始值为0，并预留10个元素的存储空间</div><div class="line">mySlice := make([]int,5,10)</div><div class="line"></div><div class="line">//直接创建并初始化包含5个元素的数组切片</div><div class="line">mySlice := []int&#123;1,2,3,4,5&#125;</div></pre></td></tr></table></figure></p>
+<h2 id="元素遍历"><a href="#元素遍历" class="headerlink" title="元素遍历"></a>元素遍历</h2><p>元素遍历与数组的元素遍历一样</p>
+<h2 id="动态增减元素"><a href="#动态增减元素" class="headerlink" title="动态增减元素"></a>动态增减元素</h2><p>与数组相比，数组切片多了一个存储能力的概念，即元素个数和分配的地址空间可以是两个不同的值，合理的设置存储能力，可以大幅降低数组切片内部重新分配内存额搬送内存块的频率。</p>
+<p>数组切片支持内置的<code>cap()</code> 和<code>len()</code>函数，前者是返回数组切片分配的空间大小，后者是返回的数组切片中当前存储的元素个数<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">func <span class="function"><span class="title">main</span></span>() &#123;</div><div class="line">	mySlice1 := make([]int, 5, 10)</div><div class="line">	fmt.Println(<span class="string">"\nlen(mySlice1):"</span>, len(mySlice1))</div><div class="line">	fmt.Println(<span class="string">"cap(mySlice1):"</span>, <span class="built_in">cap</span>(mySlice1))</div><div class="line">&#125;</div><div class="line">-------------------------------</div><div class="line">len(mySlice1): 5</div><div class="line"><span class="built_in">cap</span>(mySlice1): 10</div></pre></td></tr></table></figure></p>
+<p><code>append()</code>函数，可以在数组切片的尾部追加元素，从而生成一个新的数组切片<br><code>mySlice = append(mySlice,1,2,3,4)</code><br>append()函数的第二个参数是一个不定参数，可以按照自己的需求添加若干个元素，也可以直接将一个数组切片追加到另一个数组切片的末尾。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">mySlice2 := []int&#123;8,9,10&#125;</div><div class="line">mySlice = append(mySlice, mySlice2...)  //如果没有这个省略号就会编译出错，加上省略号相当于将mySlice2包含的所有元素打散后传入</div><div class="line">`</div></pre></td></tr></table></figure></p>
+<h2 id="基于数组切片创建数组切片"><a href="#基于数组切片创建数组切片" class="headerlink" title="基于数组切片创建数组切片"></a>基于数组切片创建数组切片</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">oldSlice := []int&#123;1,2,3&#125;</div><div class="line">newSlice := oldSlice[:3]  //基于oldSlice的前三个元素创建一个数组切片</div><div class="line"></div><div class="line"></div><div class="line">oldSlice := make([]int, 5, 10)  //初始化一个数组切片</div><div class="line">//给数组切片赋值</div><div class="line"><span class="keyword">for</span> i := 1; i &lt; 6; i++ &#123;</div><div class="line">	oldSlice[i-1] = i</div><div class="line">&#125;</div><div class="line">//基于数组切片创建一个数组切片</div><div class="line">newSlice := oldSlice[:9]  //只要选择范围不超过<span class="built_in">cap</span>()函数的值，那么这个创建程序就是合法的，没有元素的部分0填充</div><div class="line"></div><div class="line">fmt.Println(<span class="string">"newSlice："</span>, newSlice)</div><div class="line"></div><div class="line">fmt.Println(<span class="string">"\nlen(mySlice1):"</span>, len(oldSlice))</div><div class="line">fmt.Println(<span class="string">"cap(mySlice1):"</span>, <span class="built_in">cap</span>(oldSlice))</div><div class="line">-------------------</div><div class="line">newSlice： [1 2 3 4 5 0 0 0 0]</div><div class="line">len(mySlice1): 5</div><div class="line"><span class="built_in">cap</span>(mySlice1): 10</div></pre></td></tr></table></figure>
+<h3 id="内容复制"><a href="#内容复制" class="headerlink" title="内容复制"></a>内容复制</h3><p><code>copy()</code>函数用于将<strong>内容</strong>从一个数组切片复制到另一个数组切片，如果加入的两个数组切片不一样大，就会按照其中<em>最小的那个数组切片的元素个数进行复制。</em><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">slice1 := []int&#123;1, 2, 3, 4, 5&#125;</div><div class="line">slice2 := []int&#123;7, 8, 9&#125;</div><div class="line">copy(slice2, slice1)  //只会复制slice1中的前三个元素到slice2中</div><div class="line">copy(slice1, slice2)  //只会复制slice2中的三个元素到slice1的前三个位置</div></pre></td></tr></table></figure></p>
+<h1 id="map"><a href="#map" class="headerlink" title="map"></a>map</h1><p>map是一对一堆键值对的<strong>未排序集合</strong></p>
+<h2 id="变量声明"><a href="#变量声明" class="headerlink" title="变量声明"></a>变量声明</h2><p>map声明基本没有多余的元素<br><code>var myMap map[string] int</code><br>其中，myMap是声明的map的变量名，string是键的类型，int是所存放的值的类型</p>
+<p>##创建<br>可以使用内置的<code>make()</code>函数来创建一个新map<br>以下是创建一个键类型为string、值类型为自定义的PersonInfo的map:<br><code>myMap = make(map[string] PersonInfo)</code><br>也可以选择是否在创建时指定该map的初始能力，下面创建一个初始存储能力为100的map:<br><code>myMap = make(map[string] PersonInfo, 100)</code><br>创建并初始化map的代码如下：<br><code>myMap = map[string] PersonInfo{&quot;1234&quot;:PersonInfo{&quot;1&quot;,&quot;Jack&quot;,&quot;Room&quot;}, }</code></p>
+<h2 id="元素赋值"><a href="#元素赋值" class="headerlink" title="元素赋值"></a>元素赋值</h2><p><code>myMap[&quot;1234&quot;] = PersonInfo{&quot;1&quot;,&quot;Jack&quot;,&quot;Room...&quot;}</code></p>
+<h2 id="元素删除"><a href="#元素删除" class="headerlink" title="元素删除"></a>元素删除</h2><p>内置<code>delete()</code>函数，用于删除容器内的元素。<br><code>delete(myMap, &quot;1234&quot;)</code><br>从myMap中删除键为“1234”的键值对，如果不存在，什么都不会发生，如果传入的变量的值是<code>nil</code>，该调用将导致程序抛出异常</p>
+<h2 id="元素查找"><a href="#元素查找" class="headerlink" title="元素查找"></a>元素查找</h2><p>从map中查找一个特定的值，可以通过下面的代码来实现<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">value, ok := myMap[<span class="string">"1234"</span>]</div><div class="line"><span class="keyword">if</span> ok&#123;  //找到了</div><div class="line">   // 处理找到的value</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>判断是否成功找到特定的键，不需要检查取到的值是否为nil，只需要查看第二个返回值ok。</p>
+
+      
+      
+        <div class="page-reward">
+          <p><a href="javascript:void(0)" onclick="dashangToggle()" class="dashang">赏</a></p>
+          <div class="hide_box"></div>
+          <div class="shang_box">
+            <a class="shang_close" href="javascript:void(0)" onclick="dashangToggle()">×</a>
+            <div class="shang_tit">
+              <p>纯属好玩</p>
+            </div>
+            <div class="shang_payimg">
+              <img src="/img/alipayimg.jpg" alt="扫码支持" title="扫一扫" />
+            </div>
+              <div class="pay_explain">扫码打赏，你说多少就多少</div>
+            <div class="shang_payselect">
+              
+                <div class="pay_item checked" data-id="alipay">
+                  <span class="radiobox"></span>
+                  <span class="pay_logo"><img src="/img/alipay.png" alt="支付宝" /></span>
+                </div>
+              
+              
+                <div class="pay_item" data-id="wechat">
+                  <span class="radiobox"></span>
+                  <span class="pay_logo"><img src="/img/weixin.png" alt="微信" /></span>
+                </div>
+              
+            </div>
+            <div class="shang_info">
+              <p>打开<span id="shang_pay_txt">支付宝</span>扫一扫，即可进行扫码打赏哦</p>
+            </div>
+          </div>
+        </div>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/zepto/1.2.0/zepto.min.js"></script>
+        <script type="text/javascript">
+          $(".pay_item").click(function(){
+            $(this).addClass('checked').siblings('.pay_item').removeClass('checked');
+            var dataid=$(this).attr('data-id');
+            $(".shang_payimg img").attr("src","/img/"+dataid+"img.jpg");
+            $("#shang_pay_txt").text(dataid=="alipay"?"支付宝":"微信");
+          });
+          function dashangToggle(){
+            
+            $(".hide_box").fadeToggle();
+            $(".shang_box").fadeToggle();
+          }
+        </script>
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2017/12/28/数组与字典/">数组与数组切片</a></p>
+        <p><span>文章作者:</span><a href="/" title="访问 glamor 的个人博客">glamor</a></p>
+        <p><span>发布时间:</span>2017年12月28日 - 21时13分</p>
+        <p><span>最后更新:</span>2017年12月28日 - 08时13分</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2017/12/28/数组与字典/" title="数组与数组切片">http://www.cmustarc.com/2017/12/28/数组与字典/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://www.cmustarc.com/2017/12/28/数组与字典/　　作者: glamor" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script src="/js/clipboard.min.js"></script>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" title="中国大陆 (CC BY-NC-SA 3.0 CN)" target = "_blank">"署名-非商用-相同方式共享 3.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+<nav id="article-nav">
+  
+  
+    <a href="/2017/12/15/Python3笔记/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Python3 学习笔记</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#0x01-数组声明"><span class="toc-number">1.</span> <span class="toc-text">0x01 数组声明</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#元素访问"><span class="toc-number">1.1.</span> <span class="toc-text">元素访问</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#值类型"><span class="toc-number">1.2.</span> <span class="toc-text">值类型</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#数组切片"><span class="toc-number">2.</span> <span class="toc-text">数组切片</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#创建数组切片"><span class="toc-number">2.1.</span> <span class="toc-text">创建数组切片</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#基于数组创建"><span class="toc-number">2.1.1.</span> <span class="toc-text">基于数组创建</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#直接创建"><span class="toc-number">2.1.2.</span> <span class="toc-text">直接创建</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#元素遍历"><span class="toc-number">2.2.</span> <span class="toc-text">元素遍历</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#动态增减元素"><span class="toc-number">2.3.</span> <span class="toc-text">动态增减元素</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#基于数组切片创建数组切片"><span class="toc-number">2.4.</span> <span class="toc-text">基于数组切片创建数组切片</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#内容复制"><span class="toc-number">2.4.1.</span> <span class="toc-text">内容复制</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#map"><span class="toc-number">3.</span> <span class="toc-text">map</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#变量声明"><span class="toc-number">3.1.</span> <span class="toc-text">变量声明</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#元素赋值"><span class="toc-number">3.2.</span> <span class="toc-text">元素赋值</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#元素删除"><span class="toc-number">3.3.</span> <span class="toc-text">元素删除</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#元素查找"><span class="toc-number">3.4.</span> <span class="toc-text">元素查找</span></a></li></ol></li></ol>
+</div>
+<input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+<script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script>
+    var valueHide = "隐藏目录";
+    var valueShow = "显示目录";
+
+    if ($(".left-col").is(":hidden")) {
+        $("#tocButton").attr("value", valueShow);
+    }
+    $("#tocButton").click(function() {
+        if ($("#toc").is(":hidden")) {
+            $("#tocButton").attr("value", valueHide);
+            $("#toc").slideDown(320);
+        }
+        else {
+            $("#tocButton").attr("value", valueShow);
+            $("#toc").slideUp(350);
+        }
+    })
+    if ($(".toc").length < 1) {
+        $("#toc, #tocButton").hide();
+    }
+</script>
+
+
+
+
+
+<div class="bdsharebuttonbox">
+	<a href="#" class="fx fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+	<a href="#" class="fx fa-weixin bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+	<a href="#" class="fx fa-qq bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+	<a href="#" class="fx fa-facebook-official bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+	<a href="#" class="fx fa-twitter bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+	<a href="#" class="fx fa-linkedin bds_linkedin" data-cmd="linkedin" title="分享到linkedin"></a>
+	<a href="#" class="fx fa-files-o bds_copy" data-cmd="copy" title="分享到复制网址"></a>
+</div>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+
+
+
+    
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
+        
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+        
+            <a href="/2017/12/15/Python3笔记/" title="下一篇: Python3 学习笔记">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/12/28/数组与字典/">数组与数组切片</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/12/15/Python3笔记/">Python3 学习笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/12/03/python基础/">python基础</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/11/07/数据链路层/">数据链路</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/11/01/网络基础/">网络基础</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/11/01/tcp-ip简介/">tcp/ip简介</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/24/HTMLParser模块/">HTMLParser模块</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/23/SQL注入/">SQL注入整理(一)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/20/列表/">列表</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/19/偏函数/">偏函数</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/18/with上下文管理器/">上下文管理器与with语句</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/13/v2ray/">v2ray 配置文件</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/29/socket-python/">socket编程</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/28/正则表达式/">正则表达式</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/15/s2-053/">S2-053</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/10/golang流程控制/">流程控制</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/10/Strut2 常见POC/">Struts2 常见POC收集和整理</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/05/论事件驱动与异步IO/">论事件驱动与异步IO[转]</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/05/并发编程/">并发编程</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/05/Python常用模块2/">python常用模块(2)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/05/Python常用模块/">python常用模块(1)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/05/python TCP代理/">python TCP代理</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/05/hexo+github+nginx VPS搭建博客/">hexo+github+nginx vps搭建博客</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/05/go语言初识/">初识go语言</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/05/hello-world/">Hello World</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/05/goroutine与调度器/">goroutine与调度器[转]</a></li></ul>
+    <script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+    <script>
+        $(".post-list").addClass("toc-article");
+        $(".post-list-item a").attr("target","_blank");
+        $("#post-nav-button > a:nth-child(2)").click(function() {
+            $(".fa-bars, .fa-times").toggle();
+            $(".post-list").toggle(300);
+            if ($(".toc").length > 0) {
+                $("#toc, #tocButton").toggle(200, function() {
+                    if ($(".switch-area").is(":visible")) {
+                        $("#tocButton").attr("value", valueHide);
+                        }
+                    })
+            }
+            else {
+            }
+        })
+    </script>
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                &copy; 2017 glamor
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/luuman/hexo-theme-spfk" target="_blank">spfk</a> by luuman
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" >道士到访数: 
+                            <span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>, </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit">本页阅读量: 
+                            <span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+
+    </div>
+    <script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var backgroundnum = 24;
+            var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+            $("#mobile-nav").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+            $(".left-col").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+        })
+    </script>
+
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    $(document).ready(function() {
+        if ($("#comments").length < 1) {
+            $("#scroll > a:nth-child(2)").hide();
+        };
+    })
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+  <script language="javascript">
+    $(function() {
+        $("a[title]").each(function() {
+            var a = $(this);
+            var title = a.attr('title');
+            if (title == undefined || title == "") return;
+            a.data('title', title).removeAttr('title').hover(
+
+            function() {
+                var offset = a.offset();
+                $("<div id=\"anchortitlecontainer\"></div>").appendTo($("body")).html(title).css({
+                    top: offset.top - a.outerHeight() - 15,
+                    left: offset.left + a.outerWidth()/2 + 1
+                }).fadeIn(function() {
+                    var pop = $(this);
+                    setTimeout(function() {
+                        pop.remove();
+                    }, pop.text().length * 800);
+                });
+            }, function() {
+                $("#anchortitlecontainer").remove();
+            });
+        });
+    });
+</script>
+
+
+  </div>
+</body>
+</html>

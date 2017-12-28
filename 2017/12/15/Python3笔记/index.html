@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Python3 学习笔记 | glamor的博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="看到什么，感觉很新奇的，就会记下来。以防止自己忘记">
+<meta name="keywords" content="python3,基础,集合">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python3 学习笔记">
+<meta property="og:url" content="http://www.cmustarc.com/2017/12/15/Python3笔记/index.html">
+<meta property="og:site_name" content="glamor的博客">
+<meta property="og:description" content="看到什么，感觉很新奇的，就会记下来。以防止自己忘记">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2017-12-15T10:10:14.285Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Python3 学习笔记">
+<meta name="twitter:description" content="看到什么，感觉很新奇的，就会记下来。以防止自己忘记">
+  
+    <link rel="alternative" href="/atom.xml" title="glamor的博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/img/favicon.png">
+  
+  
+      <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  
+  
+      <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  
+  <!-- 加载特效 -->
+    <script src="/js/pace.js"></script>
+    <link href="/css/pace/pace-theme-flash.css" rel="stylesheet" />
+  <script>
+      var yiliaConfig = {
+          rootUrl: '/',
+          fancybox: true,
+          animate: true,
+          isHome: false,
+          isPost: true,
+          isArchive: false,
+          isTag: false,
+          isCategory: false,
+          open_in_new: false
+      }
+  </script>
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            
+            <img lazy-src="/img/head.jpg" class="js-avatar">
+            
+        </a>
+
+        <hgroup>
+          <h1 class="header-author"><a href="/" title="Hi Mate">glamor</a></h1>
+        </hgroup>
+
+        
+        <p class="header-subtitle">莫等闲，白了少年头空悲切...</p>
+        
+        
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">博客首页</a></li>
+                        
+                            <li><a href="/categories/python">人生苦短</a></li>
+                        
+                            <li><a href="/categories/Web安全">安全海洋</a></li>
+                        
+                            <li><a href="/categories/notes">随笔</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fl mail" target="_blank" href="mailto:root@cmustard.com" title="mail">mail</a>
+                            
+                                <a class="fl github" target="_blank" href="https://github.com/cmustard06" title="github">github</a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <a href="/tags/TCP-IP/" style="font-size: 10px;">TCP/IP</a> <a href="/tags/go/" style="font-size: 10px;">go</a> <a href="/tags/golang/" style="font-size: 17.5px;">golang</a> <a href="/tags/poc/" style="font-size: 12.5px;">poc</a> <a href="/tags/python/" style="font-size: 20px;">python</a> <a href="/tags/python3/" style="font-size: 12.5px;">python3</a> <a href="/tags/sql注入/" style="font-size: 10px;">sql注入</a> <a href="/tags/struct/" style="font-size: 10px;">struct</a> <a href="/tags/struts/" style="font-size: 10px;">struts</a> <a href="/tags/tcp/" style="font-size: 10px;">tcp</a> <a href="/tags/tcp-ip/" style="font-size: 10px;">tcp/ip</a> <a href="/tags/事件驱动/" style="font-size: 10px;">事件驱动</a> <a href="/tags/代理/" style="font-size: 10px;">代理</a> <a href="/tags/博客/" style="font-size: 10px;">博客</a> <a href="/tags/基础/" style="font-size: 15px;">基础</a> <a href="/tags/并发/" style="font-size: 10px;">并发</a> <a href="/tags/异步IO/" style="font-size: 10px;">异步IO</a> <a href="/tags/正则表达式/" style="font-size: 10px;">正则表达式</a> <a href="/tags/爬虫/" style="font-size: 10px;">爬虫</a> <a href="/tags/科学上网/" style="font-size: 10px;">科学上网</a> <a href="/tags/编程/" style="font-size: 10px;">编程</a> <a href="/tags/编程语言/" style="font-size: 12.5px;">编程语言</a> <a href="/tags/网络/" style="font-size: 12.5px;">网络</a> <a href="/tags/网络基础知识/" style="font-size: 10px;">网络基础知识</a> <a href="/tags/网络编程/" style="font-size: 10px;">网络编程</a> <a href="/tags/集合/" style="font-size: 10px;">集合</a>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.dmmjy9.com">dmmjy9</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="Me">glamor</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                
+                    <img lazy-src="/img/head.jpg" class="js-avatar">
+                
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="Me">glamor</a></h1>
+            </hgroup>
+            
+            <p class="header-subtitle">莫等闲，白了少年头空悲切...</p>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">博客首页</a></li>
+                
+                    <li><a href="/categories/python">人生苦短</a></li>
+                
+                    <li><a href="/categories/Web安全">安全海洋</a></li>
+                
+                    <li><a href="/categories/notes">随笔</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                <div class="social">
+                    
+                        <a class="mail" target="_blank" href="mailto:root@cmustard.com" title="mail">mail</a>
+                    
+                        <a class="github" target="_blank" href="https://github.com/cmustard06" title="github">github</a>
+                    
+                </div>
+            </nav>
+        </header>                
+    </div>
+</nav>
+      <div class="body-wrap"><article id="post-Python3笔记" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2017/12/15/Python3笔记/" class="article-date">
+      <time datetime="2017-12-15T10:10:14.285Z" itemprop="datePublished">2017-12-15</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Python3 学习笔记
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/python/">python</a>
+    </div>
+
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python3/">python3</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/基础/">基础</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/集合/">集合</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>看到什么，感觉很新奇的，就会记下来。以防止自己忘记<br><a id="more"></a></p>
+<h1 id="数值"><a href="#数值" class="headerlink" title="数值"></a>数值</h1><h2 id="分数"><a href="#分数" class="headerlink" title="分数"></a>分数</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line">In [25]: import fractions  <span class="comment"># 要使用分数就需要导入这个模块</span></div><div class="line"></div><div class="line">In [26]: x = fractions.Fraction(1,3)  <span class="comment"># 定义一个分数，传入分子和分母</span></div><div class="line"></div><div class="line">In [27]: x</div><div class="line">Out[27]: Fraction(1, 3)</div><div class="line"></div><div class="line">In [28]: x*2  <span class="comment"># 使用其可进行常规的数学计算，运算后返回一个新的Fraction对象</span></div><div class="line">Out[28]: Fraction(2, 3)</div><div class="line"></div><div class="line">In [29]: fractions.Fraction(4,6)   <span class="comment"># Fraction对象会自动进行约分</span></div><div class="line">Out[29]: Fraction(2, 3)</div><div class="line"></div><div class="line">In [30]: fractions.Fraction(0,0)  <span class="comment"># 分母不能为0，负责报错</span></div><div class="line">---------------------------------------------------------------------------</div><div class="line">ZeroDivisionError                         Traceback (most recent call last)</div><div class="line">&lt;ipython-input-30-8c47df4f3407&gt; <span class="keyword">in</span> &lt;module&gt;()</div><div class="line">----&gt; 1 fractions.Fraction(0,0)</div><div class="line"></div><div class="line">/usr/lib/python3.5/fractions.py <span class="keyword">in</span> __new__(cls, numerator, denominator, _normalize)</div><div class="line">    184 </div><div class="line">    185         <span class="keyword">if</span> denominator == 0:</div><div class="line">--&gt; 186             raise ZeroDivisionError(<span class="string">'Fraction(%s, 0)'</span> % numerator)</div><div class="line">    187         <span class="keyword">if</span> _normalize:</div><div class="line">    188             <span class="keyword">if</span> <span class="built_in">type</span>(numerator) is int is <span class="built_in">type</span>(denominator):</div><div class="line"></div><div class="line">ZeroDivisionError: Fraction(0, 0)</div></pre></td></tr></table></figure>
+<h2 id="三角函数"><a href="#三角函数" class="headerlink" title="三角函数"></a>三角函数</h2><ul>
+<li>math  模块中有一个代表 π 的常量,表示圆的周长与直径之比<br>率(圆周率)。  </li>
+<li>math  模块包括了所有的基本三角函数,包括: sin() 、 cos() 、 tan()  及像  asin()  这样的变体函数。  </li>
+<li>然而要注意的是 Python 并不支持无限精度。 tan(π / 4)  将返回  1.0 ,而不是  0.99999999999999989 。 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">In [31]: import math</div><div class="line"></div><div class="line">In [32]: math.pi</div><div class="line">Out[32]: 3.141592653589793</div><div class="line"></div><div class="line">In [33]: math.sin(math.pi/2)</div><div class="line">Out[33]: 1.0</div><div class="line"></div><div class="line">In [34]: math.tan(math.pi/4)</div><div class="line">Out[34]: 0.9999999999999999</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h1 id="元组"><a href="#元组" class="headerlink" title="元组"></a>元组</h1><p>元组和列表的主要区别是元组不能进行修改。用技术术语来说,元组是  不可变更  的。从实践的角度来说,没有可用于修改元组的方法。列表有像  <code>append()</code> 、 <code>extend()</code>、<code>insert()</code> 、<code>remove()</code>  和 <code>pop()</code> 这样的方法。这些方法,元组都没有。可以对元组进行切片操作(因为该方法创建一个新的元组),可以检查元组是否包含了特定的值(因为该操作不修改元组)</p>
+<h2 id="元组优点"><a href="#元组优点" class="headerlink" title="元组优点"></a>元组优点</h2><ul>
+<li>元组的<strong>速度比列表更快</strong>。如果定义了一系列常量值,而所需做的仅是对它进行遍历,那么请使用元组替代列表。  </li>
+<li>对不需要改变的数据进行“写保护”将使得代码更加安全。使用元组替代列表就像是有一条隐含的  assert  语句显示该数据是常量,特别的想法(及特别的功能)必须重写。(??)  </li>
+<li>一些<strong>元组可用作字典键</strong>(特别是包含字符串、数值和其它元组这样的 不可变 数据的元组。<strong>列表永远不能当做字典键使用,因为列表不是不可变的</strong>。</li>
+</ul>
+<p>元组可转换成列表,反之亦然。内建的  tuple()  函数接受一个列表参数,并返回一个包含同样元素的元组,而  list()  函数接受一个元组参数并返回一个列表。从效果上看,  tuple()  冻结列表,而  list()  融化元组。 </p>
+<p><strong>注意：</strong>为创建单元素元组,需要在值之后加上一个逗号。没有逗号,Python 会假定这只是一对额外的圆括号,虽然没有害处,但并不创建元组<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">In [52]: b_tuple = (1)</div><div class="line"></div><div class="line">In [53]: c_tuple = (1,)</div><div class="line"></div><div class="line">In [54]: b_tuple</div><div class="line">Out[54]: 1</div><div class="line"></div><div class="line">In [55]: c_tuple</div><div class="line">Out[55]: (1,)  <span class="comment"># 单元素的元组</span></div><div class="line"></div><div class="line">In [56]: <span class="built_in">type</span>(b_tuple)</div><div class="line">Out[56]: int</div><div class="line"></div><div class="line">In [57]: <span class="built_in">type</span>(c_tuple)</div><div class="line">Out[57]: tuple</div></pre></td></tr></table></figure></p>
+<h2 id="同时赋多值"><a href="#同时赋多值" class="headerlink" title="同时赋多值"></a>同时赋多值</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">In [58]: v = (1,2,3)</div><div class="line"></div><div class="line">In [59]: (x,y,z) = v</div><div class="line"></div><div class="line">In [60]: x</div><div class="line">Out[60]: 1</div><div class="line"></div><div class="line">In [61]: y</div><div class="line">Out[61]: 2</div><div class="line"></div><div class="line">In [62]: z</div><div class="line">Out[62]: 3</div></pre></td></tr></table></figure>
+<h1 id="集合"><a href="#集合" class="headerlink" title="集合"></a>集合</h1><p>一个简单的集合可以包含任何数据类型的值。如果有两个集合,则可以执行像联合、交集以及集合求差等标准集合运算。  是<strong>无序的</strong><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">In [66]: b_set = <span class="built_in">set</span>(<span class="string">"1"</span>)</div><div class="line"></div><div class="line">In [67]: b_set</div><div class="line">Out[67]: &#123;<span class="string">'1'</span>&#125;</div><div class="line"></div><div class="line">In [68]: a_set = &#123;1&#125;</div><div class="line"></div><div class="line">In [69]: b_set = <span class="built_in">set</span>(<span class="string">"1"</span>)</div><div class="line"></div><div class="line">In [70]: a_set</div><div class="line">Out[70]: &#123;1&#125;</div><div class="line"></div><div class="line">In [71]: <span class="built_in">type</span>(a_set)</div><div class="line">Out[71]: <span class="built_in">set</span></div><div class="line"></div><div class="line">In [72]: b_set</div><div class="line">Out[72]: &#123;<span class="string">'1'</span>&#125;</div><div class="line"></div><div class="line">In [73]: <span class="built_in">type</span>(b_set)</div><div class="line">Out[73]:<span class="built_in">set</span></div></pre></td></tr></table></figure></p>
+<p>还可以以列表为基础创建集合<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">In [75]: a_list = [<span class="string">"a"</span>,<span class="string">"b"</span>,True,False]</div><div class="line"></div><div class="line">In [76]: a_set = <span class="built_in">set</span>(a_list)</div><div class="line"></div><div class="line">In [77]: a_set</div><div class="line">Out[77]: &#123;False, True, <span class="string">'a'</span>, <span class="string">'b'</span>&#125;</div></pre></td></tr></table></figure></p>
+<p>创建空集合<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">In [78]: a_set = <span class="built_in">set</span>() <span class="comment"># 创建一个空集合</span></div><div class="line"></div><div class="line">In [79]: <span class="built_in">type</span>(a_set)</div><div class="line">Out[79]: <span class="built_in">set</span></div><div class="line"></div><div class="line">In [80]: not_suer = &#123;&#125;  <span class="comment"># 这么创建就是一个空字典</span></div><div class="line"></div><div class="line">In [81]: <span class="built_in">type</span>(not_suer)</div><div class="line">Out[81]: dict</div></pre></td></tr></table></figure></p>
+<h2 id="常用方法"><a href="#常用方法" class="headerlink" title="常用方法"></a>常用方法</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div></pre></td><td class="code"><pre><div class="line">In [82]: a_set = &#123;<span class="string">"k"</span>,<span class="string">"abner"</span>&#125;</div><div class="line"></div><div class="line">In [83]: a_set</div><div class="line">Out[83]: &#123;<span class="string">'abner'</span>, <span class="string">'k'</span>&#125;</div><div class="line"></div><div class="line">In [84]: a_set.add(<span class="string">"cmu"</span>)  <span class="comment"># 向集合中增加一个元素</span></div><div class="line"></div><div class="line">In [85]: a_set</div><div class="line">Out[85]: &#123;<span class="string">'abner'</span>, <span class="string">'cmu'</span>, <span class="string">'k'</span>&#125;</div><div class="line"></div><div class="line"><span class="comment"># update方法仅接受集合作为参数</span></div><div class="line">In [85]: a_set</div><div class="line">Out[85]: &#123;<span class="string">'abner'</span>, <span class="string">'cmu'</span>, <span class="string">'k'</span>&#125;</div><div class="line"></div><div class="line">In [86]: b_set = &#123;<span class="string">"m"</span>,<span class="string">"kk"</span>&#125;</div><div class="line">In [88]: a_set.update(b_set, &#123;<span class="string">"mk"</span>,<span class="string">"ll"</span>&#125;)</div><div class="line">In [89]: a_set</div><div class="line">Out[89]: &#123;<span class="string">'abner'</span>, <span class="string">'cmu'</span>, <span class="string">'k'</span>, <span class="string">'kk'</span>, <span class="string">'ll'</span>, <span class="string">'m'</span>, <span class="string">'mk'</span>&#125;</div><div class="line"><span class="comment"># update()  方法还可接受一些其它数据类型的对象作为参数,包括列表。如果调用时传入列表, update()  将会把列表中所有的元素添加到初始集合中。</span></div><div class="line"></div><div class="line">In [90]: a_set.update([1,2,3])</div><div class="line">In [91]: a_set</div><div class="line">Out[91]: &#123;1, 2, 3, <span class="string">'abner'</span>, <span class="string">'cmu'</span>, <span class="string">'k'</span>, <span class="string">'kk'</span>, <span class="string">'ll'</span>, <span class="string">'m'</span>, <span class="string">'mk'</span>&#125;</div><div class="line"></div><div class="line"><span class="comment"># 从集合中删除元素</span></div><div class="line">In [92]: a_set = &#123;1,3,6,10,15,21,28,36&#125;</div><div class="line"></div><div class="line">In [93]: a_set</div><div class="line">Out[93]: &#123;1, 3, 6, 10, 15, 21, 28, 36&#125;</div><div class="line"></div><div class="line">In [94]: a_set.discard(10)  <span class="comment"># 删除元素10</span></div><div class="line"></div><div class="line">In [95]: a_set</div><div class="line">Out[95]: &#123;1, 3, 6, 15, 21, 28, 36&#125;</div><div class="line"></div><div class="line">In [96]: a_set.discard(10)  <span class="comment"># 再次删除元素10，即使集合中没有也没由报错</span></div><div class="line"></div><div class="line">In [97]: a_set</div><div class="line">Out[97]: &#123;1, 3, 6, 15, 21, 28, 36&#125;</div><div class="line"></div><div class="line">In [98]: a_set.remove(21)  <span class="comment"># 删除21</span></div><div class="line"></div><div class="line">In [99]: a_set</div><div class="line">Out[99]: &#123;1, 3, 6, 15, 28, 36&#125;</div><div class="line"></div><div class="line">In [100]: a_set.remove(21)  <span class="comment"># 如果集合中不存在该元素就报错</span></div><div class="line">---------------------------------------------------------------------------</div><div class="line">KeyError                                  Traceback (most recent call last)</div><div class="line">&lt;ipython-input-100-98d79f2fc3b7&gt; <span class="keyword">in</span> &lt;module&gt;()</div><div class="line">----&gt; 1 a_set.remove(21)</div><div class="line"></div><div class="line">KeyError: 21</div><div class="line"></div><div class="line"><span class="comment"># pop()  方法从集合中删除某个值,并返回该值。然而,由于集合是无序的,并没有“最后一个”值的概念,因此无法控制删除的是哪一个值。它基本上是随机的</span></div><div class="line">In [101]: a_set = &#123;1,3,6,10,15,21,28,36,45&#125;</div><div class="line"></div><div class="line">In [102]: a_set.pop()</div><div class="line">Out[102]: 1</div><div class="line"></div><div class="line">In [103]: a_set.pop()</div><div class="line">Out[103]: 3</div><div class="line"></div><div class="line">In [104]: a_set.pop()</div><div class="line">Out[104]: 36</div><div class="line"></div><div class="line">In [105]: a_set</div><div class="line">Out[105]: &#123;6, 10, 15, 21, 28, 45&#125;</div><div class="line"></div><div class="line"><span class="comment">#clear()  方法删除集合中  所有  的值,留下一个空集合。它等价于  a_set = set() ,该语句创建一个新的空集合,并用之覆盖 a_set  变量的之前的值。</span></div><div class="line">In [106]: a_set.clear()</div><div class="line"></div><div class="line">In [107]: a_set</div><div class="line">Out[107]: <span class="built_in">set</span>()</div><div class="line"></div><div class="line">In [108]: a_set.pop()  <span class="comment"># 空就报错</span></div><div class="line">---------------------------------------------------------------------------</div><div class="line">KeyError                                  Traceback (most recent call last)</div><div class="line">&lt;ipython-input-108-f734613b9ec5&gt; <span class="keyword">in</span> &lt;module&gt;()</div><div class="line">----&gt; 1 a_set.pop()</div><div class="line"></div><div class="line">KeyError: <span class="string">'pop from an empty set'</span></div></pre></td></tr></table></figure>
+<h1 id="None"><a href="#None" class="headerlink" title="None"></a>None</h1><p>None  是 Python 的一个特殊常量。它是一个空值。 None  与 False  不同。<strong> None  不是 0 。 None  不是空字符串</strong>。将  None  与任何非  None  的东西进行比较将总是返回  False  。</p>
+<p>None  是唯一的空值。它有着自己的数据类型( NoneType )。可将 None  赋值给任何变量,但不能创建其它  NoneType  对象。所有值为  None  变量是相等的。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">In [109]: <span class="built_in">type</span>(None)</div><div class="line">Out[109]: NoneType</div><div class="line"></div><div class="line">In [110]: None == False</div><div class="line">Out[110]: False</div><div class="line"></div><div class="line">In [111]: None == 0</div><div class="line">Out[111]: False</div><div class="line"></div><div class="line">In [113]: None == <span class="string">""</span></div><div class="line">Out[113]: False</div><div class="line"></div><div class="line">In [114]: x = None</div><div class="line"></div><div class="line">In [115]: x == None</div><div class="line">Out[115]: True</div></pre></td></tr></table></figure></p>
+<h1 id="字典"><a href="#字典" class="headerlink" title="字典"></a>字典</h1><h2 id="字典解析"><a href="#字典解析" class="headerlink" title="字典解析"></a>字典解析</h2><p>字典解析 和列表解析类似,只不过它生成字典而不是列表<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line">In [1]: import os, glob</div><div class="line"><span class="comment"># glob.glob 匹配所有的符合条件的文件，并将其以list的形式返回</span></div><div class="line">In [2]: metadata = [(f, os.stat(f)) <span class="keyword">for</span> f <span class="keyword">in</span> glob.glob(<span class="string">'*.py'</span>)]</div><div class="line"></div><div class="line">In [3]: metadata</div><div class="line">Out[3]: </div><div class="line">[(<span class="string">'poc.py'</span>,</div><div class="line">  os.stat_result(st_mode=33204, st_ino=3542605, st_dev=2049, st_nlink=1, st_uid=1000, st_gid=1000, st_size=27762, st_atime=1512724705, st_mtime=1512724702, st_ctime=1512724702)),</div><div class="line"> (<span class="string">'mylib.py'</span>,</div><div class="line">  os.stat_result(st_mode=33204, st_ino=3542602, st_dev=2049, st_nlink=1, st_uid=1000, st_gid=1000, st_size=15603, st_atime=1512699680, st_mtime=1501669554, st_ctime=1512699680)),</div><div class="line"> (<span class="string">'humansize.py'</span>,</div><div class="line">  os.stat_result(st_mode=33204, st_ino=3542600, st_dev=2049, st_nlink=1, st_uid=1000, st_gid=1000, st_size=1012, st_atime=1512641084, st_mtime=1512641082, st_ctime=1512641082))]</div><div class="line"></div><div class="line">In [4]: metadata[0]</div><div class="line">Out[4]: </div><div class="line">(<span class="string">'poc.py'</span>,</div><div class="line"> os.stat_result(st_mode=33204, st_ino=3542605, st_dev=2049, st_nlink=1, st_uid=1000, st_gid=1000, st_size=27762, st_atime=1512724705, st_mtime=1512724702, st_ctime=1512724702))</div><div class="line"><span class="comment"># 字典解析</span></div><div class="line">In [5]: metadata_dict = &#123;f:os.stat(f) <span class="keyword">for</span> f <span class="keyword">in</span> glob.glob(<span class="string">"*.py"</span>)&#125;</div><div class="line"></div><div class="line">In [6]: metadata_dict</div><div class="line">Out[6]: </div><div class="line">&#123;<span class="string">'humansize.py'</span>: os.stat_result(st_mode=33204, st_ino=3542600, st_dev=2049, st_nlink=1, st_uid=1000, st_gid=1000, st_size=1012, st_atime=1512641084, st_mtime=1512641082, st_ctime=1512641082),</div><div class="line"> <span class="string">'mylib.py'</span>: os.stat_result(st_mode=33204, st_ino=3542602, st_dev=2049, st_nlink=1, st_uid=1000, st_gid=1000, st_size=15603, st_atime=1512699680, st_mtime=1501669554, st_ctime=1512699680),</div><div class="line"> <span class="string">'poc.py'</span>: os.stat_result(st_mode=33204, st_ino=3542605, st_dev=2049, st_nlink=1, st_uid=1000, st_gid=1000, st_size=27762, st_atime=1512724705, st_mtime=1512724702, st_ctime=1512724702)&#125;</div><div class="line"></div><div class="line">In [7]: <span class="built_in">type</span>(metadata_dict)</div><div class="line">Out[7]: dict</div><div class="line"></div><div class="line">In [8]: list(metadata_dict.keys())</div><div class="line">Out[8]: [<span class="string">'poc.py'</span>, <span class="string">'humansize.py'</span>, <span class="string">'mylib.py'</span>]</div><div class="line"></div><div class="line">In [9]: metadata_dict[<span class="string">'poc.py'</span>].st_size</div><div class="line">Out[9]: 27762</div></pre></td></tr></table></figure></p>
+<h1 id="格式化字符串"><a href="#格式化字符串" class="headerlink" title="格式化字符串"></a>格式化字符串</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">In [12]: <span class="built_in">print</span>(<span class="string">"&#123;0:.2f&#125;&#123;1&#125;"</span>.format(3345.567,<span class="string">"GB"</span>))</div><div class="line">3345.57GB</div><div class="line"></div><div class="line">In [13]: <span class="built_in">print</span>(<span class="string">"&#123;size:.2f&#125;&#123;suffix&#125;"</span>.format(size=3345.567,suffix=<span class="string">"GB"</span>))</div><div class="line">3345.57GB</div></pre></td></tr></table></figure>
+<p> {0:.1f} 的意思其实包含了两方面的内容: {0}你已经能理解, <code>:.1f</code> 则不一定了。第二部分(包括冒号及其后边的部分)即格式说明符 (format specifier) ,它进一步定义了被替换的变量应该如何被格式化</p>
+<p>在替换域中,冒号<code>( : )</code>标示格式说明符的开始。 <code>“ .1 ”</code>的意思是四舍五入到保留一们小数点。 <code>“ f ”</code>的意思是定点数(与指数标记法或者其他 10 进制数表示方法相对应)</p>
+<h1 id="字符串与字节"><a href="#字符串与字节" class="headerlink" title="字符串与字节"></a>字符串与字节</h1><p><strong>Python 3 的<code>源码</code>的默认编码方式为 UTF‐8  </strong>  utf8是采用Unicode标准实现的使用最广泛的的编码方式之一<br>计算机系统通用的字符编码工作方式：在计算机内存中，统一使用Unicode标准，当需要保存到硬盘或者需要传输的时候，就转换为UTF-8编码。用记事本编辑的时候，从文件读取的UTF-8字符被转换为Unicode到内存里，编辑完成后，保存的时候再把Unicode转换为UTF-8保存到文件<br>简单来说：</p>
+<ul>
+<li>Unicode 是「字符集」</li>
+<li>UTF-8 是「编码规则」<br>其中：</li>
+<li>字符集：为每一个「字符」分配一个唯一的 ID（学名为码位 / 码点 / Code Point）</li>
+<li>编码规则：将「码位」转换为字节序列的规则（编码/解码 可以理解为 加密/解密 的过程）</li>
+</ul>
+<p>字节即字节;字符是一种抽象的概念。<br>一个不可变 的Unicode 编码的字符序列叫做 string 。<br><strong>一串由 0 到 255 之间的数字</strong>组成的序列叫做 bytes 对象</p>
+<p>注意：</p>
+<ul>
+<li>使用 “byte 字面值 ” 语法 b’’ 来定义 bytes 对象。 <strong>byte 字面值里的每个字节都是由ASCII 字符或者是从 \x00 到 \xff 编码了的 16 进制数组成。</strong></li>
+<li>bytes 对象的类型是 bytes</li>
+<li>bytes 对象是不可变的</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">n [14]: by = b<span class="string">"abcd\x65"</span></div><div class="line"></div><div class="line">In [15]: by</div><div class="line">Out[15]: b<span class="string">'abcde'</span></div><div class="line"></div><div class="line">In [16]: <span class="built_in">type</span>(by)</div><div class="line">Out[16]: bytes</div><div class="line"></div><div class="line">In [17]: len(by)</div><div class="line">Out[17]: 5</div><div class="line"></div><div class="line">In [19]: by += b<span class="string">"\xff"</span></div><div class="line"></div><div class="line">In [20]: by[0]</div><div class="line">Out[20]: 97</div></pre></td></tr></table></figure>
+<p>使用内置函数<code>bytearray()</code>来完成从<code>bytes对象</code>到<strong>可变</strong>的bytearray对象的转换，而且所有用在<code>bytes</code>上的操作都可以用在<code>bytearray</code>上<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">In [28]: by = b<span class="string">"abcd\x65"</span></div><div class="line"></div><div class="line">In [29]: barr = bytearray(by)</div><div class="line"></div><div class="line">In [30]: barr</div><div class="line">Out[30]: bytearray(b<span class="string">'abcde'</span>)</div><div class="line"></div><div class="line">In [31]: barr[0] = 102  <span class="comment"># 转换成bytearray对象之后就可以更改值了，102对应的是f，赋的值必须在0-255之间的一个整数</span></div><div class="line"></div><div class="line">In [32]: barr</div><div class="line">Out[32]: bytearray(b<span class="string">'fbcde'</span>)</div><div class="line"></div><div class="line">In [33]: by[0] =102   <span class="comment"># bytes对象是不可变的，强行更改会出错</span></div><div class="line">---------------------------------------------------------------------------</div><div class="line">TypeError                                 Traceback (most recent call last)</div><div class="line">&lt;ipython-input-33-3647f5f47f02&gt; <span class="keyword">in</span> &lt;module&gt;()</div><div class="line">----&gt; 1 by[0] =102</div><div class="line"></div><div class="line">TypeError: <span class="string">'bytes'</span> object does not support item assignment</div></pre></td></tr></table></figure></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">In [1]: by = b<span class="string">'d'</span></div><div class="line"></div><div class="line">In [2]: s = <span class="string">'abcde'</span></div><div class="line"></div><div class="line">In [3]: by+s  <span class="comment"># 不能强制将字符串和字节组合在一起</span></div><div class="line">---------------------------------------------------------------------------</div><div class="line">TypeError: can<span class="string">'t concat bytes to str</span></div><div class="line"><span class="string"></span></div><div class="line"><span class="string">In [5]: s.count("b")</span></div><div class="line"><span class="string">Out[5]: 1</span></div><div class="line"><span class="string"></span></div><div class="line"><span class="string">In [6]: s.count(by)  # 字符串中没有bytes</span></div><div class="line"><span class="string">---------------------------------------------------------------------------</span></div><div class="line"><span class="string">TypeError: Can'</span>t convert <span class="string">'bytes'</span> object to str implicitly</div><div class="line"></div><div class="line">In [7]: s.count(by.decode(<span class="string">'ascii'</span>)) <span class="comment"># 将bytes 对象转换成字符串后该串的出现次数。   </span></div><div class="line">Out[7]: 1</div></pre></td></tr></table></figure>
+<h2 id="字符串与字节数组之间的联系"><a href="#字符串与字节数组之间的联系" class="headerlink" title="字符串与字节数组之间的联系"></a>字符串与字节数组之间的联系</h2><p>bytes 对象有一个 decode() 方法,它使用某种字符编码作为参数,然后依照这种编码方式<strong>将 bytes 对象转换为字符串</strong>,对应地,字符串有一个 encode() 方法,它也使用某种字符编码作为参数,然后依照它将串转换为 bytes 对象。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line">In [8]: a_string = <span class="string">"深入 Python"</span> <span class="comment"># a_string 是一个字符串</span></div><div class="line"></div><div class="line">In [9]: len(a_string)</div><div class="line">Out[9]: 9</div><div class="line"></div><div class="line">In [10]: by = a_string.encode(<span class="string">'utf-8'</span>)  <span class="comment"># 通过 a_string使用 UTF‐8 编码而得到的一串字节序列。</span></div><div class="line"></div><div class="line">In [11]: by</div><div class="line">Out[11]: b<span class="string">'\xe6\xb7\xb1\xe5\x85\xa5 Python'</span></div><div class="line"></div><div class="line">In [12]: len(by)</div><div class="line">Out[12]: 13</div><div class="line"></div><div class="line">In [13]: by = a_string.encode(<span class="string">'gb18030'</span>) <span class="comment"># by 还是一个 bytes 对象。通过 a_ string使用 GB18030 编码而得到的一串字节序列。  </span></div><div class="line"></div><div class="line">In [14]: by</div><div class="line">Out[14]: b<span class="string">'\xc9\xee\xc8\xeb Python'</span></div><div class="line"></div><div class="line">In [15]: len(by)</div><div class="line">Out[15]: 11</div><div class="line"></div><div class="line">In [16]: roundtrip = by.decode(<span class="string">'gb18030'</span>) <span class="comment"># 通过对 by 使用 gb18030解码算法得到的一个字符序列。</span></div><div class="line"></div><div class="line">In [17]: roundtrip</div><div class="line">Out[17]: <span class="string">'深入 Python'</span></div><div class="line"></div><div class="line">In [18]: a_string == roundtrip <span class="comment"># 从执行结果可以看出, roundtrip 与 a_string 是完全一样的。  </span></div><div class="line">Out[18]: True</div></pre></td></tr></table></figure>
+<h1 id="定制类"><a href="#定制类" class="headerlink" title="定制类"></a>定制类</h1><p>形如<code>__xxx__</code>的变量或者函数名需要注意，这些在Python中是有特殊用途的。</p>
+<h2 id="str"><a href="#str" class="headerlink" title="str"></a>str</h2><p>定义一个类，然后通过print函数直接打印这个类的实例。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">In [10]: class Student(object):</div><div class="line">    ...:     def __init__(self, name):</div><div class="line">    ...:         self.name = name</div><div class="line">    ...:         </div><div class="line"></div><div class="line">In [11]: <span class="built_in">print</span>(Student(<span class="string">"cmustard"</span>))  </div><div class="line">&lt;__main__.Student object at 0x7f25ce2cb908&gt;  <span class="comment"># 打印出来的数据不直观</span></div></pre></td></tr></table></figure></p>
+<p>改进，通过加入一个<code>__str__</code>方法，就可以实现自定义打印文本<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">In [12]: class Student(object):</div><div class="line">    ...:     def __init__(self, name):</div><div class="line">    ...:         self.name = name</div><div class="line">    ...:     def __str__(self):</div><div class="line">    ...:         <span class="built_in">return</span> <span class="string">'Student object (name, %s)'</span>%self.name</div><div class="line">    ...:     </div><div class="line"></div><div class="line">In [13]: <span class="built_in">print</span>(Student(<span class="string">"cmustard"</span>))</div><div class="line">Student object (name, cmustard)</div></pre></td></tr></table></figure></p>
+<p>如果我们在加上<code>__repr__</code>。那么不使用print函数打印，也是可以定制的。repr是为调试服务的。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">In [14]: class Student(object):</div><div class="line">    ...:     def __init__(self, name):</div><div class="line">    ...:         self.name = name</div><div class="line">    ...:     def __str__(self):</div><div class="line">    ...:         <span class="built_in">return</span> <span class="string">'Student object (name, %s)'</span>%self.name</div><div class="line">    ...:     __repr__ = __str__</div><div class="line">    ...:     </div><div class="line"></div><div class="line">In [15]: <span class="built_in">print</span>(Student(<span class="string">"cmustard"</span>))</div><div class="line">Student object (name, cmustard)</div><div class="line"></div><div class="line">In [16]: s = Student(<span class="string">"cmustard"</span>)</div><div class="line"></div><div class="line">In [17]: s</div><div class="line">Out[17]: Student object (name, cmustard)</div></pre></td></tr></table></figure></p>
+<h2 id="iter"><a href="#iter" class="headerlink" title="iter"></a>iter</h2><p>如果想要一个类实现类似于for循环的功能，那么我们就需要在类中实现一个<code>__iter__</code>方法，该方法返回一个迭代对象，然后，python的for循环就会不断的调用该迭代对象的<code>__next__</code>方法去获取下一个值，知道出现<code>StopIteration</code>错误。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line">In [19]: class Fib(object):</div><div class="line">    ...:     def __init__(self):</div><div class="line">    ...:         self.a, self.b = 0,1 <span class="comment"># 初始两个计数器a,b</span></div><div class="line">    ...:     def __iter__(self):</div><div class="line">    ...:         <span class="built_in">return</span> self  <span class="comment"># 实例本身就是迭代对象，故返回自己</span></div><div class="line">    ...:     def __next__(self):</div><div class="line">    ...:         self.a, self.b = self.b, self.a+self.b <span class="comment"># 计算下一个值</span></div><div class="line">    ...:         <span class="keyword">if</span> self.a &gt; 100000:</div><div class="line">    ...:             raise StopIteration()</div><div class="line">    ...:         <span class="built_in">return</span> self.a <span class="comment"># 返回下一个值</span></div><div class="line">    ...: </div><div class="line"></div><div class="line">In [20]: <span class="keyword">for</span> n <span class="keyword">in</span> Fib():</div><div class="line">    ...:     <span class="built_in">print</span>(n)</div><div class="line"><span class="comment"># 1到n的乘积</span></div><div class="line">In [27]: class Test(object):</div><div class="line">    ...:     def __init__(self,number):</div><div class="line">    ...:         self.number = number</div><div class="line">    ...:         self.start = 1</div><div class="line">    ...:         self.total = 1</div><div class="line">    ...:     def __iter__(self):</div><div class="line">    ...:         <span class="built_in">return</span> self</div><div class="line">    ...:     def __next__(self):</div><div class="line">    ...:         self.start = self.start+1</div><div class="line">    ...:         self.total = self.total * self.start</div><div class="line">    ...:         <span class="keyword">if</span> self.start &gt; self.number:</div><div class="line">    ...:             raise StopIteration()</div><div class="line">    ...:         <span class="built_in">return</span> self.total</div></pre></td></tr></table></figure></p>
+<h2 id="getitem"><a href="#getitem" class="headerlink" title="getitem"></a>getitem</h2><p>上面求积的那个例子虽然能够用于for循环，但是把他当成list来使用还是不行，<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">In [33]: Test(10)[1]</div><div class="line">---------------------------------------------------------------------------</div><div class="line">TypeError                                 Traceback (most recent call last)</div><div class="line">&lt;ipython-input-33-5ae7bdf6c67c&gt; <span class="keyword">in</span> &lt;module&gt;()</div><div class="line">----&gt; 1 Test(10)[1]</div><div class="line"></div><div class="line">TypeError: <span class="string">'Test'</span> object does not support indexing</div></pre></td></tr></table></figure></p>
+<p>如果需要表现得像list那样按照下标取出元素，就需要实现<code>__getitem__</code>方法<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line">In [46]:     def __init__(self,number):</div><div class="line">    ...:         self.number = number</div><div class="line">    ...:         self.start = 1</div><div class="line">    ...:         self.total = 1</div><div class="line">    ...:     def __iter__(self):</div><div class="line">    ...:         <span class="built_in">return</span> self</div><div class="line">    ...:     def __next__(self):</div><div class="line">    ...:         self.start = self.start+1</div><div class="line">    ...:         self.total = self.total * self.start</div><div class="line">    ...:         <span class="keyword">if</span> self.start &gt; self.number:</div><div class="line">    ...:             raise StopIteration()</div><div class="line">    ...:         <span class="built_in">return</span> self.total</div><div class="line">    ...:     def __getitem__(self,n):  <span class="comment"># 相当于重新实现了一下求积运算</span></div><div class="line">    ...:        <span class="comment">#  print(n)  # n为索引下标</span></div><div class="line">    ...:         total = 1</div><div class="line">    ...:         start =1</div><div class="line">    ...:         <span class="keyword">for</span> x <span class="keyword">in</span> range(n):   </div><div class="line">    ...:             start = start+1</div><div class="line">    ...:             total = total * start</div><div class="line">    ...:         <span class="built_in">return</span> total    <span class="comment"># total为返回的索引为n的值</span></div><div class="line">In [48]: Test(10)[1]</div><div class="line">1</div><div class="line">Out[48]: 2</div><div class="line"></div><div class="line">In [49]: Test(10)[3]</div><div class="line">3</div><div class="line">Out[49]: 24</div><div class="line"></div><div class="line">In [50]: Test(10)[2]</div><div class="line">2</div><div class="line">Out[50]: 6</div><div class="line"></div><div class="line">In [51]: [x <span class="keyword">for</span> x <span class="keyword">in</span> Test(10)]</div><div class="line">Out[51]: [2, 6, 24, 120, 720, 5040, 40320, 362880, 3628800]</div></pre></td></tr></table></figure></p>
+<p>此外，如果把对象看成dict，<code>__getitem__()</code>的参数也可能是一个可以作key的object，例如str。与之对应的是<code>__setitem__()</code>方法，把对象视作list或dict来对集合赋值。最后，还有一个<code>__delitem__()</code>方法，用于删除某个元素。</p>
+<h2 id="getattr"><a href="#getattr" class="headerlink" title="getattr"></a>getattr</h2><p>正常情况下，我们调用类中不存在的属性，就会报错<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">In [52]: class Student(object):</div><div class="line">    ...:     def __init__(self, name):</div><div class="line">    ...:         self.name = name</div><div class="line">    ...:     def __str__(self):</div><div class="line">    ...:         <span class="built_in">return</span> <span class="string">'Student object (name, %s)'</span>%self.name</div><div class="line">    ...:     __repr__ = __str__</div><div class="line">    ...:     </div><div class="line">In [54]: s = Student(<span class="string">"name"</span>)</div><div class="line"></div><div class="line">In [55]: s.name</div><div class="line">Out[55]: <span class="string">'name'</span></div><div class="line">In [57]: s.score</div><div class="line">---------------------------------------------------------------------------</div><div class="line">AttributeError                            Traceback (most recent call last)</div><div class="line">&lt;ipython-input-57-70c6e0ea2f21&gt; <span class="keyword">in</span> &lt;module&gt;()</div><div class="line">----&gt; 1 s.score</div><div class="line"></div><div class="line">AttributeError: <span class="string">'Student'</span> object has no attribute <span class="string">'score'</span></div></pre></td></tr></table></figure></p>
+<p>如果想要避免这种错误，除了加上一个score属性之外，Python还有一个机制就是写一个<code>__getattr__</code>方法。动态返回一个属性，如下<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">In [59]: class Student(object):</div><div class="line">    ...:     def __init__(self, name):</div><div class="line">    ...:         self.name = name</div><div class="line">    ...:     def __str__(self):</div><div class="line">    ...:         <span class="built_in">return</span> <span class="string">'Student object (name, %s)'</span>%self.name</div><div class="line">    ...:     __repr__ = __str__</div><div class="line">    ...:     def __getattr__(self,attr):</div><div class="line">    ...:         <span class="keyword">if</span> attr == <span class="string">'score'</span>:</div><div class="line">    ...:             <span class="built_in">return</span> 404</div><div class="line">    ...:         </div><div class="line">In [60]: s = Student(<span class="string">"name"</span>)</div><div class="line"></div><div class="line">In [61]: s</div><div class="line">Out[61]: Student object (name, name)</div><div class="line"></div><div class="line">In [62]: s.name</div><div class="line">Out[62]: <span class="string">'name'</span></div><div class="line"></div><div class="line">In [63]: s.score  <span class="comment"># 如果不存在这个属性的话就返回404</span></div><div class="line">Out[63]: 404</div></pre></td></tr></table></figure></p>
+<p>这只是变量，如果是函数的话<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">In [65]: class Student(object):</div><div class="line">    ...:     def __getattr__(self,attr):</div><div class="line">    ...:         <span class="keyword">if</span> attr == <span class="string">'age'</span>:</div><div class="line">    ...:             <span class="built_in">return</span> lambda: 404</div><div class="line">    ...:</div><div class="line">In [66]: s = Student()</div><div class="line"></div><div class="line">In [67]: s.age()</div><div class="line">Out[67]: 404</div></pre></td></tr></table></figure></p>
+<h2 id="call"><a href="#call" class="headerlink" title="call"></a>call</h2><p>一个对象实例可以有自己的属性和方法，我们都是通过instance.method()来调用，想要直接从实例本身上调用，就需要定义一个<code>__call__</code>方法，就可以对实例进行调用。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">In [75]: class Student(object):</div><div class="line">    ...:     def __init__(self,name):</div><div class="line">    ...:         self.name = name</div><div class="line">    ...:     def __call__(self):</div><div class="line">    ...:         <span class="built_in">print</span>(<span class="string">"My name is %s."</span>%self.name)</div><div class="line">    ...: </div><div class="line">In [76]: s = Student(<span class="string">"name"</span>)</div><div class="line"></div><div class="line">In [77]: s()  <span class="comment"># self参数不需要传入</span></div><div class="line">My name is name.</div></pre></td></tr></table></figure></p>
+
+      
+      
+        <div class="page-reward">
+          <p><a href="javascript:void(0)" onclick="dashangToggle()" class="dashang">赏</a></p>
+          <div class="hide_box"></div>
+          <div class="shang_box">
+            <a class="shang_close" href="javascript:void(0)" onclick="dashangToggle()">×</a>
+            <div class="shang_tit">
+              <p>纯属好玩</p>
+            </div>
+            <div class="shang_payimg">
+              <img src="/img/alipayimg.jpg" alt="扫码支持" title="扫一扫" />
+            </div>
+              <div class="pay_explain">扫码打赏，你说多少就多少</div>
+            <div class="shang_payselect">
+              
+                <div class="pay_item checked" data-id="alipay">
+                  <span class="radiobox"></span>
+                  <span class="pay_logo"><img src="/img/alipay.png" alt="支付宝" /></span>
+                </div>
+              
+              
+                <div class="pay_item" data-id="wechat">
+                  <span class="radiobox"></span>
+                  <span class="pay_logo"><img src="/img/weixin.png" alt="微信" /></span>
+                </div>
+              
+            </div>
+            <div class="shang_info">
+              <p>打开<span id="shang_pay_txt">支付宝</span>扫一扫，即可进行扫码打赏哦</p>
+            </div>
+          </div>
+        </div>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/zepto/1.2.0/zepto.min.js"></script>
+        <script type="text/javascript">
+          $(".pay_item").click(function(){
+            $(this).addClass('checked').siblings('.pay_item').removeClass('checked');
+            var dataid=$(this).attr('data-id');
+            $(".shang_payimg img").attr("src","/img/"+dataid+"img.jpg");
+            $("#shang_pay_txt").text(dataid=="alipay"?"支付宝":"微信");
+          });
+          function dashangToggle(){
+            
+            $(".hide_box").fadeToggle();
+            $(".shang_box").fadeToggle();
+          }
+        </script>
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2017/12/15/Python3笔记/">Python3 学习笔记</a></p>
+        <p><span>文章作者:</span><a href="/" title="访问 glamor 的个人博客">glamor</a></p>
+        <p><span>发布时间:</span>2017年12月15日 - 18时10分</p>
+        <p><span>最后更新:</span>2017年12月15日 - 05时10分</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2017/12/15/Python3笔记/" title="Python3 学习笔记">http://www.cmustarc.com/2017/12/15/Python3笔记/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://www.cmustarc.com/2017/12/15/Python3笔记/　　作者: glamor" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script src="/js/clipboard.min.js"></script>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" title="中国大陆 (CC BY-NC-SA 3.0 CN)" target = "_blank">"署名-非商用-相同方式共享 3.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+<nav id="article-nav">
+  
+    <a href="/2017/12/28/数组与字典/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          数组与数组切片
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/12/03/python基础/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">python基础</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#数值"><span class="toc-number">1.</span> <span class="toc-text">数值</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#分数"><span class="toc-number">1.1.</span> <span class="toc-text">分数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#三角函数"><span class="toc-number">1.2.</span> <span class="toc-text">三角函数</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#元组"><span class="toc-number">2.</span> <span class="toc-text">元组</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#元组优点"><span class="toc-number">2.1.</span> <span class="toc-text">元组优点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#同时赋多值"><span class="toc-number">2.2.</span> <span class="toc-text">同时赋多值</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#集合"><span class="toc-number">3.</span> <span class="toc-text">集合</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#常用方法"><span class="toc-number">3.1.</span> <span class="toc-text">常用方法</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#None"><span class="toc-number">4.</span> <span class="toc-text">None</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#字典"><span class="toc-number">5.</span> <span class="toc-text">字典</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#字典解析"><span class="toc-number">5.1.</span> <span class="toc-text">字典解析</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#格式化字符串"><span class="toc-number">6.</span> <span class="toc-text">格式化字符串</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#字符串与字节"><span class="toc-number">7.</span> <span class="toc-text">字符串与字节</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#字符串与字节数组之间的联系"><span class="toc-number">7.1.</span> <span class="toc-text">字符串与字节数组之间的联系</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#定制类"><span class="toc-number">8.</span> <span class="toc-text">定制类</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#str"><span class="toc-number">8.1.</span> <span class="toc-text">str</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#iter"><span class="toc-number">8.2.</span> <span class="toc-text">iter</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#getitem"><span class="toc-number">8.3.</span> <span class="toc-text">getitem</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#getattr"><span class="toc-number">8.4.</span> <span class="toc-text">getattr</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#call"><span class="toc-number">8.5.</span> <span class="toc-text">call</span></a></li></ol></li></ol>
+</div>
+<input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+<script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script>
+    var valueHide = "隐藏目录";
+    var valueShow = "显示目录";
+
+    if ($(".left-col").is(":hidden")) {
+        $("#tocButton").attr("value", valueShow);
+    }
+    $("#tocButton").click(function() {
+        if ($("#toc").is(":hidden")) {
+            $("#tocButton").attr("value", valueHide);
+            $("#toc").slideDown(320);
+        }
+        else {
+            $("#tocButton").attr("value", valueShow);
+            $("#toc").slideUp(350);
+        }
+    })
+    if ($(".toc").length < 1) {
+        $("#toc, #tocButton").hide();
+    }
+</script>
+
+
+
+
+
+<div class="bdsharebuttonbox">
+	<a href="#" class="fx fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+	<a href="#" class="fx fa-weixin bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+	<a href="#" class="fx fa-qq bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+	<a href="#" class="fx fa-facebook-official bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+	<a href="#" class="fx fa-twitter bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+	<a href="#" class="fx fa-linkedin bds_linkedin" data-cmd="linkedin" title="分享到linkedin"></a>
+	<a href="#" class="fx fa-files-o bds_copy" data-cmd="copy" title="分享到复制网址"></a>
+</div>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+
+
+
+    
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/2017/12/28/数组与字典/" title="上一篇: 数组与数组切片">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+        
+            <a href="/2017/12/03/python基础/" title="下一篇: python基础">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/12/28/数组与字典/">数组与数组切片</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/12/15/Python3笔记/">Python3 学习笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/12/03/python基础/">python基础</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/11/07/数据链路层/">数据链路</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/11/01/网络基础/">网络基础</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/11/01/tcp-ip简介/">tcp/ip简介</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/24/HTMLParser模块/">HTMLParser模块</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/23/SQL注入/">SQL注入整理(一)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/20/列表/">列表</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/19/偏函数/">偏函数</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/18/with上下文管理器/">上下文管理器与with语句</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/13/v2ray/">v2ray 配置文件</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/29/socket-python/">socket编程</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/28/正则表达式/">正则表达式</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/15/s2-053/">S2-053</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/10/golang流程控制/">流程控制</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/10/Strut2 常见POC/">Struts2 常见POC收集和整理</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/05/论事件驱动与异步IO/">论事件驱动与异步IO[转]</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/05/并发编程/">并发编程</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/05/Python常用模块2/">python常用模块(2)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/05/Python常用模块/">python常用模块(1)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/05/python TCP代理/">python TCP代理</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/05/hexo+github+nginx VPS搭建博客/">hexo+github+nginx vps搭建博客</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/05/go语言初识/">初识go语言</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/05/hello-world/">Hello World</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/05/goroutine与调度器/">goroutine与调度器[转]</a></li></ul>
+    <script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+    <script>
+        $(".post-list").addClass("toc-article");
+        $(".post-list-item a").attr("target","_blank");
+        $("#post-nav-button > a:nth-child(2)").click(function() {
+            $(".fa-bars, .fa-times").toggle();
+            $(".post-list").toggle(300);
+            if ($(".toc").length > 0) {
+                $("#toc, #tocButton").toggle(200, function() {
+                    if ($(".switch-area").is(":visible")) {
+                        $("#tocButton").attr("value", valueHide);
+                        }
+                    })
+            }
+            else {
+            }
+        })
+    </script>
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                &copy; 2017 glamor
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/luuman/hexo-theme-spfk" target="_blank">spfk</a> by luuman
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" >道士到访数: 
+                            <span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>, </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit">本页阅读量: 
+                            <span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+
+    </div>
+    <script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var backgroundnum = 24;
+            var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+            $("#mobile-nav").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+            $(".left-col").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+        })
+    </script>
+
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    $(document).ready(function() {
+        if ($("#comments").length < 1) {
+            $("#scroll > a:nth-child(2)").hide();
+        };
+    })
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+  <script language="javascript">
+    $(function() {
+        $("a[title]").each(function() {
+            var a = $(this);
+            var title = a.attr('title');
+            if (title == undefined || title == "") return;
+            a.data('title', title).removeAttr('title').hover(
+
+            function() {
+                var offset = a.offset();
+                $("<div id=\"anchortitlecontainer\"></div>").appendTo($("body")).html(title).css({
+                    top: offset.top - a.outerHeight() - 15,
+                    left: offset.left + a.outerWidth()/2 + 1
+                }).fadeIn(function() {
+                    var pop = $(this);
+                    setTimeout(function() {
+                        pop.remove();
+                    }, pop.text().length * 800);
+                });
+            }, function() {
+                $("#anchortitlecontainer").remove();
+            });
+        });
+    });
+</script>
+
+
+  </div>
+</body>
+</html>

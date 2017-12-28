@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>网络基础 | glamor的博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="协议协议简单来说就是计算机与计算机之间通过网络实现通信的时候事先达成的一种”约定“。只要遵从了这些约定，那么让不同的计算机之间通信。CPU是计算机的心脏，每个程序实际上就是由他调度执行的，OS是一基础软件，集合了CPU管理，内存管理，计算机外围设备管理等重要功能。一个CPU通常在同一时间只能运行一个程序，为了让多个程序同事进行，操作系统采用了CPU时间片轮转机制，在多个程序之间进行切换，合理调度，">
+<meta name="keywords" content="网络基础知识">
+<meta property="og:type" content="article">
+<meta property="og:title" content="网络基础">
+<meta property="og:url" content="http://www.cmustarc.com/2017/11/01/网络基础/index.html">
+<meta property="og:site_name" content="glamor的博客">
+<meta property="og:description" content="协议协议简单来说就是计算机与计算机之间通过网络实现通信的时候事先达成的一种”约定“。只要遵从了这些约定，那么让不同的计算机之间通信。CPU是计算机的心脏，每个程序实际上就是由他调度执行的，OS是一基础软件，集合了CPU管理，内存管理，计算机外围设备管理等重要功能。一个CPU通常在同一时间只能运行一个程序，为了让多个程序同事进行，操作系统采用了CPU时间片轮转机制，在多个程序之间进行切换，合理调度，">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://ouz06keqs.bkt.clouddn.com/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20171025161215.png">
+<meta property="og:updated_time" content="2017-11-01T08:05:42.377Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="网络基础">
+<meta name="twitter:description" content="协议协议简单来说就是计算机与计算机之间通过网络实现通信的时候事先达成的一种”约定“。只要遵从了这些约定，那么让不同的计算机之间通信。CPU是计算机的心脏，每个程序实际上就是由他调度执行的，OS是一基础软件，集合了CPU管理，内存管理，计算机外围设备管理等重要功能。一个CPU通常在同一时间只能运行一个程序，为了让多个程序同事进行，操作系统采用了CPU时间片轮转机制，在多个程序之间进行切换，合理调度，">
+<meta name="twitter:image" content="http://ouz06keqs.bkt.clouddn.com/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20171025161215.png">
+  
+    <link rel="alternative" href="/atom.xml" title="glamor的博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/img/favicon.png">
+  
+  
+      <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  
+  
+      <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  
+  <!-- 加载特效 -->
+    <script src="/js/pace.js"></script>
+    <link href="/css/pace/pace-theme-flash.css" rel="stylesheet" />
+  <script>
+      var yiliaConfig = {
+          rootUrl: '/',
+          fancybox: true,
+          animate: true,
+          isHome: false,
+          isPost: true,
+          isArchive: false,
+          isTag: false,
+          isCategory: false,
+          open_in_new: false
+      }
+  </script>
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            
+            <img lazy-src="/img/head.jpg" class="js-avatar">
+            
+        </a>
+
+        <hgroup>
+          <h1 class="header-author"><a href="/" title="Hi Mate">glamor</a></h1>
+        </hgroup>
+
+        
+        <p class="header-subtitle">莫等闲，白了少年头空悲切...</p>
+        
+        
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">博客首页</a></li>
+                        
+                            <li><a href="/categories/python">人生苦短</a></li>
+                        
+                            <li><a href="/categories/Web安全">安全海洋</a></li>
+                        
+                            <li><a href="/categories/notes">随笔</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fl mail" target="_blank" href="mailto:root@cmustard.com" title="mail">mail</a>
+                            
+                                <a class="fl github" target="_blank" href="https://github.com/cmustard06" title="github">github</a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <a href="/tags/TCP-IP/" style="font-size: 10px;">TCP/IP</a> <a href="/tags/go/" style="font-size: 10px;">go</a> <a href="/tags/golang/" style="font-size: 17.5px;">golang</a> <a href="/tags/poc/" style="font-size: 12.5px;">poc</a> <a href="/tags/python/" style="font-size: 20px;">python</a> <a href="/tags/python3/" style="font-size: 12.5px;">python3</a> <a href="/tags/sql注入/" style="font-size: 10px;">sql注入</a> <a href="/tags/struct/" style="font-size: 10px;">struct</a> <a href="/tags/struts/" style="font-size: 10px;">struts</a> <a href="/tags/tcp/" style="font-size: 10px;">tcp</a> <a href="/tags/tcp-ip/" style="font-size: 10px;">tcp/ip</a> <a href="/tags/事件驱动/" style="font-size: 10px;">事件驱动</a> <a href="/tags/代理/" style="font-size: 10px;">代理</a> <a href="/tags/博客/" style="font-size: 10px;">博客</a> <a href="/tags/基础/" style="font-size: 15px;">基础</a> <a href="/tags/并发/" style="font-size: 10px;">并发</a> <a href="/tags/异步IO/" style="font-size: 10px;">异步IO</a> <a href="/tags/正则表达式/" style="font-size: 10px;">正则表达式</a> <a href="/tags/爬虫/" style="font-size: 10px;">爬虫</a> <a href="/tags/科学上网/" style="font-size: 10px;">科学上网</a> <a href="/tags/编程/" style="font-size: 10px;">编程</a> <a href="/tags/编程语言/" style="font-size: 12.5px;">编程语言</a> <a href="/tags/网络/" style="font-size: 12.5px;">网络</a> <a href="/tags/网络基础知识/" style="font-size: 10px;">网络基础知识</a> <a href="/tags/网络编程/" style="font-size: 10px;">网络编程</a> <a href="/tags/集合/" style="font-size: 10px;">集合</a>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.dmmjy9.com">dmmjy9</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="Me">glamor</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                
+                    <img lazy-src="/img/head.jpg" class="js-avatar">
+                
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="Me">glamor</a></h1>
+            </hgroup>
+            
+            <p class="header-subtitle">莫等闲，白了少年头空悲切...</p>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">博客首页</a></li>
+                
+                    <li><a href="/categories/python">人生苦短</a></li>
+                
+                    <li><a href="/categories/Web安全">安全海洋</a></li>
+                
+                    <li><a href="/categories/notes">随笔</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                <div class="social">
+                    
+                        <a class="mail" target="_blank" href="mailto:root@cmustard.com" title="mail">mail</a>
+                    
+                        <a class="github" target="_blank" href="https://github.com/cmustard06" title="github">github</a>
+                    
+                </div>
+            </nav>
+        </header>                
+    </div>
+</nav>
+      <div class="body-wrap"><article id="post-网络基础" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2017/11/01/网络基础/" class="article-date">
+      <time datetime="2017-11-01T08:05:42.377Z" itemprop="datePublished">2017-11-01</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      网络基础
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/notes/">notes</a>
+    </div>
+
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/网络基础知识/">网络基础知识</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h1 id="协议"><a href="#协议" class="headerlink" title="协议"></a>协议</h1><p>协议简单来说就是计算机与计算机之间通过网络实现通信的时候事先达成的一种”约定“。只要遵从了这些约定，那么让不同的计算机之间通信。<br><strong>CPU是计算机的心脏，每个程序实际上就是由他调度执行的，OS是一基础软件，集合了CPU管理，内存管理，计算机外围设备管理等重要功能。一个CPU通常在同一时间只能运行一个程序，为了让多个程序同事进行，操作系统采用了CPU时间片轮转机制，在多个程序之间进行切换，合理调度，多任务调度</strong><br><a id="more"></a></p>
+<h2 id="分组交换协议"><a href="#分组交换协议" class="headerlink" title="分组交换协议"></a>分组交换协议</h2><p>将大数据分割为一个个叫做包的较小单位进行传输的方法，分组交换就是将大数据分装为一个个有包交给对方。</p>
+<p>计算机通信会在每一个分组中附加上源主机地址和目标地址送给通信线路，这些发送端地址，接收端地址以及分组序号写入的部分称为”报文首部“<br>一个较大的数据被分为多个分组时，为了标明是原始数据的哪一个部分，就有必要将分组序号写入到包中，接收端会根据这个序号，再讲每一个分组按照序号重新装配未原始数据。</p>
+<h1 id="OSI"><a href="#OSI" class="headerlink" title="OSI"></a>OSI</h1><p>OSI模型有7层，上下层之间进行交互时所遵循的约定叫做”接口“，同一层之间的交互所遵循的约定叫做协议<br>简单来说，协议就是可以直接使用的，不需要中介，接口就是就协议之间的转换。</p>
+<h2 id="七层模型"><a href="#七层模型" class="headerlink" title="七层模型"></a>七层模型</h2><table>
+<thead>
+<tr>
+<th style="text-align:right"></th>
+<th style="text-align:left">名称</th>
+<th style="text-align:left">功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right">7</td>
+<td style="text-align:left">应用层</td>
+<td style="text-align:left">针对特定的应用协议，电子邮件，远程登录，文件传输协议等</td>
+</tr>
+<tr>
+<td style="text-align:right">6</td>
+<td style="text-align:left">表示层</td>
+<td style="text-align:left">将应用处理的信息转换为适合网络传输的格式，或将下一层的数据转换未上层能够处理的格式</td>
+</tr>
+<tr>
+<td style="text-align:right">5</td>
+<td style="text-align:left">会话层</td>
+<td style="text-align:left">负责建立和断开通信连接，以及数据的分割等数据传输相关的管理</td>
+</tr>
+<tr>
+<td style="text-align:right">4</td>
+<td style="text-align:left">传输层</td>
+<td style="text-align:left">起着可靠传输的作用，只在通信双方节点上进行处理，而无需在路由器上处理</td>
+</tr>
+<tr>
+<td style="text-align:right">3</td>
+<td style="text-align:left">网络层</td>
+<td style="text-align:left">见数据传输到目标地址，这一层主要负责寻址和路由选择</td>
+</tr>
+<tr>
+<td style="text-align:right">2</td>
+<td style="text-align:left">数据链路层</td>
+<td style="text-align:left">负责物理层面上互联的，节点之间的通信传输</td>
+</tr>
+<tr>
+<td style="text-align:right">1</td>
+<td style="text-align:left">物理层</td>
+<td style="text-align:left">负责0,1比特流与电压高低，光的闪灭之间的转换</td>
+</tr>
+</tbody>
+</table>
+<p><strong>应用层写入的数据会经由表示层格式化编码，再由会话层标记发送顺序后在发送出去，会话层只对何时建立连接，何时发送数据等问题进行管理，并不具备实际传输数据的功能</strong></p>
+<h2 id="传输层"><a href="#传输层" class="headerlink" title="传输层"></a>传输层</h2><p>传输层用于对建立连接和断开连接进行处理，在两个主机之间创建逻辑上的通信连接即是传输层的主要作用，此外，传输层为了确保所传输的数据到达目标地址，会在通信两端的计算机之间进行确认，<strong><em>如果数据没有到达，他会负责进行重发。</em></strong><br>举个例子就是主机A发送给主机B一句话”早上好”，但是由于传输的过程中出现网络异常或者数据被破坏，主机B只收到了”早上”这一部分数据，那么主机B就会在收到这些数据后将主机B没有收到的部分数据的事实告知主机A，主机A得到这个信息之后，就会将”好“重发给主机B，并再次确认对端是否接受到</p>
+<p>由此可见，保证数据传输的可靠性是传输层的一个重要作用。但是，把数据传输给对端处理的还是由网络层来完成的。</p>
+<h2 id="网络层"><a href="#网络层" class="headerlink" title="网络层"></a>网络层</h2><p>网络层的作用就是在网络与网络相互连接的环境中，将数据从发送端主机发送给接收端主机。</p>
+<p>在实际发送数据时，目的地址至关重要，这个地址是进行通信的网络中的唯一指定的序号，类似与手机号。</p>
+<p><strong>在不同的网络结构体系下，网络层有时也不能保证数据的可达性。因此数据传输的过程数据丢失，顺序混乱等问题出现的可能性就会大大增加。这个时候就可以由传输层来负责提供正确传输数据的处理。</strong></p>
+<h2 id="数据链路层、物理层"><a href="#数据链路层、物理层" class="headerlink" title="数据链路层、物理层"></a>数据链路层、物理层</h2><p>数据链路层的作用就是在这些通过传输介质互连的设备之间进行数据处理</p>
+<p>在物理层中，将数据的0,1转换为电压和脉冲光传输给物理的传输介质，而相互直连的设备之间使用地址实现传输，这种地址称为mac地址，也可称为物理地址或者硬件地址，。</p>
+<p>采用MAC地址<strong>目的是为了识别连接到同一传输介质上的设备。</strong></p>
+<p>网络层和数据链路层都是<strong>基于目标地址将数据发送给接收端的</strong>，但是网络层负责将整个数据发送给最终目标地址，而数据链路层则是只发送一个分段内的数据。</p>
+<h1 id="传输方式的分类"><a href="#传输方式的分类" class="headerlink" title="传输方式的分类"></a>传输方式的分类</h1><h2 id="面向连接和面向无连接方式"><a href="#面向连接和面向无连接方式" class="headerlink" title="面向连接和面向无连接方式"></a>面向连接和面向无连接方式</h2><h3 id="面向有连接"><a href="#面向有连接" class="headerlink" title="面向有连接"></a>面向有连接</h3><p>在面向连接中，在发送数据之前，需要在收发主机之间连接一条逻辑的通信线路，连接被关闭时就无法发送数据了。<br>在面向连接的情况下，必须在通信传输前后，专门进行建立和断开连接的处理。就跟打电话一样，通话前后必须有拨通对方拿起电话交流，然后通话结束后，双方都将电话扣上切断通话一样。</p>
+<h3 id="面向无连接"><a href="#面向无连接" class="headerlink" title="面向无连接"></a>面向无连接</h3><p>面向无连接则不要求建立和断开连接。发送端可在任何时候自由发送数据，不管对端的主机是否存在。因此，在无连接的情况下，<strong>接收端需要时常确认是否收到了数据。</strong></p>
+<h2 id="电路交换与分组交换"><a href="#电路交换与分组交换" class="headerlink" title="电路交换与分组交换"></a>电路交换与分组交换</h2><h3 id="分组交换"><a href="#分组交换" class="headerlink" title="分组交换"></a>分组交换</h3><p>在分组交换中，由于分组交换机（路由器）连接通信线路，分组交换的大致处理过程为：发送端计算机将数据分组发送给路由器，路由器收到这些分组数据以后，缓存到自己的缓冲区中，然后再转发给目标服务器。路由器接收到这些数据以后会按照顺序缓存到相应的队列中，再以先进先出的顺序将他们逐一发送出去。</p>
+<p>在分组交换中，计算机与路由器之间以及路由器与路由器之间通常只有一条通信线路。<strong>因此，这条线路其实是一条共享线路。</strong>而且通信线路的速度还会有所不同，根据网络拥堵的情况，数据到达目标地址的时间有长有短，另外，路由器的缓存饱和或者溢出时，也有可能发送分组数据丢失的情况。</p>
+<h3 id="电路交换"><a href="#电路交换" class="headerlink" title="电路交换"></a>电路交换</h3><p>以电路联接为目的的交换方式是电路交换方式。电路交换在通信之前要<strong>在通信双方之间建立一条被双方独占的物理通路</strong>（由通信双方之间的交换设备和链路逐段连接而成）。电话网中就是采用电路交换方式。打电话时，首先是摘下话机拨号。拨号完毕，交换机就知道了要和谁通话，并为双方建立连接，等一方挂机后，交换机就把双方的线路断开，为双方各自开始一次新的通话做好准备。因此，可以体会到，电路交换的动作，就是在通信时建立（即联接）电路，通信完毕时拆除（即断开）电路。至于在通信过程中双方传送信息的内容，与交换系统无关。</p>
+<h2 id="～播"><a href="#～播" class="headerlink" title="～播"></a>～播</h2><h3 id="单播"><a href="#单播" class="headerlink" title="单播"></a>单播</h3><p>单播就是一对一通信</p>
+<h3 id="广播"><a href="#广播" class="headerlink" title="广播"></a>广播</h3><p>将消息从1台主机发送给<strong><em>与之相连的所有</em></strong>其他主机。典型的例子就是电视播放。<br>在进行广播通信的时候，也会存在一个广播范围，只有在这个范围之内的计算机才能收到相应的广播消息。这个范围叫做广播域</p>
+<h3 id="多播"><a href="#多播" class="headerlink" title="多播"></a>多播</h3><p>多播与广播类似，也是将消息发给多个接受主机，不同之处在于多播要限定<strong><em>某一组主机</em></strong>作为接收端，多播通信最典型的例子就是电视会议，指定莫一群特定的人。</p>
+<h3 id="任播"><a href="#任播" class="headerlink" title="任播"></a>任播</h3><p>任播是指在特定的多台主机中选出一台作为接收端的一种通信方式。任播通信是从目标主机中选择一台最符合网络条件的主机作为目标足记发送消息，通常，所被选中的那台特定主机将返回一个单播信号，随后发送端主机只跟这台主机进行通信。</p>
+<h1 id="地址"><a href="#地址" class="headerlink" title="地址"></a>地址</h1><p>地址，怎样才能被称为地址，最主要的就是唯一性，可以明确的表示一个主体对象。单播好理解，他是一对一的，就是需要地址有唯一性才能被找到，而对于多播，我们可以对这些由多个设备组成的<strong>一组通信</strong>赋予同一个具有唯一特性的地址，一个例子就是，一个老师说”一年级一班的同学请起立”，其中一年级一班就明确的指代了目标对象，”一年级一班“就是这一层多播的目标地址，具有唯一性。</p>
+<h2 id="地址的层次性"><a href="#地址的层次性" class="headerlink" title="地址的层次性"></a>地址的层次性</h2><p>为了更快的能将地址对应到特定的事务，我们需要让地址有层次性。就像电话号码一样，有国家区号，国内区号，然后是电话，这样就我们就能快速定位到每一个特定的地址。</p>
+<p>而对与MAC地址和IP地址而言，虽然他们在标示通信主体的时候具有唯一性，但是只有IP具有层次性。原因如下：</p>
+<p>mac地址通过由制造商识别号，产品编号以及通用编号等信息组成，具备了唯一性，但是在实际寻找地址的过程中这些组成部分并没有起到实际的效果，所以不能算是有层次性。虽然MAC地址是<strong>真正负责最终通信的地址</strong>，但是目前这也是仅限于在同一网段中，在公网上其寻址作用的还是IP。</p>
+<p>IP地址的层次性主要体现在一些两方面，一是IP地址是网络号和主机号两部分组成，即使通信主体的IP地址不同，若主机号不同，网络号相同，说明他们处于同一网段。网络号相同的主机都比较集中，为IP寻址带来了极大的遍历。</p>
+<p>另一方面，在网络传输中，每个节点会根据分组数据的地址信息，来判断该报文应该由那个网卡发出去，为此每一个地址都会参考一个发出借口列表，在这一点上MAC寻址和IP寻址都一样。MAC地址这张表叫MAC地址转发表，而IP寻址中所参考的叫做路由控制表。</p>
+<p><strong>MAC地址表中记录的是实际的MAC地址，而路由表中记录的是集中之后的网络号</strong></p>
+<h1 id="网络的构成要素"><a href="#网络的构成要素" class="headerlink" title="网络的构成要素"></a>网络的构成要素</h1><p><img src="http://ouz06keqs.bkt.clouddn.com/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20171025161215.png" alt=""></p>
+<h2 id="搭建网络的主要设备和作用"><a href="#搭建网络的主要设备和作用" class="headerlink" title="搭建网络的主要设备和作用"></a>搭建网络的主要设备和作用</h2><table>
+<thead>
+<tr>
+<th style="text-align:center">设备</th>
+<th style="text-align:left">作用</th>
+<th style="text-align:left">简介</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">网卡</td>
+<td style="text-align:left">使计算机联网的设备</td>
+<td style="text-align:left">也叫网络适配器，没有配置NIC的计算机是无法接入到以太网</td>
+</tr>
+<tr>
+<td style="text-align:center">中继器</td>
+<td style="text-align:left">从物理层上延长网络的设备。可以在双脚电缆和光纤电缆之间进行转换</td>
+<td style="text-align:left">将由电缆传过来的电信号或者光信号经由中继器的波形调整和放大再传给另一个电缆，一般情况下，中继器的两端连接的是相同的通信媒介，当然有些中继器也可以支持不同的，但是中继器不能在传输速度不同媒介之间进行转发，中继集线器可以看着是一个多口的中继器，每一个端口都可以成为一个中继器</td>
+</tr>
+<tr>
+<td style="text-align:center">网桥/2层交换机</td>
+<td style="text-align:left">从数据链路层延长网络的设备，识别数据链路层的数据帧，重构数据帧转发。丢弃错误的数据帧</td>
+<td style="text-align:left">能识别数据链路层中的数据帧，并将这些数据帧临时存储在内存中，再重新生成信号作为一个全新的帧转发给相连的另一个网段。数据链路的数据帧中有一个数据位叫做FCS，用于校验数据是否正确送达目的地，网桥通过检查这个域中的值，将那些损坏的数据丢弃，从而避免发送给其他网段，此外，网桥还能通过地址自学机制和过滤功能控制网络流量,这类网桥会记住曾经通过自己转发的所有数据帧的MAC地址，并保存到中继的内存表中。  以太网等网络中使用的交换集线器(hub常说的集线器)，现在基本也属于网桥的一种，交换集线器中连接电缆的每一个端口都能提供类似于网桥的功能</td>
+</tr>
+<tr>
+<td style="text-align:center">路由器/3层交换机</td>
+<td style="text-align:left">通过网络层转发分组数据的设备，判断网络路径，转发至目标地址</td>
+<td style="text-align:left">网络层面上连接两个网络(ATM与以太网)，并对分组报文进行转发的设备，网桥是根据物理地址进行处理的，而路由器是根据Ip地址进行转发的。路由器还有分担网络负荷的作用</td>
+</tr>
+<tr>
+<td style="text-align:center">4~7层交换机</td>
+<td style="text-align:left">处理传输层以上各层网络传输的设备</td>
+<td style="text-align:left">负责处理OSI模型中传输层到应用层的数据，包括分析收发数据，并对这些数据进行特定的处理。比如负载均衡器，广域网加速器以及防火墙</td>
+</tr>
+<tr>
+<td style="text-align:center">网关</td>
+<td style="text-align:left">转换协议的设备</td>
+<td style="text-align:left">负责将从传输层到应用层的数据进行转换和转发的设备，网关不仅对数据进行转发还会对数据进行转换，它通常会使用一个表示层或者应用层网关，在两个不能进行直接通信的协议之间进行翻译，最终实现两者之间的通信&lt;。典型的就是互联网邮件和手机邮件的转换服务，比如代理服务器，防火墙等</td>
+</tr>
+</tbody>
+</table>
+<h2 id="通信媒介和数据链路"><a href="#通信媒介和数据链路" class="headerlink" title="通信媒介和数据链路"></a>通信媒介和数据链路</h2><p>计算机之间通过电缆相互连接，电缆可以分为很多种，包括双绞线电缆，光纤电缆，同轴电缆，串行电缆，而媒介本身也分为电波，微波等不同类型的电磁波。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">数据链路名</th>
+<th style="text-align:left">通信媒介</th>
+<th style="text-align:left">传输速率</th>
+<th style="text-align:left">主要用途</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">以太网</td>
+<td style="text-align:left">双绞线电缆</td>
+<td style="text-align:left">10Mbps～100Gbps</td>
+<td style="text-align:left">LAN</td>
+</tr>
+<tr>
+<td style="text-align:left">以太网</td>
+<td style="text-align:left">同轴电缆</td>
+<td style="text-align:left">10Mbps</td>
+<td style="text-align:left">LAN</td>
+</tr>
+<tr>
+<td style="text-align:left">以太网</td>
+<td style="text-align:left">光纤电缆</td>
+<td style="text-align:left">10Mbps～100Gbps</td>
+<td style="text-align:left">LAN</td>
+</tr>
+<tr>
+<td style="text-align:left">无线</td>
+<td style="text-align:left">电磁波</td>
+<td style="text-align:left">数个Mbps</td>
+<td style="text-align:left">LAN/WAN</td>
+</tr>
+<tr>
+<td style="text-align:left">ATM 又叫信元中继。电路交换的方式</td>
+<td style="text-align:left">双绞线电缆，光纤电缆</td>
+<td style="text-align:left">25Mbps，155Mbps，622Mbps</td>
+<td style="text-align:left">Lan/WAN</td>
+</tr>
+<tr>
+<td style="text-align:left">FDDI光纤分布式数据接口，逻辑上是基于令牌环架构</td>
+<td style="text-align:left">光纤电缆，双绞线电</td>
+<td style="text-align:left">100Mbps</td>
+<td style="text-align:left">主LAN/WAN</td>
+</tr>
+<tr>
+<td style="text-align:left">帧中继</td>
+<td style="text-align:left">双绞线电缆，光纤电缆</td>
+<td style="text-align:left">约64k～1.5Mbps</td>
+<td style="text-align:left">WAN</td>
+</tr>
+<tr>
+<td style="text-align:left">ISDN综合业务数字网是一个数字电话网络国际标准，是一种典型的电路交换网络系统</td>
+<td style="text-align:left">双绞线电缆</td>
+<td style="text-align:left">64k~1.5Mbps</td>
+<td style="text-align:left">WAN</td>
+</tr>
+</tbody>
+</table>
+<p>在数据传输的过程中，两个设备之间数据流动的物理速度称为传输速率，单位为Mbsp，每秒比特数。传输速率又称为带宽，带宽越大表示网路传输能力越强。此外，主机之间实际的传输速率被称为吞吐量</p>
+
+      
+      
+        <div class="page-reward">
+          <p><a href="javascript:void(0)" onclick="dashangToggle()" class="dashang">赏</a></p>
+          <div class="hide_box"></div>
+          <div class="shang_box">
+            <a class="shang_close" href="javascript:void(0)" onclick="dashangToggle()">×</a>
+            <div class="shang_tit">
+              <p>纯属好玩</p>
+            </div>
+            <div class="shang_payimg">
+              <img src="/img/alipayimg.jpg" alt="扫码支持" title="扫一扫" />
+            </div>
+              <div class="pay_explain">扫码打赏，你说多少就多少</div>
+            <div class="shang_payselect">
+              
+                <div class="pay_item checked" data-id="alipay">
+                  <span class="radiobox"></span>
+                  <span class="pay_logo"><img src="/img/alipay.png" alt="支付宝" /></span>
+                </div>
+              
+              
+                <div class="pay_item" data-id="wechat">
+                  <span class="radiobox"></span>
+                  <span class="pay_logo"><img src="/img/weixin.png" alt="微信" /></span>
+                </div>
+              
+            </div>
+            <div class="shang_info">
+              <p>打开<span id="shang_pay_txt">支付宝</span>扫一扫，即可进行扫码打赏哦</p>
+            </div>
+          </div>
+        </div>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/zepto/1.2.0/zepto.min.js"></script>
+        <script type="text/javascript">
+          $(".pay_item").click(function(){
+            $(this).addClass('checked').siblings('.pay_item').removeClass('checked');
+            var dataid=$(this).attr('data-id');
+            $(".shang_payimg img").attr("src","/img/"+dataid+"img.jpg");
+            $("#shang_pay_txt").text(dataid=="alipay"?"支付宝":"微信");
+          });
+          function dashangToggle(){
+            
+            $(".hide_box").fadeToggle();
+            $(".shang_box").fadeToggle();
+          }
+        </script>
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2017/11/01/网络基础/">网络基础</a></p>
+        <p><span>文章作者:</span><a href="/" title="访问 glamor 的个人博客">glamor</a></p>
+        <p><span>发布时间:</span>2017年11月01日 - 16时05分</p>
+        <p><span>最后更新:</span>2017年11月01日 - 04时05分</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2017/11/01/网络基础/" title="网络基础">http://www.cmustarc.com/2017/11/01/网络基础/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://www.cmustarc.com/2017/11/01/网络基础/　　作者: glamor" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script src="/js/clipboard.min.js"></script>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" title="中国大陆 (CC BY-NC-SA 3.0 CN)" target = "_blank">"署名-非商用-相同方式共享 3.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+<nav id="article-nav">
+  
+    <a href="/2017/11/07/数据链路层/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          数据链路
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/11/01/tcp-ip简介/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">tcp/ip简介</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#协议"><span class="toc-number">1.</span> <span class="toc-text">协议</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#分组交换协议"><span class="toc-number">1.1.</span> <span class="toc-text">分组交换协议</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#OSI"><span class="toc-number">2.</span> <span class="toc-text">OSI</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#七层模型"><span class="toc-number">2.1.</span> <span class="toc-text">七层模型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#传输层"><span class="toc-number">2.2.</span> <span class="toc-text">传输层</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#网络层"><span class="toc-number">2.3.</span> <span class="toc-text">网络层</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#数据链路层、物理层"><span class="toc-number">2.4.</span> <span class="toc-text">数据链路层、物理层</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#传输方式的分类"><span class="toc-number">3.</span> <span class="toc-text">传输方式的分类</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#面向连接和面向无连接方式"><span class="toc-number">3.1.</span> <span class="toc-text">面向连接和面向无连接方式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#面向有连接"><span class="toc-number">3.1.1.</span> <span class="toc-text">面向有连接</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#面向无连接"><span class="toc-number">3.1.2.</span> <span class="toc-text">面向无连接</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#电路交换与分组交换"><span class="toc-number">3.2.</span> <span class="toc-text">电路交换与分组交换</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#分组交换"><span class="toc-number">3.2.1.</span> <span class="toc-text">分组交换</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#电路交换"><span class="toc-number">3.2.2.</span> <span class="toc-text">电路交换</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#～播"><span class="toc-number">3.3.</span> <span class="toc-text">～播</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#单播"><span class="toc-number">3.3.1.</span> <span class="toc-text">单播</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#广播"><span class="toc-number">3.3.2.</span> <span class="toc-text">广播</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#多播"><span class="toc-number">3.3.3.</span> <span class="toc-text">多播</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#任播"><span class="toc-number">3.3.4.</span> <span class="toc-text">任播</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#地址"><span class="toc-number">4.</span> <span class="toc-text">地址</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#地址的层次性"><span class="toc-number">4.1.</span> <span class="toc-text">地址的层次性</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#网络的构成要素"><span class="toc-number">5.</span> <span class="toc-text">网络的构成要素</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#搭建网络的主要设备和作用"><span class="toc-number">5.1.</span> <span class="toc-text">搭建网络的主要设备和作用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#通信媒介和数据链路"><span class="toc-number">5.2.</span> <span class="toc-text">通信媒介和数据链路</span></a></li></ol></li></ol>
+</div>
+<input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+<script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script>
+    var valueHide = "隐藏目录";
+    var valueShow = "显示目录";
+
+    if ($(".left-col").is(":hidden")) {
+        $("#tocButton").attr("value", valueShow);
+    }
+    $("#tocButton").click(function() {
+        if ($("#toc").is(":hidden")) {
+            $("#tocButton").attr("value", valueHide);
+            $("#toc").slideDown(320);
+        }
+        else {
+            $("#tocButton").attr("value", valueShow);
+            $("#toc").slideUp(350);
+        }
+    })
+    if ($(".toc").length < 1) {
+        $("#toc, #tocButton").hide();
+    }
+</script>
+
+
+
+
+
+<div class="bdsharebuttonbox">
+	<a href="#" class="fx fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+	<a href="#" class="fx fa-weixin bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+	<a href="#" class="fx fa-qq bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+	<a href="#" class="fx fa-facebook-official bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+	<a href="#" class="fx fa-twitter bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+	<a href="#" class="fx fa-linkedin bds_linkedin" data-cmd="linkedin" title="分享到linkedin"></a>
+	<a href="#" class="fx fa-files-o bds_copy" data-cmd="copy" title="分享到复制网址"></a>
+</div>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+
+
+
+    
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/2017/11/07/数据链路层/" title="上一篇: 数据链路">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+        
+            <a href="/2017/11/01/tcp-ip简介/" title="下一篇: tcp/ip简介">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/12/28/数组与字典/">数组与数组切片</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/12/15/Python3笔记/">Python3 学习笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/12/03/python基础/">python基础</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/11/07/数据链路层/">数据链路</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/11/01/网络基础/">网络基础</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/11/01/tcp-ip简介/">tcp/ip简介</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/24/HTMLParser模块/">HTMLParser模块</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/23/SQL注入/">SQL注入整理(一)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/20/列表/">列表</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/19/偏函数/">偏函数</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/18/with上下文管理器/">上下文管理器与with语句</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/13/v2ray/">v2ray 配置文件</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/29/socket-python/">socket编程</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/28/正则表达式/">正则表达式</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/15/s2-053/">S2-053</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/10/golang流程控制/">流程控制</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/10/Strut2 常见POC/">Struts2 常见POC收集和整理</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/05/论事件驱动与异步IO/">论事件驱动与异步IO[转]</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/05/并发编程/">并发编程</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/05/Python常用模块2/">python常用模块(2)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/05/Python常用模块/">python常用模块(1)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/05/python TCP代理/">python TCP代理</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/05/hexo+github+nginx VPS搭建博客/">hexo+github+nginx vps搭建博客</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/05/go语言初识/">初识go语言</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/05/hello-world/">Hello World</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/05/goroutine与调度器/">goroutine与调度器[转]</a></li></ul>
+    <script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+    <script>
+        $(".post-list").addClass("toc-article");
+        $(".post-list-item a").attr("target","_blank");
+        $("#post-nav-button > a:nth-child(2)").click(function() {
+            $(".fa-bars, .fa-times").toggle();
+            $(".post-list").toggle(300);
+            if ($(".toc").length > 0) {
+                $("#toc, #tocButton").toggle(200, function() {
+                    if ($(".switch-area").is(":visible")) {
+                        $("#tocButton").attr("value", valueHide);
+                        }
+                    })
+            }
+            else {
+            }
+        })
+    </script>
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                &copy; 2017 glamor
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/luuman/hexo-theme-spfk" target="_blank">spfk</a> by luuman
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" >道士到访数: 
+                            <span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>, </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit">本页阅读量: 
+                            <span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+
+    </div>
+    <script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var backgroundnum = 24;
+            var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+            $("#mobile-nav").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+            $(".left-col").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+        })
+    </script>
+
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    $(document).ready(function() {
+        if ($("#comments").length < 1) {
+            $("#scroll > a:nth-child(2)").hide();
+        };
+    })
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+  <script language="javascript">
+    $(function() {
+        $("a[title]").each(function() {
+            var a = $(this);
+            var title = a.attr('title');
+            if (title == undefined || title == "") return;
+            a.data('title', title).removeAttr('title').hover(
+
+            function() {
+                var offset = a.offset();
+                $("<div id=\"anchortitlecontainer\"></div>").appendTo($("body")).html(title).css({
+                    top: offset.top - a.outerHeight() - 15,
+                    left: offset.left + a.outerWidth()/2 + 1
+                }).fadeIn(function() {
+                    var pop = $(this);
+                    setTimeout(function() {
+                        pop.remove();
+                    }, pop.text().length * 800);
+                });
+            }, function() {
+                $("#anchortitlecontainer").remove();
+            });
+        });
+    });
+</script>
+
+
+  </div>
+</body>
+</html>

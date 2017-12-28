@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>tcp/ip简介 | glamor的博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="补充">
+<meta name="keywords" content="tcp&#x2F;ip,网络">
+<meta property="og:type" content="article">
+<meta property="og:title" content="tcp&#x2F;ip简介">
+<meta property="og:url" content="http://www.cmustarc.com/2017/11/01/tcp-ip简介/index.html">
+<meta property="og:site_name" content="glamor的博客">
+<meta property="og:description" content="补充">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://ouz06keqs.bkt.clouddn.com/%E6%95%B0%E6%8D%AE%E5%8C%85%E9%A6%96%E9%83%A8.png">
+<meta property="og:image" content="http://ouz06keqs.bkt.clouddn.com/%E9%82%AE%E4%BB%B6%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86.png">
+<meta property="og:image" content="http://ouz06keqs.bkt.clouddn.com/%E5%B8%A7%E5%8C%85%E7%BB%93%E6%9E%84.png">
+<meta property="og:updated_time" content="2017-11-01T08:04:25.253Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="tcp&#x2F;ip简介">
+<meta name="twitter:description" content="补充">
+<meta name="twitter:image" content="http://ouz06keqs.bkt.clouddn.com/%E6%95%B0%E6%8D%AE%E5%8C%85%E9%A6%96%E9%83%A8.png">
+  
+    <link rel="alternative" href="/atom.xml" title="glamor的博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/img/favicon.png">
+  
+  
+      <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  
+  
+      <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  
+  <!-- 加载特效 -->
+    <script src="/js/pace.js"></script>
+    <link href="/css/pace/pace-theme-flash.css" rel="stylesheet" />
+  <script>
+      var yiliaConfig = {
+          rootUrl: '/',
+          fancybox: true,
+          animate: true,
+          isHome: false,
+          isPost: true,
+          isArchive: false,
+          isTag: false,
+          isCategory: false,
+          open_in_new: false
+      }
+  </script>
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            
+            <img lazy-src="/img/head.jpg" class="js-avatar">
+            
+        </a>
+
+        <hgroup>
+          <h1 class="header-author"><a href="/" title="Hi Mate">glamor</a></h1>
+        </hgroup>
+
+        
+        <p class="header-subtitle">莫等闲，白了少年头空悲切...</p>
+        
+        
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">博客首页</a></li>
+                        
+                            <li><a href="/categories/python">人生苦短</a></li>
+                        
+                            <li><a href="/categories/Web安全">安全海洋</a></li>
+                        
+                            <li><a href="/categories/notes">随笔</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fl mail" target="_blank" href="mailto:root@cmustard.com" title="mail">mail</a>
+                            
+                                <a class="fl github" target="_blank" href="https://github.com/cmustard06" title="github">github</a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <a href="/tags/TCP-IP/" style="font-size: 10px;">TCP/IP</a> <a href="/tags/go/" style="font-size: 10px;">go</a> <a href="/tags/golang/" style="font-size: 17.5px;">golang</a> <a href="/tags/poc/" style="font-size: 12.5px;">poc</a> <a href="/tags/python/" style="font-size: 20px;">python</a> <a href="/tags/python3/" style="font-size: 12.5px;">python3</a> <a href="/tags/sql注入/" style="font-size: 10px;">sql注入</a> <a href="/tags/struct/" style="font-size: 10px;">struct</a> <a href="/tags/struts/" style="font-size: 10px;">struts</a> <a href="/tags/tcp/" style="font-size: 10px;">tcp</a> <a href="/tags/tcp-ip/" style="font-size: 10px;">tcp/ip</a> <a href="/tags/事件驱动/" style="font-size: 10px;">事件驱动</a> <a href="/tags/代理/" style="font-size: 10px;">代理</a> <a href="/tags/博客/" style="font-size: 10px;">博客</a> <a href="/tags/基础/" style="font-size: 15px;">基础</a> <a href="/tags/并发/" style="font-size: 10px;">并发</a> <a href="/tags/异步IO/" style="font-size: 10px;">异步IO</a> <a href="/tags/正则表达式/" style="font-size: 10px;">正则表达式</a> <a href="/tags/爬虫/" style="font-size: 10px;">爬虫</a> <a href="/tags/科学上网/" style="font-size: 10px;">科学上网</a> <a href="/tags/编程/" style="font-size: 10px;">编程</a> <a href="/tags/编程语言/" style="font-size: 12.5px;">编程语言</a> <a href="/tags/网络/" style="font-size: 12.5px;">网络</a> <a href="/tags/网络基础知识/" style="font-size: 10px;">网络基础知识</a> <a href="/tags/网络编程/" style="font-size: 10px;">网络编程</a> <a href="/tags/集合/" style="font-size: 10px;">集合</a>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.dmmjy9.com">dmmjy9</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="Me">glamor</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                
+                    <img lazy-src="/img/head.jpg" class="js-avatar">
+                
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="Me">glamor</a></h1>
+            </hgroup>
+            
+            <p class="header-subtitle">莫等闲，白了少年头空悲切...</p>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">博客首页</a></li>
+                
+                    <li><a href="/categories/python">人生苦短</a></li>
+                
+                    <li><a href="/categories/Web安全">安全海洋</a></li>
+                
+                    <li><a href="/categories/notes">随笔</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                <div class="social">
+                    
+                        <a class="mail" target="_blank" href="mailto:root@cmustard.com" title="mail">mail</a>
+                    
+                        <a class="github" target="_blank" href="https://github.com/cmustard06" title="github">github</a>
+                    
+                </div>
+            </nav>
+        </header>                
+    </div>
+</nav>
+      <div class="body-wrap"><article id="post-tcp-ip简介" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2017/11/01/tcp-ip简介/" class="article-date">
+      <time datetime="2017-11-01T08:04:25.253Z" itemprop="datePublished">2017-11-01</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      tcp/ip简介
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/notes/">notes</a>
+    </div>
+
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/tcp-ip/">tcp/ip</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/网络/">网络</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h1 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h1><a id="more"></a>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">年份</th>
+<th style="text-align:left">事件</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">20世纪60年代后半叶</td>
+<td style="text-align:left">应DoD要求，美国开始进行通信技术相关研究</td>
+</tr>
+<tr>
+<td style="text-align:left">1969</td>
+<td style="text-align:left">ARPANET诞生，开始分组交换技术</td>
+</tr>
+<tr>
+<td style="text-align:left">1972</td>
+<td style="text-align:left">ARPANET取得初步成功，扩展到了50个节点</td>
+</tr>
+<tr>
+<td style="text-align:left">1982</td>
+<td style="text-align:left">TCP/IP规范出炉，unix是最早开始实现tcp/ip的协议</td>
+</tr>
+<tr>
+<td style="text-align:left">1983</td>
+<td style="text-align:left">ARPANET决定正式启用tcp/ip为通信协议</td>
+</tr>
+<tr>
+<td style="text-align:left">1989</td>
+<td style="text-align:left">局域网上的tcp/ip应用迅速扩大</td>
+</tr>
+<tr>
+<td style="text-align:left">1990</td>
+<td style="text-align:left">无论是局域网还是广域网，都开始倾向于使用tcp/ip</td>
+</tr>
+<tr>
+<td style="text-align:left">1995</td>
+<td style="text-align:left">互联网开始商用，互联网服务提供商的数量剧增</td>
+</tr>
+<tr>
+<td style="text-align:left">1996</td>
+<td style="text-align:left">IPv6规范出炉</td>
+</tr>
+</tbody>
+</table>
+<h2 id="具体含义"><a href="#具体含义" class="headerlink" title="具体含义"></a>具体含义</h2><p>tcp/ip协议是指利用IP进行通信时所需要使用到的协议群的统称，具体来说，Ip和icmp，tcp或者udp，telnet或者ftp，以及http等都属于tcp/ip协议。</p>
+<p>tcp/ip是被标准化的协议，被人们列入RFC（Request for comment）文档并在互联网上公布。RFC不仅记录了协议规范的内容，还包含了协议的实现和运用的相关信息，以及实验方面的信息。<br>rfc的具体网址<a href="http://www.rfc-editor.org/rfc/" target="_blank" rel="external">http://www.rfc-editor.org/rfc/</a>,其中rfc-index.txt的文件中包含了所有的RFC的概览信息。</p>
+<h2 id="互联网结构"><a href="#互联网结构" class="headerlink" title="互联网结构"></a>互联网结构</h2><p>互联网中的每一个网络都是由骨干网和末端网组成的。每个网络之间通过NOC（网络操作中心）相连，如果运营商不同，他的网络连接方式和使用方法也会不同，连接这种异构的网络需要IX(网络交换中心)的支持。</p>
+<h1 id="协议分层"><a href="#协议分层" class="headerlink" title="协议分层"></a>协议分层</h1><p>tcp/ip模型一般分为四层，分别为网络接口层，网络层，传输层和应用层。</p>
+<h2 id="网络接口层"><a href="#网络接口层" class="headerlink" title="网络接口层"></a>网络接口层</h2><p>也称作数据链路层，通常包括操作系统中的设备驱动程序和计算机中对应的网络接口卡。它们一起处理与电缆（或其他任何传输媒介）的物理接口细节。</p>
+<h3 id="物理层"><a href="#物理层" class="headerlink" title="物理层"></a>物理层</h3><p>物理层是最底层，是负责数据传输的硬件，这种硬件就相当于以太网或者电话线路等物理层设备。</p>
+<h3 id="数据链路层"><a href="#数据链路层" class="headerlink" title="数据链路层"></a>数据链路层</h3><p>网络接口层利用以太网中数据链路层进行通信，因此属于接口层，也就是说，把它当做让网卡起作用的驱动程序也没关系。</p>
+<h2 id="互联网层-网络层"><a href="#互联网层-网络层" class="headerlink" title="互联网层(网络层)"></a>互联网层(网络层)</h2><p>网络层使用的是IP协议，它相当于OSI模型中的第三层网络层，ip协议基于Ip地址转发分包数据。网络层和传输层的功能通常是由操作系统提供，尤其是路由器，它必须实现通过互联网层转发分组数据包的功能。</p>
+<h3 id="IP"><a href="#IP" class="headerlink" title="IP"></a>IP</h3><p>ip是可以让整个互联网都能收到数据的协议，IP协议使数据能够发送到地球的另一端，这期间它使用IP地址作为主机的标示。<br>ip还隐含着数据链路层的功能，通过IP相互通信的主机之间不论经过这样的底层数据链路都能实现通信。<br>虽然IP也是分组交换的一种协议，但是它不具有重发机制，即使分组数据包未能到达对端主机也不会重发。因此，属于非可靠性传输协议</p>
+<h3 id="ICMP"><a href="#ICMP" class="headerlink" title="ICMP"></a>ICMP</h3><p>Ip数据包在发送过程如果出现了异常没有到达对端的目标地址，需要发送端发送一个异常的通知，ICMP就是未这一个功能而订制。</p>
+<h3 id="ARP"><a href="#ARP" class="headerlink" title="ARP"></a>ARP</h3><p>从分组数据包的IP地址中解析处出物理地址的一种协议</p>
+<h2 id="传输层"><a href="#传输层" class="headerlink" title="传输层"></a>传输层</h2><p>TCP是一种面向有链接的协议，能够正确处理在传输过程中丢包，传输顺序乱掉等异常情况，还能有效利用带宽，环节网络拥堵的状况。<br>UDP是一种面向无连接的传输协议，常用于分组数据较少或多播，广播通信以及视频通信等多媒体领域</p>
+<h2 id="应用层"><a href="#应用层" class="headerlink" title="应用层"></a>应用层</h2><h3 id="FTP"><a href="#FTP" class="headerlink" title="FTP"></a>FTP</h3><p>FTP支持二进制方式和文本方式传输，在ftp进行文件传输的时候会建立两个TCP连接，分别是发出传输请求时所需要用到的控制连接与实际传输数据时所需要用到的数据连接</p>
+<h3 id="SNMP"><a href="#SNMP" class="headerlink" title="SNMP"></a>SNMP</h3><p>使用SNMP管理的主机，网桥，路由器等称为SNMp代理而进行管理的那一段叫做管理器。<br>在SNMp的代理端，保存着网络借口的信息，通信数据量，异常数据量以及设备温度等信息，这些信息可以通过MID(Managenment information Base)访问。</p>
+<h1 id="分层模型"><a href="#分层模型" class="headerlink" title="分层模型"></a>分层模型</h1><h2 id="数据包首部"><a href="#数据包首部" class="headerlink" title="数据包首部"></a>数据包首部</h2><p><img src="http://ouz06keqs.bkt.clouddn.com/%E6%95%B0%E6%8D%AE%E5%8C%85%E9%A6%96%E9%83%A8.png" alt=""><br>每个分层中，都会对所发送的数据附加一个首部，这个首部中包含了该层必要的信息，比如mac地址什么的。通常，为协议提供的信息为包首部，所要发送的内容未数据。<br>包首部就像协议的脸，只有通过包首部才能知道这是属于那一层的数据，而且包首部中还明确了协议应该如何读取数据。<br><strong>包是全能性术语。</strong><br><strong>帧用于表示数据链路层中包的单位</strong><br><strong>数据包是IP和UDP等网络层以上的分层中包的单位</strong><br><strong>段则表示TCP数据流中的信息</strong><br><strong>消息是指应用协议中数据的单位</strong></p>
+<h2 id="数据包处理"><a href="#数据包处理" class="headerlink" title="数据包处理"></a>数据包处理</h2><p>我们以发送一封邮件为例<br><img src="http://ouz06keqs.bkt.clouddn.com/%E9%82%AE%E4%BB%B6%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86.png" alt=""></p>
+<p>1.应用程序处理<br>首先邮件经过编辑之后，我们点击发送，应用程序就会对其数据进行编码处理，比如进行utf-8编码，这些编码行为相当于OSI中的表示层的功能<br>应用程序在发送邮件的那一刻会建立TCP连接，从而利用这个TCP连接发送数据，他的过程首先是将应用的数据发送给下一层的TCP，再做实际的转发处理</p>
+<p>2.TCP模块的处理<br>TCP根据应用的指示，负责建立连接，发送数据以及断开连接，TCP提供将应用层发来的数据所以发送至对端的可靠传输。<br>为了实现这一功能，需要在应用层数据的前段附加一个TCP首部，TCP首部中包括源端口号和目的端口号，(<strong>用于识别发送主机跟接受主机的应用</strong>)、序号(<strong>用以发送的包中那一部分的数据</strong>)以及校验和(<strong>用以判断数据是否被损坏</strong>)。随后将附加了TCP首部的包再发个IP层</p>
+<p>3.IP模块处理<br>IP将TCP传过来的TCP首部和TCP数据合起来当做自己的数据，并在TCP首部的前端再加上自己的IP首部，IP包生成后，参考路由控制表决定接受此IP包的路由或者主机，随后，IP包将被发送给连接这些路由器或者主机网络借口的驱动程序，用以实现真正的发送数据</p>
+<p>如果不知道接收端的MAc地址，可以使用ARP协议查找，只要知道了对端的MAC地址，就可以将MAC地址和IP地址交给以太网的驱动程序，实现数据传输</p>
+<p>4.网络接口的处理<br>从IP层传过来的IP包，对于以太网驱动来说不过就是数据，给这数据附加上以太网首部并进行发送处理，以太网首部中包含接收端MAc地址，发送端MAC地址以及标志以太网类型的以太网数据的协议，发送处理的FCS由硬件计算，添加到包的最后面，设置FSC的目的是为了判断数据包是否由于噪声而被破坏。</p>
+<p><strong>最后生成的包的简略结构如下</strong><br><img src="http://ouz06keqs.bkt.clouddn.com/%E5%B8%A7%E5%8C%85%E7%BB%93%E6%9E%84.png" alt="省略版"><br>包流动的时候，从前往后依次被附加了以太网包首部，IP包首部，TCP包首部以及应用主机的包首部和数据。而在包的最后则追加了以太网包尾。<br><strong>每个包首部中至少都会包含两个信息，一个是发送端和接收端地址，另一个是上一层协议的类型。</strong></p>
+<p><strong>接收数据包过程</strong><br>1.主机收到以太网包以后，首先从以太网首部中找到mac地址。判断是不是发给主机的包，不是就丢弃。如果是就查找以太网首部中的类型域从而确定以太网协议所传送过来的数据类型。是Ip的类型就传给IP模块处理，是ARP就传给ARP模块处理<br>2.IP模块收到IP包首部以及后面的数据部分时，也会做类似的处理。<br>3.TCP模块处理，在TCP模块中，<strong>首先会计算一下校验和</strong>，判断数据是否被破坏，然后检查是否在按照序号接受数据，最后检查端口号，确定具体的应用程序。<br>数据接收完毕后，接收端则发送一个”确认回执”给发送端，如果这个回执信息未能达到发送端，那么发送端会认为接收端没有接受到数据而一直反复发送，数据被完整的接收后，会传给由端口号识别的应用程序。<br>4.应用程序处理，接受端应用程序会直接接受发送端发送的数据。</p>
+
+      
+      
+        <div class="page-reward">
+          <p><a href="javascript:void(0)" onclick="dashangToggle()" class="dashang">赏</a></p>
+          <div class="hide_box"></div>
+          <div class="shang_box">
+            <a class="shang_close" href="javascript:void(0)" onclick="dashangToggle()">×</a>
+            <div class="shang_tit">
+              <p>纯属好玩</p>
+            </div>
+            <div class="shang_payimg">
+              <img src="/img/alipayimg.jpg" alt="扫码支持" title="扫一扫" />
+            </div>
+              <div class="pay_explain">扫码打赏，你说多少就多少</div>
+            <div class="shang_payselect">
+              
+                <div class="pay_item checked" data-id="alipay">
+                  <span class="radiobox"></span>
+                  <span class="pay_logo"><img src="/img/alipay.png" alt="支付宝" /></span>
+                </div>
+              
+              
+                <div class="pay_item" data-id="wechat">
+                  <span class="radiobox"></span>
+                  <span class="pay_logo"><img src="/img/weixin.png" alt="微信" /></span>
+                </div>
+              
+            </div>
+            <div class="shang_info">
+              <p>打开<span id="shang_pay_txt">支付宝</span>扫一扫，即可进行扫码打赏哦</p>
+            </div>
+          </div>
+        </div>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/zepto/1.2.0/zepto.min.js"></script>
+        <script type="text/javascript">
+          $(".pay_item").click(function(){
+            $(this).addClass('checked').siblings('.pay_item').removeClass('checked');
+            var dataid=$(this).attr('data-id');
+            $(".shang_payimg img").attr("src","/img/"+dataid+"img.jpg");
+            $("#shang_pay_txt").text(dataid=="alipay"?"支付宝":"微信");
+          });
+          function dashangToggle(){
+            
+            $(".hide_box").fadeToggle();
+            $(".shang_box").fadeToggle();
+          }
+        </script>
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2017/11/01/tcp-ip简介/">tcp/ip简介</a></p>
+        <p><span>文章作者:</span><a href="/" title="访问 glamor 的个人博客">glamor</a></p>
+        <p><span>发布时间:</span>2017年11月01日 - 16时04分</p>
+        <p><span>最后更新:</span>2017年11月01日 - 04时04分</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2017/11/01/tcp-ip简介/" title="tcp/ip简介">http://www.cmustarc.com/2017/11/01/tcp-ip简介/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://www.cmustarc.com/2017/11/01/tcp-ip简介/　　作者: glamor" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script src="/js/clipboard.min.js"></script>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" title="中国大陆 (CC BY-NC-SA 3.0 CN)" target = "_blank">"署名-非商用-相同方式共享 3.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+<nav id="article-nav">
+  
+    <a href="/2017/11/01/网络基础/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          网络基础
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/10/24/HTMLParser模块/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">HTMLParser模块</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#补充"><span class="toc-number">1.</span> <span class="toc-text">补充</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#具体含义"><span class="toc-number">1.1.</span> <span class="toc-text">具体含义</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#互联网结构"><span class="toc-number">1.2.</span> <span class="toc-text">互联网结构</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#协议分层"><span class="toc-number">2.</span> <span class="toc-text">协议分层</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#网络接口层"><span class="toc-number">2.1.</span> <span class="toc-text">网络接口层</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#物理层"><span class="toc-number">2.1.1.</span> <span class="toc-text">物理层</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#数据链路层"><span class="toc-number">2.1.2.</span> <span class="toc-text">数据链路层</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#互联网层-网络层"><span class="toc-number">2.2.</span> <span class="toc-text">互联网层(网络层)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#IP"><span class="toc-number">2.2.1.</span> <span class="toc-text">IP</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ICMP"><span class="toc-number">2.2.2.</span> <span class="toc-text">ICMP</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ARP"><span class="toc-number">2.2.3.</span> <span class="toc-text">ARP</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#传输层"><span class="toc-number">2.3.</span> <span class="toc-text">传输层</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#应用层"><span class="toc-number">2.4.</span> <span class="toc-text">应用层</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#FTP"><span class="toc-number">2.4.1.</span> <span class="toc-text">FTP</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SNMP"><span class="toc-number">2.4.2.</span> <span class="toc-text">SNMP</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#分层模型"><span class="toc-number">3.</span> <span class="toc-text">分层模型</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#数据包首部"><span class="toc-number">3.1.</span> <span class="toc-text">数据包首部</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#数据包处理"><span class="toc-number">3.2.</span> <span class="toc-text">数据包处理</span></a></li></ol></li></ol>
+</div>
+<input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+<script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script>
+    var valueHide = "隐藏目录";
+    var valueShow = "显示目录";
+
+    if ($(".left-col").is(":hidden")) {
+        $("#tocButton").attr("value", valueShow);
+    }
+    $("#tocButton").click(function() {
+        if ($("#toc").is(":hidden")) {
+            $("#tocButton").attr("value", valueHide);
+            $("#toc").slideDown(320);
+        }
+        else {
+            $("#tocButton").attr("value", valueShow);
+            $("#toc").slideUp(350);
+        }
+    })
+    if ($(".toc").length < 1) {
+        $("#toc, #tocButton").hide();
+    }
+</script>
+
+
+
+
+
+<div class="bdsharebuttonbox">
+	<a href="#" class="fx fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+	<a href="#" class="fx fa-weixin bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+	<a href="#" class="fx fa-qq bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+	<a href="#" class="fx fa-facebook-official bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+	<a href="#" class="fx fa-twitter bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+	<a href="#" class="fx fa-linkedin bds_linkedin" data-cmd="linkedin" title="分享到linkedin"></a>
+	<a href="#" class="fx fa-files-o bds_copy" data-cmd="copy" title="分享到复制网址"></a>
+</div>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+
+
+
+    
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/2017/11/01/网络基础/" title="上一篇: 网络基础">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+        
+            <a href="/2017/10/24/HTMLParser模块/" title="下一篇: HTMLParser模块">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/12/28/数组与字典/">数组与数组切片</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/12/15/Python3笔记/">Python3 学习笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/12/03/python基础/">python基础</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/11/07/数据链路层/">数据链路</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/11/01/网络基础/">网络基础</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/11/01/tcp-ip简介/">tcp/ip简介</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/24/HTMLParser模块/">HTMLParser模块</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/23/SQL注入/">SQL注入整理(一)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/20/列表/">列表</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/19/偏函数/">偏函数</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/18/with上下文管理器/">上下文管理器与with语句</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/13/v2ray/">v2ray 配置文件</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/29/socket-python/">socket编程</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/28/正则表达式/">正则表达式</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/15/s2-053/">S2-053</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/10/golang流程控制/">流程控制</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/10/Strut2 常见POC/">Struts2 常见POC收集和整理</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/05/论事件驱动与异步IO/">论事件驱动与异步IO[转]</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/05/并发编程/">并发编程</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/05/Python常用模块2/">python常用模块(2)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/05/Python常用模块/">python常用模块(1)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/05/python TCP代理/">python TCP代理</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/05/hexo+github+nginx VPS搭建博客/">hexo+github+nginx vps搭建博客</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/05/go语言初识/">初识go语言</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/05/hello-world/">Hello World</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/05/goroutine与调度器/">goroutine与调度器[转]</a></li></ul>
+    <script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+    <script>
+        $(".post-list").addClass("toc-article");
+        $(".post-list-item a").attr("target","_blank");
+        $("#post-nav-button > a:nth-child(2)").click(function() {
+            $(".fa-bars, .fa-times").toggle();
+            $(".post-list").toggle(300);
+            if ($(".toc").length > 0) {
+                $("#toc, #tocButton").toggle(200, function() {
+                    if ($(".switch-area").is(":visible")) {
+                        $("#tocButton").attr("value", valueHide);
+                        }
+                    })
+            }
+            else {
+            }
+        })
+    </script>
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                &copy; 2017 glamor
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/luuman/hexo-theme-spfk" target="_blank">spfk</a> by luuman
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" >道士到访数: 
+                            <span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>, </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit">本页阅读量: 
+                            <span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+
+    </div>
+    <script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var backgroundnum = 24;
+            var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+            $("#mobile-nav").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+            $(".left-col").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+        })
+    </script>
+
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    $(document).ready(function() {
+        if ($("#comments").length < 1) {
+            $("#scroll > a:nth-child(2)").hide();
+        };
+    })
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+  <script language="javascript">
+    $(function() {
+        $("a[title]").each(function() {
+            var a = $(this);
+            var title = a.attr('title');
+            if (title == undefined || title == "") return;
+            a.data('title', title).removeAttr('title').hover(
+
+            function() {
+                var offset = a.offset();
+                $("<div id=\"anchortitlecontainer\"></div>").appendTo($("body")).html(title).css({
+                    top: offset.top - a.outerHeight() - 15,
+                    left: offset.left + a.outerWidth()/2 + 1
+                }).fadeIn(function() {
+                    var pop = $(this);
+                    setTimeout(function() {
+                        pop.remove();
+                    }, pop.text().length * 800);
+                });
+            }, function() {
+                $("#anchortitlecontainer").remove();
+            });
+        });
+    });
+</script>
+
+
+  </div>
+</body>
+</html>
