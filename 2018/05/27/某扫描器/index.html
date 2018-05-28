@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>某扫描器 | glamor的博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="0x01. 整体简介引言为了省去繁琐的手工测试和常用漏洞的搜索工作，提升工作的效率，才有了此工具，工具对于前期的收集采用了市面上大量的工具集合，不漏扫的原则，最大化的提升工具可用性，可扩展性等要求，开发次扫描器。">
+<meta name="keywords" content="漏扫,Python">
+<meta property="og:type" content="article">
+<meta property="og:title" content="某扫描器">
+<meta property="og:url" content="http://www.cmustarc.com/2018/05/27/某扫描器/index.html">
+<meta property="og:site_name" content="glamor的博客">
+<meta property="og:description" content="0x01. 整体简介引言为了省去繁琐的手工测试和常用漏洞的搜索工作，提升工作的效率，才有了此工具，工具对于前期的收集采用了市面上大量的工具集合，不漏扫的原则，最大化的提升工具可用性，可扩展性等要求，开发次扫描器。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/6853514-34f3cea2610e12b0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/6853514-101c516ed9c90be6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/6853514-845725518d992059.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/6853514-dd8ae8fe702a0034.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2018-05-27T15:06:14.509Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="某扫描器">
+<meta name="twitter:description" content="0x01. 整体简介引言为了省去繁琐的手工测试和常用漏洞的搜索工作，提升工作的效率，才有了此工具，工具对于前期的收集采用了市面上大量的工具集合，不漏扫的原则，最大化的提升工具可用性，可扩展性等要求，开发次扫描器。">
+<meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/6853514-34f3cea2610e12b0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+  
+    <link rel="alternative" href="/atom.xml" title="glamor的博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/img/favicon.png">
+  
+  
+      <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  
+  
+      <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  
+  <!-- 加载特效 -->
+    <script src="/js/pace.js"></script>
+    <link href="/css/pace/pace-theme-flash.css" rel="stylesheet" />
+  <script>
+      var yiliaConfig = {
+          rootUrl: '/',
+          fancybox: true,
+          animate: true,
+          isHome: false,
+          isPost: true,
+          isArchive: false,
+          isTag: false,
+          isCategory: false,
+          open_in_new: false
+      }
+  </script>
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            
+            <img lazy-src="/img/head.jpg" class="js-avatar">
+            
+        </a>
+
+        <hgroup>
+          <h1 class="header-author"><a href="/" title="Hi Mate">glamor</a></h1>
+        </hgroup>
+
+        
+        <p class="header-subtitle">莫等闲，白了少年头空悲切...</p>
+        
+        
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">博客首页</a></li>
+                        
+                            <li><a href="/categories/python">人生苦短</a></li>
+                        
+                            <li><a href="/categories/Web安全">安全海洋</a></li>
+                        
+                            <li><a href="/categories/notes">随笔</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fl mail" target="_blank" href="mailto:root@cmustard.com" title="mail">mail</a>
+                            
+                                <a class="fl github" target="_blank" href="https://github.com/cmustard06" title="github">github</a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <a href="/tags/Python/" style="font-size: 10px;">Python</a> <a href="/tags/TCP-IP/" style="font-size: 10px;">TCP/IP</a> <a href="/tags/go/" style="font-size: 10px;">go</a> <a href="/tags/golang/" style="font-size: 17.5px;">golang</a> <a href="/tags/importlib/" style="font-size: 10px;">importlib</a> <a href="/tags/poc/" style="font-size: 12.5px;">poc</a> <a href="/tags/python/" style="font-size: 20px;">python</a> <a href="/tags/python3/" style="font-size: 12.5px;">python3</a> <a href="/tags/sql注入/" style="font-size: 10px;">sql注入</a> <a href="/tags/struct/" style="font-size: 10px;">struct</a> <a href="/tags/struts/" style="font-size: 10px;">struts</a> <a href="/tags/tcp/" style="font-size: 10px;">tcp</a> <a href="/tags/tcp-ip/" style="font-size: 10px;">tcp/ip</a> <a href="/tags/windows命令/" style="font-size: 10px;">windows命令</a> <a href="/tags/事件驱动/" style="font-size: 10px;">事件驱动</a> <a href="/tags/代理/" style="font-size: 10px;">代理</a> <a href="/tags/博客/" style="font-size: 10px;">博客</a> <a href="/tags/基础/" style="font-size: 15px;">基础</a> <a href="/tags/并发/" style="font-size: 10px;">并发</a> <a href="/tags/异步IO/" style="font-size: 10px;">异步IO</a> <a href="/tags/正则表达式/" style="font-size: 10px;">正则表达式</a> <a href="/tags/漏扫/" style="font-size: 12.5px;">漏扫</a> <a href="/tags/爬虫/" style="font-size: 10px;">爬虫</a> <a href="/tags/科学上网/" style="font-size: 10px;">科学上网</a> <a href="/tags/系统/" style="font-size: 10px;">系统</a> <a href="/tags/编程/" style="font-size: 15px;">编程</a> <a href="/tags/编程语言/" style="font-size: 12.5px;">编程语言</a> <a href="/tags/网络/" style="font-size: 12.5px;">网络</a> <a href="/tags/网络基础知识/" style="font-size: 10px;">网络基础知识</a> <a href="/tags/网络编程/" style="font-size: 10px;">网络编程</a> <a href="/tags/集合/" style="font-size: 10px;">集合</a>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.dmmjy9.top">dmmjy9</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="Me">glamor</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                
+                    <img lazy-src="/img/head.jpg" class="js-avatar">
+                
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="Me">glamor</a></h1>
+            </hgroup>
+            
+            <p class="header-subtitle">莫等闲，白了少年头空悲切...</p>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">博客首页</a></li>
+                
+                    <li><a href="/categories/python">人生苦短</a></li>
+                
+                    <li><a href="/categories/Web安全">安全海洋</a></li>
+                
+                    <li><a href="/categories/notes">随笔</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                <div class="social">
+                    
+                        <a class="mail" target="_blank" href="mailto:root@cmustard.com" title="mail">mail</a>
+                    
+                        <a class="github" target="_blank" href="https://github.com/cmustard06" title="github">github</a>
+                    
+                </div>
+            </nav>
+        </header>                
+    </div>
+</nav>
+      <div class="body-wrap"><article id="post-某扫描器" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2018/05/27/某扫描器/" class="article-date">
+      <time datetime="2018-05-27T15:06:14.509Z" itemprop="datePublished">2018-05-27</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      某扫描器
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/Web安全/">Web安全</a>
+    </div>
+
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/">Python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/漏扫/">漏扫</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <hr>
+<h1 id="0x01-整体简介"><a href="#0x01-整体简介" class="headerlink" title="0x01. 整体简介"></a>0x01. 整体简介</h1><h2 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h2><p>为了省去繁琐的手工测试和常用漏洞的搜索工作，提升工作的效率，才有了此工具，工具对于前期的收集采用了市面上大量的工具集合，不漏扫的原则，最大化的提升工具可用性，可扩展性等要求，开发次扫描器。</p>
+<a id="more"></a>
+<p><strong>使用方法</strong></p>
+<p><code>可以直接执行 python main.py -d cert.org.cn</code></p>
+<h2 id="思维导图"><a href="#思维导图" class="headerlink" title="思维导图"></a>思维导图</h2><p><img src="https://upload-images.jianshu.io/upload_images/6853514-34f3cea2610e12b0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="1-1"></p>
+<h2 id="目录结构"><a href="#目录结构" class="headerlink" title="目录结构"></a>目录结构</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line">|--dict  <span class="comment"># 存放子域名，dns服务器字典的文件夹</span></div><div class="line">	|--dns_server.txt </div><div class="line">	|--...</div><div class="line">|--lib   <span class="comment"># BBSScan漏洞扫描脚本的lib库</span></div><div class="line">	|-- __init__.py</div><div class="line">	|--cmdline.py  </div><div class="line">	|--...</div><div class="line">|--listen  <span class="comment"># 用于监听AWVS扫描器</span></div><div class="line">	|--filer.py</div><div class="line"></div><div class="line">|--report  <span class="comment"># 存放各脚本执行完成后，转换为html文件结果的文件夹，最后报告生成的文件夹</span></div><div class="line">|--result  <span class="comment"># 临时存放各个脚本结果的地方，包括一些txt文件，json文件等</span></div><div class="line">|--rules  <span class="comment"># 存放规则的的文件夹</span></div><div class="line">	|--wahtweb.json   <span class="comment"># 应用程序指纹</span></div><div class="line">	|--commom.txt   <span class="comment"># 漏洞扫描规则</span></div><div class="line">|--subbrute  <span class="comment"># 收集信息时sublist3r.py的第三方库</span></div><div class="line">|--thirdlib  <span class="comment"># 第三方库，一个轻量级的线程池</span></div><div class="line">|--utils   <span class="comment"># 第三方库，包含了各种第三方网站收集子域名的方法</span></div><div class="line">|--api.keys  <span class="comment"># 存放bing api的文件</span></div><div class="line">|--BBScan.py</div><div class="line">|--bingAPI</div><div class="line">|--captcha.py</div><div class="line">|--config.py</div><div class="line">|--dnsbrute.py</div><div class="line">|--gxfr.py</div><div class="line">|--import1.php</div><div class="line">|--main.py</div><div class="line">|--report_all.py</div><div class="line">|--subDomainBrute.py</div><div class="line">|--sublist3r.py</div><div class="line">|--upload.py</div><div class="line">|--wahtweb.py</div><div class="line">|--wydomain.py</div><div class="line">|--启动程序.bat</div><div class="line">|--wvs.bat</div></pre></td></tr></table></figure>
+<p>这个目录结构让我感觉很乱，尤其后面一大推py文件，缺少点软件设计的思想，感觉时即兴写出来的代码，很多文件还有错误，注释很少，很多时候需要debug才能知道该段代码实现的功能。</p>
+<h1 id="0x02-信息收集"><a href="#0x02-信息收集" class="headerlink" title="0x02.信息收集"></a>0x02.信息收集</h1><h2 id="1-域名信息收集"><a href="#1-域名信息收集" class="headerlink" title="1.域名信息收集"></a>1.域名信息收集</h2><p>在进行扫描之前，按照惯例需要对目标网站的域名信息进行<code>whois</code>查询，该脚本whois的实现是通过第三方网站查询得到的，不过原查询函数因为日期久远，而网站代码也已经更新了，该函数已经无法准确的获取到目标网站域名信息了</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line">def sub_domain_whois(url_domain):</div><div class="line">&quot;&quot;&quot;</div><div class="line">通过第三方网站查询得到whois结果，然后对网页进行正则匹配，以获取到网页内容中的whois结果</div><div class="line">&quot;&quot;&quot;</div><div class="line">    um=[]</div><div class="line">    a1=requests.get(&quot;http://whois.chinaz.com/%s&quot; %(url_domain))</div><div class="line"></div><div class="line">    if &apos;Registration&apos; not in a1.text:</div><div class="line">        print &apos;whois error&apos;</div><div class="line">    else:</div><div class="line">        print a1.text</div><div class="line">        # 使用正则匹配想要获取的内容，假如目标网站的前端代码改变了，那么该正则就失效了</div><div class="line">        out_result=re.findall(r&apos;&lt;pre class=&quot;whois-detail&quot;&gt;([\s\S]*)&lt;/pre&gt;&apos;, a1.text.encode(&quot;GBK&quot;,&apos;ignore&apos;))</div><div class="line">        out_result_register=re.findall(r&apos;http://(.*?)&quot;&apos;, a1.text.encode(&quot;GBK&quot;,&apos;ignore&apos;))</div><div class="line">        for x in out_result_register:</div><div class="line">            if &apos;reverse_registrant/?query=&apos; in x:</div><div class="line">                um.append(x)</div><div class="line">                break</div><div class="line">        for x in out_result_register:</div><div class="line">            if &apos;reverse_mail/?query=&apos; in x:</div><div class="line">                um.append(x)</div><div class="line">                break</div><div class="line">        print um[0], um[1]</div><div class="line">        print out_result[0]</div><div class="line">        # 将获取到的结果存放在的一个html文件中，以便最后生成报告</div><div class="line">        with open(&apos;report/whois_email_user.html&apos;,&apos;w&apos;) as fwrite:</div><div class="line">            fwrite.write(&apos;register_user:&apos;)</div><div class="line">            fwrite.write(&apos;&lt;a href=&quot;http://&apos; + um[0] + &apos;&quot;&gt;注册者反查询&lt;/a&gt;&apos;)</div><div class="line">            fwrite.write(&apos;&lt;br&gt;&apos;)</div><div class="line">            fwrite.write(&apos;email:&apos;)</div><div class="line">            fwrite.write(&apos;&lt;a href=&quot;http://&apos; + um[1] + &apos;&quot;&gt;邮箱反查询&lt;/a&gt;&apos;)</div><div class="line">            fwrite.write(&apos;&lt;br&gt;&apos;)</div><div class="line">            fwrite.write(&apos;&lt;pre&gt;&apos;)</div><div class="line">            fwrite.write(out_result[0])</div><div class="line">            fwrite.write(&apos;&lt;/pre&gt;&apos;)</div></pre></td></tr></table></figure>
+<p>最后生成的文档格式如下<br><img src="https://upload-images.jianshu.io/upload_images/6853514-101c516ed9c90be6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="2-1.png"><br>这种获取whois信息的方法虽然简单，但是由于目标网站内容的不确定性，可能几个月之后网站的代码一升级，现有的正则表达式就无法匹配，该函数就失去了作用，维护起来成本比较高。可以使用一些固定的API，这样获取的数据格式就不会有大的的变动。比如以下一个简单的例子<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">def sub_domain_whois(url_domain):</div><div class="line">    import json</div><div class="line">    a = requests.get(&quot;http://api.whoapi.com/?domain=&#123;&#125;&amp;r=whois&amp;apikey=demokey&quot;.format(url_domain))</div><div class="line">    result = a.text</div><div class="line">    r = json.loads(result)</div><div class="line">    for k,v in r.items():</div><div class="line">        print(k,v)</div></pre></td></tr></table></figure></p>
+<p>可以获取到如下内容<br><img src="https://upload-images.jianshu.io/upload_images/6853514-845725518d992059.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="2-2.png"></p>
+<p>当然如果需要一些详细的信息，可能还是需要对一些网站的内容进行爬取才行。</p>
+<h2 id="2-子域名收集"><a href="#2-子域名收集" class="headerlink" title="2.子域名收集"></a>2.子域名收集</h2><p>对于子域名收集，这个系统在实现的时候，为了收集到尽可能多的代码,使用了很多第三方脚本，这里就出现了一个问题，这种使用脚本的方法让代码可读性很差，而且维护困难，很多代码现在已经不适用了。</p>
+<h3 id="使用到的脚本名称与介绍"><a href="#使用到的脚本名称与介绍" class="headerlink" title="使用到的脚本名称与介绍"></a>使用到的脚本名称与介绍</h3><table>
+<thead>
+<tr>
+<th style="text-align:left">脚本名称</th>
+<th style="text-align:left">介绍</th>
+<th style="text-align:left">使用方法</th>
+<th style="text-align:left">返回内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">gxfr.py</td>
+<td style="text-align:left">使用高级搜索引擎（bing，baidu，google）查询来枚举子域并执行dns查找，这个程序使用的是bing的API对子域名进行收集</td>
+<td style="text-align:left">python gxfr.py –bxfr –dns-lookup  -o –domain  url_domain</td>
+<td style="text-align:left">程序会将结果保存到一个domain_gxfr1.txt这样的文件中，api已经不可用</td>
+</tr>
+<tr>
+<td style="text-align:left">subDomainsBrute.py</td>
+<td style="text-align:left">提供的常用的子域名字符串字典，然后通过与域名进行组合，配合DNS服务器确定是否存在组合后的子域名</td>
+<td style="text-align:left">python subDomainsBrute.py domain</td>
+<td style="text-align:left">将字典枚举组合解析成功后的域名存放在domain_jiejie.txt文件中</td>
+</tr>
+<tr>
+<td style="text-align:left">wydomain.py</td>
+<td style="text-align:left">通过使用互联网上的第三方接口或者爬取查询结果来获取目标的子域名</td>
+<td style="text-align:left">python wydomain domain</td>
+<td style="text-align:left">通过不同网站获取的结果会存在本地的不同的.json文件中</td>
+</tr>
+<tr>
+<td style="text-align:left">sublist3r.py</td>
+<td style="text-align:left">使用百度，雅虎，bing等第三方引擎对目标域名进行子域名收集，而且还提供字典枚举的功能和端口扫描的功能</td>
+<td style="text-align:left">python sublist3r -d doamin -o domain_sublistdir.txt</td>
+<td style="text-align:left">将获取到的子域名结果存在本地的txt文件中</td>
+</tr>
+</tbody>
+</table>
+<h3 id="gxfr-py文件"><a href="#gxfr-py文件" class="headerlink" title="gxfr.py文件"></a>gxfr.py文件</h3><p>该py文件是使用bing的API，谷歌的搜索引擎对目标域名的子域名进行查询。主要的两个函数为<code>bxfr</code>函数和<code>gxfr</code>函数。</p>
+<ul>
+<li><p><code>bxfr</code>函数，使用Bing的API进行子域名解析和查询，该函数需要提供Bing相关功能的API Key。然后访问<code>https://api.datamarket.azure.com/Data.ashx/Bing/Search/Web?Query=domain&amp;$top=50&amp;$format=json</code>经过测试该API接口已经不可用。通过该API获取子域名结果后，使用<code>lookup_subs</code>函数进行socket函数获取地址并成功后(<code>socket.getaddrinfo(site, 80)</code>)，将结果存储在txt文件中中。</p>
+</li>
+<li><p><code>gxfr</code>函数，使用google搜索引擎的hack语法进行查询(<code>site:baidu.com</code>)，然后通过正则表达式进行匹配<figure class="highlight plain"><figcaption><span>= '>([\.\w-]*)\.%s.+?<' %="" (domain)```。然后获取匹配结果。最后经过`lookkup_subs`函数验证之后写入txt文件中。<="" span=""></'></span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">### subDomainsBrute.py文件</div><div class="line">该py文件通过提供的子域名字典，对目标域名的子域名进行枚举然后解析测试，最后输出结果。这里提供了两个字典文件，分别为`dict/subnames.txt`和`dict/next_sub.txt`。</div><div class="line">还有一个dns服务器列表</div><div class="line"></div><div class="line">```bash</div><div class="line">114.114.114.114</div><div class="line">8.8.8.8</div><div class="line">180.76.76.76</div><div class="line">223.5.5.5</div><div class="line">223.6.6.6</div></pre></td></tr></table></figure></p>
+</li>
+</ul>
+<p>程序简介</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">def __init__(self, target, names_file, ignore_intranet, threads_num, output):</div><div class="line">       self.target = target.strip() <span class="comment">#目标域名</span></div><div class="line">       self.names_file = names_file <span class="comment"># 自定义的域名字典路径</span></div><div class="line">       self.ignore_intranet = ignore_intranet <span class="comment"># 是否忽略私网地址对应的域名，这里关系到是否运行is_intranet函数</span></div><div class="line">       self.thread_count = self.threads_num = threads_num <span class="comment"># 线程数量</span></div><div class="line">       self.scan_count = self.found_count = 0 <span class="comment"># 初始话子域名扫描数量和已确定存在的数量</span></div><div class="line">       self.lock = threading.Lock()</div><div class="line">       self.console_width = getTerminalSize()[0] - 2    <span class="comment"># Cal terminal width when starts up</span></div><div class="line">       self.resolvers = [dns.resolver.Resolver() <span class="keyword">for</span> _ <span class="keyword">in</span> range(threads_num)]   <span class="comment"># 使用第三方模块dns.resolver解析子域名已确认是否解析成功</span></div><div class="line">       self._load_dns_servers() <span class="comment"># 加载dns服务器</span></div><div class="line">       self._load_sub_names() <span class="comment"># 加载子域名字典</span></div><div class="line">       self._load_next_sub()  <span class="comment"># 加载二级子域名字典</span></div><div class="line">       outfile = target + <span class="string">'_jiejie.txt'</span> <span class="keyword">if</span> not output <span class="keyword">else</span> output<span class="comment"># 输出结果保存的文件名称</span></div><div class="line">       self.outfile = open(outfile, <span class="string">'w'</span>)   <span class="comment"># won't close manually</span></div><div class="line">       self.ip_dict = &#123;&#125; <span class="comment"># 已经成功解析的ip及其对应的数量</span></div><div class="line">       self.STOP_ME = False</div></pre></td></tr></table></figure>
+<p>该程序的执行流程就是，先从字典中加载字符串，然后将字符串与目标域名进行拼接得到一个子域名，通过第三方模块<code>dns.resolver</code>对其进行解析，解析成功就保存在txt文件中。<br>关键代码如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">cur_sub_domain = sub + <span class="string">'.'</span> + self.target</div><div class="line"><span class="comment"># 第三方模块，判断子域名是否存在</span></div><div class="line">answers = d.resolvers[thread_id].query(cur_sub_domain)</div><div class="line">is_wildcard_record = False</div><div class="line"><span class="keyword">if</span> answers:</div><div class="line">    <span class="keyword">for</span> answer <span class="keyword">in</span> answers:</div><div class="line">        self.lock.acquire()</div><div class="line">        <span class="keyword">if</span> answer.address not <span class="keyword">in</span> self.ip_dict:</div><div class="line">            self.ip_dict[answer.address] = 1</div><div class="line">        <span class="keyword">else</span>:</div><div class="line">            self.ip_dict[answer.address] += 1</div><div class="line">            <span class="keyword">if</span> self.ip_dict[answer.address] &gt; 2:    <span class="comment"># a wildcard DNS record</span></div><div class="line">                is_wildcard_record = True</div><div class="line">        self.lock.release()</div></pre></td></tr></table></figure>
+<h3 id="wydomain-py文件"><a href="#wydomain-py文件" class="headerlink" title="wydomain.py文件"></a>wydomain.py文件</h3><p>该程序是通过调用多个第三方接口对目标域名进行子域名查询，然后将查询结果分别存储在一个json文件中。</p>
+<h4 id="Alexa"><a href="#Alexa" class="headerlink" title="Alexa"></a>Alexa</h4><ul>
+<li><code>fetch_chinaz</code>函数</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">url = <span class="string">'http://alexa.chinaz.com/?domain=&#123;0&#125;'</span>.format(self.domain)</div><div class="line"> r = http_request_get(url).content</div><div class="line">subs = re.compile(r<span class="string">'(?&lt;="\&gt;\r\n&lt;li&gt;).*?(?=&lt;/li&gt;)'</span>)</div></pre></td></tr></table></figure>
+<ul>
+<li><code>fetch_alexa_cn</code>函数</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">url = <span class="string">'http://www.alexa.cn/index.php?url=&#123;0&#125;'</span>.format(self.domain)</div><div class="line">r = http_request_get(url).text</div><div class="line">sign = re.compile(r<span class="string">'(?&lt;=showHint\(\'</span>).*?(?=\<span class="string">'\);)'</span>).findall(r)</div></pre></td></tr></table></figure>
+<h4 id="Threatcrowd"><a href="#Threatcrowd" class="headerlink" title="Threatcrowd"></a>Threatcrowd</h4><ul>
+<li><code>class Threatcrowd(object)</code></li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">url = <span class="string">"&#123;0&#125;/searchApi/v2/domain/report/?domain=&#123;1&#125;"</span>.format(self.website, self.domain)</div><div class="line">content = http_request_get(url).content</div><div class="line"><span class="keyword">for</span> sub <span class="keyword">in</span> json.loads(content).get(<span class="string">'subdomains'</span>):</div></pre></td></tr></table></figure>
+<h4 id="Threatminer"><a href="#Threatminer" class="headerlink" title="Threatminer"></a>Threatminer</h4><ul>
+<li><code>class Threatminer(object)</code></li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"> url = <span class="string">"&#123;0&#125;/getData.php?e=subdomains_container&amp;q=&#123;1&#125;&amp;t=0&amp;rt=10&amp;p=1"</span>.format(self.website, self.domain)</div><div class="line">content = http_request_get(url).content</div><div class="line"> _regex = re.compile(r<span class="string">'(?&lt;=&lt;a href\="domain.php\?q=).*?(?="&gt;)'</span>)</div><div class="line"> <span class="keyword">for</span> sub <span class="keyword">in</span> _regex.findall(content):</div></pre></td></tr></table></figure>
+<h4 id="Sitedossier"><a href="#Sitedossier" class="headerlink" title="Sitedossier"></a>Sitedossier</h4><ul>
+<li><code>class Sitedossier(object)</code></li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"> url = <span class="string">'http://www.sitedossier.com/parentdomain/&#123;0&#125;'</span>.format(self.domain)</div><div class="line"> r = self.get_content(url)  <span class="comment"># 获取服务器回复的内容</span></div><div class="line"> self.parser(r)  <span class="comment"># 从内容中提取我们想要的子域名</span></div><div class="line"></div><div class="line"><span class="string">""</span><span class="string">"</span></div><div class="line"><span class="string">部分代码如下</span></div><div class="line"><span class="string">npage = re.search('&lt;a href="</span>/parentdomain/(.*?)<span class="string">"&gt;&lt;b&gt;Show', response)</span></div><div class="line"><span class="string">if npage:</span></div><div class="line"><span class="string">     for sub in self.get_subdomain(response):</span></div><div class="line"><span class="string">            self.subset.append(sub)</span></div><div class="line"><span class="string">"</span><span class="string">""</span></div><div class="line"><span class="built_in">return</span> list(<span class="built_in">set</span>(self.subset))</div></pre></td></tr></table></figure>
+<h4 id="Netcraft"><a href="#Netcraft" class="headerlink" title="Netcraft"></a>Netcraft</h4><ul>
+<li><code>class Netcraft(object)</code></li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">self.site = <span class="string">'http://searchdns.netcraft.com'</span></div><div class="line">self.cookie = self.get_cookie().get(<span class="string">'cookie'</span>)</div><div class="line">url = <span class="string">'&#123;0&#125;/?restriction=site+contains&amp;position=limited&amp;host=.&#123;1&#125;'</span>.format(</div><div class="line">self.site, self.domain)</div><div class="line">r = http_request_get(url, custom_cookie=self.cookie)</div><div class="line">self.parser(r.text) <span class="comment"># 对服务器返回的内容进行解析，获取子域名信息</span></div><div class="line"><span class="string">""</span><span class="string">"</span></div><div class="line"><span class="string">部分代码信息</span></div><div class="line"><span class="string">npage = re.search('&lt;A href="</span>(.*?)<span class="string">"&gt;&lt;b&gt;Next page&lt;/b&gt;&lt;/a&gt;', response)</span></div><div class="line"><span class="string">"</span><span class="string">""</span></div><div class="line"><span class="built_in">return</span> list(<span class="built_in">set</span>(self.subset))</div></pre></td></tr></table></figure>
+<h4 id="Ilinks"><a href="#Ilinks" class="headerlink" title="Ilinks"></a>Ilinks</h4><ul>
+<li><code>class Ilinks(object)</code></li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">self.url = <span class="string">'http://i.links.cn/subdomain/'</span></div><div class="line">payload = &#123;</div><div class="line">                <span class="string">'b2'</span>: 1,</div><div class="line">                <span class="string">'b3'</span>: 1,</div><div class="line">                <span class="string">'b4'</span>: 1,</div><div class="line">                <span class="string">'domain'</span>: self.domain</div><div class="line">            &#125;</div><div class="line"> r = http_request_post(self.url,payload=payload).text</div><div class="line">subs = re.compile(r<span class="string">'(?&lt;=value\=\"http://).*?(?=\"&gt;&lt;input)'</span>)</div></pre></td></tr></table></figure>
+<h4 id="Chaxunla"><a href="#Chaxunla" class="headerlink" title="Chaxunla"></a>Chaxunla</h4><ul>
+<li><code>class Chaxunla(object)</code></li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">self.url = <span class="string">'http://api.chaxun.la/toolsAPI/getDomain/'</span></div><div class="line">url = <span class="string">"&#123;0&#125;?0.&#123;1&#125;&amp;callback=&amp;k=&#123;2&#125;&amp;page=1&amp;order=default&amp;sort=desc&amp;action=moreson&amp;_=&#123;3&#125;&amp;verify=&#123;4&#125;"</span>.format(</div><div class="line">self.url, timestemp, self.domain, timestemp, self.verify)</div><div class="line">result = json.loads(req.get(url).content)</div></pre></td></tr></table></figure>
+<p>通过这些模块获取到目标网站的子域名并将其存放再json文件中<br><img src="https://upload-images.jianshu.io/upload_images/6853514-dd8ae8fe702a0034.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="2-3"><br>最后通过json模块将这些信息汇总，去重，最后默认存放在文件domain.log中<br>关键代码：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">json_data = read_json(_burte_file)</div><div class="line"><span class="keyword">if</span> json_data:</div><div class="line">    subdomains.extend(json_data)</div><div class="line">......</div><div class="line">subdomains = list(<span class="built_in">set</span>(subdomains))</div><div class="line">_result_file = os.path.join(script_path, outfile)</div><div class="line">save_result(_result_file, subdomains)</div></pre></td></tr></table></figure>
+<h3 id="sublist3r-py文件"><a href="#sublist3r-py文件" class="headerlink" title="sublist3r.py文件"></a>sublist3r.py文件</h3><p>该文件使用百度，雅虎，bing等第三方引擎对目标域名进行子域名收集，而且还提供字典枚举的功能和端口扫描的功能<br>在该系统中只用到了该程序的子域名收集功能。<br>使用到的模块也与之前的wydomain.py文件有很多重复的地方</p>
+<h4 id="enumratorBase基类"><a href="#enumratorBase基类" class="headerlink" title="enumratorBase基类"></a>enumratorBase基类</h4><p>该文件的类都是继承至该类，而这个基类也是由作者自定义的一个类。简单解释一下该类的功能</p>
+<ul>
+<li><p><code>print_banner</code>方法<br>子类通过继承，可以通过该函数打印出该类使用的一些接口的信息</p>
+</li>
+<li><p><code>send_req</code>方法<br>发送请求的方法，该方法中自定义了大量的http头部变量，该方法返回的服务器回复的数据</p>
+</li>
+<li><p><code>get_response</code>方法<br>从response对象中获取html内容，并返回</p>
+</li>
+<li><p><code>check_max_subdomains</code>方法<br>该方法是用来设置寻找子域名最大个数的，如果得到子域名的数量到达该函数设置数量时，程序就会停止继续寻找子域名</p>
+</li>
+<li><p><code>check_max_pages</code>方法<br>比如google搜索引擎是需要指定探索的最大页数，否则会无限制的探索下去。</p>
+</li>
+<li><p><code>check_response_errors</code> 方法<br>该方法检查对服务器的请求是否成功完成</p>
+</li>
+<li><p><code>should_sleep</code>方法<br>在进行子域名收集的时候，为了避免类似于google搜索引擎的机器识别，应该设置休眠时间</p>
+</li>
+<li><code>enumerate</code>方法<br>通过该方法获取子域名</li>
+</ul>
+<p>而以下的子域名检索方法是由enumratorBase类派生出来的，然后根据各自的特点进行修改后形成的类，简单的介绍一下功能</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">类名称</th>
+<th style="text-align:left">实现的功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">GoogleEnum</td>
+<td style="text-align:left">通过google搜索引擎检索目标子域名</td>
+</tr>
+<tr>
+<td style="text-align:center">YahooEnum</td>
+<td style="text-align:left">通过雅虎搜索引擎检索目标子域名</td>
+</tr>
+<tr>
+<td style="text-align:center">AskEnum</td>
+<td style="text-align:left">通过<a href="http://www.ask.com/web检索子域名" target="_blank" rel="external">http://www.ask.com/web检索子域名</a></td>
+</tr>
+<tr>
+<td style="text-align:center">BingEnum</td>
+<td style="text-align:left">通过bing检索子域名</td>
+</tr>
+<tr>
+<td style="text-align:center">BaiduEnum</td>
+<td style="text-align:left">通过百度检索子域名</td>
+</tr>
+<tr>
+<td style="text-align:center">NetcraftEnum</td>
+<td style="text-align:left">通过<a href="http://searchdns.netcraft.com/?restriction=site+ends+with&amp;host={domain}检测子域名" target="_blank" rel="external">http://searchdns.netcraft.com/?restriction=site+ends+with&amp;host={domain}检测子域名</a></td>
+</tr>
+<tr>
+<td style="text-align:center">Virustotal</td>
+<td style="text-align:left">通过’<a href="https://www.virustotal.com/en/domain/{domain}/information/检索子域名" target="_blank" rel="external">https://www.virustotal.com/en/domain/{domain}/information/检索子域名</a></td>
+</tr>
+<tr>
+<td style="text-align:center">ThreatCrowd</td>
+<td style="text-align:left"><a href="https://www.threatcrowd.org/searchApi/v2/domain/report/?domain={domain}检索子域名" target="_blank" rel="external">https://www.threatcrowd.org/searchApi/v2/domain/report/?domain={domain}检索子域名</a></td>
+</tr>
+<tr>
+<td style="text-align:center">CrtSearch</td>
+<td style="text-align:left">通过<a href="https://crt.sh/?q=%25.{domain}检索子域名" target="_blank" rel="external">https://crt.sh/?q=%25.{domain}检索子域名</a></td>
+</tr>
+<tr>
+<td style="text-align:center">PassiveDNS</td>
+<td style="text-align:left">通过<a href="http://ptrarchive.com/tools/search.htm?label={domain}检索子域名" target="_blank" rel="external">http://ptrarchive.com/tools/search.htm?label={domain}检索子域名</a></td>
+</tr>
+</tbody>
+</table>
+<p>此外该脚本还提供端口扫描功能和字子域名字典枚举的功能，虽然该项系统并未使用这些功能</p>
+<ul>
+<li><code>postscan</code>函数<br>关键代码,使用socket模块去尝试连接目标端口，如果超过2s目标没有回复，则判断目标没有开放该端口<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">for port in ports:</div><div class="line">      try:</div><div class="line">           s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)</div><div class="line">           s.settimeout(2)</div><div class="line">           result = s.connect_ex((host, int(port)))</div><div class="line">           if result == 0:</div><div class="line">               openports.append(port)</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>对与子域名枚举功能，该脚本调用了subbrute.py中的函数，用于对字典中字符串拼成的子域名进行验证操作。<br> 关键代码</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">bruteforce_list = subbrute.print_target(parsed_domain.netloc, record_type, subs, resolvers, process_count, output, json_output, search_list, verbose)</div><div class="line"><span class="string">""</span><span class="string">"</span></div><div class="line"><span class="string">print_target函数是subbrute文件中的函数，用于验证子域名是否是可用的</span></div><div class="line"><span class="string">"</span><span class="string">""</span></div></pre></td></tr></table></figure>
+<p><strong>最后通过一个<code>make_domain</code>函数将所有的以<code>.txt</code>为后缀名的文件全部复制到all_reqult.log文件中，通过读取后格式化处理，将结果存储到report/result.txt文件中</strong><br>关键代码如下</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">os.system(<span class="string">"copy *.txt all_reqult.log &amp;&amp; del *.txt"</span>)</div><div class="line"><span class="built_in">print</span>(<span class="string">"[+]del *txt\ncopy txt\n"</span>)</div><div class="line">list_domain = []</div><div class="line">f = open(<span class="string">"all_reqult.log"</span>, <span class="string">"r"</span>)</div><div class="line">......</div><div class="line">f.close()</div><div class="line">os.system(<span class="string">"del all_reqult.log"</span>)</div><div class="line">list_domain = list(<span class="built_in">set</span>((list_domain)))</div><div class="line"><span class="built_in">print</span> list_domain, len(list_domain)</div><div class="line">with open(<span class="string">'result.txt'</span>, <span class="string">'w'</span>) as outfile:</div><div class="line">    outfile.write(<span class="string">'\n'</span>.join(list_domain))</div><div class="line">fopen1 = open(<span class="string">'report/result.txt'</span>, <span class="string">'w'</span>)</div><div class="line">fopen1.write(<span class="string">'\n'</span>.join(list_domain))</div><div class="line">fopen1.close()</div></pre></td></tr></table></figure>
+<h2 id="3-Web信息获取"><a href="#3-Web信息获取" class="headerlink" title="3.Web信息获取"></a>3.Web信息获取</h2><p>对于获取Web网页的信息，这里主要是获取网页使用的是什么框架或者CMS，通过本地提供的一个json规则检测文件，对目标网站进行检测和指纹识别<br>json文件中部分规则如下:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">    <span class="string">"discuz"</span>: [</div><div class="line">        &#123;</div><div class="line">            <span class="string">"url"</span>: <span class="string">"/static/image/admincp/bg_repno.gif"</span>,</div><div class="line">            <span class="string">"md5"</span>: <span class="string">"403889213f03534a0651d7cfd6878b2c"</span></div><div class="line">        &#125;,</div><div class="line">        &#123;</div><div class="line">            <span class="string">"url"</span>: <span class="string">"/"</span>,</div><div class="line">            <span class="string">"text"</span>: <span class="string">"&lt;meta name=\"generator\" content=\"Discuz!"</span>,</div><div class="line">            <span class="string">"regexp"</span>: <span class="string">"&lt;script src=\".*?logging\\.js"</span></div><div class="line">        &#125;</div><div class="line">    ],</div><div class="line">    <span class="string">"phpwind"</span>: [</div><div class="line">        &#123;</div><div class="line">            <span class="string">"url"</span>: <span class="string">"/res/js/dev/wind.js"</span>,</div><div class="line">            <span class="string">"md5"</span>: <span class="string">"7ad9ac3d647e00e12c615a06762430fe"</span></div><div class="line">        &#125;,</div><div class="line">        &#123;</div><div class="line">            <span class="string">"url"</span>: <span class="string">"/"</span>,</div><div class="line">            <span class="string">"regexp"</span>: <span class="string">"&lt;meta name=\"generator\" content=\"(phpwind|PHPWind)"</span></div><div class="line">        &#125;</div><div class="line">    ],</div><div class="line">    <span class="string">"phpmyadmin"</span>: [</div><div class="line">        &#123;</div><div class="line">            <span class="string">"url"</span>: <span class="string">"/"</span>,</div><div class="line">            <span class="string">"text"</span>: <span class="string">"&lt;link rel=\"stylesheet\" type=\"text/css\" href=\"phpmyadmin.css.php"</span>,</div><div class="line">            <span class="string">"regexp"</span>: <span class="string">"&lt;title&gt;phpMyAdmin&lt;/title&gt;"</span></div><div class="line">        &#125;</div><div class="line">    ],</div><div class="line">    <span class="string">"wordpress"</span>: [</div><div class="line">        &#123;</div><div class="line">            <span class="string">"url"</span>: <span class="string">"/wp-login.php"</span>,</div><div class="line">            <span class="string">"text"</span>: [<span class="string">"wp-core-ui"</span>, <span class="string">"click-backtoblog"</span>]</div><div class="line">        &#125;</div><div class="line">    ],</div><div class="line">    <span class="string">"zblog"</span>: [</div><div class="line">        &#123;</div><div class="line">            <span class="string">"url"</span>: <span class="string">"/"</span>,</div><div class="line">            <span class="string">"regexp"</span>: <span class="string">"&lt;link rel=\"stylesheet\" rev=\"stylesheet\" href=\".*zb_users"</span></div><div class="line">        &#125;</div><div class="line">    ],</div><div class="line">......</div></pre></td></tr></table></figure>
+<p>实现的过程是将<code>report/result.txt</code>中所有的域名根据json文件中的规则进行url拼接，然后<br>对这个特定URL进行访问获取网页内容，再将网页内容与规则进行匹配，最后判断使用cms或者框架名称。<br>关键代码如下</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line">r = requests.get(url1+ rule[<span class="string">"url"</span>], timeout=5)</div><div class="line">r.encoding = r.apparent_encoding</div><div class="line">r.close()</div><div class="line"><span class="keyword">if</span> <span class="string">"md5"</span> <span class="keyword">in</span> rule and hashlib.md5(r.content).hexdigest() == rule[<span class="string">"md5"</span>]:</div><div class="line">    <span class="built_in">print</span> (url1, <span class="string">"&lt;font color=red&gt;"</span>+cms+<span class="string">"&lt;/font&gt;"</span>)</div><div class="line"></div><div class="line"><span class="keyword">elif</span> <span class="string">"field"</span> <span class="keyword">in</span> rule and rule[<span class="string">"field"</span>] <span class="keyword">in</span> r.headers and rule[<span class="string">"value"</span>] <span class="keyword">in</span> r.headers[rule[<span class="string">"field"</span>]]:</div><div class="line">    <span class="built_in">print</span> (url1, <span class="string">"&lt;font color=red&gt;"</span>+cms+<span class="string">"&lt;/font&gt;"</span>)</div><div class="line"></div><div class="line"><span class="keyword">elif</span> <span class="string">"text"</span> <span class="keyword">in</span> rule:</div><div class="line">    <span class="keyword">if</span> <span class="built_in">type</span>(rule[<span class="string">"text"</span>]) is list:</div><div class="line">        <span class="keyword">for</span> itext <span class="keyword">in</span> rule[<span class="string">"text"</span>]:</div><div class="line">            <span class="keyword">if</span> itext <span class="keyword">in</span> r.text:</div><div class="line">                <span class="built_in">print</span> (url1, <span class="string">"&lt;font color=red&gt;"</span>+cms+<span class="string">"&lt;/font&gt;"</span>)</div><div class="line">    <span class="keyword">elif</span> rule[<span class="string">"text"</span>] <span class="keyword">in</span> r.text:</div><div class="line">            <span class="built_in">print</span> (url1, <span class="string">"&lt;font color=red&gt;"</span>+cms+<span class="string">"&lt;/font&gt;"</span>)</div><div class="line"></div><div class="line"><span class="keyword">elif</span> <span class="string">"regexp"</span> <span class="keyword">in</span> rule:</div><div class="line">    <span class="keyword">if</span> <span class="built_in">type</span>(rule[<span class="string">"regexp"</span>]) is list:</div><div class="line">        <span class="keyword">for</span> reg <span class="keyword">in</span> rule[<span class="string">"regexp"</span>]:</div><div class="line">            <span class="keyword">if</span> re.search(reg, r.text):</div><div class="line">                <span class="built_in">print</span> (url1, <span class="string">"&lt;font color=red&gt;"</span>+cms+<span class="string">"&lt;/font&gt;"</span>)</div><div class="line">    <span class="keyword">elif</span> re.search(rule[<span class="string">"regexp"</span>], r.text):</div><div class="line">            <span class="built_in">print</span> (url1, <span class="string">"&lt;font color=red&gt;"</span>+cms+<span class="string">"&lt;/font&gt;"</span>)</div><div class="line">    <span class="keyword">else</span>:</div><div class="line">        <span class="built_in">print</span> <span class="string">'no'</span></div></pre></td></tr></table></figure>
+<p>注意该脚本还引入了一个第三方模块<code>from thirdlib import threadpool</code> 该threadpool是一个简单的实现线程池的框架，方便使用脚本使用多线程。<br>脚本中调用的关键代码</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">pool = threadpool.ThreadPool(self.thread_num)</div><div class="line">reqs = threadpool.makeRequests(self.identify_cms, self.rules, self.log)</div><div class="line"><span class="keyword">for</span> req <span class="keyword">in</span> reqs:</div><div class="line">    pool.putRequest(req)</div><div class="line">pool.wait()</div></pre></td></tr></table></figure>
+<p>在系统的主函数中通过接受该脚本stdout输出的流数据，将数据写入到一个列表中，最后将结果保存到<code>report/whatweb.html</code>。</p>
+<h1 id="0x03-漏洞扫描"><a href="#0x03-漏洞扫描" class="headerlink" title="0x03.漏洞扫描"></a>0x03.漏洞扫描</h1><p>该系统的漏洞扫描模块是调用的第三方脚本BBScan.py，该文件代码实现了一个轻量级的web漏洞扫描器。<br>使用的规则库为存放在本地的一个txt文件中<code>rules/commom.txt</code><br><strong>部分规则如下：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># Admin Panel</span></div><div class="line">/admin/    &#123;severity=2&#125;</div><div class="line">/config/   &#123;severity=2&#125;</div><div class="line">/manage/   &#123;severity=2&#125;</div><div class="line">/backup/   &#123;severity=2&#125;</div><div class="line">/backend/  &#123;severity=2&#125;</div><div class="line"></div><div class="line">/admin.php &#123;severity=2&#125;   &#123;status=200&#125;</div><div class="line">/admin.jsp &#123;severity=2&#125;   &#123;status=200&#125;</div><div class="line">/admin.do  &#123;severity=2&#125;   &#123;status=200&#125;</div><div class="line"></div><div class="line"><span class="comment"># Tomcat Examples</span></div><div class="line">/examples           &#123;severity=2&#125;</div><div class="line">/examples/servlets/servlet/SessionExample    &#123;severity=2&#125;</div><div class="line">/manager/html       &#123;severity=2&#125;</div><div class="line"></div><div class="line"><span class="comment"># Database</span></div><div class="line">/db/       &#123;severity=2&#125;</div><div class="line">/DB/       &#123;severity=2&#125;</div><div class="line">/data/	   &#123;severity=2&#125;</div><div class="line">/sqlnet.log       &#123;status=200&#125;       &#123;type_no=<span class="string">"html"</span>&#125;</div><div class="line">/data/user.txt    &#123;status=200&#125;       &#123;type_no=<span class="string">"html"</span>&#125;</div><div class="line">/user.txt         &#123;status=200&#125;       &#123;type_no=<span class="string">"html"</span>&#125;</div><div class="line">/phpinfo.php   &#123;tag=<span class="string">"allow_url_fopen"</span>&#125;  &#123;status=200&#125;</div><div class="line">/mysql/add_user.php   &#123;status=200&#125;</div><div class="line">/cachemonitor/statistics.jsp    &#123;severity=2&#125;   &#123;status=200&#125;</div><div class="line"></div><div class="line">/jmx-console/    &#123;severity=2&#125;</div><div class="line">/jmx-console/HtmlAdaptor       &#123;status=200&#125;</div><div class="line">/cacti/          &#123;severity=2&#125;</div><div class="line">/cacti/cacti.sql &#123;status=200&#125;  &#123;type_no=<span class="string">"html"</span>&#125;</div><div class="line"><span class="comment"># Directory traversal</span></div><div class="line">/../../../../../../../../../../../../../etc/passwd  &#123;tag=<span class="string">"root:x:"</span>&#125;</div><div class="line"></div><div class="line"><span class="comment"># Discuz!</span></div><div class="line">/config/config_ucenter.php.bak         &#123;status=200&#125;</div><div class="line"></div><div class="line"><span class="comment"># webshell</span></div><div class="line">/shell.php              &#123;status=200&#125;</div><div class="line">/shell.jsp              &#123;status=200&#125;</div><div class="line">/&#123;hostname&#125;.zip         &#123;status=200&#125;    &#123;type_no=<span class="string">"html"</span>&#125;</div><div class="line"></div><div class="line"><span class="comment"># Resin</span></div><div class="line">/resin-doc/resource/tutorial/jndi-appconfig/<span class="built_in">test</span>?inputFile=/etc/passwd    &#123;tag=<span class="string">"root:x:"</span>&#125;</div><div class="line"></div><div class="line"><span class="comment"># Java web</span></div><div class="line">/WEB-INF/web.xml                             &#123;tag=<span class="string">"xml"</span>&#125;    &#123;status=200&#125;</div><div class="line">/WEB-INF/web.xml.bak                         &#123;tag=<span class="string">"xml"</span>&#125;    &#123;status=200&#125;</div><div class="line"></div><div class="line"><span class="comment"># SVN and Git</span></div><div class="line">/.svn/</div><div class="line">/.svn/entries         &#123;tag=<span class="string">"dir\n"</span>&#125; &#123;status=200&#125;</div><div class="line"></div><div class="line"><span class="comment"># Wordpress</span></div><div class="line">/wp-login.php         &#123;tag=<span class="string">"user_login"</span>&#125; &#123;status=200&#125;</div><div class="line">/config.inc           &#123;status=200&#125;	&#123;type_no=<span class="string">"html"</span>&#125;</div><div class="line">/config.ini           &#123;status=200&#125;      &#123;type_no=<span class="string">"html"</span>&#125;</div></pre></td></tr></table></figure>
+<p> 脚本通过从这个文件中读取规则，对目标进行测试，然后根据服务器返回的内容进行判断是否存在该类型的漏洞。<br><strong>代码简介</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">def __init__(self, url, lock, timeout=600, depth=2):</div><div class="line">    self.START_TIME = time.time() <span class="comment"># 扫描开始时间</span></div><div class="line">    <span class="comment">#self.lock = lock </span></div><div class="line">    self.TIME_OUT = timeout  <span class="comment"># 默认的网站访问超时时间</span></div><div class="line">    self.LINKS_LIMIT = 20       <span class="comment"># 最大连接数量</span></div><div class="line">    self.final_severity = 0   <span class="comment"># 默认的安全等级</span></div><div class="line">    self.schema, self.host, self.path = self._parse_url(url)  <span class="comment"># 对URL进行解析</span></div><div class="line">    self.max_depth = self._cal_depth(self.path)[1] + depth     <span class="comment"># 最大扫描的深度</span></div><div class="line">    self.check_404()           <span class="comment"># 检测目标网页是否是404</span></div><div class="line">    <span class="keyword">if</span> self._status == -1:</div><div class="line">        <span class="built_in">return</span> None</div><div class="line">    <span class="keyword">if</span> not self.has_404:</div><div class="line">        <span class="built_in">print</span> <span class="string">'[Warning] %s has no HTTP 404.'</span> % self.host</div><div class="line">    self._init_rules()    <span class="comment"># 初始化规则</span></div><div class="line">    self.url_queue = Queue.Queue()    <span class="comment"># 将所有要扫描的url加入到队列中</span></div><div class="line">    self.urls_in_queue = []           <span class="comment"># urls already in queue</span></div><div class="line">    _path, _depth = self._cal_depth(self.path)</div><div class="line">    self._enqueue(_path)  <span class="comment"># 判断是否是已经爬取过的URL路径</span></div><div class="line">    self.crawl_index(_path)  <span class="comment"># 方法，爬取目标主页中的url</span></div><div class="line">    self.lock = threading.Lock()</div><div class="line">    self.results = &#123;&#125;</div></pre></td></tr></table></figure>
+<p><strong>方法简介</strong></p>
+<ul>
+<li><code>_parse_url</code>方法:<br>解析URL，如果没有指定通信协议，系统自动添加为http协议。然后判断url中是否存在路径，如果不存在就返回”/“,否则返回协议，主机名，和资源路径</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">return</span> _.scheme, _.netloc, _.path <span class="keyword">if</span> _.path <span class="keyword">else</span> <span class="string">'/'</span></div></pre></td></tr></table></figure>
+<ul>
+<li><code>_cal_depth</code>:<br>该方法是用于计算URL的深度，返回一个元组，url和深度。以//或者javascript开头的URL不做分析，以http开头的URL先对URL进行解析，然后判断hostnane是否为目标的hostname，在判断path路径的深度。<br>关键代码如下</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">    _ = urlparse.urlparse(url, <span class="string">'http'</span>)</div><div class="line">    <span class="keyword">if</span> _.netloc == self.host:    <span class="comment"># same hostname</span></div><div class="line">        url = _.path</div><div class="line">。。。。</div><div class="line">url = url[: url.rfind(<span class="string">'/'</span>)+1]</div><div class="line">depth = len(url.split(<span class="string">'/'</span>)) - 1</div></pre></td></tr></table></figure>
+<ul>
+<li><code>_init_rules</code>:<br>该方法从文件中加载规则，使用正则表达式从文件中的每一行提取数据，正则表达式如下</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">p_severity = re.compile(<span class="string">'&#123;severity=(\d)&#125;'</span>)</div><div class="line">p_tag = re.compile(<span class="string">'&#123;tag="([^"]+)"&#125;'</span>)</div><div class="line">p_status = re.compile(<span class="string">'&#123;status=(\d&#123;3&#125;)&#125;'</span>)</div><div class="line">p_content_type = re.compile(<span class="string">'&#123;type="([^"]+)"&#125;'</span>)</div><div class="line">p_content_type_no = re.compile(<span class="string">'&#123;type_no="([^"]+)"&#125;'</span>)</div></pre></td></tr></table></figure>
+<p>提取数据并进行判断，没有的置为空或者0</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">_ = p_severity.search(url)</div><div class="line">severity = int(_.group(1)) <span class="keyword">if</span> _ <span class="keyword">else</span> 3</div><div class="line">_ = p_tag.search(url)</div><div class="line">tag = _.group(1) <span class="keyword">if</span> _ <span class="keyword">else</span> <span class="string">''</span></div><div class="line">_ = p_status.search(url)</div><div class="line">status = int(_.group(1)) <span class="keyword">if</span> _ <span class="keyword">else</span> 0</div><div class="line">_ = p_content_type.search(url)</div><div class="line">content_type = _.group(1) <span class="keyword">if</span> _ <span class="keyword">else</span> <span class="string">''</span></div><div class="line">_ = p_content_type_no.search(url)</div><div class="line">content_type_no = _.group(1) <span class="keyword">if</span> _ <span class="keyword">else</span> <span class="string">''</span></div></pre></td></tr></table></figure>
+<p>最后将重组的规则存放在一个元组中，最后将这个元组追加到一个列表中</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">self.url_dict.append((url, severity, tag, status, content_type, content_type_no))</div></pre></td></tr></table></figure>
+<ul>
+<li><code>_http_request</code>方法:<br>通过该方法获取访问目标url的状态码，返回http头部和html内容<br>部分代码如下</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">conn.request(method=<span class="string">'GET'</span>, url=url,</div><div class="line">								headers=&#123;<span class="string">'User-Agent'</span>: <span class="string">'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/38.0.2125.111 Safari/537.36 BBScan/1.0'</span>&#125;</div><div class="line">)</div><div class="line">resp = conn.getresponse()</div><div class="line">resp_headers = dict(resp.getheaders())</div><div class="line">status = resp.status</div></pre></td></tr></table></figure>
+<ul>
+<li><code>_decode_response_text</code>方法:<br>该方法对服务器返回的页面进行解码操作，如果用户没有指定charset类型，那么该方法就会尝试使用’UTF-8’, ‘GB2312’, ‘GBK’, ‘iso-8859-1’, ‘big5’编码对目标返回的内容进行解码，并将解码后的内容返回<br>部分代码</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">encodings = [<span class="string">'UTF-8'</span>, <span class="string">'GB2312'</span>, <span class="string">'GBK'</span>, <span class="string">'iso-8859-1'</span>, <span class="string">'big5'</span>]</div><div class="line"><span class="keyword">for</span> _ <span class="keyword">in</span> encodings:</div><div class="line">    try:</div><div class="line">        <span class="built_in">return</span> rtxt.decode(_)</div><div class="line">    except:</div><div class="line">        pass</div></pre></td></tr></table></figure>
+<ul>
+<li><code>check_404方法</code>:<br>检查目标返回的页面的状态码是否为404<br>部分代码如下</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">self._status, headers, html_doc = self._http_request(<span class="string">'/A_NOT_EXISTED_URL_TO_CHECK_404_STATUS_EXISTENCE'</span>)</div><div class="line"><span class="keyword">if</span> self._status == -1:</div><div class="line">    <span class="built_in">print</span> <span class="string">'[ERROR] Fail to connect to %s'</span> % self.host</div><div class="line">self.has_404 = (self._status == 404)</div><div class="line"><span class="built_in">return</span> self.has_404</div></pre></td></tr></table></figure>
+<ul>
+<li><code>_enqueue</code>方法:<br>该方法是判断爬取的URL是否是已经爬取的，如果是一个新的链接就传入队列中，该队列用于爬虫<br>部分代码</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span> url <span class="keyword">in</span> self.urls_in_queue:</div><div class="line">    <span class="built_in">return</span> False</div><div class="line"><span class="keyword">elif</span> len(self.urls_in_queue) &gt;= self.LINKS_LIMIT:</div><div class="line">    <span class="built_in">return</span> False</div><div class="line"><span class="keyword">else</span>:</div><div class="line">    self.urls_in_queue.append(url)</div></pre></td></tr></table></figure>
+<p>还通过该方法将漏洞检测规则对应到URL上，然后组成一个元组，将这个元组传入一个用于扫描漏洞的队列中，<br>代码如下</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">for</span> _ <span class="keyword">in</span> self.url_dict:   <span class="comment"># 这个列表中包含一个元组[(url, severity, tag, status, content_type, content_type_no)]</span></div><div class="line">    full_url = url.rstrip(<span class="string">'/'</span>) + _[0]  <span class="comment"># 获取完整的URL，将hostname与path拼接</span></div><div class="line">    url_description = &#123;<span class="string">'prefix'</span>: url.rstrip(<span class="string">'/'</span>), <span class="string">'full_url'</span>: full_url&#125;  <span class="comment"># 重新裁成一个字典</span></div><div class="line">    item = (url_description, _[1], _[2], _[3], _[4], _[5])   </div><div class="line">    self.url_queue.put(item)</div></pre></td></tr></table></figure>
+<ul>
+<li><code>crawl_index方法</code>:<br>该方法使用beautifulSoup4爬取页面中的url链接。<br>部分代码如下</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">soup = BeautifulSoup(html_doc, <span class="string">"html.parser"</span>)</div><div class="line">links = soup.find_all(<span class="string">'a'</span>)</div><div class="line"><span class="keyword">for</span> l <span class="keyword">in</span> links:</div><div class="line">    url = l.get(<span class="string">'href'</span>, <span class="string">''</span>)</div><div class="line">    url, depth = self._cal_depth(url)</div><div class="line">    <span class="keyword">if</span> depth &lt;= self.max_depth:</div><div class="line">        self._enqueue(url)</div></pre></td></tr></table></figure>
+<ul>
+<li><code>_update_severity</code>方法:<br>该方法用于更新serverity，如果规则中存在serverty字段，那么就将默认的final_serverity进行修改</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span> severity &gt; self.final_severity:</div><div class="line">    self.final_severity = severity</div></pre></td></tr></table></figure>
+<ul>
+<li><code>_scan_worker</code>方法:<br>该方法是用于执行漏洞扫描的<br>关键代码如下</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line">try:</div><div class="line">   <span class="comment"># 获取url以及相对应的规则组成的元组</span></div><div class="line">    item = self.url_queue.get(timeout=1.0)</div><div class="line">except:</div><div class="line">    <span class="built_in">return</span></div><div class="line">try:</div><div class="line">    url_description, severity, tag, code, content_type, content_type_no = item</div><div class="line">    url = url_description[<span class="string">'full_url'</span>]</div><div class="line">    prefix = url_description[<span class="string">'prefix'</span>]</div><div class="line">except Exception, e:</div><div class="line">    logging.error(<span class="string">'[InfoDisScanner._scan_worker][1] Exception: %s'</span> % e)</div><div class="line">    <span class="built_in">continue</span></div><div class="line"><span class="keyword">if</span> not item or not url:</div><div class="line">    <span class="built_in">break</span></div><div class="line"></div><div class="line">。。。。</div><div class="line"><span class="comment"># 开始进行测试，将URL加上payload之后发送给服务器，本地根据服务器返回的数据与url_description中存放的数据进行对比，如果结果一样，说明目标存在漏洞</span></div><div class="line">status, headers, html_doc = self._http_request(url)</div><div class="line"><span class="keyword">if</span> (status <span class="keyword">in</span> [200, 301, 302, 303]) and (self.has_404 or status!=self._status):</div><div class="line">    <span class="keyword">if</span> code and status != code:</div><div class="line">        <span class="built_in">continue</span></div><div class="line">    <span class="keyword">if</span> not tag or html_doc.find(tag) &gt;= 0:</div><div class="line">        <span class="keyword">if</span> content_type and headers.get(<span class="string">'content-type'</span>, <span class="string">''</span>).find(content_type) &lt; 0 or \</div><div class="line">            content_type_no and headers.get(<span class="string">'content-type'</span>, <span class="string">''</span>).find(content_type_no) &gt;=0:</div><div class="line">            <span class="built_in">continue</span></div><div class="line">        self.lock.acquire()</div><div class="line">        <span class="comment"># print '[+] [Prefix:%s] [%s] %s' % (prefix, status, 'http://' + self.host +  url)</span></div><div class="line">        <span class="keyword">if</span> not prefix <span class="keyword">in</span> self.results:</div><div class="line">            self.results[prefix]= []</div><div class="line">       <span class="comment"># 存放最后结果</span></div><div class="line">        self.results[prefix].append(&#123;<span class="string">'status'</span>:status, <span class="string">'url'</span>: <span class="string">'%s://%s%s'</span> % (self.schema, self.host, url)&#125; )</div><div class="line">        self._update_severity(severity)</div><div class="line">        self.lock.release()</div></pre></td></tr></table></figure>
+<ul>
+<li><code>scan</code>方法:<br>这是一个多线程启动器，用来启动_scan_worker方法，最后返回测试的主机名，测试的结果和严重程度<br>代码如下</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(threads):</div><div class="line">    t = threading.Thread(target=self._scan_worker)</div><div class="line">    threads_list.append(t)</div><div class="line">    t.start()</div><div class="line"><span class="keyword">for</span> t <span class="keyword">in</span> threads_list:</div><div class="line">    t.join()</div><div class="line"><span class="keyword">for</span> key <span class="keyword">in</span> self.results.keys():</div><div class="line">    <span class="keyword">if</span> len(self.results[key]) &gt; 10:</div><div class="line">        del self.results[key]</div><div class="line"><span class="built_in">return</span> self.host, self.results, self.final_severity</div></pre></td></tr></table></figure>
+<h3 id="1-nmap扫描"><a href="#1-nmap扫描" class="headerlink" title="1.nmap扫描"></a>1.nmap扫描</h3><p>通过直接调用nmap对目标进行扫描，扫描结果储存在<code>nmap_port_services.xml</code>中，启动的命令为</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">nmap -v  --script=banner,http-headers,http-title  -T4  -iL  <span class="string">'result.txt'</span>  -oX nmap_port_services.xml</div></pre></td></tr></table></figure>
+<h3 id="2-AWVS扫描"><a href="#2-AWVS扫描" class="headerlink" title="2.AWVS扫描"></a>2.AWVS扫描</h3><p>使用命令行调用AWVS对目标网站进行扫描，并在系统中启用一个线程去监测该进程的运行情况，代码如下</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">while</span> not os.path.exists(<span class="string">'result.txt'</span>):</div><div class="line">	time.sleep(20)</div><div class="line">	<span class="built_in">print</span> <span class="string">'listen ......'</span></div><div class="line"><span class="built_in">print</span> <span class="string">'starting  wvs scan'</span></div><div class="line"></div><div class="line">popen = subprocess.Popen(<span class="string">"cmd.exe /c"</span> + <span class="string">"wvs.bat"</span>, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)</div><div class="line"><span class="keyword">while</span> True:</div><div class="line">	next_line = popen.stdout.readline()</div><div class="line">	<span class="keyword">if</span> next_line == <span class="string">''</span> and popen.poll() != None:</div><div class="line">		<span class="built_in">break</span></div><div class="line">	sys.stdout.write(next_line)</div></pre></td></tr></table></figure>
+<p><code>wvs.bat</code>的代码如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">@<span class="built_in">echo</span> off</div><div class="line"><span class="built_in">set</span> /p wvs_path=please input wvs path,eg: [D:\Program Files (x86)\Web Vulnerability Scanner 10]::</div><div class="line"><span class="keyword">for</span> /f %%i <span class="keyword">in</span> (result.txt) <span class="keyword">do</span> (</div><div class="line"><span class="built_in">set</span> pp=%%i</div><div class="line"><span class="built_in">echo</span> running   %%i ......</div><div class="line"><span class="string">"%wvs_path%\wvs_console.exe"</span> /scan %%i /Profile default /SaveFolder d:\wwwscanresult\%pp%\ /save /Verbose --EnablePortScanning=<span class="literal">true</span> --UseCSA=<span class="literal">true</span> --RobotsTxt=<span class="literal">true</span> --CaseInsensitivePaths=<span class="literal">true</span></div><div class="line">)</div></pre></td></tr></table></figure>
+<h1 id="0x04-报告生成"><a href="#0x04-报告生成" class="headerlink" title="0x04.报告生成"></a>0x04.报告生成</h1><p>首先是将nmap生成的XML文件通过import1.php脚本进行格式化后重新输出，核心代码如下:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">@file_put_contents(<span class="string">"report/result_sentives.html"</span>, <span class="string">'&lt;h2&gt;&lt;font color=red&gt;'</span>.<span class="variable">$ip</span>.<span class="string">'&lt;/font&gt;&lt;/h2&gt;'</span>, FILE_APPEND);</div><div class="line"><span class="built_in">print</span> <span class="variable">$ip</span>.<span class="string">'&lt;br&gt;'</span>;</div><div class="line">foreach (<span class="variable">$p</span>-&gt;port as <span class="variable">$pp</span>)&#123;</div><div class="line">	<span class="variable">$p_protocol</span>=<span class="variable">$pp</span>[<span class="string">'protocol'</span>];</div><div class="line">	<span class="variable">$p_port</span>=(int)<span class="variable">$pp</span>[<span class="string">'portid'</span>];</div><div class="line">	<span class="variable">$p_service_http_title</span>=<span class="variable">$pp</span>-&gt;script[<span class="string">"http-title"</span>][<span class="string">'output'</span>];			</div><div class="line">	<span class="variable">$p_banner</span>=<span class="variable">$pp</span>-&gt;script[<span class="string">'output'</span>];</div><div class="line">	<span class="variable">$p_service</span>=<span class="variable">$pp</span>-&gt;service[<span class="string">"name"</span>];</div><div class="line">	<span class="variable">$total</span>++;</div><div class="line">	<span class="variable">$fwritt</span>=<span class="string">'&lt;b&gt;'</span>.<span class="variable">$p_protocol</span>.<span class="string">'&lt;/b&gt;   '</span>.<span class="string">'&lt;a href="http://'</span>.<span class="variable">$ip</span>.<span class="string">':'</span>.<span class="variable">$p_port</span>.<span class="string">'"" target=_blank&gt;&lt;b&gt;'</span>.<span class="variable">$p_port</span>.<span class="string">'&lt;/b&gt;&lt;/a&gt;'</span>.<span class="string">'   &lt;b&gt;'</span>.<span class="variable">$p_service</span>.<span class="string">'&lt;/b&gt;   &lt;pre&gt;'</span>.<span class="variable">$p_service_http_title</span>.<span class="string">'&lt;/pre&gt;   &lt;pre&gt;'</span>.<span class="variable">$p_banner</span>.<span class="string">'&lt;/pre&gt;   '</span>.<span class="string">'   '</span>.<span class="string">'&lt;br&gt;'</span>;</div><div class="line">    <span class="built_in">print</span> <span class="variable">$fwritt</span>;</div><div class="line">    @file_put_contents(<span class="string">"report/result_sentives.html"</span>, <span class="variable">$fwritt</span>, FILE_APPEND);</div><div class="line">	&#125;</div></pre></td></tr></table></figure>
+<p>最后将所有的结果通过<code>repoert_all</code>函数将结果进行整合,将这些文件的路径汇总到left,html中。<br>代码如下:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">html_doc = left_html.substitute(&#123;<span class="string">'domain_whois_email'</span>: <span class="string">'whois_email_user.html'</span>, <span class="string">'domain_result'</span>: <span class="string">'result.txt'</span>,</div><div class="line">                                 <span class="string">'domain_port'</span>: <span class="string">'result_sentives.html'</span>, <span class="string">'domain_webscan'</span>: <span class="string">'result_sentivesweb.html'</span>,</div><div class="line">                                 <span class="string">'domain_whatweb'</span>: <span class="string">'whatweb.html'</span>&#125;)</div><div class="line">with open(<span class="string">'report/left.htm'</span>, <span class="string">'w'</span>) as outFile:</div><div class="line">    outFile.write(html_doc)</div></pre></td></tr></table></figure>
+<h1 id="0x05-总结"><a href="#0x05-总结" class="headerlink" title="0x05.总结"></a>0x05.总结</h1><p>对于该系统而言只能说是能够满足个人的使用，且后期代码维护难度过大，不易进行扩展，使用第三方脚本时，直接是使用命令执行来获取数据，而不是通过导入模块的方式。不过系统的思路是值得借鉴的，尤其是在前期搜集子域名信息的时候是花了大功夫的，调用了很多第三方脚本，为的是尽可能的将目标的域名下的子域名收集完整，值得学习。<br>而对于漏洞扫描模块而言，即使用了第三方脚本，也是用的AWVS对目标进行扫描，对于BBScan这个扫描储程序的规则设计值得学习，自定义化程度很高。<br>总体来说整个扫描器的设计还是不错的，只是将这些第三方脚本进行整合时就显得有点仓促了。</p>
+
+      
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2018/05/27/某扫描器/">某扫描器</a></p>
+        <p><span>文章作者:</span><a href="/" title="访问 glamor 的个人博客">glamor</a></p>
+        <p><span>发布时间:</span>2018年05月27日 - 23时06分</p>
+        <p><span>最后更新:</span>2018年05月27日 - 11时06分</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2018/05/27/某扫描器/" title="某扫描器">http://www.cmustarc.com/2018/05/27/某扫描器/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://www.cmustarc.com/2018/05/27/某扫描器/　　作者: glamor" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script src="/js/clipboard.min.js"></script>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" title="中国大陆 (CC BY-NC-SA 3.0 CN)" target = "_blank">"署名-非商用-相同方式共享 3.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+<nav id="article-nav">
+  
+    <a href="/2018/05/28/python-importlib/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          importlib动态加载模块
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/05/27/惊蛰漏洞扫描平台分析/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">惊蛰漏洞扫描平台分析</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#0x01-整体简介"><span class="toc-number">1.</span> <span class="toc-text">0x01. 整体简介</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#引言"><span class="toc-number">1.1.</span> <span class="toc-text">引言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#思维导图"><span class="toc-number">1.2.</span> <span class="toc-text">思维导图</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#目录结构"><span class="toc-number">1.3.</span> <span class="toc-text">目录结构</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#0x02-信息收集"><span class="toc-number">2.</span> <span class="toc-text">0x02.信息收集</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-域名信息收集"><span class="toc-number">2.1.</span> <span class="toc-text">1.域名信息收集</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-子域名收集"><span class="toc-number">2.2.</span> <span class="toc-text">2.子域名收集</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#使用到的脚本名称与介绍"><span class="toc-number">2.2.1.</span> <span class="toc-text">使用到的脚本名称与介绍</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#gxfr-py文件"><span class="toc-number">2.2.2.</span> <span class="toc-text">gxfr.py文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#wydomain-py文件"><span class="toc-number">2.2.3.</span> <span class="toc-text">wydomain.py文件</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Alexa"><span class="toc-number">2.2.3.1.</span> <span class="toc-text">Alexa</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Threatcrowd"><span class="toc-number">2.2.3.2.</span> <span class="toc-text">Threatcrowd</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Threatminer"><span class="toc-number">2.2.3.3.</span> <span class="toc-text">Threatminer</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Sitedossier"><span class="toc-number">2.2.3.4.</span> <span class="toc-text">Sitedossier</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Netcraft"><span class="toc-number">2.2.3.5.</span> <span class="toc-text">Netcraft</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Ilinks"><span class="toc-number">2.2.3.6.</span> <span class="toc-text">Ilinks</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Chaxunla"><span class="toc-number">2.2.3.7.</span> <span class="toc-text">Chaxunla</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#sublist3r-py文件"><span class="toc-number">2.2.4.</span> <span class="toc-text">sublist3r.py文件</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#enumratorBase基类"><span class="toc-number">2.2.4.1.</span> <span class="toc-text">enumratorBase基类</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-Web信息获取"><span class="toc-number">2.3.</span> <span class="toc-text">3.Web信息获取</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#0x03-漏洞扫描"><span class="toc-number">3.</span> <span class="toc-text">0x03.漏洞扫描</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-nmap扫描"><span class="toc-number">3.0.1.</span> <span class="toc-text">1.nmap扫描</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-AWVS扫描"><span class="toc-number">3.0.2.</span> <span class="toc-text">2.AWVS扫描</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#0x04-报告生成"><span class="toc-number">4.</span> <span class="toc-text">0x04.报告生成</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#0x05-总结"><span class="toc-number">5.</span> <span class="toc-text">0x05.总结</span></a></li></ol>
+</div>
+<input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+<script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script>
+    var valueHide = "隐藏目录";
+    var valueShow = "显示目录";
+
+    if ($(".left-col").is(":hidden")) {
+        $("#tocButton").attr("value", valueShow);
+    }
+    $("#tocButton").click(function() {
+        if ($("#toc").is(":hidden")) {
+            $("#tocButton").attr("value", valueHide);
+            $("#toc").slideDown(320);
+        }
+        else {
+            $("#tocButton").attr("value", valueShow);
+            $("#toc").slideUp(350);
+        }
+    })
+    if ($(".toc").length < 1) {
+        $("#toc, #tocButton").hide();
+    }
+</script>
+
+
+
+
+
+<div class="bdsharebuttonbox">
+	<a href="#" class="fx fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+	<a href="#" class="fx fa-weixin bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+	<a href="#" class="fx fa-qq bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+	<a href="#" class="fx fa-facebook-official bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+	<a href="#" class="fx fa-twitter bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+	<a href="#" class="fx fa-linkedin bds_linkedin" data-cmd="linkedin" title="分享到linkedin"></a>
+	<a href="#" class="fx fa-files-o bds_copy" data-cmd="copy" title="分享到复制网址"></a>
+</div>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+
+
+
+    
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/2018/05/28/python-importlib/" title="上一篇: importlib动态加载模块">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+        
+            <a href="/2018/05/27/惊蛰漏洞扫描平台分析/" title="下一篇: 惊蛰漏洞扫描平台分析">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2018/05/28/python-importlib/">importlib动态加载模块</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/27/某扫描器/">某扫描器</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/27/惊蛰漏洞扫描平台分析/">惊蛰漏洞扫描平台分析</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/01/07/加密/">加密</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/01/06/JSON处理/">JSON处理</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/01/03/网络编程/">网络编程</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/01/02/windows采用命令/">常用的windows命令</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/12/31/byte与rune/">rune与byte</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/12/28/数组与字典/">数组与数组切片</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/12/15/Python3笔记/">Python3 学习笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/12/03/python基础/">python基础</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/11/07/数据链路层/">数据链路</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/11/01/网络基础/">网络基础</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/11/01/tcp-ip简介/">tcp/ip简介</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/24/HTMLParser模块/">HTMLParser模块</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/23/SQL注入/">SQL注入整理(一)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/20/列表/">列表</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/19/偏函数/">偏函数</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/18/with上下文管理器/">上下文管理器与with语句</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/13/v2ray/">v2ray 配置文件</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/29/socket-python/">socket编程</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/28/正则表达式/">正则表达式</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/15/s2-053/">S2-053</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/10/golang流程控制/">流程控制</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/10/Strut2 常见POC/">Struts2 常见POC收集和整理</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/05/论事件驱动与异步IO/">论事件驱动与异步IO[转]</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/05/并发编程/">并发编程</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/05/Python常用模块2/">python常用模块(2)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/05/Python常用模块/">python常用模块(1)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/05/python TCP代理/">python TCP代理</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/05/hexo+github+nginx VPS搭建博客/">hexo+github+nginx vps搭建博客</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/05/go语言初识/">初识go语言</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/05/hello-world/">Hello World</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/05/goroutine与调度器/">goroutine与调度器[转]</a></li></ul>
+    <script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+    <script>
+        $(".post-list").addClass("toc-article");
+        $(".post-list-item a").attr("target","_blank");
+        $("#post-nav-button > a:nth-child(2)").click(function() {
+            $(".fa-bars, .fa-times").toggle();
+            $(".post-list").toggle(300);
+            if ($(".toc").length > 0) {
+                $("#toc, #tocButton").toggle(200, function() {
+                    if ($(".switch-area").is(":visible")) {
+                        $("#tocButton").attr("value", valueHide);
+                        }
+                    })
+            }
+            else {
+            }
+        })
+    </script>
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                &copy; 2018 glamor
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/luuman/hexo-theme-spfk" target="_blank">spfk</a> by luuman
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" >道士到访数: 
+                            <span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>, </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit">本页阅读量: 
+                            <span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+
+    </div>
+    <script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var backgroundnum = 24;
+            var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+            $("#mobile-nav").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+            $(".left-col").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+        })
+    </script>
+
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    $(document).ready(function() {
+        if ($("#comments").length < 1) {
+            $("#scroll > a:nth-child(2)").hide();
+        };
+    })
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+  <script language="javascript">
+    $(function() {
+        $("a[title]").each(function() {
+            var a = $(this);
+            var title = a.attr('title');
+            if (title == undefined || title == "") return;
+            a.data('title', title).removeAttr('title').hover(
+
+            function() {
+                var offset = a.offset();
+                $("<div id=\"anchortitlecontainer\"></div>").appendTo($("body")).html(title).css({
+                    top: offset.top - a.outerHeight() - 15,
+                    left: offset.left + a.outerWidth()/2 + 1
+                }).fadeIn(function() {
+                    var pop = $(this);
+                    setTimeout(function() {
+                        pop.remove();
+                    }, pop.text().length * 800);
+                });
+            }, function() {
+                $("#anchortitlecontainer").remove();
+            });
+        });
+    });
+</script>
+
+
+  </div>
+</body>
+</html>

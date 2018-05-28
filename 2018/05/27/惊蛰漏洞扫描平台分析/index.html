@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>惊蛰漏洞扫描平台分析 | glamor的博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="简介InsectsAwke是一个比较著名的开源的基于Python开发的漏洞扫描系统。启蒙于Bugscan脱胎于 Pocsuite。采用FLASK+MongoDB提供WEB服务。初步具备Poc的健壮性。">
+<meta name="keywords" content="python,漏扫">
+<meta property="og:type" content="article">
+<meta property="og:title" content="惊蛰漏洞扫描平台分析">
+<meta property="og:url" content="http://www.cmustarc.com/2018/05/27/惊蛰漏洞扫描平台分析/index.html">
+<meta property="og:site_name" content="glamor的博客">
+<meta property="og:description" content="简介InsectsAwke是一个比较著名的开源的基于Python开发的漏洞扫描系统。启蒙于Bugscan脱胎于 Pocsuite。采用FLASK+MongoDB提供WEB服务。初步具备Poc的健壮性。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/6853514-f27b52bd1a46a6f4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/6853514-8f66ceba709198a0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/6853514-471f8fe22eeb5485.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/6853514-8dba912f7eb327f0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/6853514-7dd911921e4df1c7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/6853514-d46fe78637ff3cd5.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/6853514-31b89fda3a7cf5de.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/6853514-bc8f68a8a3f732f2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/6853514-24e1d97e2ea3850a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/6853514-f1a30af31f958b95.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/6853514-93d81f1bf70cdc07.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/6853514-3e5ab45b272599fa.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/6853514-5a04e3f161d8279f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/6853514-06d97fc9fbbdab62.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/6853514-58a87b04e56a5e16.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/6853514-c766589802ddbf22.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/6853514-66cb2bc93be61f2e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/6853514-46bb90934e52b988.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/6853514-86579c4201f7c6dd.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/6853514-97186eb4f6f1cb8c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/6853514-a18c1f45baf3c6bb.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/6853514-bf4bab98c8fc829f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/6853514-2d682998223c7a64.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/6853514-0b0eb3ce92058201.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/6853514-03dcb898479e5680.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/6853514-7a877c0192dd0266.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2018-05-27T15:02:22.325Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="惊蛰漏洞扫描平台分析">
+<meta name="twitter:description" content="简介InsectsAwke是一个比较著名的开源的基于Python开发的漏洞扫描系统。启蒙于Bugscan脱胎于 Pocsuite。采用FLASK+MongoDB提供WEB服务。初步具备Poc的健壮性。">
+<meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/6853514-f27b52bd1a46a6f4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+  
+    <link rel="alternative" href="/atom.xml" title="glamor的博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/img/favicon.png">
+  
+  
+      <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  
+  
+      <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  
+  <!-- 加载特效 -->
+    <script src="/js/pace.js"></script>
+    <link href="/css/pace/pace-theme-flash.css" rel="stylesheet" />
+  <script>
+      var yiliaConfig = {
+          rootUrl: '/',
+          fancybox: true,
+          animate: true,
+          isHome: false,
+          isPost: true,
+          isArchive: false,
+          isTag: false,
+          isCategory: false,
+          open_in_new: false
+      }
+  </script>
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            
+            <img lazy-src="/img/head.jpg" class="js-avatar">
+            
+        </a>
+
+        <hgroup>
+          <h1 class="header-author"><a href="/" title="Hi Mate">glamor</a></h1>
+        </hgroup>
+
+        
+        <p class="header-subtitle">莫等闲，白了少年头空悲切...</p>
+        
+        
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">博客首页</a></li>
+                        
+                            <li><a href="/categories/python">人生苦短</a></li>
+                        
+                            <li><a href="/categories/Web安全">安全海洋</a></li>
+                        
+                            <li><a href="/categories/notes">随笔</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fl mail" target="_blank" href="mailto:root@cmustard.com" title="mail">mail</a>
+                            
+                                <a class="fl github" target="_blank" href="https://github.com/cmustard06" title="github">github</a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <a href="/tags/Python/" style="font-size: 10px;">Python</a> <a href="/tags/TCP-IP/" style="font-size: 10px;">TCP/IP</a> <a href="/tags/go/" style="font-size: 10px;">go</a> <a href="/tags/golang/" style="font-size: 17.5px;">golang</a> <a href="/tags/importlib/" style="font-size: 10px;">importlib</a> <a href="/tags/poc/" style="font-size: 12.5px;">poc</a> <a href="/tags/python/" style="font-size: 20px;">python</a> <a href="/tags/python3/" style="font-size: 12.5px;">python3</a> <a href="/tags/sql注入/" style="font-size: 10px;">sql注入</a> <a href="/tags/struct/" style="font-size: 10px;">struct</a> <a href="/tags/struts/" style="font-size: 10px;">struts</a> <a href="/tags/tcp/" style="font-size: 10px;">tcp</a> <a href="/tags/tcp-ip/" style="font-size: 10px;">tcp/ip</a> <a href="/tags/windows命令/" style="font-size: 10px;">windows命令</a> <a href="/tags/事件驱动/" style="font-size: 10px;">事件驱动</a> <a href="/tags/代理/" style="font-size: 10px;">代理</a> <a href="/tags/博客/" style="font-size: 10px;">博客</a> <a href="/tags/基础/" style="font-size: 15px;">基础</a> <a href="/tags/并发/" style="font-size: 10px;">并发</a> <a href="/tags/异步IO/" style="font-size: 10px;">异步IO</a> <a href="/tags/正则表达式/" style="font-size: 10px;">正则表达式</a> <a href="/tags/漏扫/" style="font-size: 12.5px;">漏扫</a> <a href="/tags/爬虫/" style="font-size: 10px;">爬虫</a> <a href="/tags/科学上网/" style="font-size: 10px;">科学上网</a> <a href="/tags/系统/" style="font-size: 10px;">系统</a> <a href="/tags/编程/" style="font-size: 15px;">编程</a> <a href="/tags/编程语言/" style="font-size: 12.5px;">编程语言</a> <a href="/tags/网络/" style="font-size: 12.5px;">网络</a> <a href="/tags/网络基础知识/" style="font-size: 10px;">网络基础知识</a> <a href="/tags/网络编程/" style="font-size: 10px;">网络编程</a> <a href="/tags/集合/" style="font-size: 10px;">集合</a>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.dmmjy9.top">dmmjy9</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="Me">glamor</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                
+                    <img lazy-src="/img/head.jpg" class="js-avatar">
+                
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="Me">glamor</a></h1>
+            </hgroup>
+            
+            <p class="header-subtitle">莫等闲，白了少年头空悲切...</p>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">博客首页</a></li>
+                
+                    <li><a href="/categories/python">人生苦短</a></li>
+                
+                    <li><a href="/categories/Web安全">安全海洋</a></li>
+                
+                    <li><a href="/categories/notes">随笔</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                <div class="social">
+                    
+                        <a class="mail" target="_blank" href="mailto:root@cmustard.com" title="mail">mail</a>
+                    
+                        <a class="github" target="_blank" href="https://github.com/cmustard06" title="github">github</a>
+                    
+                </div>
+            </nav>
+        </header>                
+    </div>
+</nav>
+      <div class="body-wrap"><article id="post-惊蛰漏洞扫描平台分析" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2018/05/27/惊蛰漏洞扫描平台分析/" class="article-date">
+      <time datetime="2018-05-27T15:02:22.325Z" itemprop="datePublished">2018-05-27</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      惊蛰漏洞扫描平台分析
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/Web安全/">Web安全</a>
+    </div>
+
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/">python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/漏扫/">漏扫</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>InsectsAwke是一个比较著名的开源的基于Python开发的漏洞扫描系统。启蒙于<a href="http://www.bugscan.net" target="_blank" rel="external">Bugscan</a>脱胎于 <a href="http://pocsuite.org/" target="_blank" rel="external">Pocsuite</a>。采用FLASK+MongoDB提供WEB服务。初步具备Poc的健壮性。</p>
+<a id="more"></a>
+<h1 id="主要功能"><a href="#主要功能" class="headerlink" title="主要功能"></a>主要功能</h1><ul>
+<li>漏洞扫描 <ul>
+<li>通过调用创宇的 Pocsuite 进行扫描，扫描插件通过 Seebug </li>
+<li>扫描目标只能是单个 IP 或者 URL，不支持网段扫描（公司是中小型公司，就忘写这块需 求了），默认有80余个插件，大多是 Seebug 的免费PoC </li>
+<li>任务周期可以选择临时、每日、每周或每月 </li>
+</ul>
+</li>
+<li><p>资产管理  </p>
+<ul>
+<li>可以通过各资产库创建漏洞扫描任务，同样资产库只能是单个 IP 或者 URL。 </li>
+<li>开启端口发现功能后，后端会定时调用 nmap 对资产进行端口扫描，需要扫描的端口可 以在设置里进行配置 </li>
+</ul>
+</li>
+<li><p>域名发现功能 </p>
+<ul>
+<li>即子域名爆破功能，但目前功能尚不完善，只能通过配置字典进行暴力猜解，域名字典可 以在设置处进行配置，项目 tests 文件夹内提供了一份子域名字典（字典来源 ring04h 的 <a href="https://github.com/ring04h/wydomain/blob/wydomain2/wydomain.csv" target="_blank" rel="external">wydomain</a> 项目） </li>
+</ul>
+</li>
+</ul>
+<h1 id="安装过程"><a href="#安装过程" class="headerlink" title="安装过程"></a>安装过程</h1><ul>
+<li>安装虚拟机 16.04 </li>
+</ul>
+<p><img src="https://upload-images.jianshu.io/upload_images/6853514-f27b52bd1a46a6f4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<ul>
+<li>更新为国内源 </li>
+</ul>
+<p><img src="https://upload-images.jianshu.io/upload_images/6853514-8f66ceba709198a0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<ul>
+<li><p>获取项目源码</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git <span class="built_in">clone</span> https://github.com/jeffzh3ng/InsectsAwake.git</div></pre></td></tr></table></figure>
+</li>
+<li><p>安装 Python 及 pip</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">sudo apt update </div><div class="line">sudo apt install python python-pip</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p><img src="https://upload-images.jianshu.io/upload_images/6853514-471f8fe22eeb5485.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<ul>
+<li>安装 MongoDB <ul>
+<li>安装的是企业版MongoDB，普通的MongoDB是无法支持系统运行的 </li>
+<li>很多人按照freebuf 的安装不成功，是因为载入的是3.4版本的安装源 可是当我们执行 sudo apt-get install -y mongodb-enterp的时候，如果没有指定版 本号的话，apt默认安装最新的即3.6版本，所以mongodb-enterprise在安装的时候就 会出现问题。这里我们加载的是3.6版本的安装源，所以可以安装成功<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 2930ADAE8CAF5059EE73BB4B58712A2291FA4AD5 </div><div class="line"><span class="built_in">echo</span> <span class="string">"deb [ arch=amd64,arm64,ppc64el,s390x ] http://repo.mongodb.com/apt/ubuntu xenial/mongodb-enterprise/3.6 multiverse"</span> | </div><div class="line">sudo tee /etc/apt/sources.list.d/mongodb-enterprise.list </div><div class="line">sudo apt-get update </div><div class="line">sudo apt-get install -y mongodb-enterprise</div></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://upload-images.jianshu.io/upload_images/6853514-8dba912f7eb327f0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<ul>
+<li><p>其他系统安装参考官方手册：</p>
+<ul>
+<li><a href="https://docs.mongodb.com/manual/installation/" target="_blank" rel="external">https://docs.mongodb.com/manual/installation/</a></li>
+</ul>
+</li>
+<li><p>安装 Python 依赖包</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">cd</span> InsectsAwake </div><div class="line">sudo pip install pip -U </div><div class="line">sudo pip install -r requirements.txt</div></pre></td></tr></table></figure>
+</li>
+<li><p>安装nmap</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo apt install nmap</div></pre></td></tr></table></figure>
+</li>
+<li><p>配置数据库 </p>
+<ul>
+<li>启动数据库<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">sudo mkdir -p  /data/db </div><div class="line">sudo service mongod start </div><div class="line">mongo --host 127.0.0.1:27017</div></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://upload-images.jianshu.io/upload_images/6853514-7dd911921e4df1c7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<ul>
+<li>添加用户<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">use InsectsAwake </div><div class="line">db.createUser(&#123;user:<span class="string">'you username'</span>,<span class="built_in">pwd</span>:<span class="string">'you password'</span>,roles: [&#123;role:<span class="string">'dbOwner'</span>,db:<span class="string">'InsectsAwake'</span>&#125;]&#125;) </div><div class="line"><span class="built_in">exit</span></div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p><img src="https://upload-images.jianshu.io/upload_images/6853514-d46fe78637ff3cd5.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<ul>
+<li>修改扫描器配置 <ul>
+<li>扫描器配置文件路径：InsectsAwake-Project/instance/conﬁg.py<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">class Config():    </div><div class="line">  WEB_USER = <span class="string">'admin'</span>          // 扫描器登录用户    </div><div class="line">  WEB_PASSWORD = <span class="string">'whoami'</span>     // 扫描器登录密码    </div><div class="line">  WEB_HOST = <span class="string">'127.0.0.1'</span>      // 本地访问    </div><div class="line">  WEB_PORT = 5000             // Web服务端口    </div><div class="line">  POCSUITE_PATH = basedir +<span class="string">'/../InsectsAwake/views/modules/scanner/pocsuite_plugin/'</span></div><div class="line"> </div><div class="line">class ProductionConfig(Config):    </div><div class="line">  DB_HOST = <span class="string">'127.0.0.1'</span>       // 数据库地址    </div><div class="line">  DB_PORT = 27017             // 数据库端口    </div><div class="line">  DB_USERNAME = <span class="string">'testuser'</span>    // 数据库用户    </div><div class="line">  DB_PASSWORD = <span class="string">'testpwd'</span>     // 数据库密码    </div><div class="line">  DB_NAME = <span class="string">'test'</span>            // 数据库名</div><div class="line">   // 数据库集合名    </div><div class="line">  PLUGIN_DB = <span class="string">'test_plugin_info'</span>    </div><div class="line">  TASKS_DB = <span class="string">'test_tasks'</span>    </div><div class="line">  VULNERABILITY_DB = <span class="string">'test_vuldb'</span>   </div><div class="line">  ASSET_DB = <span class="string">'test_asset'</span></div></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<p>比较懒，clone下来直接chmod -R 777 然后就可以愉快的修改文件</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/6853514-31b89fda3a7cf5de.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<ul>
+<li>初始化数据库<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">cd</span> /InsectsAwake/migration </div><div class="line">python start.py</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p><img src="https://upload-images.jianshu.io/upload_images/6853514-bc8f68a8a3f732f2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<ul>
+<li><p>运行系统</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo ./run.sh restart</div></pre></td></tr></table></figure>
+</li>
+<li><p>run.sh会出现有关nohup的报错可以参考 </p>
+</li>
+</ul>
+<p><img src="https://upload-images.jianshu.io/upload_images/6853514-24e1d97e2ea3850a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<p><a href="https://blog.csdn.net/educast/article/details/28273301" target="_blank" rel="external">https://blog.csdn.net/educast/article/details/28273301</a> 进行适当修改 </p>
+<ul>
+<li>成功</li>
+</ul>
+<p><img src="https://upload-images.jianshu.io/upload_images/6853514-f1a30af31f958b95.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<ul>
+<li>项目默认运行在127.0.0.1:5000 （可以 修改 默认的 WEB_HOST 及 WEB_PORT），无法外 网访问，建议配置 Nginx 或者 Caddy 等Web服务代理访问 </li>
+<li>后记<ul>
+<li>系统安装后先更新一遍，推荐清华源 </li>
+<li>安装mongodb-enterprise的时候建议慢慢来一遍成功，否则安装会很麻烦apt各种报错 基本等于报废需要重新来过了。。。 </li>
+<li>刚刚启动run.sh的时候等一下才能看到web页面</li>
+</ul>
+</li>
+</ul>
+<h1 id="工作流程"><a href="#工作流程" class="headerlink" title="工作流程"></a>工作流程</h1><h2 id="下图为系统运行简单SDL流程图"><a href="#下图为系统运行简单SDL流程图" class="headerlink" title="下图为系统运行简单SDL流程图"></a>下图为系统运行简单SDL流程图</h2><p><img src="https://upload-images.jianshu.io/upload_images/6853514-93d81f1bf70cdc07.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="1.jpg"></p>
+<h1 id="项目结构"><a href="#项目结构" class="headerlink" title="项目结构"></a>项目结构</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div></pre></td><td class="code"><pre><div class="line">├── InsectsAwake</div><div class="line">│   ├── app.py flask blueprint注册</div><div class="line">│   ├── __init__.py</div><div class="line">│   ├── static   网页静态文件夹</div><div class="line">│   ├── templates 网页html模板文件夹</div><div class="line">│   └── views  </div><div class="line">│       ├── asset_management.py  flask资产管理处理页面</div><div class="line">│       ├── authenticate.py   flask网页认证页面，登录与登出</div><div class="line">│       ├── dashboard.py   dashboard页面</div><div class="line">│       ├── index.py   主页</div><div class="line">│       ├── __init__.py</div><div class="line">│       ├── lib</div><div class="line">│       │   ├── __init__.py</div><div class="line">│       │   ├── mongo_db.py  创建和管理mongo数据库</div><div class="line">│       ├── modules</div><div class="line">│       │   ├── discovery   资产发现</div><div class="line">│       │   │   ├── __init__.py  </div><div class="line">│       │   │   ├── port_scanner.py   扫描端口和目标服务信息</div><div class="line">│       │   ├── __init__.py</div><div class="line">│       │   ├── scanner   漏洞扫描</div><div class="line">│       │   │   ├── __init__.py</div><div class="line">│       │   │   ├── pocsuite_plugin   存放漏洞扫描poc插件的文件夹</div><div class="line">│       │   │   ├── pocsuite_scanner.py  调用pocsuites框架对目标进行漏洞扫描</div><div class="line">│       │   │   ├── vulnerability_plugin.py 管理漏洞poc插件，向数据库中加入插件信息</div><div class="line">│       │   ├── subdomain  子域名爆破</div><div class="line">│       │   │   ├── __init__.py</div><div class="line">│       │   │   ├── subdomain.py  子域名爆破</div><div class="line">│       │   └── week_passwd</div><div class="line">│       │       ├── __init__.py</div><div class="line">│       │       └── week_http_passwd_test.py  作者还未实现</div><div class="line">│       ├── plugin_management.py  flask poc插件管理页面</div><div class="line">│       ├── settings.py   flask 平台参数设置页面,如线程数量，字典</div><div class="line">│       ├── sql_injection.py  作者还未实现</div><div class="line">│       ├── subdomain_brute.py  flask 子域名爆破页面</div><div class="line">│       ├── task_management.py  flask 任务管理页面</div><div class="line">│       ├── vulnerability_management.py  flask 漏洞扫描结果管理页面 </div><div class="line">│       ├── weak_passwd_test.py   falsk弱口令管理页面</div><div class="line">├── InsectsAwake.py  主执行文件</div><div class="line">├── instance</div><div class="line">│   ├── config.py   flask 配置和数据库配置</div><div class="line">│   ├── __init__.py</div><div class="line">├── LICENSE</div><div class="line">├── logs</div><div class="line">│   ├── db.log</div><div class="line">│   └── log.log</div><div class="line">├── migration</div><div class="line">│   ├── DataModels</div><div class="line">│   └── start.py  创建数据库</div><div class="line">├── requirements.txt</div><div class="line">├── run.sh  </div><div class="line">├── tests</div><div class="line">│   ├── domain.dict 子域名爆破字典</div></pre></td></tr></table></figure>
+<h1 id="项目思维导图"><a href="#项目思维导图" class="headerlink" title="项目思维导图"></a>项目思维导图</h1><p><img src="https://upload-images.jianshu.io/upload_images/6853514-3e5ab45b272599fa.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<h1 id="主文件分析"><a href="#主文件分析" class="headerlink" title="主文件分析"></a>主文件分析</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div></pre></td><td class="code"><pre><div class="line">def scanner():</div><div class="line">    <span class="string">""</span><span class="string">"</span></div><div class="line"><span class="string">    调用漏洞扫描模块</span></div><div class="line"><span class="string">    :return: </span></div><div class="line"><span class="string">    "</span><span class="string">""</span></div><div class="line">    config_db = db_name_conf()[<span class="string">'config_db'</span>]</div><div class="line">    scanner_time = int(connectiondb(config_db).find_one()[<span class="string">'scanner_time'</span>])</div><div class="line">    <span class="built_in">print</span>(<span class="string">'Scanner is start...'</span>)</div><div class="line">    scanner_loop_execute(scanner_time)</div><div class="line"></div><div class="line"></div><div class="line">def manage():</div><div class="line">    <span class="string">""</span><span class="string">"</span></div><div class="line"><span class="string">    调用flask</span></div><div class="line"><span class="string">    :return: </span></div><div class="line"><span class="string">    "</span><span class="string">""</span></div><div class="line">    app.run(host=flask_app.config.get(<span class="string">'WEB_HOST'</span>), port=flask_app.config.get(<span class="string">'WEB_PORT'</span>))</div><div class="line"></div><div class="line"></div><div class="line">def discovery():</div><div class="line">    <span class="string">""</span><span class="string">"</span></div><div class="line"><span class="string">    调用资产发现模块</span></div><div class="line"><span class="string">    :return: </span></div><div class="line"><span class="string">    "</span><span class="string">""</span></div><div class="line">    <span class="built_in">print</span>(<span class="string">'Discovery is start...'</span>)</div><div class="line">    scheduler = BlockingScheduler()</div><div class="line">    try:</div><div class="line">        <span class="comment"># 函数实现的是每天14：47执行这start_port_scan这个函数 </span></div><div class="line">        scheduler.add_job(MultiProcess().start_port_scan, <span class="string">'cron'</span>, day=<span class="string">'1-31'</span>, hour=14, minute=47)</div><div class="line">        scheduler.start()</div><div class="line">    except Exception as e:</div><div class="line">        <span class="built_in">print</span>(e)</div><div class="line"></div><div class="line"></div><div class="line">def subdomain():</div><div class="line">    <span class="string">""</span><span class="string">"</span></div><div class="line"><span class="string">    调用子域名爆破模块</span></div><div class="line"><span class="string">    :return: </span></div><div class="line"><span class="string">    "</span><span class="string">""</span></div><div class="line">    scanner_time = 30</div><div class="line">    <span class="built_in">print</span>(<span class="string">'Subdomain is start...'</span>)</div><div class="line">    subdomain_loop_execute(scanner_time)</div><div class="line"></div><div class="line"></div><div class="line"><span class="keyword">if</span> __name__ == <span class="string">"__main__"</span>:</div><div class="line">    <span class="string">""</span><span class="string">"</span></div><div class="line"><span class="string">    开启四个线程执行这4个模块</span></div><div class="line"><span class="string">    "</span><span class="string">""</span></div><div class="line">    t1 = threading.Thread(target=scanner, args=())</div><div class="line">    t2 = threading.Thread(target=manage, args=())</div><div class="line">    t3 = threading.Thread(target=subdomain, args=())</div><div class="line">    t4 = threading.Thread(target=discovery, args=())</div><div class="line">    t1.start()</div><div class="line">    t2.start()</div><div class="line">    t3.start()</div><div class="line">    t4.start()</div><div class="line">    t1.join()</div><div class="line">    t2.join()</div><div class="line">    t3.join()</div><div class="line">    t4.join()</div></pre></td></tr></table></figure>
+<h1 id="子域名爆破模块"><a href="#子域名爆破模块" class="headerlink" title="子域名爆破模块"></a>子域名爆破模块</h1><p>该模块与服务器Flask是分开的。Flask负责将前端接受的关于子域名破解的信息存储和更新到数据库中，而核心的子域名暴力破解程序则使用<strong>调度器每隔一段时间循环检查数据库中的配置文件</strong>，当数据库中有数据满足暴力破解程序运行的条件时，就开始执行程序，对目标进行子域名暴力破解，并将结果存储在数据库中。</p>
+<h2 id="简介-1"><a href="#简介-1" class="headerlink" title="简介"></a>简介</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">InsectsAwake/views/subdomain_brute.py  核心文件，用于对目标进行子域名查找</div><div class="line">InsectsAwake/views/modules/subdomain/subdomain.py  flask后端文件，用于接受前端的数据并存储在数据库中</div><div class="line"></div><div class="line">执行函数</div><div class="line">def subdomain():</div><div class="line">    每30s运行一次子域名爆破程序</div><div class="line">    scanner_time = 30</div><div class="line">    <span class="built_in">print</span>(<span class="string">'Subdomain is start...'</span>)</div><div class="line">    subdomain_loop_execute(scanner_time)</div></pre></td></tr></table></figure>
+<h2 id="细节函数分析"><a href="#细节函数分析" class="headerlink" title="细节函数分析"></a>细节函数分析</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div></pre></td><td class="code"><pre><div class="line">class DomainsBrute:</div><div class="line">    def __init__(self, target_domain, subdomain_dict, domain_id, domain_name):</div><div class="line">        <span class="string">""</span><span class="string">"</span></div><div class="line"><span class="string">        初始化类和成员变量</span></div><div class="line"><span class="string">        :param target_domain:  目标域名host</span></div><div class="line"><span class="string">        :param subdomain_dict: 子域名爆破字典</span></div><div class="line"><span class="string">        :param domain_id: 域名在数据库中所对应的IP</span></div><div class="line"><span class="string">        :param domain_name: 域名的名字，如百度</span></div><div class="line"><span class="string">        "</span><span class="string">""</span></div><div class="line">    def resolver_check(self):</div><div class="line">        <span class="string">""</span><span class="string">"</span></div><div class="line"><span class="string">        对随机生成一个域名并进行处理，如果这个随机的域名存在就返回解析的结果</span></div><div class="line"><span class="string">        :return: [] or False</span></div><div class="line"><span class="string"></span></div><div class="line"><span class="string">    def handle_domain(self):</span></div><div class="line"><span class="string">        "</span><span class="string">""</span></div><div class="line">        组成新的二级或者三级域名</div><div class="line">        :<span class="built_in">return</span>: &lt;<span class="built_in">type</span> <span class="string">'list'</span>&gt;: [u<span class="string">'123.baidu.com'</span>, u<span class="string">'2323.baidu.com'</span>, u<span class="string">'sds.baidu.com'</span>]</div><div class="line">        <span class="string">""</span><span class="string">"</span></div><div class="line"><span class="string">    </span></div><div class="line"><span class="string">    def handle_result(self):</span></div><div class="line"><span class="string">        "</span><span class="string">""</span></div><div class="line">        获取处理的结果，如果该二级或者三级域名存在，则存入数据库，</div><div class="line">        :<span class="built_in">return</span>:</div><div class="line">        <span class="string">""</span><span class="string">"</span></div><div class="line"><span class="string"></span></div><div class="line"><span class="string">    def save_db(self, result):</span></div><div class="line"><span class="string">        "</span><span class="string">""</span></div><div class="line">        将域名爆破结果存储到数据库中test_subdomain</div><div class="line">        :param result:</div><div class="line">        :<span class="built_in">return</span>:</div><div class="line">        <span class="string">""</span><span class="string">"</span></div><div class="line"><span class="string"></span></div><div class="line"><span class="string">    def run_multi(self):</span></div><div class="line"><span class="string">        "</span><span class="string">""</span></div><div class="line">        多进程解析域名</div><div class="line">        :<span class="built_in">return</span>:</div><div class="line">        <span class="string">""</span><span class="string">"</span></div><div class="line"><span class="string">        self.handle_domain()  # 生成子域名字典self.domain_list</span></div><div class="line"><span class="string">        scanner_pool = multiprocessing.Pool(processes=100)  # 在进程池中初始化100个进程 </span></div><div class="line"><span class="string">        self.result = scanner_pool.map(ha_resolver_domain, self.domain_list) # 对self.domain_list中的域名进行解析，判断是否存在，返回结果</span></div><div class="line"><span class="string">        scanner_pool.close()</span></div><div class="line"><span class="string">        scanner_pool.join()</span></div><div class="line"><span class="string">        self.handle_result()  # 对self.result结果进行处理（结果中可能含有空字典），顺便解析一下随机的域名，将最后的结果存储到数据库中</span></div><div class="line"><span class="string"></span></div><div class="line"><span class="string">def ha_resolver_domain(domain):</span></div><div class="line"><span class="string">    "</span><span class="string">""</span></div><div class="line">    解析域名，返回解析结果</div><div class="line">    :param domain:</div><div class="line">    :<span class="built_in">return</span>: &#123;<span class="string">'baidu.com'</span>: [<span class="string">'220.181.57.216'</span>, <span class="string">'123.125.115.110'</span>]&#125; or &#123;&#125;</div><div class="line">    <span class="string">""</span><span class="string">"</span></div><div class="line"><span class="string">def start_brute(inc_time):</span></div><div class="line"><span class="string">    "</span><span class="string">""</span></div><div class="line">    </div><div class="line">    :param inc_time:</div><div class="line">    :<span class="built_in">return</span>:</div><div class="line">    <span class="string">""</span><span class="string">"</span></div><div class="line"><span class="string">    schedule.enter(inc_time, 1, start_brute, (inc_time,)) # 该代码与subdomain_loop_execute函数中的代码一起使用可以达到循环的效果</span></div><div class="line"><span class="string">  # 从数据库中获取需要的数据和配置</span></div><div class="line"><span class="string">    subdomain_list = connectiondb(config_db).find_one()['subdomain'] # &lt;type 'list'&gt;: [u'123', u'2323', u'sds', u'sdss', u'sdszz']</span></div><div class="line"><span class="string">    for domain_text in connectiondb(domain_db).find(): #</span></div><div class="line"><span class="string">        # Preparation</span></div><div class="line"><span class="string">        if domain_text['scan_status'] == "</span>Done<span class="string">":  # 判断域名状态，三种状态Preparation，running，Done</span></div><div class="line"><span class="string">            domain_list = domain_text['domain_text']  # &lt;type 'list'&gt;: [u'baidu.com']</span></div><div class="line"><span class="string">            domain_id = domain_text['_id']  # 5afcfaa1710c6348e9039b5c</span></div><div class="line"><span class="string">            domain_name = domain_text['domain_name']  # u'baidu.com'</span></div><div class="line"><span class="string">            print("</span>++++++++++ Scan Start! ++++++++++<span class="string">")</span></div><div class="line"><span class="string">            start_date = datetime.now()</span></div><div class="line"><span class="string">            # 开始执行爆破动作，修改数据库中的状态</span></div><div class="line"><span class="string">            connectiondb(domain_db).update_one(&#123;'_id': ObjectId(domain_id)&#125;, &#123;'<span class="variable">$set</span>': &#123;'scan_status': 'Running'&#125;&#125;)</span></div><div class="line"><span class="string">            for target in domain_list:</span></div><div class="line"><span class="string">                start = DomainsBrute(target, subdomain_list, domain_id, domain_name)</span></div><div class="line"><span class="string">                start.run_multi()</span></div><div class="line"><span class="string">            # 是否开启三级域名扫描</span></div><div class="line"><span class="string">            if domain_text['scan_option'] == "</span>Enable<span class="string">":</span></div><div class="line"><span class="string">                for result in connectiondb(subdomain_db).find(&#123;'domain_id': ObjectId(domain_id)&#125;):</span></div><div class="line"><span class="string">                    next_subdomain = eval(result['result']).keys()[0]  # u'123.baidu.com'</span></div><div class="line"><span class="string">                    start = DomainsBrute(next_subdomain, subdomain_list, domain_id, domain_name)</span></div><div class="line"><span class="string">                    start.run_multi()</span></div><div class="line"><span class="string">         # 将扫描结果更新到数据库中</span></div><div class="line"><span class="string">            connectiondb(domain_db).update_one(&#123;'_id': ObjectId(domain_id)&#125;, &#123;'<span class="variable">$set</span>': &#123;'scan_status': 'Done'&#125;&#125;)</span></div><div class="line"><span class="string">            scan_time = datetime.now() - start_date</span></div><div class="line"><span class="string">            print("</span>++++++++++ Scan Done! ++++++++++<span class="string">", scan_time.total_seconds())</span></div><div class="line"><span class="string"></span></div><div class="line"><span class="string">def subdomain_loop_execute(inc,):</span></div><div class="line"><span class="string"></span></div><div class="line"><span class="string">    schedule.enter(inc, 0, start_brute, (inc,))  # 做了一个循环</span></div><div class="line"><span class="string">    schedule.run()</span></div></pre></td></tr></table></figure>
+<p>稍微修改了一下，现在可以单独使用了<br><a href="https://github.com/cmustard06/subdomain" target="_blank" rel="external">https://github.com/cmustard06/subdomain</a></p>
+<h1 id="端口扫描模块"><a href="#端口扫描模块" class="headerlink" title="端口扫描模块"></a>端口扫描模块</h1><p>端口扫描模块依然是与falsk框架分开的，是一个独立运行的模块，数据的交互主要还是通过数据库进行的，循周期性运行程序，通过查看数据库的关于端口扫描模块的配置信息，如果配置满足一定条件时，就开始执行程序。该模块使用使用了第三方模块APScheduler 该模块是一个Python定时任务框架，使用起来十分方便。提供了基于日期、固定时间间隔以及crontab类型的任务，并且可以持久化任务、并以daemon方式运行应用。<br><strong>函数实现的是每天14：47执行这start_port_scan这个函数</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cheduler.add_job(MultiProcess().start_port_scan, &apos;cron&apos;, day=&apos;1-31&apos;, hour=14, minute=47)</div></pre></td></tr></table></figure></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line">def nmap_scanner(target_host):</div><div class="line">    <span class="string">""</span><span class="string">"</span></div><div class="line"><span class="string">    对目标主机的指定断开进行扫描，返回扫描结果</span></div><div class="line"><span class="string">    :param target_host:</span></div><div class="line"><span class="string">    :return: [&#123;'host': '192.168.1.1', 'banner': 'cpe:/o:linux:linux_kernel', 'port': 80, 'port_server': 'BusyBox http'&#125;,]</span></div><div class="line"><span class="string">    原函数中存在bug，修改</span></div><div class="line"><span class="string">    port_scanner.scan(target_host, ','.join('%s' % port for port in eval(target_ports))) # 暂时这么改，存在安全问题</span></div><div class="line"><span class="string">    "</span><span class="string">""</span></div><div class="line"></div><div class="line">class MultiProcess:</div><div class="line">    def __init__(self):</div><div class="line">        self.target_list = []</div><div class="line">        self.server_db = db_name_conf()[<span class="string">'server_db'</span>]</div><div class="line">        self.asset_db = db_name_conf()[<span class="string">'asset_db'</span>]</div><div class="line">        self.processes_count = int(connectiondb(config_db).find_one()[<span class="string">'port_thread'</span>])</div><div class="line">        self.asset_id = <span class="string">''</span></div><div class="line">        self.asset_name = <span class="string">''</span></div><div class="line"></div><div class="line">    def scan_pool(self):</div><div class="line">        <span class="string">""</span><span class="string">"</span></div><div class="line"><span class="string">        不同目标多进程端口扫描，将结果更新到数据库中</span></div><div class="line"><span class="string">        :return: </span></div><div class="line"><span class="string">        "</span><span class="string">""</span></div><div class="line"></div><div class="line">    def start_port_scan(self):</div><div class="line">        <span class="string">""</span><span class="string">"</span></div><div class="line"><span class="string">        从数据库中取出数据，调用start_pool函数</span></div><div class="line"><span class="string">        :return: </span></div><div class="line"><span class="string">        "</span><span class="string">""</span></div></pre></td></tr></table></figure>
+<h1 id="漏洞扫描模块"><a href="#漏洞扫描模块" class="headerlink" title="漏洞扫描模块"></a>漏洞扫描模块</h1><p>漏洞扫描模块使用的是知道创宇的开源扫描框架pocsuite，由于该框架在后期升级维护的过程中修改了很多功能，导致如果使用最新版的pocsuite框架运行程序时可能会出现异常，这里采用的是该框架的2.0.4版。比如在测试的时候由于导入下面模块时出现错误，通过查看原函数发现<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">from pocsuite.lib.utils.password import genPassword</div></pre></td></tr></table></figure></p>
+<p>没有genPassword函数，因此手动修改了password.py文件，修改后文件内容如下<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/env python</span></div><div class="line"><span class="comment"># -*- coding: utf-8 -*-</span></div><div class="line"></div><div class="line"><span class="string">""</span><span class="string">"</span></div><div class="line"><span class="string">Copyright (c) 2014-2016 pocsuite developers (https://seebug.org)</span></div><div class="line"><span class="string">See the file 'docs/COPYING' for copying permission</span></div><div class="line"><span class="string">"</span><span class="string">""</span></div><div class="line">import string</div><div class="line">from pocsuite.lib.core.common import getFileItems</div><div class="line">from pocsuite.lib.core.data import paths</div><div class="line">from random import choice</div><div class="line"></div><div class="line">def getWeakPassword():</div><div class="line">    <span class="built_in">return</span> getFileItems(paths.WEAK_PASS)</div><div class="line"></div><div class="line"></div><div class="line">def getLargeWeakPassword():</div><div class="line">    <span class="built_in">return</span> getFileItems(paths.LARGE_WEAK_PASS)</div><div class="line"></div><div class="line"><span class="comment"># 增加的函数</span></div><div class="line">def genPassword(length=8, chars=string.letters + string.digits):</div><div class="line">    <span class="built_in">return</span> <span class="string">""</span>.join([choice(chars) <span class="keyword">for</span> _ <span class="keyword">in</span> range(length)])</div></pre></td></tr></table></figure></p>
+<p>修改完成后继续运行测试程序，运行成功。成果获取到了漏洞扫描结果的数据,如下<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">(<span class="string">'http://demo.**.cn/demo/**/'</span>, <span class="string">'EZ-Oscommerce 31 - Remote File Upload75a8d2e1'</span>, <span class="string">'69439'</span>, <span class="string">'Oscommerce'</span>, <span class="string">'3.1'</span>, (0, <span class="string">'Internet nothing returned'</span>), <span class="string">'2018-05-20 20:56:25'</span>, <span class="string">'&#123;&#125;'</span>)</div></pre></td></tr></table></figure></p>
+<h2 id="代码分析"><a href="#代码分析" class="headerlink" title="代码分析"></a>代码分析</h2><p>函数分析<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">    def verify_poc(self, target):</div><div class="line">        <span class="string">""</span><span class="string">"</span></div><div class="line"><span class="string">        poc验证函数</span></div><div class="line"><span class="string">        :param target:</span></div><div class="line"><span class="string">        :return:</span></div><div class="line"><span class="string"></span></div><div class="line"><span class="string">    def start_scan(self):</span></div><div class="line"><span class="string">        "</span><span class="string">""</span></div><div class="line">        使用多线程进行漏洞扫描</div><div class="line">        :<span class="built_in">return</span>:</div><div class="line">        <span class="string">""</span><span class="string">"</span></div><div class="line"><span class="string">    def periodic_tasks(self):</span></div><div class="line"><span class="string">        "</span><span class="string">""</span></div><div class="line">        从数剧库中获取任务信息，跟据配置信息周期性扫描目标</div><div class="line">        :<span class="built_in">return</span>:</div><div class="line">        <span class="string">""</span><span class="string">"</span></div><div class="line"><span class="string">def scanner_loop_execute(inc):</span></div><div class="line"><span class="string">    "</span><span class="string">""</span></div><div class="line">    主程序循环执行模块</div><div class="line">    :param inc: </div><div class="line">    :<span class="built_in">return</span>: </div><div class="line">    <span class="string">""</span><span class="string">"</span></div></pre></td></tr></table></figure></p>
+<h1 id="数据库模块"><a href="#数据库模块" class="headerlink" title="数据库模块"></a>数据库模块</h1><h2 id="数据库结构"><a href="#数据库结构" class="headerlink" title="数据库结构"></a>数据库结构</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># PLUGIN_DB 插件集合</span></div><div class="line">------------------------------------</div><div class="line">plugin_appversion       影响版本</div><div class="line">plugin_vultype          漏洞名称</div><div class="line">plugin_vuldate          漏洞日期</div><div class="line">plugin_filename         文件路径</div><div class="line">plugin_name             插件名</div><div class="line">plugin_appname          应用名称</div><div class="line">plugin_author           插件作者</div><div class="line">_id                     ObjectId</div><div class="line">------------------------------------</div><div class="line"></div><div class="line"><span class="comment"># TASKS_DB 任务集合</span></div><div class="line">------------------------------------</div><div class="line">task_status             任务状态</div><div class="line">end_date                结束时间</div><div class="line">scan_target_list        扫描对象(列表)</div><div class="line">task_name               任务名称</div><div class="line">plugin_id               插件id</div><div class="line">_id                     ObjectId</div><div class="line">start_date              任务开始时间</div><div class="line">task_plan               扫描计划</div><div class="line">------------------------------------</div><div class="line"></div><div class="line"><span class="comment"># VULNERABILITY_DB 漏洞集合</span></div><div class="line">------------------------------------</div><div class="line">scan_result             扫描结果</div><div class="line">target                  扫描对象</div><div class="line">task_id                 任务ID</div><div class="line">appname                 应用名称</div><div class="line">scan_date               扫描日期</div><div class="line">poc_name                插件名称</div><div class="line">vulversion              漏洞影响版本</div><div class="line">poc_vultype             漏洞类型</div><div class="line">task_name               任务名称</div><div class="line">plugin_id               插件ID</div><div class="line">_id                     ObjectId</div><div class="line">------------------------------------</div><div class="line"></div><div class="line"><span class="comment"># ASSET_DB 资产库集合</span></div><div class="line">asset_date              创建日期</div><div class="line">scan_option             资产发现</div><div class="line">asset_text              资产</div><div class="line">asset_name              资产库名称</div><div class="line">dept_name               部门名称</div><div class="line">admin_name              管理员</div><div class="line">_id                     ObjectId</div><div class="line">------------------------------------</div><div class="line"></div><div class="line"><span class="comment"># CONFIG_DB 配置集合</span></div><div class="line">------------------------------------</div><div class="line">port_thread             端口扫描线程</div><div class="line">scanner_thread          漏洞检测线程</div><div class="line">port_list               端口扫描列表</div><div class="line">config_name             配置文件名称</div><div class="line">subdomain               子域名字典</div><div class="line">------------------------------------</div><div class="line"></div><div class="line"></div><div class="line"><span class="comment"># SERVER_DB 服务集合</span></div><div class="line">------------------------------------</div><div class="line">host                    主机</div><div class="line">asset_id                资产库ID</div><div class="line">port                    端口</div><div class="line">port_server             服务</div><div class="line">banner                  指纹(cpe)</div><div class="line">scan_date               扫描日期</div><div class="line">asset_name              所属资产库</div><div class="line">------------------------------------</div><div class="line"></div><div class="line"></div><div class="line"><span class="comment"># DOMAIN_DB 服务集合</span></div><div class="line">------------------------------------</div><div class="line">domain_text             主域名</div><div class="line">scan_option             三级域名扫描</div><div class="line">dept_name               域名所属部门</div><div class="line">domain_date             创建日期</div><div class="line">domain_name             域名名称</div><div class="line">_id                     ObjectId</div><div class="line">------------------------------------</div><div class="line"></div><div class="line"></div><div class="line"><span class="comment"># SUBDOMAIN_DB 服务集合</span></div><div class="line">------------------------------------</div><div class="line">date                    扫描日期</div><div class="line">domain                  主域名</div><div class="line">_id                     ObjectId</div><div class="line">result                  子域名</div><div class="line">domain_id               主域名ID</div><div class="line">domain_name             域名名称</div><div class="line">------------------------------------</div><div class="line"></div><div class="line"><span class="comment"># WEEKPASSWD_DB 服务集合</span></div><div class="line">------------------------------------</div><div class="line">date                    扫描日期</div><div class="line">target                  检测对象</div><div class="line">task_name               任务名称</div><div class="line">post_data               登录数据包</div><div class="line">status                  检测状态</div><div class="line">week_passwd_count       弱口令数量</div><div class="line">error_data              失败标记</div><div class="line">success_data            成功标记</div><div class="line">username                账号</div><div class="line">password                密码</div><div class="line">week_passwd_result      存在弱口令的结果</div><div class="line">_id                     ObjectId</div><div class="line">------------------------------------</div></pre></td></tr></table></figure>
+<h2 id="数据库详情"><a href="#数据库详情" class="headerlink" title="数据库详情"></a>数据库详情</h2><ul>
+<li>test_asset  :该表collection用于存储资产信息，通过该表中的信息可以在后面调用漏洞扫描模块和nmap模块对资产进行扫描</li>
+</ul>
+<p><img src="https://upload-images.jianshu.io/upload_images/6853514-5a04e3f161d8279f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="数据库.png"></p>
+<p><img src="https://upload-images.jianshu.io/upload_images/6853514-06d97fc9fbbdab62.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="前端.png"></p>
+<ul>
+<li>test_config：该表用于存放域名字典，需要扫描的端口，开启的进程数量等数据</li>
+</ul>
+<p><img src="https://upload-images.jianshu.io/upload_images/6853514-58a87b04e56a5e16.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="数据库.png"></p>
+<p><img src="https://upload-images.jianshu.io/upload_images/6853514-c766589802ddbf22.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="前端设置界面.png"></p>
+<ul>
+<li>test_domain：该表用于存放域名信息，通过该表中的数据对表中的域名进行子域名爆破</li>
+</ul>
+<p><img src="https://upload-images.jianshu.io/upload_images/6853514-66cb2bc93be61f2e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="数据库.png"></p>
+<p><img src="https://upload-images.jianshu.io/upload_images/6853514-46bb90934e52b988.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="前端界面.png"></p>
+<ul>
+<li>test_plugin_info:该表用于存放扫描插件信息，包括插件名称，功能，以及插件存放的路径</li>
+</ul>
+<p><img src="https://upload-images.jianshu.io/upload_images/6853514-86579c4201f7c6dd.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="数据库.png"></p>
+<p><img src="https://upload-images.jianshu.io/upload_images/6853514-97186eb4f6f1cb8c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="前端展示.png"></p>
+<ul>
+<li>test_server：该表中存储的是资产信息，包括开放的端口信息以及服务</li>
+</ul>
+<p><img src="https://upload-images.jianshu.io/upload_images/6853514-a18c1f45baf3c6bb.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="数据库.png"></p>
+<p><img src="https://upload-images.jianshu.io/upload_images/6853514-bf4bab98c8fc829f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="前端展示.png"></p>
+<ul>
+<li>test_subdomain：该表用于存放子域名爆破结果</li>
+</ul>
+<p><img src="https://upload-images.jianshu.io/upload_images/6853514-2d682998223c7a64.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="数据库.png"></p>
+<p><img src="https://upload-images.jianshu.io/upload_images/6853514-0b0eb3ce92058201.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="前端展示.png"></p>
+<ul>
+<li>test_tasks：该表用于存储漏洞扫描任务信息</li>
+</ul>
+<p><img src="https://upload-images.jianshu.io/upload_images/6853514-03dcb898479e5680.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="数据库.png"></p>
+<p><img src="https://upload-images.jianshu.io/upload_images/6853514-7a877c0192dd0266.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="前端展示.png"></p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>该系统使用的所有模块之间都是通过数据库进行数据交互的，每个模块都是相对独立的运行，单独拿出来做测试也是没有问题的，在进行代码分析时也很友好，一个槽点就是漏洞扫描模块使用的pocsuite开源框架有一些问题，每一次版本的迭代都有新的功能被添加，旧的功能被删除，导致了官方的pocsuite poc验证插件容易出问题，老版本的poc插件无法在新的框架下运行！！</p>
+
+      
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2018/05/27/惊蛰漏洞扫描平台分析/">惊蛰漏洞扫描平台分析</a></p>
+        <p><span>文章作者:</span><a href="/" title="访问 glamor 的个人博客">glamor</a></p>
+        <p><span>发布时间:</span>2018年05月27日 - 23时02分</p>
+        <p><span>最后更新:</span>2018年05月27日 - 11时02分</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2018/05/27/惊蛰漏洞扫描平台分析/" title="惊蛰漏洞扫描平台分析">http://www.cmustarc.com/2018/05/27/惊蛰漏洞扫描平台分析/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://www.cmustarc.com/2018/05/27/惊蛰漏洞扫描平台分析/　　作者: glamor" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script src="/js/clipboard.min.js"></script>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" title="中国大陆 (CC BY-NC-SA 3.0 CN)" target = "_blank">"署名-非商用-相同方式共享 3.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+<nav id="article-nav">
+  
+    <a href="/2018/05/27/某扫描器/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          某扫描器
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/01/07/加密/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">加密</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#简介"><span class="toc-number">1.</span> <span class="toc-text">简介</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#主要功能"><span class="toc-number">2.</span> <span class="toc-text">主要功能</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#安装过程"><span class="toc-number">3.</span> <span class="toc-text">安装过程</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#工作流程"><span class="toc-number">4.</span> <span class="toc-text">工作流程</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#下图为系统运行简单SDL流程图"><span class="toc-number">4.1.</span> <span class="toc-text">下图为系统运行简单SDL流程图</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#项目结构"><span class="toc-number">5.</span> <span class="toc-text">项目结构</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#项目思维导图"><span class="toc-number">6.</span> <span class="toc-text">项目思维导图</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#主文件分析"><span class="toc-number">7.</span> <span class="toc-text">主文件分析</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#子域名爆破模块"><span class="toc-number">8.</span> <span class="toc-text">子域名爆破模块</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#简介-1"><span class="toc-number">8.1.</span> <span class="toc-text">简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#细节函数分析"><span class="toc-number">8.2.</span> <span class="toc-text">细节函数分析</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#端口扫描模块"><span class="toc-number">9.</span> <span class="toc-text">端口扫描模块</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#漏洞扫描模块"><span class="toc-number">10.</span> <span class="toc-text">漏洞扫描模块</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#代码分析"><span class="toc-number">10.1.</span> <span class="toc-text">代码分析</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#数据库模块"><span class="toc-number">11.</span> <span class="toc-text">数据库模块</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#数据库结构"><span class="toc-number">11.1.</span> <span class="toc-text">数据库结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#数据库详情"><span class="toc-number">11.2.</span> <span class="toc-text">数据库详情</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#总结"><span class="toc-number">12.</span> <span class="toc-text">总结</span></a></li></ol>
+</div>
+<input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+<script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script>
+    var valueHide = "隐藏目录";
+    var valueShow = "显示目录";
+
+    if ($(".left-col").is(":hidden")) {
+        $("#tocButton").attr("value", valueShow);
+    }
+    $("#tocButton").click(function() {
+        if ($("#toc").is(":hidden")) {
+            $("#tocButton").attr("value", valueHide);
+            $("#toc").slideDown(320);
+        }
+        else {
+            $("#tocButton").attr("value", valueShow);
+            $("#toc").slideUp(350);
+        }
+    })
+    if ($(".toc").length < 1) {
+        $("#toc, #tocButton").hide();
+    }
+</script>
+
+
+
+
+
+<div class="bdsharebuttonbox">
+	<a href="#" class="fx fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+	<a href="#" class="fx fa-weixin bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+	<a href="#" class="fx fa-qq bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+	<a href="#" class="fx fa-facebook-official bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+	<a href="#" class="fx fa-twitter bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+	<a href="#" class="fx fa-linkedin bds_linkedin" data-cmd="linkedin" title="分享到linkedin"></a>
+	<a href="#" class="fx fa-files-o bds_copy" data-cmd="copy" title="分享到复制网址"></a>
+</div>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+
+
+
+    
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/2018/05/27/某扫描器/" title="上一篇: 某扫描器">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+        
+            <a href="/2018/01/07/加密/" title="下一篇: 加密">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2018/05/28/python-importlib/">importlib动态加载模块</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/27/某扫描器/">某扫描器</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/27/惊蛰漏洞扫描平台分析/">惊蛰漏洞扫描平台分析</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/01/07/加密/">加密</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/01/06/JSON处理/">JSON处理</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/01/03/网络编程/">网络编程</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/01/02/windows采用命令/">常用的windows命令</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/12/31/byte与rune/">rune与byte</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/12/28/数组与字典/">数组与数组切片</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/12/15/Python3笔记/">Python3 学习笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/12/03/python基础/">python基础</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/11/07/数据链路层/">数据链路</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/11/01/网络基础/">网络基础</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/11/01/tcp-ip简介/">tcp/ip简介</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/24/HTMLParser模块/">HTMLParser模块</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/23/SQL注入/">SQL注入整理(一)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/20/列表/">列表</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/19/偏函数/">偏函数</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/18/with上下文管理器/">上下文管理器与with语句</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/13/v2ray/">v2ray 配置文件</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/29/socket-python/">socket编程</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/28/正则表达式/">正则表达式</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/15/s2-053/">S2-053</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/10/golang流程控制/">流程控制</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/10/Strut2 常见POC/">Struts2 常见POC收集和整理</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/05/论事件驱动与异步IO/">论事件驱动与异步IO[转]</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/05/并发编程/">并发编程</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/05/Python常用模块2/">python常用模块(2)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/05/Python常用模块/">python常用模块(1)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/05/python TCP代理/">python TCP代理</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/05/hexo+github+nginx VPS搭建博客/">hexo+github+nginx vps搭建博客</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/05/go语言初识/">初识go语言</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/05/hello-world/">Hello World</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/05/goroutine与调度器/">goroutine与调度器[转]</a></li></ul>
+    <script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+    <script>
+        $(".post-list").addClass("toc-article");
+        $(".post-list-item a").attr("target","_blank");
+        $("#post-nav-button > a:nth-child(2)").click(function() {
+            $(".fa-bars, .fa-times").toggle();
+            $(".post-list").toggle(300);
+            if ($(".toc").length > 0) {
+                $("#toc, #tocButton").toggle(200, function() {
+                    if ($(".switch-area").is(":visible")) {
+                        $("#tocButton").attr("value", valueHide);
+                        }
+                    })
+            }
+            else {
+            }
+        })
+    </script>
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                &copy; 2018 glamor
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/luuman/hexo-theme-spfk" target="_blank">spfk</a> by luuman
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" >道士到访数: 
+                            <span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>, </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit">本页阅读量: 
+                            <span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+
+    </div>
+    <script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var backgroundnum = 24;
+            var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+            $("#mobile-nav").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+            $(".left-col").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+        })
+    </script>
+
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    $(document).ready(function() {
+        if ($("#comments").length < 1) {
+            $("#scroll > a:nth-child(2)").hide();
+        };
+    })
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+  <script language="javascript">
+    $(function() {
+        $("a[title]").each(function() {
+            var a = $(this);
+            var title = a.attr('title');
+            if (title == undefined || title == "") return;
+            a.data('title', title).removeAttr('title').hover(
+
+            function() {
+                var offset = a.offset();
+                $("<div id=\"anchortitlecontainer\"></div>").appendTo($("body")).html(title).css({
+                    top: offset.top - a.outerHeight() - 15,
+                    left: offset.left + a.outerWidth()/2 + 1
+                }).fadeIn(function() {
+                    var pop = $(this);
+                    setTimeout(function() {
+                        pop.remove();
+                    }, pop.text().length * 800);
+                });
+            }, function() {
+                $("#anchortitlecontainer").remove();
+            });
+        });
+    });
+</script>
+
+
+  </div>
+</body>
+</html>

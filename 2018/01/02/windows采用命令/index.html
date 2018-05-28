@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>常用的windows命令 | glamor的博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="wmicwmic是wmi的扩展，由于别名的原因wmic比wmi更加直观。wmic提供了从命令行接口和批命令脚本执行系统管理的支持">
+<meta name="keywords" content="windows命令,系统">
+<meta property="og:type" content="article">
+<meta property="og:title" content="常用的windows命令">
+<meta property="og:url" content="http://www.cmustarc.com/2018/01/02/windows采用命令/index.html">
+<meta property="og:site_name" content="glamor的博客">
+<meta property="og:description" content="wmicwmic是wmi的扩展，由于别名的原因wmic比wmi更加直观。wmic提供了从命令行接口和批命令脚本执行系统管理的支持">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/6853514-8e7f2fcd40702e14.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/6853514-9654772fdd42fd5b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/6853514-08c57756b44de859.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/6853514-c6c36f6692a1ecbf.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/6853514-6cb68edd287a2b61.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/6853514-29cebb5bcc0cf5ed.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/6853514-d7899952fd82cfb7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/6853514-403043a019726570.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/6853514-3513800b66bff811.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/6853514-f96fe186d3ac7fd2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/6853514-09bf3bd5b42dfa5c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2018-01-02T10:30:43.432Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="常用的windows命令">
+<meta name="twitter:description" content="wmicwmic是wmi的扩展，由于别名的原因wmic比wmi更加直观。wmic提供了从命令行接口和批命令脚本执行系统管理的支持">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/6853514-8e7f2fcd40702e14.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+  
+    <link rel="alternative" href="/atom.xml" title="glamor的博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/img/favicon.png">
+  
+  
+      <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  
+  
+      <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  
+  <!-- 加载特效 -->
+    <script src="/js/pace.js"></script>
+    <link href="/css/pace/pace-theme-flash.css" rel="stylesheet" />
+  <script>
+      var yiliaConfig = {
+          rootUrl: '/',
+          fancybox: true,
+          animate: true,
+          isHome: false,
+          isPost: true,
+          isArchive: false,
+          isTag: false,
+          isCategory: false,
+          open_in_new: false
+      }
+  </script>
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            
+            <img lazy-src="/img/head.jpg" class="js-avatar">
+            
+        </a>
+
+        <hgroup>
+          <h1 class="header-author"><a href="/" title="Hi Mate">glamor</a></h1>
+        </hgroup>
+
+        
+        <p class="header-subtitle">莫等闲，白了少年头空悲切...</p>
+        
+        
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">博客首页</a></li>
+                        
+                            <li><a href="/categories/python">人生苦短</a></li>
+                        
+                            <li><a href="/categories/Web安全">安全海洋</a></li>
+                        
+                            <li><a href="/categories/notes">随笔</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fl mail" target="_blank" href="mailto:root@cmustard.com" title="mail">mail</a>
+                            
+                                <a class="fl github" target="_blank" href="https://github.com/cmustard06" title="github">github</a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <a href="/tags/Python/" style="font-size: 10px;">Python</a> <a href="/tags/TCP-IP/" style="font-size: 10px;">TCP/IP</a> <a href="/tags/go/" style="font-size: 10px;">go</a> <a href="/tags/golang/" style="font-size: 17.5px;">golang</a> <a href="/tags/importlib/" style="font-size: 10px;">importlib</a> <a href="/tags/poc/" style="font-size: 12.5px;">poc</a> <a href="/tags/python/" style="font-size: 20px;">python</a> <a href="/tags/python3/" style="font-size: 12.5px;">python3</a> <a href="/tags/sql注入/" style="font-size: 10px;">sql注入</a> <a href="/tags/struct/" style="font-size: 10px;">struct</a> <a href="/tags/struts/" style="font-size: 10px;">struts</a> <a href="/tags/tcp/" style="font-size: 10px;">tcp</a> <a href="/tags/tcp-ip/" style="font-size: 10px;">tcp/ip</a> <a href="/tags/windows命令/" style="font-size: 10px;">windows命令</a> <a href="/tags/事件驱动/" style="font-size: 10px;">事件驱动</a> <a href="/tags/代理/" style="font-size: 10px;">代理</a> <a href="/tags/博客/" style="font-size: 10px;">博客</a> <a href="/tags/基础/" style="font-size: 15px;">基础</a> <a href="/tags/并发/" style="font-size: 10px;">并发</a> <a href="/tags/异步IO/" style="font-size: 10px;">异步IO</a> <a href="/tags/正则表达式/" style="font-size: 10px;">正则表达式</a> <a href="/tags/漏扫/" style="font-size: 12.5px;">漏扫</a> <a href="/tags/爬虫/" style="font-size: 10px;">爬虫</a> <a href="/tags/科学上网/" style="font-size: 10px;">科学上网</a> <a href="/tags/系统/" style="font-size: 10px;">系统</a> <a href="/tags/编程/" style="font-size: 15px;">编程</a> <a href="/tags/编程语言/" style="font-size: 12.5px;">编程语言</a> <a href="/tags/网络/" style="font-size: 12.5px;">网络</a> <a href="/tags/网络基础知识/" style="font-size: 10px;">网络基础知识</a> <a href="/tags/网络编程/" style="font-size: 10px;">网络编程</a> <a href="/tags/集合/" style="font-size: 10px;">集合</a>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.dmmjy9.top">dmmjy9</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="Me">glamor</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                
+                    <img lazy-src="/img/head.jpg" class="js-avatar">
+                
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="Me">glamor</a></h1>
+            </hgroup>
+            
+            <p class="header-subtitle">莫等闲，白了少年头空悲切...</p>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">博客首页</a></li>
+                
+                    <li><a href="/categories/python">人生苦短</a></li>
+                
+                    <li><a href="/categories/Web安全">安全海洋</a></li>
+                
+                    <li><a href="/categories/notes">随笔</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                <div class="social">
+                    
+                        <a class="mail" target="_blank" href="mailto:root@cmustard.com" title="mail">mail</a>
+                    
+                        <a class="github" target="_blank" href="https://github.com/cmustard06" title="github">github</a>
+                    
+                </div>
+            </nav>
+        </header>                
+    </div>
+</nav>
+      <div class="body-wrap"><article id="post-windows采用命令" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2018/01/02/windows采用命令/" class="article-date">
+      <time datetime="2018-01-02T10:30:43.432Z" itemprop="datePublished">2018-01-02</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      常用的windows命令
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/Web安全/">Web安全</a>
+    </div>
+
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/windows命令/">windows命令</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/系统/">系统</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h1 id="wmic"><a href="#wmic" class="headerlink" title="wmic"></a>wmic</h1><p>wmic是wmi的扩展，由于别名的原因wmic比wmi更加直观。wmic提供了从命令行接口和批命令脚本执行系统管理的支持<br><a id="more"></a><br>直接在cmd中运行wmic即可直接进入一个具有root权限的交互式shell<br><img src="http://upload-images.jianshu.io/upload_images/6853514-8e7f2fcd40702e14.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br>获取用户信息，在交互界面输入<code>useraccount list brief</code>可以获取详细的用户信息，<br><img src="http://upload-images.jianshu.io/upload_images/6853514-9654772fdd42fd5b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br><img src="http://upload-images.jianshu.io/upload_images/6853514-08c57756b44de859.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br><strong>识别Windows启动查程序</strong><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">wmic startup</div><div class="line">   wmic startup list full</div><div class="line">   wmic startup list brief</div><div class="line">   wmic startup list system</div></pre></td></tr></table></figure></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/6853514-c6c36f6692a1ecbf.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br><strong>识别windows网卡</strong><br>wmic还可以提供有关网卡和驱动程序的大量信息<br>列出所有网络驱动程序列表<br><code>wmic nicconfig list</code><br><img src="http://upload-images.jianshu.io/upload_images/6853514-6cb68edd287a2b61.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br><strong>更新静态ip</strong><br><code>mic nicconfig where index=9 call enablestatic(&quot;192.168.123.66&quot;), (&quot;255.255.255.0&quot;)</code><br><strong>更新网关</strong><br><code>wmic nicconfig where index=9 call setgateways(&quot;192.168.123.4&quot;),(1)</code><br><strong>启动DHCP</strong><br><code>wmic nicconfig where index=9 call enabledhcp</code><br><strong>设置DHCP状态</strong><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">wmic service <span class="built_in">where</span> caption=<span class="string">"DHCP Client"</span> call changestartmode <span class="string">"Disabled"</span></div><div class="line">wmic service <span class="built_in">where</span> caption=<span class="string">"DHCP Client"</span> call changestartmode <span class="string">"Automatic"</span></div><div class="line">wmic service <span class="built_in">where</span> caption=<span class="string">"DHCP Client"</span> call changestartmode <span class="string">"Manual"</span></div></pre></td></tr></table></figure></p>
+<h2 id="处理windows进程"><a href="#处理windows进程" class="headerlink" title="处理windows进程"></a>处理windows进程</h2><p><strong>列出进程</strong><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">wmic process</div><div class="line">wmic process list brief</div><div class="line">wmic process list full</div><div class="line">wmic process list system</div></pre></td></tr></table></figure></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/6853514-29cebb5bcc0cf5ed.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br><strong>以xml格式存储</strong><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">wmic /record:processes.xml process list brief</div><div class="line">wmic /record:processes.xml process list full</div><div class="line">wmic /record:processes.xml process list system</div></pre></td></tr></table></figure></p>
+<p><strong>出正在运行的进程并输出到HTML/XSL格式</strong><br><code>wmic /output:wmic.html process list full /format:hform</code></p>
+<h2 id="windows用户"><a href="#windows用户" class="headerlink" title="windows用户"></a>windows用户</h2><p><strong>显示本地计算机的所有用户账户的列表</strong><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">net user</div><div class="line">wmic useraccount</div><div class="line">wmic useraccount list brief</div></pre></td></tr></table></figure></p>
+<p><strong>显示某个账户的信息</strong><br><code>net user someuser</code><br><img src="http://upload-images.jianshu.io/upload_images/6853514-d7899952fd82cfb7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br><strong>添加test用户</strong><br><code>net user test /add</code><br><strong>使用24小时制表示法设置test的登录时间</strong><br><code>net user test /time:M-F,8AM-5PM</code></p>
+<p><strong>列出事件日志</strong><br><code>wmic ntevent list brief</code><br><strong>删除arp</strong><br><code>netsh int ip delete arpcache</code><br><strong>重启和关机</strong><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">wmic os <span class="built_in">where</span> buildnumber=<span class="string">"2600"</span> call reboot </div><div class="line">shutdown -r -f -t 1</div><div class="line">shutdown -s -f -t 1</div></pre></td></tr></table></figure></p>
+<p>详细<a href="https://blogs.technet.microsoft.com/askperf/2012/02/17/useful-wmic-queries/" target="_blank" rel="external">查询语句</a></p>
+<h2 id="识别Windows的安全补丁"><a href="#识别Windows的安全补丁" class="headerlink" title="识别Windows的安全补丁"></a>识别Windows的安全补丁</h2><p><code>wmic qfe get description,installedOn</code><br><img src="http://upload-images.jianshu.io/upload_images/6853514-403043a019726570.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="4.png"></p>
+<h1 id="sc命令"><a href="#sc命令" class="headerlink" title="sc命令"></a>sc命令</h1><p>作为一个命令行工具，SC.exe可以用来测试你自己的系统，你可以设置一个批处理文件来使用不同的参数调用 SC.exe来控制服务。<br><code>SC [Servername] command Servicename [Optionname= Optionvalues]</code></p>
+<h2 id="识别windows的服务"><a href="#识别windows的服务" class="headerlink" title="识别windows的服务"></a>识别windows的服务</h2><p><strong>查询正在运行的服务</strong><br><code>sc query type=service</code><br><img src="http://upload-images.jianshu.io/upload_images/6853514-3513800b66bff811.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br><strong>查询存在但没有运行的服务</strong><br><code>sc query type=service state=inactive</code><br><img src="http://upload-images.jianshu.io/upload_images/6853514-f96fe186d3ac7fd2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br><strong>查询所有服务</strong><br><code>sc query type=service state=all</code><br><img src="http://upload-images.jianshu.io/upload_images/6853514-09bf3bd5b42dfa5c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<h1 id="网络连接监视"><a href="#网络连接监视" class="headerlink" title="网络连接监视"></a>网络连接监视</h1><p><strong>所有侦听端口和可执行文件的刷新率均为3秒</strong><br><code>netstat -nab 3 &gt;&gt; netstat.tx</code><br>-n：以数字形式显示地址和端口号<br>-a ：显示所有连接和侦听端口<br>-b：显示创建每个连接或侦听端口所涉及的可执行文件</p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="http://hackerwing.com/2017/12/20/windows%E5%B8%B8%E7%94%A8hacker-command/" target="_blank" rel="external">windows常用hacker-command</a></p>
+
+      
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2018/01/02/windows采用命令/">常用的windows命令</a></p>
+        <p><span>文章作者:</span><a href="/" title="访问 glamor 的个人博客">glamor</a></p>
+        <p><span>发布时间:</span>2018年01月02日 - 18时30分</p>
+        <p><span>最后更新:</span>2018年01月02日 - 05时30分</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2018/01/02/windows采用命令/" title="常用的windows命令">http://www.cmustarc.com/2018/01/02/windows采用命令/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://www.cmustarc.com/2018/01/02/windows采用命令/　　作者: glamor" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script src="/js/clipboard.min.js"></script>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" title="中国大陆 (CC BY-NC-SA 3.0 CN)" target = "_blank">"署名-非商用-相同方式共享 3.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+<nav id="article-nav">
+  
+    <a href="/2018/01/03/网络编程/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          网络编程
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/12/31/byte与rune/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">rune与byte</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#wmic"><span class="toc-number">1.</span> <span class="toc-text">wmic</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#处理windows进程"><span class="toc-number">1.1.</span> <span class="toc-text">处理windows进程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#windows用户"><span class="toc-number">1.2.</span> <span class="toc-text">windows用户</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#识别Windows的安全补丁"><span class="toc-number">1.3.</span> <span class="toc-text">识别Windows的安全补丁</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#sc命令"><span class="toc-number">2.</span> <span class="toc-text">sc命令</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#识别windows的服务"><span class="toc-number">2.1.</span> <span class="toc-text">识别windows的服务</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#网络连接监视"><span class="toc-number">3.</span> <span class="toc-text">网络连接监视</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#参考"><span class="toc-number">4.</span> <span class="toc-text">参考</span></a></li></ol>
+</div>
+<input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+<script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script>
+    var valueHide = "隐藏目录";
+    var valueShow = "显示目录";
+
+    if ($(".left-col").is(":hidden")) {
+        $("#tocButton").attr("value", valueShow);
+    }
+    $("#tocButton").click(function() {
+        if ($("#toc").is(":hidden")) {
+            $("#tocButton").attr("value", valueHide);
+            $("#toc").slideDown(320);
+        }
+        else {
+            $("#tocButton").attr("value", valueShow);
+            $("#toc").slideUp(350);
+        }
+    })
+    if ($(".toc").length < 1) {
+        $("#toc, #tocButton").hide();
+    }
+</script>
+
+
+
+
+
+<div class="bdsharebuttonbox">
+	<a href="#" class="fx fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+	<a href="#" class="fx fa-weixin bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+	<a href="#" class="fx fa-qq bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+	<a href="#" class="fx fa-facebook-official bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+	<a href="#" class="fx fa-twitter bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+	<a href="#" class="fx fa-linkedin bds_linkedin" data-cmd="linkedin" title="分享到linkedin"></a>
+	<a href="#" class="fx fa-files-o bds_copy" data-cmd="copy" title="分享到复制网址"></a>
+</div>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+
+
+
+    
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/2018/01/03/网络编程/" title="上一篇: 网络编程">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+        
+            <a href="/2017/12/31/byte与rune/" title="下一篇: rune与byte">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2018/05/28/python-importlib/">importlib动态加载模块</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/27/某扫描器/">某扫描器</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/27/惊蛰漏洞扫描平台分析/">惊蛰漏洞扫描平台分析</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/01/07/加密/">加密</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/01/06/JSON处理/">JSON处理</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/01/03/网络编程/">网络编程</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/01/02/windows采用命令/">常用的windows命令</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/12/31/byte与rune/">rune与byte</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/12/28/数组与字典/">数组与数组切片</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/12/15/Python3笔记/">Python3 学习笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/12/03/python基础/">python基础</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/11/07/数据链路层/">数据链路</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/11/01/网络基础/">网络基础</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/11/01/tcp-ip简介/">tcp/ip简介</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/24/HTMLParser模块/">HTMLParser模块</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/23/SQL注入/">SQL注入整理(一)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/20/列表/">列表</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/19/偏函数/">偏函数</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/18/with上下文管理器/">上下文管理器与with语句</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/13/v2ray/">v2ray 配置文件</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/29/socket-python/">socket编程</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/28/正则表达式/">正则表达式</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/15/s2-053/">S2-053</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/10/golang流程控制/">流程控制</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/10/Strut2 常见POC/">Struts2 常见POC收集和整理</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/05/论事件驱动与异步IO/">论事件驱动与异步IO[转]</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/05/并发编程/">并发编程</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/05/Python常用模块2/">python常用模块(2)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/05/Python常用模块/">python常用模块(1)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/05/python TCP代理/">python TCP代理</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/05/hexo+github+nginx VPS搭建博客/">hexo+github+nginx vps搭建博客</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/05/go语言初识/">初识go语言</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/05/hello-world/">Hello World</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/05/goroutine与调度器/">goroutine与调度器[转]</a></li></ul>
+    <script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+    <script>
+        $(".post-list").addClass("toc-article");
+        $(".post-list-item a").attr("target","_blank");
+        $("#post-nav-button > a:nth-child(2)").click(function() {
+            $(".fa-bars, .fa-times").toggle();
+            $(".post-list").toggle(300);
+            if ($(".toc").length > 0) {
+                $("#toc, #tocButton").toggle(200, function() {
+                    if ($(".switch-area").is(":visible")) {
+                        $("#tocButton").attr("value", valueHide);
+                        }
+                    })
+            }
+            else {
+            }
+        })
+    </script>
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                &copy; 2018 glamor
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/luuman/hexo-theme-spfk" target="_blank">spfk</a> by luuman
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" >道士到访数: 
+                            <span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>, </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit">本页阅读量: 
+                            <span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+
+    </div>
+    <script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var backgroundnum = 24;
+            var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+            $("#mobile-nav").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+            $(".left-col").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+        })
+    </script>
+
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    $(document).ready(function() {
+        if ($("#comments").length < 1) {
+            $("#scroll > a:nth-child(2)").hide();
+        };
+    })
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+  <script language="javascript">
+    $(function() {
+        $("a[title]").each(function() {
+            var a = $(this);
+            var title = a.attr('title');
+            if (title == undefined || title == "") return;
+            a.data('title', title).removeAttr('title').hover(
+
+            function() {
+                var offset = a.offset();
+                $("<div id=\"anchortitlecontainer\"></div>").appendTo($("body")).html(title).css({
+                    top: offset.top - a.outerHeight() - 15,
+                    left: offset.left + a.outerWidth()/2 + 1
+                }).fadeIn(function() {
+                    var pop = $(this);
+                    setTimeout(function() {
+                        pop.remove();
+                    }, pop.text().length * 800);
+                });
+            }, function() {
+                $("#anchortitlecontainer").remove();
+            });
+        });
+    });
+</script>
+
+
+  </div>
+</body>
+</html>
