@@ -3,14 +3,14 @@
 <head>
   <meta charset="utf-8">
   
-  <title>goroutine与调度器[转] | glamor的博客</title>
+  <title>goroutine与调度器[转] | Merak的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="转载自goroutine与调度器by skoo我们都知道Go语言是原生支持语言级并发的，这个并发的最小逻辑单元就是goroutine。goroutine就是Go语言提供的一种用户态线程，当然这种用户态线程是跑在内核级线程之上的。当我们创建了很多的goroutine，并且它们都是跑在同一个内核线程之上的时候，就需要一个调度器来维护这些goroutine，确保所有的goroutine都使用cpu，并且">
 <meta name="keywords" content="golang,编程语言">
 <meta property="og:type" content="article">
 <meta property="og:title" content="goroutine与调度器[转]">
-<meta property="og:url" content="http://www.cmustarc.com/2017/09/05/goroutine与调度器/index.html">
-<meta property="og:site_name" content="glamor的博客">
+<meta property="og:url" content="http://www.Merak.cc/2017/09/05/goroutine与调度器/index.html">
+<meta property="og:site_name" content="Merak的博客">
 <meta property="og:description" content="转载自goroutine与调度器by skoo我们都知道Go语言是原生支持语言级并发的，这个并发的最小逻辑单元就是goroutine。goroutine就是Go语言提供的一种用户态线程，当然这种用户态线程是跑在内核级线程之上的。当我们创建了很多的goroutine，并且它们都是跑在同一个内核线程之上的时候，就需要一个调度器来维护这些goroutine，确保所有的goroutine都使用cpu，并且">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://ouz06keqs.bkt.clouddn.com/golang-car.jpeg">
@@ -22,7 +22,7 @@
 <meta name="twitter:description" content="转载自goroutine与调度器by skoo我们都知道Go语言是原生支持语言级并发的，这个并发的最小逻辑单元就是goroutine。goroutine就是Go语言提供的一种用户态线程，当然这种用户态线程是跑在内核级线程之上的。当我们创建了很多的goroutine，并且它们都是跑在同一个内核线程之上的时候，就需要一个调度器来维护这些goroutine，确保所有的goroutine都使用cpu，并且">
 <meta name="twitter:image" content="http://ouz06keqs.bkt.clouddn.com/golang-car.jpeg">
   
-    <link rel="alternative" href="/atom.xml" title="glamor的博客" type="application/atom+xml">
+    <link rel="alternative" href="/atom.xml" title="Merak的博客" type="application/atom+xml">
   
   
     <link rel="icon" href="/img/favicon.png">
@@ -67,7 +67,7 @@
         </a>
 
         <hgroup>
-          <h1 class="header-author"><a href="/" title="Hi Mate">glamor</a></h1>
+          <h1 class="header-author"><a href="/" title="Hi Mate">Merak</a></h1>
         </hgroup>
 
         
@@ -164,7 +164,7 @@
       <nav id="mobile-nav">
       <div class="overlay">
           <div class="slider-trigger"></div>
-          <h1 class="header-author js-mobile-header hide"><a href="/" title="Me">glamor</a></h1>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="Me">Merak</a></h1>
       </div>
     <div class="intrude-less">
         <header id="header" class="inner">
@@ -174,7 +174,7 @@
                 
             </a>
             <hgroup>
-              <h1 class="header-author"><a href="/" title="Me">glamor</a></h1>
+              <h1 class="header-author"><a href="/" title="Me">Merak</a></h1>
             </hgroup>
             
             <p class="header-subtitle">莫等闲，白了少年头空悲切...</p>
@@ -292,12 +292,12 @@
     
     <div class="copyright">
         <p><span>本文标题:</span><a href="/2017/09/05/goroutine与调度器/">goroutine与调度器[转]</a></p>
-        <p><span>文章作者:</span><a href="/" title="访问 glamor 的个人博客">glamor</a></p>
+        <p><span>文章作者:</span><a href="/" title="访问 Merak 的个人博客">Merak</a></p>
         <p><span>发布时间:</span>2017年09月05日 - 14时21分</p>
         <p><span>最后更新:</span>2017年09月05日 - 02时21分</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2017/09/05/goroutine与调度器/" title="goroutine与调度器[转]">http://www.cmustarc.com/2017/09/05/goroutine与调度器/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://www.cmustarc.com/2017/09/05/goroutine与调度器/　　作者: glamor" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/2017/09/05/goroutine与调度器/" title="goroutine与调度器[转]">http://www.Merak.cc/2017/09/05/goroutine与调度器/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://www.Merak.cc/2017/09/05/goroutine与调度器/　　作者: Merak" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script src="/js/clipboard.min.js"></script>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
@@ -417,7 +417,7 @@
     <div class="outer">
         <div id="footer-info">
             <div class="footer-left">
-                &copy; 2018 glamor
+                &copy; 2018 Merak
             </div>
             <div class="footer-right">
                 <a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/luuman/hexo-theme-spfk" target="_blank">spfk</a> by luuman

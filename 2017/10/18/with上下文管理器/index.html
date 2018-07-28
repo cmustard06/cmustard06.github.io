@@ -3,14 +3,14 @@
 <head>
   <meta charset="utf-8">
   
-  <title>上下文管理器与with语句 | glamor的博客</title>
+  <title>上下文管理器与with语句 | Merak的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="简介with语句支持由上下文管理器对象控制的运行时上下文执行一系列语句执行with object 语句时，他执行方法object.__enter__()来指示正在进入一个新的上下文，当控制流离开该上下文时，就会执行方法obj.__exit__(exec_type,exe_val,exc_tb)。如果没有引发异常，这三个参数为None，否则他们将包含导致控制流离开上下文的异常相关的类型，值和跟踪信息">
 <meta name="keywords" content="python">
 <meta property="og:type" content="article">
 <meta property="og:title" content="上下文管理器与with语句">
-<meta property="og:url" content="http://www.cmustarc.com/2017/10/18/with上下文管理器/index.html">
-<meta property="og:site_name" content="glamor的博客">
+<meta property="og:url" content="http://www.Merak.cc/2017/10/18/with上下文管理器/index.html">
+<meta property="og:site_name" content="Merak的博客">
 <meta property="og:description" content="简介with语句支持由上下文管理器对象控制的运行时上下文执行一系列语句执行with object 语句时，他执行方法object.__enter__()来指示正在进入一个新的上下文，当控制流离开该上下文时，就会执行方法obj.__exit__(exec_type,exe_val,exc_tb)。如果没有引发异常，这三个参数为None，否则他们将包含导致控制流离开上下文的异常相关的类型，值和跟踪信息">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:updated_time" content="2017-10-19T03:26:14.613Z">
@@ -18,7 +18,7 @@
 <meta name="twitter:title" content="上下文管理器与with语句">
 <meta name="twitter:description" content="简介with语句支持由上下文管理器对象控制的运行时上下文执行一系列语句执行with object 语句时，他执行方法object.__enter__()来指示正在进入一个新的上下文，当控制流离开该上下文时，就会执行方法obj.__exit__(exec_type,exe_val,exc_tb)。如果没有引发异常，这三个参数为None，否则他们将包含导致控制流离开上下文的异常相关的类型，值和跟踪信息">
   
-    <link rel="alternative" href="/atom.xml" title="glamor的博客" type="application/atom+xml">
+    <link rel="alternative" href="/atom.xml" title="Merak的博客" type="application/atom+xml">
   
   
     <link rel="icon" href="/img/favicon.png">
@@ -63,7 +63,7 @@
         </a>
 
         <hgroup>
-          <h1 class="header-author"><a href="/" title="Hi Mate">glamor</a></h1>
+          <h1 class="header-author"><a href="/" title="Hi Mate">Merak</a></h1>
         </hgroup>
 
         
@@ -160,7 +160,7 @@
       <nav id="mobile-nav">
       <div class="overlay">
           <div class="slider-trigger"></div>
-          <h1 class="header-author js-mobile-header hide"><a href="/" title="Me">glamor</a></h1>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="Me">Merak</a></h1>
       </div>
     <div class="intrude-less">
         <header id="header" class="inner">
@@ -170,7 +170,7 @@
                 
             </a>
             <hgroup>
-              <h1 class="header-author"><a href="/" title="Me">glamor</a></h1>
+              <h1 class="header-author"><a href="/" title="Me">Merak</a></h1>
             </hgroup>
             
             <p class="header-subtitle">莫等闲，白了少年头空悲切...</p>
@@ -257,12 +257,12 @@
     
     <div class="copyright">
         <p><span>本文标题:</span><a href="/2017/10/18/with上下文管理器/">上下文管理器与with语句</a></p>
-        <p><span>文章作者:</span><a href="/" title="访问 glamor 的个人博客">glamor</a></p>
+        <p><span>文章作者:</span><a href="/" title="访问 Merak 的个人博客">Merak</a></p>
         <p><span>发布时间:</span>2017年10月19日 - 11时26分</p>
         <p><span>最后更新:</span>2017年10月18日 - 23时26分</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2017/10/18/with上下文管理器/" title="上下文管理器与with语句">http://www.cmustarc.com/2017/10/18/with上下文管理器/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://www.cmustarc.com/2017/10/18/with上下文管理器/　　作者: glamor" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/2017/10/18/with上下文管理器/" title="上下文管理器与with语句">http://www.Merak.cc/2017/10/18/with上下文管理器/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://www.Merak.cc/2017/10/18/with上下文管理器/　　作者: Merak" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script src="/js/clipboard.min.js"></script>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
@@ -389,7 +389,7 @@
     <div class="outer">
         <div id="footer-info">
             <div class="footer-left">
-                &copy; 2018 glamor
+                &copy; 2018 Merak
             </div>
             <div class="footer-right">
                 <a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/luuman/hexo-theme-spfk" target="_blank">spfk</a> by luuman
