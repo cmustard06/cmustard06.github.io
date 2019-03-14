@@ -3,19 +3,20 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Merak的博客</title>
+  <title>死锁，活锁和饥饿 | Merak的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="死锁，活锁和饥饿[TOC] 转载自死锁&amp;amp;活锁 什么是死锁死锁：是指两个或两个以上的进程（或线程）在执行过程中，因争夺资源而造成的一种互相等待的现象，若无外力作用，它们都将无法推进下去。此时称系统处于死锁状态或系统产生了死锁，这些永远在互相等待的进程称为死锁进程。">
+  <meta name="description" content="转载自死锁&amp;amp;活锁 什么是死锁死锁：是指两个或两个以上的进程（或线程）在执行过程中，因争夺资源而造成的一种互相等待的现象，若无外力作用，它们都将无法推进下去。此时称系统处于死锁状态或系统产生了死锁，这些永远在互相等待的进程称为死锁进程。">
+<meta name="keywords" content="操作系统,c">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Merak的博客">
+<meta property="og:title" content="死锁，活锁和饥饿">
 <meta property="og:url" content="http://www.Merak.cc/2018/10/24/死锁，活锁，饥饿/index.html">
 <meta property="og:site_name" content="Merak的博客">
-<meta property="og:description" content="死锁，活锁和饥饿[TOC] 转载自死锁&amp;amp;活锁 什么是死锁死锁：是指两个或两个以上的进程（或线程）在执行过程中，因争夺资源而造成的一种互相等待的现象，若无外力作用，它们都将无法推进下去。此时称系统处于死锁状态或系统产生了死锁，这些永远在互相等待的进程称为死锁进程。">
+<meta property="og:description" content="转载自死锁&amp;amp;活锁 什么是死锁死锁：是指两个或两个以上的进程（或线程）在执行过程中，因争夺资源而造成的一种互相等待的现象，若无外力作用，它们都将无法推进下去。此时称系统处于死锁状态或系统产生了死锁，这些永远在互相等待的进程称为死锁进程。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-10-24T07:57:12.042Z">
+<meta property="og:updated_time" content="2018-10-24T08:09:31.766Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Merak的博客">
-<meta name="twitter:description" content="死锁，活锁和饥饿[TOC] 转载自死锁&amp;amp;活锁 什么是死锁死锁：是指两个或两个以上的进程（或线程）在执行过程中，因争夺资源而造成的一种互相等待的现象，若无外力作用，它们都将无法推进下去。此时称系统处于死锁状态或系统产生了死锁，这些永远在互相等待的进程称为死锁进程。">
+<meta name="twitter:title" content="死锁，活锁和饥饿">
+<meta name="twitter:description" content="转载自死锁&amp;amp;活锁 什么是死锁死锁：是指两个或两个以上的进程（或线程）在执行过程中，因争夺资源而造成的一种互相等待的现象，若无外力作用，它们都将无法推进下去。此时称系统处于死锁状态或系统产生了死锁，这些永远在互相等待的进程称为死锁进程。">
   
     <link rel="alternative" href="/atom.xml" title="Merak的博客" type="application/atom+xml">
   
@@ -134,7 +135,7 @@
                 
                 <section class="switch-part switch-part2">
                     <div class="widget tagcloud" id="js-tagcloud">
-                        <a href="/tags/PHP/" style="font-size: 10px;">PHP</a> <a href="/tags/Python/" style="font-size: 10px;">Python</a> <a href="/tags/TCP-IP/" style="font-size: 10px;">TCP/IP</a> <a href="/tags/go/" style="font-size: 10px;">go</a> <a href="/tags/golang/" style="font-size: 17.5px;">golang</a> <a href="/tags/importlib/" style="font-size: 10px;">importlib</a> <a href="/tags/poc/" style="font-size: 12.5px;">poc</a> <a href="/tags/python/" style="font-size: 20px;">python</a> <a href="/tags/python3/" style="font-size: 12.5px;">python3</a> <a href="/tags/sql注入/" style="font-size: 10px;">sql注入</a> <a href="/tags/struct/" style="font-size: 10px;">struct</a> <a href="/tags/struts/" style="font-size: 10px;">struts</a> <a href="/tags/tcp/" style="font-size: 10px;">tcp</a> <a href="/tags/tcp-ip/" style="font-size: 10px;">tcp/ip</a> <a href="/tags/windows命令/" style="font-size: 10px;">windows命令</a> <a href="/tags/事件驱动/" style="font-size: 10px;">事件驱动</a> <a href="/tags/代理/" style="font-size: 10px;">代理</a> <a href="/tags/博客/" style="font-size: 10px;">博客</a> <a href="/tags/基础/" style="font-size: 15px;">基础</a> <a href="/tags/安全/" style="font-size: 10px;">安全</a> <a href="/tags/并发/" style="font-size: 10px;">并发</a> <a href="/tags/异步IO/" style="font-size: 10px;">异步IO</a> <a href="/tags/正则表达式/" style="font-size: 10px;">正则表达式</a> <a href="/tags/漏扫/" style="font-size: 12.5px;">漏扫</a> <a href="/tags/爬虫/" style="font-size: 10px;">爬虫</a> <a href="/tags/科学上网/" style="font-size: 10px;">科学上网</a> <a href="/tags/系统/" style="font-size: 10px;">系统</a> <a href="/tags/编程/" style="font-size: 15px;">编程</a> <a href="/tags/编程语言/" style="font-size: 12.5px;">编程语言</a> <a href="/tags/网络/" style="font-size: 12.5px;">网络</a> <a href="/tags/网络基础知识/" style="font-size: 10px;">网络基础知识</a> <a href="/tags/网络编程/" style="font-size: 10px;">网络编程</a> <a href="/tags/集合/" style="font-size: 10px;">集合</a>
+                        <a href="/tags/PHP/" style="font-size: 10px;">PHP</a> <a href="/tags/Python/" style="font-size: 10px;">Python</a> <a href="/tags/TCP-IP/" style="font-size: 10px;">TCP/IP</a> <a href="/tags/c/" style="font-size: 10px;">c</a> <a href="/tags/go/" style="font-size: 10px;">go</a> <a href="/tags/golang/" style="font-size: 17.5px;">golang</a> <a href="/tags/importlib/" style="font-size: 10px;">importlib</a> <a href="/tags/poc/" style="font-size: 12.5px;">poc</a> <a href="/tags/python/" style="font-size: 20px;">python</a> <a href="/tags/python3/" style="font-size: 12.5px;">python3</a> <a href="/tags/sql注入/" style="font-size: 10px;">sql注入</a> <a href="/tags/struct/" style="font-size: 10px;">struct</a> <a href="/tags/struts/" style="font-size: 10px;">struts</a> <a href="/tags/tcp/" style="font-size: 10px;">tcp</a> <a href="/tags/tcp-ip/" style="font-size: 10px;">tcp/ip</a> <a href="/tags/windows命令/" style="font-size: 10px;">windows命令</a> <a href="/tags/事件驱动/" style="font-size: 10px;">事件驱动</a> <a href="/tags/代理/" style="font-size: 10px;">代理</a> <a href="/tags/博客/" style="font-size: 10px;">博客</a> <a href="/tags/基础/" style="font-size: 15px;">基础</a> <a href="/tags/安全/" style="font-size: 10px;">安全</a> <a href="/tags/并发/" style="font-size: 10px;">并发</a> <a href="/tags/异步IO/" style="font-size: 10px;">异步IO</a> <a href="/tags/操作系统/" style="font-size: 10px;">操作系统</a> <a href="/tags/机器学习/" style="font-size: 10px;">机器学习</a> <a href="/tags/正则表达式/" style="font-size: 10px;">正则表达式</a> <a href="/tags/漏扫/" style="font-size: 12.5px;">漏扫</a> <a href="/tags/爬虫/" style="font-size: 10px;">爬虫</a> <a href="/tags/科学上网/" style="font-size: 10px;">科学上网</a> <a href="/tags/系统/" style="font-size: 10px;">系统</a> <a href="/tags/编程/" style="font-size: 15px;">编程</a> <a href="/tags/编程语言/" style="font-size: 12.5px;">编程语言</a> <a href="/tags/网络/" style="font-size: 12.5px;">网络</a> <a href="/tags/网络基础知识/" style="font-size: 10px;">网络基础知识</a> <a href="/tags/网络编程/" style="font-size: 10px;">网络编程</a> <a href="/tags/集合/" style="font-size: 10px;">集合</a>
                     </div>
                 </section>
                 
@@ -204,7 +205,7 @@
   
     <div class="article-meta">
       <a href="/2018/10/24/死锁，活锁，饥饿/" class="article-date">
-      <time datetime="2018-10-24T07:57:12.042Z" itemprop="datePublished">2018-10-24</time>
+      <time datetime="2018-10-24T08:09:31.766Z" itemprop="datePublished">2018-10-24</time>
 </a>
     </div>
   
@@ -213,18 +214,47 @@
       <input type="hidden" class="isFancy" />
     
     
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      死锁，活锁和饥饿
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/notes/">notes</a>
+    </div>
+
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/c/">c</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/操作系统/">操作系统</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
     <div class="article-entry" itemprop="articleBody">
       
           
-        <h1 id="死锁，活锁和饥饿"><a href="#死锁，活锁和饥饿" class="headerlink" title="死锁，活锁和饥饿"></a>死锁，活锁和饥饿</h1><p>[TOC]</p>
-<p>转载自<a href="https://blog.csdn.net/benbenxiongyuan/article/details/8960611" target="_blank" rel="external">死锁&amp;活锁</a></p>
+        <p>转载自<a href="https://blog.csdn.net/benbenxiongyuan/article/details/8960611" target="_blank" rel="external">死锁&amp;活锁</a></p>
 <h2 id="什么是死锁"><a href="#什么是死锁" class="headerlink" title="什么是死锁"></a>什么是死锁</h2><p><strong>死锁</strong>：是指<strong>两个或两个以上</strong>的进程（或线程）在执行过程中，因<strong>争夺资源</strong>而造成的一种<strong>互相等待</strong>的现象，若无外力作用，它们都将无法推进下去。此时称系统处于死锁状态或系统产生了死锁，这些永远在互相等待的进程称为死锁进程。</p>
 <a id="more"></a>
 <h3 id="死锁发生的条件"><a href="#死锁发生的条件" class="headerlink" title="死锁发生的条件"></a>死锁发生的条件</h3><ul>
-<li><strong>互斥条件</strong>：线程对资源的访问是排他性的，如果一个线程对占用了某资源，那么其他线程必须处于等待状态，直到资源被释放。</li>
-<li><strong>请求和保持条件</strong>：线程T1至少已经保持了一个资源R1占用,但又提出对另一个资源R2请求，而此时，资源R2被其他线程T2占用，于是该线程T1也必须等待，但又对自己保持的资源R1不释放。</li>
-<li><strong>不剥夺条件</strong>：线程已获得的资源，在未使用完之前，不能被其他线程剥夺，只能在使用完以后由自己释放。</li>
-<li><strong>环路等待条件</strong>：在死锁发生时，必然存在一个“进程-资源环形链”，即：{p0,p1,p2,…pn},进程p0（或线程）等待p1占用的资源，p1等待p2占用的资源，pn等待p0占用的资源。（最直观的理解是，p0等待p1占用的资源，而p1而在等待p0占用的资源，于是两个进程就相互等待）</li>
+<li><p><strong>互斥条件</strong>：线程对资源的访问是排他性的，如果一个线程对占用了某资源，那么其他线程必须处于等待状态，直到资源被释放。</p>
+</li>
+<li><p><strong>请求和保持条件</strong>：线程T1至少已经保持了一个资源R1占用,但又提出对另一个资源R2请求，而此时，资源R2被其他线程T2占用，于是该线程T1也必须等待，但又对自己保持的资源R1不释放。</p>
+</li>
+<li><p><strong>不剥夺条件</strong>：线程已获得的资源，在未使用完之前，不能被其他线程剥夺，只能在使用完以后由自己释放。</p>
+</li>
+<li><p><strong>环路等待条件</strong>：在死锁发生时，必然存在一个“进程-资源环形链”，即：{p0,p1,p2,…pn},进程p0（或线程）等待p1占用的资源，p1等待p2占用的资源，pn等待p0占用的资源。（最直观的理解是，p0等待p1占用的资源，而p1而在等待p0占用的资源，于是两个进程就相互等待）</p>
+</li>
 </ul>
 <h2 id="什么是活锁"><a href="#什么是活锁" class="headerlink" title="什么是活锁"></a>什么是活锁</h2><p>活锁：是指线程1可以使用资源，但它很礼貌，让其他线程先使用资源，线程2也可以使用资源，但它很绅士，也让其他线程先使用资源。这样<strong>你让我，我让你，最后两个线程都无法使用资源</strong>。</p>
 <h3 id="关于“死锁与活锁”的比喻"><a href="#关于“死锁与活锁”的比喻" class="headerlink" title="关于“死锁与活锁”的比喻"></a>关于“死锁与活锁”的比喻</h3><p><strong>死锁</strong>：迎面开来的汽车A和汽车B过马路，汽车A得到了半条路的资源（满足死锁发生条件1：资源访问是排他性的，我占了路你就不能上来，除非你爬我头上去），汽车B占了汽车A的另外半条路的资源，A想过去必须请求另一半被B占用的道路（死锁发生条件2：必须整条车身的空间才能开过去，我已经占了一半，尼玛另一半的路被B占用了），B若想过去也必须等待A让路，A是辆兰博基尼，B是开奇瑞QQ的屌丝，A素质比较低开窗对B狂骂：快给老子让开，B很生气，你妈逼的，老子就不让（死锁发生条件3：在未使用完资源前，不能被其他线程剥夺），于是两者相互僵持一个都走不了（死锁发生条件4：环路等待条件），而且导致整条道上的后续车辆也走不了。</p>
@@ -240,12 +270,12 @@
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2018/10/24/死锁，活锁，饥饿/"></a></p>
+        <p><span>本文标题:</span><a href="/2018/10/24/死锁，活锁，饥饿/">死锁，活锁和饥饿</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 Merak 的个人博客">Merak</a></p>
-        <p><span>发布时间:</span>2018年10月24日 - 15时57分</p>
-        <p><span>最后更新:</span>2018年10月24日 - 03时57分</p>
+        <p><span>发布时间:</span>2018年10月24日 - 16时09分</p>
+        <p><span>最后更新:</span>2018年10月24日 - 04时09分</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2018/10/24/死锁，活锁，饥饿/" title="">http://www.Merak.cc/2018/10/24/死锁，活锁，饥饿/</a>
+            <span>原始链接:</span><a class="post-url" href="/2018/10/24/死锁，活锁，饥饿/" title="死锁，活锁和饥饿">http://www.Merak.cc/2018/10/24/死锁，活锁，饥饿/</a>
             <span class="copy-path" data-clipboard-text="原文: http://www.Merak.cc/2018/10/24/死锁，活锁，饥饿/　　作者: Merak" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script src="/js/clipboard.min.js"></script>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
@@ -258,6 +288,15 @@
 
 
 <nav id="article-nav">
+  
+    <a href="/2019/03/14/机器学习概述/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          机器学习概述
+        
+      </div>
+    </a>
   
   
     <a href="/2018/07/30/php序列化/" id="article-nav-older" class="article-nav-link-wrap">
@@ -272,7 +311,7 @@
 
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
-    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#死锁，活锁和饥饿"><span class="toc-number">1.</span> <span class="toc-text">死锁，活锁和饥饿</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#什么是死锁"><span class="toc-number">1.1.</span> <span class="toc-text">什么是死锁</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#死锁发生的条件"><span class="toc-number">1.1.1.</span> <span class="toc-text">死锁发生的条件</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#什么是活锁"><span class="toc-number">1.2.</span> <span class="toc-text">什么是活锁</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#关于“死锁与活锁”的比喻"><span class="toc-number">1.2.1.</span> <span class="toc-text">关于“死锁与活锁”的比喻</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#什么是饥饿"><span class="toc-number">1.3.</span> <span class="toc-text">什么是饥饿</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#关于”饥饿“的比喻："><span class="toc-number">1.3.1.</span> <span class="toc-text">关于”饥饿“的比喻：</span></a></li></ol></li></ol></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#什么是死锁"><span class="toc-number">1.</span> <span class="toc-text">什么是死锁</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#死锁发生的条件"><span class="toc-number">1.1.</span> <span class="toc-text">死锁发生的条件</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#什么是活锁"><span class="toc-number">2.</span> <span class="toc-text">什么是活锁</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#关于“死锁与活锁”的比喻"><span class="toc-number">2.1.</span> <span class="toc-text">关于“死锁与活锁”的比喻</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#什么是饥饿"><span class="toc-number">3.</span> <span class="toc-text">什么是饥饿</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#关于”饥饿“的比喻："><span class="toc-number">3.1.</span> <span class="toc-text">关于”饥饿“的比喻：</span></a></li></ol></li></ol>
 </div>
 <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
 
@@ -323,7 +362,9 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
+            <a href="/2019/03/14/机器学习概述/" title="上一篇: 机器学习概述">
+                <i class="fa fa-angle-left"></i>
+            </a>
         
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
         
@@ -332,7 +373,7 @@
             </a>
         
     </div>
-    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2018/10/24/死锁，活锁，饥饿/">死锁，活锁，饥饿</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/07/30/php序列化/">PHP序列化与反序列化</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/28/python-importlib/">importlib动态加载模块</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/27/某扫描器/">某扫描器</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/27/惊蛰漏洞扫描平台分析/">惊蛰漏洞扫描平台分析</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/01/07/加密/">加密</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/01/06/JSON处理/">JSON处理</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/01/03/网络编程/">网络编程</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/01/02/windows采用命令/">常用的windows命令</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/12/31/byte与rune/">rune与byte</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/12/28/数组与字典/">数组与数组切片</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/12/15/Python3笔记/">Python3 学习笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/12/03/python基础/">python基础</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/11/07/数据链路层/">数据链路</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/11/01/网络基础/">网络基础</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/11/01/tcp-ip简介/">tcp/ip简介</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/24/HTMLParser模块/">HTMLParser模块</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/23/SQL注入/">SQL注入整理(一)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/20/列表/">列表</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/19/偏函数/">偏函数</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/18/with上下文管理器/">上下文管理器与with语句</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/13/v2ray/">v2ray 配置文件</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/29/socket-python/">socket编程</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/28/正则表达式/">正则表达式</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/15/s2-053/">S2-053</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/10/golang流程控制/">流程控制</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/10/Strut2 常见POC/">Struts2 常见POC收集和整理</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/05/论事件驱动与异步IO/">论事件驱动与异步IO[转]</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/05/并发编程/">并发编程</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/05/Python常用模块2/">python常用模块(2)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/05/Python常用模块/">python常用模块(1)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/05/python TCP代理/">python TCP代理</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/05/hexo+github+nginx VPS搭建博客/">hexo+github+nginx vps搭建博客</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/05/go语言初识/">初识go语言</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/05/hello-world/">Hello World</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/05/goroutine与调度器/">goroutine与调度器[转]</a></li></ul>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2019/03/14/机器学习概述/">机器学习概述</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/24/死锁，活锁，饥饿/">死锁，活锁和饥饿</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/07/30/php序列化/">PHP序列化与反序列化</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/28/python-importlib/">importlib动态加载模块</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/27/某扫描器/">某扫描器</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/27/惊蛰漏洞扫描平台分析/">惊蛰漏洞扫描平台分析</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/01/07/加密/">加密</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/01/06/JSON处理/">JSON处理</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/01/03/网络编程/">网络编程</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/01/02/windows采用命令/">常用的windows命令</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/12/31/byte与rune/">rune与byte</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/12/28/数组与字典/">数组与数组切片</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/12/15/Python3笔记/">Python3 学习笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/12/03/python基础/">python基础</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/11/07/数据链路层/">数据链路</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/11/01/网络基础/">网络基础</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/11/01/tcp-ip简介/">tcp/ip简介</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/24/HTMLParser模块/">HTMLParser模块</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/23/SQL注入/">SQL注入整理(一)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/20/列表/">列表</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/19/偏函数/">偏函数</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/18/with上下文管理器/">上下文管理器与with语句</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/13/v2ray/">v2ray 配置文件</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/29/socket-python/">socket编程</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/28/正则表达式/">正则表达式</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/15/s2-053/">S2-053</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/10/golang流程控制/">流程控制</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/10/Strut2 常见POC/">Struts2 常见POC收集和整理</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/05/论事件驱动与异步IO/">论事件驱动与异步IO[转]</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/05/并发编程/">并发编程</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/05/Python常用模块2/">python常用模块(2)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/05/Python常用模块/">python常用模块(1)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/05/python TCP代理/">python TCP代理</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/05/hexo+github+nginx VPS搭建博客/">hexo+github+nginx vps搭建博客</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/05/go语言初识/">初识go语言</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/05/hello-world/">Hello World</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/05/goroutine与调度器/">goroutine与调度器[转]</a></li></ul>
     <script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
     <script>
         $(".post-list").addClass("toc-article");
@@ -362,7 +403,7 @@
     <div class="outer">
         <div id="footer-info">
             <div class="footer-left">
-                &copy; 2018 Merak
+                &copy; 2019 Merak
             </div>
             <div class="footer-right">
                 <a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/luuman/hexo-theme-spfk" target="_blank">spfk</a> by luuman

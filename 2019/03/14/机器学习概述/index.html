@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>机器学习概述 | Merak的博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="有监督与无监督学习有监督学习监督学习的训练集要求包括输入输出，也可以说是特征和目标。训练集中的目标是由人标注的。通过已有的训练样本（即已知数据及其对应的输出）去训练得到一个最优模型（这个模型属于某个函数的集合，最优表示某个评价准则下是最佳的），再利用这个模型将所有的输入映射为相应的输出，对输出进行简单的判断从而实现分类的目的。也就具有了对未知数据分类的能力。监督学习的目标往往是让计算机去学习我们已">
+<meta name="keywords" content="机器学习">
+<meta property="og:type" content="article">
+<meta property="og:title" content="机器学习概述">
+<meta property="og:url" content="http://www.Merak.cc/2019/03/14/机器学习概述/index.html">
+<meta property="og:site_name" content="Merak的博客">
+<meta property="og:description" content="有监督与无监督学习有监督学习监督学习的训练集要求包括输入输出，也可以说是特征和目标。训练集中的目标是由人标注的。通过已有的训练样本（即已知数据及其对应的输出）去训练得到一个最优模型（这个模型属于某个函数的集合，最优表示某个评价准则下是最佳的），再利用这个模型将所有的输入映射为相应的输出，对输出进行简单的判断从而实现分类的目的。也就具有了对未知数据分类的能力。监督学习的目标往往是让计算机去学习我们已">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-03-14T12:43:52.339Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="机器学习概述">
+<meta name="twitter:description" content="有监督与无监督学习有监督学习监督学习的训练集要求包括输入输出，也可以说是特征和目标。训练集中的目标是由人标注的。通过已有的训练样本（即已知数据及其对应的输出）去训练得到一个最优模型（这个模型属于某个函数的集合，最优表示某个评价准则下是最佳的），再利用这个模型将所有的输入映射为相应的输出，对输出进行简单的判断从而实现分类的目的。也就具有了对未知数据分类的能力。监督学习的目标往往是让计算机去学习我们已">
+  
+    <link rel="alternative" href="/atom.xml" title="Merak的博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/img/favicon.png">
+  
+  
+      <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  
+  
+      <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  
+  <!-- 加载特效 -->
+    <script src="/js/pace.js"></script>
+    <link href="/css/pace/pace-theme-flash.css" rel="stylesheet" />
+  <script>
+      var yiliaConfig = {
+          rootUrl: '/',
+          fancybox: true,
+          animate: true,
+          isHome: false,
+          isPost: true,
+          isArchive: false,
+          isTag: false,
+          isCategory: false,
+          open_in_new: false
+      }
+  </script>
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            
+            <img lazy-src="/img/head.jpg" class="js-avatar">
+            
+        </a>
+
+        <hgroup>
+          <h1 class="header-author"><a href="/" title="Hi Mate">Merak</a></h1>
+        </hgroup>
+
+        
+        <p class="header-subtitle">莫等闲，白了少年头空悲切...</p>
+        
+        
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">博客首页</a></li>
+                        
+                            <li><a href="/categories/python">人生苦短</a></li>
+                        
+                            <li><a href="/categories/Web安全">安全海洋</a></li>
+                        
+                            <li><a href="/categories/notes">随笔</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fl mail" target="_blank" href="mailto:root@cmustard.com" title="mail">mail</a>
+                            
+                                <a class="fl github" target="_blank" href="https://github.com/cmustard06" title="github">github</a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <a href="/tags/PHP/" style="font-size: 10px;">PHP</a> <a href="/tags/Python/" style="font-size: 10px;">Python</a> <a href="/tags/TCP-IP/" style="font-size: 10px;">TCP/IP</a> <a href="/tags/c/" style="font-size: 10px;">c</a> <a href="/tags/go/" style="font-size: 10px;">go</a> <a href="/tags/golang/" style="font-size: 17.5px;">golang</a> <a href="/tags/importlib/" style="font-size: 10px;">importlib</a> <a href="/tags/poc/" style="font-size: 12.5px;">poc</a> <a href="/tags/python/" style="font-size: 20px;">python</a> <a href="/tags/python3/" style="font-size: 12.5px;">python3</a> <a href="/tags/sql注入/" style="font-size: 10px;">sql注入</a> <a href="/tags/struct/" style="font-size: 10px;">struct</a> <a href="/tags/struts/" style="font-size: 10px;">struts</a> <a href="/tags/tcp/" style="font-size: 10px;">tcp</a> <a href="/tags/tcp-ip/" style="font-size: 10px;">tcp/ip</a> <a href="/tags/windows命令/" style="font-size: 10px;">windows命令</a> <a href="/tags/事件驱动/" style="font-size: 10px;">事件驱动</a> <a href="/tags/代理/" style="font-size: 10px;">代理</a> <a href="/tags/博客/" style="font-size: 10px;">博客</a> <a href="/tags/基础/" style="font-size: 15px;">基础</a> <a href="/tags/安全/" style="font-size: 10px;">安全</a> <a href="/tags/并发/" style="font-size: 10px;">并发</a> <a href="/tags/异步IO/" style="font-size: 10px;">异步IO</a> <a href="/tags/操作系统/" style="font-size: 10px;">操作系统</a> <a href="/tags/机器学习/" style="font-size: 10px;">机器学习</a> <a href="/tags/正则表达式/" style="font-size: 10px;">正则表达式</a> <a href="/tags/漏扫/" style="font-size: 12.5px;">漏扫</a> <a href="/tags/爬虫/" style="font-size: 10px;">爬虫</a> <a href="/tags/科学上网/" style="font-size: 10px;">科学上网</a> <a href="/tags/系统/" style="font-size: 10px;">系统</a> <a href="/tags/编程/" style="font-size: 15px;">编程</a> <a href="/tags/编程语言/" style="font-size: 12.5px;">编程语言</a> <a href="/tags/网络/" style="font-size: 12.5px;">网络</a> <a href="/tags/网络基础知识/" style="font-size: 10px;">网络基础知识</a> <a href="/tags/网络编程/" style="font-size: 10px;">网络编程</a> <a href="/tags/集合/" style="font-size: 10px;">集合</a>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.dmmjy9.top">dmmjy9</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="Me">Merak</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                
+                    <img lazy-src="/img/head.jpg" class="js-avatar">
+                
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="Me">Merak</a></h1>
+            </hgroup>
+            
+            <p class="header-subtitle">莫等闲，白了少年头空悲切...</p>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">博客首页</a></li>
+                
+                    <li><a href="/categories/python">人生苦短</a></li>
+                
+                    <li><a href="/categories/Web安全">安全海洋</a></li>
+                
+                    <li><a href="/categories/notes">随笔</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                <div class="social">
+                    
+                        <a class="mail" target="_blank" href="mailto:root@cmustard.com" title="mail">mail</a>
+                    
+                        <a class="github" target="_blank" href="https://github.com/cmustard06" title="github">github</a>
+                    
+                </div>
+            </nav>
+        </header>                
+    </div>
+</nav>
+      <div class="body-wrap"><article id="post-机器学习概述" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2019/03/14/机器学习概述/" class="article-date">
+      <time datetime="2019-03-14T12:43:52.339Z" itemprop="datePublished">2019-03-14</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      机器学习概述
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/notes/">notes</a>
+    </div>
+
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/机器学习/">机器学习</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h2 id="有监督与无监督学习"><a href="#有监督与无监督学习" class="headerlink" title="有监督与无监督学习"></a>有监督与无监督学习</h2><h3 id="有监督学习"><a href="#有监督学习" class="headerlink" title="有监督学习"></a>有监督学习</h3><p>监督学习的训练集要求包括输入输出，也可以说是特征和目标。训练集中的<strong>目标是由人标</strong>注的。通过<strong>已有的训练样本</strong>（即已知数据及其对应的输出）去<strong>训练得到一个最优模型</strong>（这个模型属于某个函数的集合，最优表示某个评价准则下是最佳的），再利用这个模型将所有的输入映射为相应的输出，对输出进行简单的判断从而实现分类的目的。也就具有了对未知数据分类的能力。<strong>监督学习的目标往往是让计算机去学习我们已经创建好的分类系统</strong>。因此训练样本的<strong>歧义性低</strong></p>
+<p><strong>常见的有监督学习算法：回归分析和统计分类。最典型的算法是KNN和SVM。</strong></p>
+<a id="more"></a>
+<h3 id="无监督学习"><a href="#无监督学习" class="headerlink" title="无监督学习"></a>无监督学习</h3><p>对没有概念分类的训练样本进行学习，以便发现训练样本集中的结构性知识，这里所有的分类都是未知的，因此训练样本歧义性高。简单来说就是给一堆数据，让计算机自己学习，分类，建立模型</p>
+<p><strong>聚类</strong>就是典型的无监督学习。利用聚类结果，可以提取数据集中隐藏信息，对未来数据进行分类和预测。应用于数据挖掘，模式识别，图像处理等。<br><strong>PCA和很多deep learning算法都属于无监督学习</strong>。 </p>
+<h3 id="不同点"><a href="#不同点" class="headerlink" title="不同点"></a>不同点</h3><ol>
+<li><strong>有监督学习方法必须要有训练集与测试样本</strong>。在训练集中找规律，而对测试样本使用这种规律。而<strong>非监督学习没有训练集，只有一组数据，在该组数据集内寻找规律。</strong></li>
+<li>有监督学习的方法就是识别事物，识别的结果表现在给待识别数据加上了标签。因此<strong>训练样本集必须由带标签的样本组成</strong>。而<strong>非监督学习</strong>方法<strong>只有要分析的数据集的本身，预先没有什么标签</strong>。如果发现数据集呈现某种聚集性，则可按自然的聚集性分类，但不予以某种预先分类标签对上号为目的。</li>
+<li>非监督学习方法在寻找数据集中的规律性，这种规律性并不一定要达到划分数据集的目的，也就是说不一定要“分类”。<br><strong>这一点是比有监督学习方法的用途要广</strong>。譬如分析一堆数据的主分量，或分析数据集有什么特点都可以归于非监督学习方法的范畴。</li>
+</ol>
+<p>简单来说，<strong>有训练样本则考虑采用监督学习方法；无训练样本，则一定不能用监督学习方法。</strong></p>
+<h2 id="准确率与召回率"><a href="#准确率与召回率" class="headerlink" title="准确率与召回率"></a>准确率与召回率</h2><p>对于信息检索、分类、识别、翻译等领域中有两个最基本的指标，<strong>召回率</strong>和<strong>准确率</strong>，其中召回率也叫查全率，准确率也叫查准率。</p>
+<p>对于一个二分问题来说，与四种情况，如果一个实例是实际为真并且也被预测为真，就为<strong>真正类</strong>，如果实际为假，预测为真，就为<strong>假正类</strong>。同理，实际为假预测也为假即为<strong>真负类</strong>，实际为假，预测为真则为<strong>假负类</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">~</th>
+<th style="text-align:center">实际为真</th>
+<th style="text-align:center">实际为假</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">预测为真</td>
+<td style="text-align:center">TP</td>
+<td style="text-align:center">FP，其实就是误报</td>
+</tr>
+<tr>
+<td style="text-align:left">预测为假</td>
+<td style="text-align:center">FN，其实就是漏报</td>
+<td style="text-align:center">TN</td>
+</tr>
+</tbody>
+</table>
+<p>召回率=TP/(TP+FN)<br>准确率=TP/(TP+FP)</p>
+<p>不妨举这样一个例子：某池塘有1400条鲤鱼，300只虾，300只鳖。现在以捕鲤鱼为目的。撒一大网，逮着了700条鲤鱼，200只虾，100只鳖。那么，这些指标分别如下：</p>
+<p>正确率 = 700 / (700 + 200 + 100) = 70%</p>
+<p>召回率 = 700 / 1400 = 50%</p>
+<p>F值 = 70% <em> 50% </em> 2 / (70% + 50%) = 58.3%</p>
+<p>不妨看看如果把池子里的所有的鲤鱼、虾和鳖都一网打尽，这些指标又有何变化：</p>
+<p>正确率 = 1400 / (1400 + 300 + 300) = 70%</p>
+<p>召回率 = 1400 / 1400 = 100%</p>
+<p>F值 = 70% <em> 100% </em> 2 / (70% + 100%) = 82.35%        </p>
+<p>由此可见，正确率是评估捕获的成果中目标成果所占得比例；召回率，顾名思义，就是从关注领域中，召回目标类别的比例；而F值，则是综合这二者指标的评估指标，用于综合反映整体的指标。</p>
+<h2 id="常用数据集"><a href="#常用数据集" class="headerlink" title="常用数据集"></a>常用数据集</h2><h3 id="KCD99"><a href="#KCD99" class="headerlink" title="KCD99"></a>KCD99</h3><p>数据集是从一个模拟的美国空军局域网上采集来的9个星期的网络连接数据,<strong>分成具有标识的训练数据和未加标识的测试数据</strong>。测试数据和训练数据有着不同的概率分布,测试数据包含了一些未出现在训练数据中的攻击类型,这使得入侵检测更具有现实性。</p>
+<h3 id="HTTP-DATASET-CSIC-2010"><a href="#HTTP-DATASET-CSIC-2010" class="headerlink" title="HTTP DATASET CSIC 2010"></a>HTTP DATASET CSIC 2010</h3><p><a href="http://www.isi.csic.es/dataset/" target="_blank" rel="external">http://www.isi.csic.es/dataset/</a><br>CSIC2010数据集包含上万条自动生成的Web请求，主要用于测试网络攻击防护系统，它是由西班牙研究委员会（CSIC）信息安全研究所制作的。<br>CSIC2010包含针对电子商务Web应用产生的HTTP数据流量。在该Web应用中，用户可以通过购物车购买物品，并通过提供一些个人信息进行注册。由于它是西班牙语的Web应用程序，所以数据集包含一些拉丁字符。<br>数据集是自动生成的，包含<strong>36000个正常请求和超过25000个异常请求</strong>。HTTP请求被标记为正常或异常，数据集包括各种攻击，如：<strong>SQL注入、缓冲区溢出、信息收集、文件披露，CRLF注入，跨站脚本，服务器端包含、参数篡改等。</strong></p>
+<h3 id="sea数据集"><a href="#sea数据集" class="headerlink" title="sea数据集"></a>sea数据集</h3><p>或者叫schonlau数据集,,用于内部威胁检测，<br><a href="http://www.schonlau.net/" target="_blank" rel="external">http://www.schonlau.net/</a></p>
+<h3 id="ADFA-LD数据集"><a href="#ADFA-LD数据集" class="headerlink" title="ADFA-LD数据集"></a>ADFA-LD数据集</h3><p>ADFA数据集是澳大利亚国防学院（缩写为ADFA）对外发布的一套主机级入侵检测系统的数据集合，被广泛应用于入侵检测类产品的测试。数据集内已经将各类系统调用完成了特征化，并针对攻击类型进行了标注。<br>该数据集包括Linux（ADFA-LD）和Windows(ADFA-WD)两个OS平台，分别记录了各类系统调用次序。<br>ADFA数据集官方介绍及下载地址：<a href="https://www.unsw.adfa.edu.au/australian-centre-for-cyber-security/cybersecurity/ADFA-IDS-Datasets/" target="_blank" rel="external">https://www.unsw.adfa.edu.au/australian-centre-for-cyber-security/cybersecurity/ADFA-IDS-Datasets/</a></p>
+<h3 id="Alexa域名数据"><a href="#Alexa域名数据" class="headerlink" title="Alexa域名数据"></a>Alexa域名数据</h3><p>Alexa对外提供了全球排名TOP100w的网站域名下载，，文件为CSV格式</p>
+<h3 id="Scikit-Learn数据集"><a href="#Scikit-Learn数据集" class="headerlink" title="Scikit-Learn数据集"></a>Scikit-Learn数据集</h3><p> Scikit-Learn自带的数据集也很经典，其中最常见就是iris数据集</p>
+<h3 id="MNIST数据集"><a href="#MNIST数据集" class="headerlink" title="MNIST数据集"></a>MNIST数据集</h3><p>这是一个入门级的计算机视觉数据集，包含各种手写数字图片</p>
+<h3 id="Movie-Review-Data"><a href="#Movie-Review-Data" class="headerlink" title="Movie Review Data"></a>Movie Review Data</h3><p>数据集包含了1000条正面的评论和1000条负面的评论，广泛用于文本分类<br><a href="http://www.cs.cornell.edu/People/pabo/movie-review-data" target="_blank" rel="external">http://www.cs.cornell.edu/People/pabo/movie-review-data</a></p>
+<h3 id="SpamBase数据集"><a href="#SpamBase数据集" class="headerlink" title="SpamBase数据集"></a>SpamBase数据集</h3><p>该数据是用于入门级的垃圾邮件数据集<br> <a href="https://archive.ics.uci.edu/ml/datasets/spambase" target="_blank" rel="external">https://archive.ics.uci.edu/ml/datasets/spambase</a></p>
+<h3 id="Enron数据集"><a href="#Enron数据集" class="headerlink" title="Enron数据集"></a>Enron数据集</h3><p>垃圾邮件数据集<br><a href="http://www2.aueb.gr/users/ion/data/enron-spam/" target="_blank" rel="external">http://www2.aueb.gr/users/ion/data/enron-spam/</a></p>
+<h2 id="特征提取"><a href="#特征提取" class="headerlink" title="特征提取"></a>特征提取</h2><h3 id="数字型特征提取"><a href="#数字型特征提取" class="headerlink" title="数字型特征提取"></a>数字型特征提取</h3><p>数字型特征可以直接作为特征，但是对于一个多维的特征，某一个特征的取值范围特别大，很可能导致其他特征对结果的影响被忽略，所以我们需要对这些数据进行<strong>预处理</strong></p>
+<h4 id="标准化"><a href="#标准化" class="headerlink" title="标准化"></a>标准化</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">In [<span class="number">6</span>]: <span class="keyword">from</span> sklearn <span class="keyword">import</span> preprocessing</div><div class="line">In [<span class="number">7</span>]: <span class="keyword">import</span> numpy <span class="keyword">as</span> np</div><div class="line">In [<span class="number">8</span>]: x = np.array([[<span class="number">1.</span>,<span class="number">-1.</span>,<span class="number">2.</span>],[<span class="number">2.</span>,<span class="number">0.</span>,<span class="number">0.</span>],[<span class="number">0.</span>,<span class="number">1.</span>,<span class="number">-1.</span>]])</div><div class="line">In [<span class="number">9</span>]: s = preprocessing.scale(x)</div><div class="line">In [<span class="number">10</span>]: s</div><div class="line">Out[<span class="number">10</span>]:</div><div class="line">array([[ <span class="number">0.</span>        , <span class="number">-1.22474487</span>,  <span class="number">1.33630621</span>],</div><div class="line">       [ <span class="number">1.22474487</span>,  <span class="number">0.</span>        , <span class="number">-0.26726124</span>],</div><div class="line">       [<span class="number">-1.22474487</span>,  <span class="number">1.22474487</span>, <span class="number">-1.06904497</span>]])</div></pre></td></tr></table></figure>
+<h4 id="正则化"><a href="#正则化" class="headerlink" title="正则化"></a>正则化</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">In [<span class="number">23</span>]: x = [[<span class="number">1.</span>,<span class="number">-1.</span>,<span class="number">2.</span>],[<span class="number">2.</span>,<span class="number">0.</span>,<span class="number">0.</span>],[<span class="number">0.</span>,<span class="number">1.</span>,<span class="number">-1.</span>]]</div><div class="line">In [<span class="number">24</span>]: s = preprocessing.normalize(x,norm=<span class="string">'max'</span>)</div><div class="line">In [<span class="number">25</span>]: s</div><div class="line">Out[<span class="number">25</span>]:</div><div class="line">array([[ <span class="number">0.5</span>, <span class="number">-0.5</span>,  <span class="number">1.</span> ],</div><div class="line">       [ <span class="number">1.</span> ,  <span class="number">0.</span> ,  <span class="number">0.</span> ],</div><div class="line">       [ <span class="number">0.</span> ,  <span class="number">1.</span> , <span class="number">-1.</span> ]])</div></pre></td></tr></table></figure>
+<h4 id="归一化"><a href="#归一化" class="headerlink" title="归一化"></a>归一化</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">In [<span class="number">26</span>]: x = np.array([[<span class="number">1.</span>,<span class="number">-1.</span>,<span class="number">2.</span>],[<span class="number">2.</span>,<span class="number">0.</span>,<span class="number">0.</span>],[<span class="number">0.</span>,<span class="number">1.</span>,<span class="number">-1.</span>]])</div><div class="line">In [<span class="number">27</span>]: min_max_scaler = preprocessing.MinMaxScaler()</div><div class="line">In [<span class="number">28</span>]: x_train_minmax = min_max_scaler.fit_transform(x)</div><div class="line">In [<span class="number">29</span>]: x_train_minmax</div><div class="line">Out[<span class="number">29</span>]:</div><div class="line">array([[<span class="number">0.5</span>       , <span class="number">0.</span>        , <span class="number">1.</span>        ],</div><div class="line">       [<span class="number">1.</span>        , <span class="number">0.5</span>       , <span class="number">0.33333333</span>],</div><div class="line">       [<span class="number">0.</span>        , <span class="number">1.</span>        , <span class="number">0.</span>        ]])</div></pre></td></tr></table></figure>
+<h3 id="文本特征提取"><a href="#文本特征提取" class="headerlink" title="文本特征提取"></a>文本特征提取</h3><p>文本特征要比数值特征复炸很多，本质上是做<strong>单词切分，不同的单词当成一个新的特征</strong></p>
+<p>文本特征提取有两个重要的模型</p>
+<ul>
+<li>词集模型，单词构成的集合，集合中每个元素都只有一个</li>
+<li>词袋模型，如果一个单词在文档中出现不止一次，并统计其出现的次数<br>两者的区别就是一个只管有没有，另一个还得知道出现的频率</li>
+</ul>
+<h4 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div></pre></td><td class="code"><pre><div class="line">In [<span class="number">31</span>]: <span class="keyword">from</span> sklearn.feature_extraction.text <span class="keyword">import</span> CountVectorizer</div><div class="line"><span class="comment"># 实例化分词对象</span></div><div class="line">In [<span class="number">32</span>]: vectorizer = CountVectorizer(min_df=<span class="number">1</span>)</div><div class="line">In [<span class="number">33</span>]: vectorizer</div><div class="line">Out[<span class="number">33</span>]:</div><div class="line">CountVectorizer(analyzer=<span class="string">'word'</span>, binary=<span class="keyword">False</span>, decode_error=<span class="string">'strict'</span>,</div><div class="line">        dtype=&lt;class 'numpy.int64'&gt;, encoding='utf-8', input='content',</div><div class="line">        lowercase=<span class="keyword">True</span>, max_df=<span class="number">1.0</span>, max_features=<span class="keyword">None</span>, min_df=<span class="number">1</span>,</div><div class="line">        ngram_range=(<span class="number">1</span>, <span class="number">1</span>), preprocessor=<span class="keyword">None</span>, stop_words=<span class="keyword">None</span>,</div><div class="line">        strip_accents=<span class="keyword">None</span>, token_pattern=<span class="string">'(?u)\\b\\w\\w+\\b'</span>,</div><div class="line">        tokenizer=<span class="keyword">None</span>, vocabulary=<span class="keyword">None</span>)</div><div class="line"><span class="comment"># 将文本进行词袋处理</span></div><div class="line">In [<span class="number">34</span>]: words = [<span class="string">'This is the first document'</span>,<span class="string">'This is the second second document'</span>,<span class="string">'And the third one'</span>,<span class="string">'Is this the fi</span></div><div class="line"><span class="string">    ...: rst document?'</span>]</div><div class="line"></div><div class="line">In [<span class="number">35</span>]: x = vectorizer.fit_transform(words)</div><div class="line"></div><div class="line">In [<span class="number">36</span>]: x</div><div class="line">Out[<span class="number">36</span>]:</div><div class="line">&lt;<span class="number">4</span>x9 sparse matrix of type <span class="string">'&lt;class '</span>numpy.int64<span class="string">'&gt;'</span></div><div class="line">        <span class="keyword">with</span> <span class="number">19</span> stored elements <span class="keyword">in</span> Compressed Sparse Row format&gt;</div><div class="line"> </div><div class="line"> <span class="comment"># 获取对应的特征名称</span></div><div class="line">In [<span class="number">37</span>]: vectorizer.get_feature_names()</div><div class="line">Out[<span class="number">37</span>]: [<span class="string">'and'</span>, <span class="string">'document'</span>, <span class="string">'first'</span>, <span class="string">'is'</span>, <span class="string">'one'</span>, <span class="string">'second'</span>, <span class="string">'the'</span>, <span class="string">'third'</span>, <span class="string">'this'</span>]</div><div class="line"></div><div class="line"><span class="comment"># 获取词袋数据，完成词袋化，然后将现有词袋的特征进行向量化</span></div><div class="line">In [<span class="number">38</span>]: x.toarray()</div><div class="line">Out[<span class="number">38</span>]:</div><div class="line">array([[<span class="number">0</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>],</div><div class="line">       [<span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">2</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>],</div><div class="line">       [<span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>],</div><div class="line">       [<span class="number">0</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>]], dtype=int64)</div><div class="line"></div><div class="line"><span class="comment"># 针对其他的文本进行词袋处理的时候，可以直接使用现有的词汇表</span></div><div class="line">In [<span class="number">39</span>]: new_vectorizer = CountVectorizer(min_df=<span class="number">1</span>,vocabulary=vectorizer.vocabulary_)</div></pre></td></tr></table></figure>
+<h3 id="数据读取"><a href="#数据读取" class="headerlink" title="数据读取"></a>数据读取</h3><p>TensorFlow提供了非常便捷的方式从CSV中读取数据</p>
+<p>从CSV文件中读取数据<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">training_set = tf.contrib.learn.datasets.base.load_csv_with_header(filename=<span class="string">"iris_tranning.csv"</span>,target_dtype=np.int,features_dtype=np.float32)</div></pre></td></tr></table></figure></p>
+<p>各个参数的定义</p>
+<ul>
+<li>filename 文件名</li>
+<li>target_dtype 标记数据类型</li>
+<li>features_dtype 特征数据类型</li>
+</ul>
+<h2 id="效果验证"><a href="#效果验证" class="headerlink" title="效果验证"></a>效果验证</h2><p>效果验证是机器学习非常重要的一环，最常使用的是<strong>交叉验证</strong><br>以svm为例<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 使用sklearn自带的样本库datasets</span></div><div class="line">In [<span class="number">7</span>]: <span class="keyword">import</span> numpy <span class="keyword">as</span> np</div><div class="line">In [<span class="number">8</span>]: <span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> train_test_split</div><div class="line">In [<span class="number">9</span>]: <span class="keyword">from</span> sklearn <span class="keyword">import</span> datasets</div><div class="line">In [<span class="number">10</span>]: <span class="keyword">from</span> sklearn <span class="keyword">import</span> svm</div><div class="line"><span class="comment"># 获取样本数据</span></div><div class="line">In [<span class="number">11</span>]: iris = datasets.load_iris()</div><div class="line">In [<span class="number">12</span>]: iris.data.shape,iris.target.shape</div><div class="line">Out[<span class="number">12</span>]: ((<span class="number">150</span>, <span class="number">4</span>), (<span class="number">150</span>,))</div><div class="line"></div><div class="line"><span class="comment"># 使用函数 随机分割样本为训练样本和测试样本</span></div><div class="line">In [<span class="number">13</span>]: x_train,x_test,y_train,y_test = train_test_split(iris.data,iris.target,test_size=<span class="number">0.4</span>,random_state=<span class="number">0</span>)</div><div class="line"></div><div class="line">In [<span class="number">14</span>]: x_train.shape,y_train.shape</div><div class="line">Out[<span class="number">14</span>]: ((<span class="number">90</span>, <span class="number">4</span>), (<span class="number">90</span>,))</div><div class="line"></div><div class="line">In [<span class="number">15</span>]: x_test.shape,y_test.shape</div><div class="line">Out[<span class="number">15</span>]: ((<span class="number">60</span>, <span class="number">4</span>), (<span class="number">60</span>,))</div><div class="line"></div><div class="line"><span class="comment"># 调用svm进行训练</span></div><div class="line">In [<span class="number">16</span>]: clf = svm.SVC(kernel=<span class="string">'linear'</span>,C=<span class="number">1</span>).fit(x_train,y_train)</div><div class="line"></div><div class="line"><span class="comment"># 判断预测结果与测试样本标记的结果</span></div><div class="line">In [<span class="number">17</span>]: clf.score(x_test,y_test)</div><div class="line">Out[<span class="number">17</span>]: <span class="number">0.9666666666666667</span></div></pre></td></tr></table></figure></p>
+<p>为了提高验证的精确度，常用的方法是<strong>K折交叉验证</strong>，就是初始采样分割成K个子样本，一个单独的子样本被保留作为验证模型的数据，其他K-1个样本用来训练，交叉重复验证K次。</p>
+
+      
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2019/03/14/机器学习概述/">机器学习概述</a></p>
+        <p><span>文章作者:</span><a href="/" title="访问 Merak 的个人博客">Merak</a></p>
+        <p><span>发布时间:</span>2019年03月14日 - 20时43分</p>
+        <p><span>最后更新:</span>2019年03月14日 - 08时43分</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2019/03/14/机器学习概述/" title="机器学习概述">http://www.Merak.cc/2019/03/14/机器学习概述/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://www.Merak.cc/2019/03/14/机器学习概述/　　作者: Merak" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script src="/js/clipboard.min.js"></script>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" title="中国大陆 (CC BY-NC-SA 3.0 CN)" target = "_blank">"署名-非商用-相同方式共享 3.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+<nav id="article-nav">
+  
+  
+    <a href="/2018/10/24/死锁，活锁，饥饿/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">死锁，活锁和饥饿</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#有监督与无监督学习"><span class="toc-number">1.</span> <span class="toc-text">有监督与无监督学习</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#有监督学习"><span class="toc-number">1.1.</span> <span class="toc-text">有监督学习</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#无监督学习"><span class="toc-number">1.2.</span> <span class="toc-text">无监督学习</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#不同点"><span class="toc-number">1.3.</span> <span class="toc-text">不同点</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#准确率与召回率"><span class="toc-number">2.</span> <span class="toc-text">准确率与召回率</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#常用数据集"><span class="toc-number">3.</span> <span class="toc-text">常用数据集</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#KCD99"><span class="toc-number">3.1.</span> <span class="toc-text">KCD99</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#HTTP-DATASET-CSIC-2010"><span class="toc-number">3.2.</span> <span class="toc-text">HTTP DATASET CSIC 2010</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#sea数据集"><span class="toc-number">3.3.</span> <span class="toc-text">sea数据集</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ADFA-LD数据集"><span class="toc-number">3.4.</span> <span class="toc-text">ADFA-LD数据集</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Alexa域名数据"><span class="toc-number">3.5.</span> <span class="toc-text">Alexa域名数据</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Scikit-Learn数据集"><span class="toc-number">3.6.</span> <span class="toc-text">Scikit-Learn数据集</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MNIST数据集"><span class="toc-number">3.7.</span> <span class="toc-text">MNIST数据集</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Movie-Review-Data"><span class="toc-number">3.8.</span> <span class="toc-text">Movie Review Data</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SpamBase数据集"><span class="toc-number">3.9.</span> <span class="toc-text">SpamBase数据集</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Enron数据集"><span class="toc-number">3.10.</span> <span class="toc-text">Enron数据集</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#特征提取"><span class="toc-number">4.</span> <span class="toc-text">特征提取</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#数字型特征提取"><span class="toc-number">4.1.</span> <span class="toc-text">数字型特征提取</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#标准化"><span class="toc-number">4.1.1.</span> <span class="toc-text">标准化</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#正则化"><span class="toc-number">4.1.2.</span> <span class="toc-text">正则化</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#归一化"><span class="toc-number">4.1.3.</span> <span class="toc-text">归一化</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#文本特征提取"><span class="toc-number">4.2.</span> <span class="toc-text">文本特征提取</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#示例"><span class="toc-number">4.2.1.</span> <span class="toc-text">示例</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#数据读取"><span class="toc-number">4.3.</span> <span class="toc-text">数据读取</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#效果验证"><span class="toc-number">5.</span> <span class="toc-text">效果验证</span></a></li></ol>
+</div>
+<input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+<script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script>
+    var valueHide = "隐藏目录";
+    var valueShow = "显示目录";
+
+    if ($(".left-col").is(":hidden")) {
+        $("#tocButton").attr("value", valueShow);
+    }
+    $("#tocButton").click(function() {
+        if ($("#toc").is(":hidden")) {
+            $("#tocButton").attr("value", valueHide);
+            $("#toc").slideDown(320);
+        }
+        else {
+            $("#tocButton").attr("value", valueShow);
+            $("#toc").slideUp(350);
+        }
+    })
+    if ($(".toc").length < 1) {
+        $("#toc, #tocButton").hide();
+    }
+</script>
+
+
+
+
+
+<div class="bdsharebuttonbox">
+	<a href="#" class="fx fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+	<a href="#" class="fx fa-weixin bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+	<a href="#" class="fx fa-qq bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+	<a href="#" class="fx fa-facebook-official bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+	<a href="#" class="fx fa-twitter bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+	<a href="#" class="fx fa-linkedin bds_linkedin" data-cmd="linkedin" title="分享到linkedin"></a>
+	<a href="#" class="fx fa-files-o bds_copy" data-cmd="copy" title="分享到复制网址"></a>
+</div>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+
+
+
+    
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
+        
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+        
+            <a href="/2018/10/24/死锁，活锁，饥饿/" title="下一篇: 死锁，活锁和饥饿">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2019/03/14/机器学习概述/">机器学习概述</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/24/死锁，活锁，饥饿/">死锁，活锁和饥饿</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/07/30/php序列化/">PHP序列化与反序列化</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/28/python-importlib/">importlib动态加载模块</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/27/某扫描器/">某扫描器</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/27/惊蛰漏洞扫描平台分析/">惊蛰漏洞扫描平台分析</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/01/07/加密/">加密</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/01/06/JSON处理/">JSON处理</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/01/03/网络编程/">网络编程</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/01/02/windows采用命令/">常用的windows命令</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/12/31/byte与rune/">rune与byte</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/12/28/数组与字典/">数组与数组切片</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/12/15/Python3笔记/">Python3 学习笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/12/03/python基础/">python基础</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/11/07/数据链路层/">数据链路</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/11/01/网络基础/">网络基础</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/11/01/tcp-ip简介/">tcp/ip简介</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/24/HTMLParser模块/">HTMLParser模块</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/23/SQL注入/">SQL注入整理(一)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/20/列表/">列表</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/19/偏函数/">偏函数</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/18/with上下文管理器/">上下文管理器与with语句</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/13/v2ray/">v2ray 配置文件</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/29/socket-python/">socket编程</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/28/正则表达式/">正则表达式</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/15/s2-053/">S2-053</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/10/golang流程控制/">流程控制</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/10/Strut2 常见POC/">Struts2 常见POC收集和整理</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/05/论事件驱动与异步IO/">论事件驱动与异步IO[转]</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/05/并发编程/">并发编程</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/05/Python常用模块2/">python常用模块(2)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/05/Python常用模块/">python常用模块(1)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/05/python TCP代理/">python TCP代理</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/05/hexo+github+nginx VPS搭建博客/">hexo+github+nginx vps搭建博客</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/05/go语言初识/">初识go语言</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/05/hello-world/">Hello World</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/05/goroutine与调度器/">goroutine与调度器[转]</a></li></ul>
+    <script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+    <script>
+        $(".post-list").addClass("toc-article");
+        $(".post-list-item a").attr("target","_blank");
+        $("#post-nav-button > a:nth-child(2)").click(function() {
+            $(".fa-bars, .fa-times").toggle();
+            $(".post-list").toggle(300);
+            if ($(".toc").length > 0) {
+                $("#toc, #tocButton").toggle(200, function() {
+                    if ($(".switch-area").is(":visible")) {
+                        $("#tocButton").attr("value", valueHide);
+                        }
+                    })
+            }
+            else {
+            }
+        })
+    </script>
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                &copy; 2019 Merak
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/luuman/hexo-theme-spfk" target="_blank">spfk</a> by luuman
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" >道士到访数: 
+                            <span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>, </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit">本页阅读量: 
+                            <span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+
+    </div>
+    <script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var backgroundnum = 24;
+            var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+            $("#mobile-nav").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+            $(".left-col").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+        })
+    </script>
+
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    $(document).ready(function() {
+        if ($("#comments").length < 1) {
+            $("#scroll > a:nth-child(2)").hide();
+        };
+    })
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+  <script language="javascript">
+    $(function() {
+        $("a[title]").each(function() {
+            var a = $(this);
+            var title = a.attr('title');
+            if (title == undefined || title == "") return;
+            a.data('title', title).removeAttr('title').hover(
+
+            function() {
+                var offset = a.offset();
+                $("<div id=\"anchortitlecontainer\"></div>").appendTo($("body")).html(title).css({
+                    top: offset.top - a.outerHeight() - 15,
+                    left: offset.left + a.outerWidth()/2 + 1
+                }).fadeIn(function() {
+                    var pop = $(this);
+                    setTimeout(function() {
+                        pop.remove();
+                    }, pop.text().length * 800);
+                });
+            }, function() {
+                $("#anchortitlecontainer").remove();
+            });
+        });
+    });
+</script>
+
+
+  </div>
+</body>
+</html>
